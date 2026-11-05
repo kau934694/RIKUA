@@ -117,7 +117,6 @@ public class SyaratNikahActivity extends AppCompatActivity {
     // ---------- Views: header & biaya ----------
     private TextView tvLayananJudul;
     private TextView tvLayananDeskripsi;
-    private TextView tvDiperbarui;
     private TextView tvEstimasi;
     private TextView tvBiaya;
     private TextView tvBiayaCatatan;
@@ -226,7 +225,6 @@ public class SyaratNikahActivity extends AppCompatActivity {
 
         tvLayananJudul = findViewById(R.id.tv_layanan_judul);
         tvLayananDeskripsi = findViewById(R.id.tv_layanan_deskripsi);
-        tvDiperbarui = findViewById(R.id.tv_diperbarui);
         tvEstimasi = findViewById(R.id.tv_estimasi);
         tvBiaya = findViewById(R.id.tv_biaya);
         tvBiayaCatatan = findViewById(R.id.tv_biaya_catatan);
@@ -534,25 +532,8 @@ public class SyaratNikahActivity extends AppCompatActivity {
         }
         tvBiayaCatatan.setVisibility(View.VISIBLE);
 
-        if (!layanan.getTerakhirDiperbarui().isEmpty()) {
-            tvDiperbarui.setText(
-                    getString(R.string.syarat_diperbarui_format, layanan.getTerakhirDiperbarui()));
-        } else {
-            // Redesign: strip tanggal tetap tampil meski server belum kirim data.
-            tvDiperbarui.setText(R.string.syarat_diperbarui_statis);
-        }
-        tvDiperbarui.setVisibility(View.VISIBLE);
-
-        if (!layanan.getEstimasiDurasi().isEmpty()) {
-            tvEstimasi.setText(
-                    getString(R.string.syarat_estimasi_format, layanan.getEstimasiDurasi()));
-            tvEstimasi.setVisibility(View.VISIBLE);
-        } else {
-            tvEstimasi.setVisibility(View.GONE);
-        }
+        /** Bangun kartu accordion syarat pada container yang sesuai kategorinya. */
     }
-
-    /** Bangun kartu accordion syarat pada container yang sesuai kategorinya. */
     private void bindSyarat(@NonNull Payload p) {
         holders.clear();
         containerUmum.removeAllViews();

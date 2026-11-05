@@ -364,8 +364,6 @@
 
     <string name="syarat_loading">Memuat data syarat nikah…</string>
     <!-- ===== Redesign syarat nikah (MD3 summary card, notice, sticky help) ===== -->
-    <string name="syarat_badge_resmi_kemenag">Resmi Kemenag</string>
-    <string name="syarat_diperbarui_statis">Terakhir diperbarui: 1 Oktober 2026</string>
     <string name="syarat_summary_title">Dokumen dan langkah untuk mendaftar nikah</string>
     <string name="syarat_summary_desc">
         Checklist lengkap berkas N1\u2013N6 plus alur pendaftaran dari surat pengantar

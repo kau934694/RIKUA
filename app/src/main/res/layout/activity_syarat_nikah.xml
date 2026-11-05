@@ -136,60 +136,6 @@
                         android:orientation="vertical"
                         android:padding="18dp">
 
-                        <!-- Baris badge resmi + tanggal pembaruan -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_syarat_badge_resmi"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingStart="10dp"
-                                android:paddingTop="5dp"
-                                android:paddingEnd="12dp"
-                                android:paddingBottom="5dp">
-
-                                <ImageView
-                                    android:layout_width="14dp"
-                                    android:layout_height="14dp"
-                                    android:contentDescription="@null"
-                                    android:src="@drawable/ic_verified"
-                                    app:tint="@color/badge_emerald_text" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
-                                    android:fontFamily="sans-serif-medium"
-                                    android:text="@string/syarat_badge_resmi_kemenag"
-                                    android:textColor="@color/badge_emerald_text"
-                                    android:textSize="11sp" />
-                            </LinearLayout>
-
-                            <!-- tv_diperbarui: default statis, diganti format API bila ada -->
-                            <TextView
-                                android:id="@+id/tv_diperbarui"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_weight="1"
-                                android:drawablePadding="5dp"
-                                android:ellipsize="end"
-                                android:fontFamily="sans-serif-medium"
-                                android:gravity="center_vertical|end"
-                                android:maxLines="1"
-                                android:text="@string/syarat_diperbarui_statis"
-                                android:textColor="@color/text_tertiary"
-                                android:textSize="11sp"
-                                app:drawableEndCompat="@drawable/ic_schedule"
-                                app:drawableTint="@color/text_tertiary" />
-                        </LinearLayout>
-
                         <!-- Judul layanan (dinamis dari tabel layanan) -->
                         <TextView
                             android:id="@+id/tv_layanan_judul"
