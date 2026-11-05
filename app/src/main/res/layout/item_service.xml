@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_service_item"
+    style="@style/Widget.Rikua.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:checkable="false"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="76dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="1dp"
+    app:rippleColor="@color/primary_forest_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:minHeight="76dp"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="14dp">
+
+        <!-- Round Icon Container -->
+        <FrameLayout
+            android:id="@+id/icon_frame"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_icon_rounded_green">
+
+            <ImageView
+                android:id="@+id/iv_service_icon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                tools:src="@drawable/wali_nikah" />
+        </FrameLayout>
+
+        <!-- Title + Description + Badge -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_service_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Syarat Nikah" />
+
+            <TextView
+                android:id="@+id/tv_service_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="Kelengkapan dokumen N1-N4 &amp; pemeriksaan berkas" />
+
+            <TextView
+                android:id="@+id/tv_service_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_badge_emerald"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/status_green_dark"
+                android:textSize="10sp"
+                tools:text="Lengkap" />
+        </LinearLayout>
+
+        <!-- Chevron Right -->
+        <ImageView
+            android:id="@+id/iv_chevron"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/services_chevron_desc"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/text_tertiary" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

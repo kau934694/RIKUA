@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strip catatan biaya "Rp 0 (Gratis) | Hari Kerja" di dasar summary card -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/syarat_primary_soft" />
+    <corners android:radius="14dp" />
+</shape>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_officer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/surface_card_border"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ===== Top row: Avatar + Identity ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Avatar circle with status dot overlay -->
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp">
+
+                <TextView
+                    android:id="@+id/tv_avatar"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_avatar_teal"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:letterSpacing="0.02"
+                    android:textColor="@color/text_white"
+                    android:textSize="18sp"
+                    tools:text="HS" />
+
+                <ImageView
+                    android:id="@+id/iv_status_dot"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="bottom|end"
+                    android:contentDescription="@string/consultation_status_available"
+                    android:src="@drawable/dot_status_online" />
+            </FrameLayout>
+
+            <!-- Name, role, status badge -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_officer_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="H. M. Syaifuddin, S.Ag." />
+
+                <TextView
+                    android:id="@+id/tv_officer_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:textColor="@color/consult_primary"
+                    android:textSize="13sp"
+                    tools:text="Kepala KUA Randudongkal" />
+
+                <TextView
+                    android:id="@+id/tv_status_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_badge_emerald"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="3dp"
+                    android:textColor="@color/status_green_dark"
+                    android:textSize="11sp"
+                    tools:text="Tersedia" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== Service hours line ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:contentDescription="@string/consultation_hours_desc"
+                android:src="@drawable/ic_schedule"
+                app:tint="@color/text_tertiary" />
+
+            <TextView
+                android:id="@+id/tv_service_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                tools:text="Jam layanan: 08.00 - 15.00 WIB" />
+        </LinearLayout>
+
+        <!-- ===== Expertise chips ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/consultation_expertise_title"
+            android:textColor="@color/text_tertiary"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_expertise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:chipSpacingVertical="4dp" />
+
+        <!-- ===== Action buttons ===== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_whatsapp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/consultation_btn_whatsapp"
+                android:textColor="@color/text_white"
+                android:textSize="13sp"
+                app:backgroundTint="@color/whatsapp_brand_dark"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_whatsapp"
+                app:iconGravity="start"
+                app:iconSize="18dp"
+                app:iconTint="@color/text_white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_telepon"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/consultation_btn_telepon"
+                android:textColor="@color/consult_primary"
+                android:textSize="13sp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_phone"
+                app:iconGravity="start"
+                app:iconSize="18dp"
+                app:iconTint="@color/consult_primary"
+                app:strokeColor="@color/consult_primary" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

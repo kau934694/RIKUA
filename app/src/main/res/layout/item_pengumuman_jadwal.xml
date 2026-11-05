@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    RIKUA — item_pengumuman_jadwal.xml
+    Kartu satu rencana akad pada daftar "Pengumuman Kehendak Nikah":
+    badge status (terverifikasi/uji publik), nama pasangan, jadwal, lokasi,
+    dan nomor berkas / masa sanggah.
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_pengumuman_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="@color/md3_surface_card"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/md3_outline_variant_40"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Baris 1: badge status + desa domisili -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/layout_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_badge_emerald"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp">
+
+                <ImageView
+                    android:id="@+id/iv_status_icon"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_check_circle"
+                    app:tint="@color/badge_emerald_text" />
+
+                <TextView
+                    android:id="@+id/tv_status_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/peng_status_terverifikasi"
+                    android:textColor="@color/badge_emerald_text"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_village"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="end"
+                android:maxLines="1"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp"
+                tools:text="Desa Randudongkal" />
+        </LinearLayout>
+
+        <!-- Nama pasangan calon -->
+        <TextView
+            android:id="@+id/tv_couple_names"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Ahmad Fauzi &amp; Siti Aminah" />
+
+        <!-- Jadwal hari/tanggal & jam -->
+        <TextView
+            android:id="@+id/tv_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:drawablePadding="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            app:drawableStartCompat="@drawable/ic_schedule"
+            app:drawableTint="@color/md3_primary"
+            tools:text="Sabtu, 24 Oktober 2026 • 08.00 WIB" />
+
+        <!-- Lokasi akad -->
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp"
+            app:drawableStartCompat="@drawable/ic_location"
+            app:drawableTint="@color/md3_primary"
+            tools:text="Balai Nikah KUA Kec. Randudongkal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/divider" />
+
+        <!-- Nomor berkas / masa sanggah -->
+        <TextView
+            android:id="@+id/tv_file_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_tertiary"
+            android:textSize="11sp"
+            app:drawableStartCompat="@drawable/ic_description"
+            app:drawableTint="@color/text_tertiary"
+            tools:text="Nomor berkas: 0342/OKN/X/2026" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

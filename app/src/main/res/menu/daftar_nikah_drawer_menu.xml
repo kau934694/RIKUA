@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Navigation drawer layar Daftar Nikah: 12 menu lengkap,
+     item "Daftar Nikah" diberi state aktif (single-checkable + setCheckedItem). -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/daf_drawer_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_home"
+            android:icon="@drawable/ic_nav_home"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/menu_services"
+            android:icon="@drawable/ic_nav_services"
+            android:title="@string/nav_services" />
+        <item
+            android:id="@+id/menu_daftar_nikah"
+            android:icon="@drawable/ic_how_to_reg"
+            android:title="@string/rekom_nav_daftar_nikah" />
+        <item
+            android:id="@+id/menu_cek_status"
+            android:icon="@drawable/ic_search"
+            android:title="@string/daf_nav_cek_status" />
+        <item
+            android:id="@+id/menu_forms"
+            android:icon="@drawable/ic_nav_forms"
+            android:title="@string/nav_forms" />
+        <item
+            android:id="@+id/menu_facilities"
+            android:icon="@drawable/ic_nav_facilities"
+            android:title="@string/nav_facilities" />
+        <item
+            android:id="@+id/menu_consultation"
+            android:icon="@drawable/ic_nav_consultation"
+            android:title="@string/nav_consultation" />
+        <item
+            android:id="@+id/menu_pengumuman"
+            android:icon="@drawable/ic_campaign"
+            android:title="@string/daf_nav_pengumuman" />
+        <item
+            android:id="@+id/menu_faq"
+            android:icon="@drawable/ic_help_center"
+            android:title="@string/daf_nav_faq" />
+        <item
+            android:id="@+id/menu_profil"
+            android:icon="@drawable/ic_person_circle"
+            android:title="@string/daf_nav_profil" />
+        <item
+            android:id="@+id/menu_simkah"
+            android:icon="@drawable/ic_navigation"
+            android:title="@string/daf_nav_simkah" />
+        <item
+            android:id="@+id/menu_login"
+            android:icon="@drawable/ic_verified"
+            android:title="@string/daf_nav_login" />
+    </group>
+</menu>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Izin Akses Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Visibilitas intent kamera untuk ACTION_IMAGE_CAPTURE (Langkah 5, targetSdk 30+) -->
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Rikua">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+    android:name=".JadwalPernikahanActivity"
+    android:exported="false" />
+
+        <activity
+            android:name=".ServicesActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ConsultationActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".FacilitiesActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".FacilityDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".FacilitiesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".BlankoActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman detail persyaratan layanan (dibuka dari daftar Layanan) -->
+        <activity
+            android:name=".SyaratNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman panduan rekomendasi nikah luar kecamatan -->
+        <activity
+            android:name=".RekomendasiNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman panduan isbat nikah (pencatatan nikah belum tercatat) -->
+        <activity
+            android:name=".IsbatNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman panduan duplikat buku nikah (hilang/rusak) -->
+        <activity
+            android:name=".DuplikatBukuNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman panduan wakaf & kemasjidan (ikrar wakaf via PPAIW) -->
+        <activity
+            android:name=".WakafActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman panduan wali nikah (tertib wali nasab & wali hakim) -->
+        <activity
+            android:name=".WaliNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman panduan taukil wali bil kitabah (pelimpahan wali tertulis) -->
+        <activity
+            android:name=".TaukilNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Halaman papan pengumuman kehendak nikah (uji publik rencana akad) -->
+        <activity
+            android:name=".PengumumanNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".ServicesActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Alur daftar nikah: pengantar (Langkah 1/6) -->
+        <activity
+            android:name=".DaftarNikahActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Alur daftar nikah: data calon suami (Langkah 2/6) -->
+        <activity
+            android:name=".DaftarNikahStep2Activity"
+            android:exported="false"
+            android:parentActivityName=".DaftarNikahActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Alur daftar nikah: data calon istri (Langkah 3/6) -->
+        <activity
+            android:name=".DataCalonIstriActivity"
+            android:exported="false"
+            android:parentActivityName=".DaftarNikahStep2Activity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Alur daftar nikah: wali, saksi & rencana akad (Langkah 4/6) -->
+        <activity
+            android:name=".DaftarNikahStep4Activity"
+            android:exported="false"
+            android:parentActivityName=".DataCalonIstriActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Alur daftar nikah: inkuri/unggah dokumen (Langkah 5/6) -->
+        <activity
+            android:name=".DaftarNikahStep5Activity"
+            android:exported="false"
+            android:parentActivityName=".DaftarNikahStep4Activity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- Alur daftar nikah: tinjau & kirim (Langkah 6/6) -->
+        <activity
+            android:name=".DaftarNikahStep6Activity"
+            android:exported="false"
+            android:parentActivityName=".DaftarNikahStep5Activity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Pelacakan berkas: cek status pendaftaran -->
+        <activity
+            android:name=".CekStatusActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- FileProvider: URI aman foto dokumen kamera → app eksternal (Langkah 5) -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ============================================================================
+     RIKUA — activity_duplikat_buku_nikah.xml
+     Halaman "Duplikat Buku Nikah" (penggantian buku nikah hilang/rusak) MD3
+     Palette: primary #005145 / #0f6b5c, container #a2f2de, secondary #795902 /
+              #fdd275, surface #f7f9ff, card #ffffff, border #bec9c5 @ 40%.
+    ============================================================================
+     Struktur:
+       DrawerLayout
+         └─ CoordinatorLayout
+              ├─ AppBarLayout + MaterialToolbar   (back | judul tengah | burger)
+              ├─ NestedScrollView (paddingBottom 220dp — bebas dock)
+              │    ├─ Hero / civic card : badge resmi, diperbarui, judul,
+              │    │                       deskripsi, strip biaya "Rp 0"
+              │    ├─ Checklist dokumen   : badge "4 Dokumen" + 4 row interaktif
+              │    ├─ Timeline 4 langkah  : garis dashed + langkah-4 emas (Selesai)
+              │    ├─ Banner anti-pungli  : garansi gratis (secondary gold)
+              │    └─ Kartu jam layanan   : Senin–Jumat + tombol Hubungi
+              └─ layout_bottom_sticky     (dock aksi + bottom nav 5 tab)
+    ============================================================================
+-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".DuplikatBukuNikahActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/dup_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md3_background">
+
+        <!-- =================== TOP APP BAR (STICKY) =================== -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md3_primary"
+            app:elevation="0dp"
+            app:liftOnScroll="false">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/md3_primary"
+                app:contentInsetStartWithNavigation="0dp"
+                app:menu="@menu/services_toolbar_menu"
+                app:navigationContentDescription="@string/syarat_back"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/md3_on_primary">
+
+                <!-- Judul tengah + subjudul KUA (custom center view) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/dup_toolbar_title"
+                        android:textColor="@color/md3_on_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/dup_toolbar_subtitle"
+                        android:textColor="@color/md3_on_primary_container"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- =================== SCROLLABLE BODY =================== -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="220dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="18dp">
+
+                <!-- ============ 1. HERO / CIVIC CARD ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_rekom_card"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <!-- Badge resmi + tanggal pembaruan -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_rekom_badge_official"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="5dp">
+
+                            <ImageView
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_verified"
+                                app:tint="@color/badge_emerald_text" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/dup_badge_resmi"
+                                android:textColor="@color/badge_emerald_text"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:drawablePadding="4dp"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="end"
+                            android:maxLines="1"
+                            android:text="@string/dup_diperbarui"
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="10sp"
+                            app:drawableEndCompat="@drawable/ic_schedule"
+                            app:drawableTint="@color/text_tertiary" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/dup_hero_title"
+                        android:textColor="@color/text_primary"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/dup_hero_desc"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+
+                    <!-- Informasi biaya: Gratis Rp 0,- dengan badge khusus -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_rekom_info_blue"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="12dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_wallet"
+                            app:tint="@color/md3_info_blue_text" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/dup_biaya_title"
+                            android:textColor="@color/md3_info_blue_text"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_gold"
+                            android:fontFamily="sans-serif-black"
+                            android:paddingStart="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/syarat_biaya_rp0"
+                            android:textColor="@color/md3_secondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- Ringkasan alur: Buku hilang/rusak -> Duplikat Sah Terbit -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:text="@string/dup_flow_summary"
+                        android:textColor="@color/md3_primary"
+                        android:textSize="12sp"
+                        app:drawableStartCompat="@drawable/ic_transfer"
+                        app:drawableTint="@color/md3_primary" />
+                </LinearLayout>
+
+                <!-- ============ 2. CHECKLIST PERSYARATAN DOKUMEN (4 ITEM) ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/dup_siap_title"
+                        android:textColor="@color/text_primary"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Badge jumlah dokumen -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/bg_badge_teal"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingStart="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/dup_siap_badge"
+                        android:textColor="@color/badge_teal_text"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/dup_siap_subtitle"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_rekom_card"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="6dp">
+
+                    <!-- Dokumen 1 — Surat kehilangan (badge POLSEK) -->
+                    <LinearLayout
+                        android:id="@+id/row_dok_1"
+                        style="@style/RekomChecklistRow">
+
+                        <ImageView
+                            android:id="@+id/iv_check_1"
+                            style="@style/RekomChecklistIcon"
+                            android:contentDescription="@string/syarat_check_desc"
+                            android:src="@drawable/ic_check_circle" />
+
+                        <LinearLayout style="@style/RekomChecklistText">
+
+                            <TextView
+                                android:id="@+id/tv_dok_1"
+                                style="@style/RekomChecklistTitle"
+                                android:text="@string/dup_dok_1_title" />
+
+                            <TextView
+                                style="@style/RekomChecklistDesc"
+                                android:text="@string/dup_dok_1_desc" />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/IsbatBerkasBadge"
+                            android:background="@drawable/bg_badge_blue"
+                            android:text="@string/dup_badge_polsek"
+                            android:textColor="@color/badge_blue_text" />
+                    </LinearLayout>
+
+                    <!-- Dokumen 2 — KTP & KK (badge FOTOKOPI) -->
+                    <LinearLayout
+                        android:id="@+id/row_dok_2"
+                        style="@style/RekomChecklistRow">
+
+                        <ImageView
+                            android:id="@+id/iv_check_2"
+                            style="@style/RekomChecklistIcon"
+                            android:contentDescription="@string/syarat_check_desc"
+                            android:src="@drawable/ic_check_circle" />
+
+                        <LinearLayout style="@style/RekomChecklistText">
+
+                            <TextView
+                                android:id="@+id/tv_dok_2"
+                                style="@style/RekomChecklistTitle"
+                                android:text="@string/dup_dok_2_title" />
+
+                            <TextView
+                                style="@style/RekomChecklistDesc"
+                                android:text="@string/dup_dok_2_desc" />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/IsbatBerkasBadge"
+                            android:background="@drawable/bg_badge_gray"
+                            android:text="@string/isbat_badge_fotokopi"
+                            android:textColor="@color/text_tertiary" />
+                    </LinearLayout>
+
+                    <!-- Dokumen 3 — Buku rusak (badge JIKA RUSAK) -->
+                    <LinearLayout
+                        android:id="@+id/row_dok_3"
+                        style="@style/RekomChecklistRow">
+
+                        <ImageView
+                            android:id="@+id/iv_check_3"
+                            style="@style/RekomChecklistIcon"
+                            android:contentDescription="@string/syarat_check_desc"
+                            android:src="@drawable/ic_check_circle" />
+
+                        <LinearLayout style="@style/RekomChecklistText">
+
+                            <TextView
+                                android:id="@+id/tv_dok_3"
+                                style="@style/RekomChecklistTitle"
+                                android:text="@string/dup_dok_3_title" />
+
+                            <TextView
+                                style="@style/RekomChecklistDesc"
+                                android:text="@string/dup_dok_3_desc" />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/IsbatBerkasBadge"
+                            android:background="@drawable/bg_badge_amber"
+                            android:text="@string/dup_badge_sesuai_kondisi"
+                            android:textColor="@color/badge_amber_text" />
+                    </LinearLayout>
+
+                    <!-- Dokumen 4 — Pas foto 2x3 suami istri latar biru -->
+                    <LinearLayout
+                        android:id="@+id/row_dok_4"
+                        style="@style/RekomChecklistRow">
+
+                        <ImageView
+                            android:id="@+id/iv_check_4"
+                            style="@style/RekomChecklistIcon"
+                            android:contentDescription="@string/syarat_check_desc"
+                            android:src="@drawable/ic_check_circle" />
+
+                        <LinearLayout style="@style/RekomChecklistText">
+
+                            <TextView
+                                android:id="@+id/tv_dok_4"
+                                style="@style/RekomChecklistTitle"
+                                android:text="@string/dup_dok_4_title" />
+
+                            <TextView
+                                style="@style/RekomChecklistDesc"
+                                android:text="@string/dup_dok_4_desc" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- ============ 3. LANGKAH PENGURUSAN (TIMELINE 4 TAHAPAN) ============ -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/dup_alur_title"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/dup_alur_subtitle"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="12sp" />
+
+                <!-- Langkah 1 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_1"
+                        style="@style/RekomStepNumber"
+                        android:text="@string/rekom_step_1_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_rekom_dashed_line"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/tv_step_1"
+                        app:layout_constraintStart_toStartOf="@id/tv_step_1"
+                        app:layout_constraintTop_toBottomOf="@id/tv_step_1" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/RekomStepCard"
+                        app:cardBackgroundColor="@color/md3_surface_card"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_step_1"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout style="@style/RekomStepCardBody">
+
+                            <TextView
+                                style="@style/RekomStepTitle"
+                                android:text="@string/dup_alur_1_title" />
+
+                            <TextView
+                                style="@style/RekomStepDesc"
+                                android:text="@string/dup_alur_1_desc" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Langkah 2 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_2"
+                        style="@style/RekomStepNumber"
+                        android:text="@string/rekom_step_2_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_rekom_dashed_line"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/tv_step_2"
+                        app:layout_constraintStart_toStartOf="@id/tv_step_2"
+                        app:layout_constraintTop_toBottomOf="@id/tv_step_2" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/RekomStepCard"
+                        app:cardBackgroundColor="@color/md3_surface_card"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_step_2"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout style="@style/RekomStepCardBody">
+
+                            <TextView
+                                style="@style/RekomStepTitle"
+                                android:text="@string/dup_alur_2_title" />
+
+                            <TextView
+                                style="@style/RekomStepDesc"
+                                android:text="@string/dup_alur_2_desc" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Langkah 3 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_3"
+                        style="@style/RekomStepNumber"
+                        android:text="@string/rekom_step_3_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_rekom_dashed_line"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/tv_step_3"
+                        app:layout_constraintStart_toStartOf="@id/tv_step_3"
+                        app:layout_constraintTop_toBottomOf="@id/tv_step_3" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/RekomStepCard"
+                        app:cardBackgroundColor="@color/md3_surface_card"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_step_3"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout style="@style/RekomStepCardBody">
+
+                            <TextView
+                                style="@style/RekomStepTitle"
+                                android:text="@string/dup_alur_3_title" />
+
+                            <TextView
+                                style="@style/RekomStepDesc"
+                                android:text="@string/dup_alur_3_desc" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Langkah 4 — highlight sekunder emas (Status: Selesai) -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_step_4"
+                        style="@style/RekomStepNumber"
+                        android:text="4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/RekomStepCard"
+                        app:cardBackgroundColor="@color/md3_secondary_container"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_step_4"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:strokeColor="@color/syarat_accent_gold"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout style="@style/RekomStepCardBody">
+
+                            <TextView
+                                style="@style/RekomStepTitle"
+                                android:text="@string/dup_alur_4_title"
+                                android:textColor="@color/md3_secondary" />
+
+                            <TextView
+                                style="@style/RekomStepDesc"
+                                android:text="@string/dup_alur_4_desc"
+                                android:textColor="@color/md3_secondary" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- ============ 4. BANNER ANTI-PUNGLI ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/bg_rekom_garansi_banner"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_policy_shield"
+                            app:tint="@color/md3_secondary" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/dup_pungli_title"
+                            android:textColor="@color/md3_secondary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_gold"
+                            android:fontFamily="sans-serif-black"
+                            android:paddingStart="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="@string/syarat_biaya_rp0"
+                            android:textColor="@color/md3_secondary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/dup_pungli_desc"
+                        android:textColor="@color/md3_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <!-- ============ 5. KARTU JAM LAYANAN + HUBUNGI ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_rekom_card"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="12dp">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:background="@drawable/bg_rekom_icon_teal_soft"
+                        android:contentDescription="@null"
+                        android:padding="9dp"
+                        android:src="@drawable/ic_schedule"
+                        app:tint="@color/md3_primary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/hours_weekday"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/hours_friday"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/dup_jam_desc"
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <!-- Aksi cepat: Hubungi petugas (WhatsApp admin) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_hubungi"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:minWidth="96dp"
+                        android:text="@string/dup_btn_hubungi"
+                        android:textAllCaps="false"
+                        android:textColor="@color/md3_on_primary_container"
+                        android:textSize="13sp"
+                        app:backgroundTint="@color/md3_primary_container"
+                        app:cornerRadius="14dp"
+                        app:icon="@drawable/ic_phone"
+                        app:iconGravity="start"
+                        app:iconSize="16dp"
+                        app:iconTint="@color/md3_on_primary_container" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- ============ STICKY BOTTOM: DOCK AKSI + BOTTOM NAV ============ -->
+        <LinearLayout
+            android:id="@+id/layout_bottom_sticky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/md3_background"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <!-- Dock tombol aksi layanan -->
+            <LinearLayout
+                android:id="@+id/layout_action_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="18dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_lihat_syarat"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/dup_btn_syarat"
+                    android:textAllCaps="false"
+                    android:textColor="@color/md3_primary"
+                    android:textSize="14sp"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_description"
+                    app:iconGravity="start"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/md3_primary"
+                    app:strokeColor="@color/md3_primary"
+                    app:strokeWidth="1.5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_konsultasi"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/dup_btn_konsultasi"
+                    android:textAllCaps="false"
+                    android:textColor="@color/md3_on_primary"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/md3_primary"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_chat"
+                    app:iconGravity="start"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/md3_on_primary" />
+            </LinearLayout>
+
+            <!-- Bottom Navigation Persistent (5 tab, Layanan aktif) -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/surface_white"
+                app:elevation="0dp"
+                app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+                app:itemIconTint="@color/bottom_nav_color_selector"
+                app:itemRippleColor="@color/primary_forest_container"
+                app:itemTextColor="@color/bottom_nav_color_selector"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/rekom_bottom_nav_menu" />
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- =================== NAVIGATION DRAWER =================== -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/surface_white"
+        app:headerLayout="@layout/nav_drawer_header"
+        app:menu="@menu/bottom_nav_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Material symbol: transfer_within_a_station -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M16.49,15.5v-1.75L14,17.25l2.49,3.5V19H22v-4h-5.51zM3,19h5.51v1.75L11,17.25 8.51,13.75V15.5H3V19zM9.5,4l-4,4h3v4h2V8h3L9.5,4z" />
+</vector>

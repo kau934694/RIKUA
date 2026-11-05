@@ -1,0 +1,1172 @@
+<resources>
+    <string name="app_name">RIKUA</string>
+    <string name="kua_subtitle">KUA Kec. Randudongkal</string>
+
+    
+    
+    <!-- Hero Strings -->
+    <string name="hero_greeting_prefix">Assalamu\'alaikum,</string>
+    <string name="hero_greeting_title">Warga Sejahtera</string>
+    <string name="hero_greeting_desc">Layanan informasi dan administrasi pernikahan terpadu KUA Kecamatan Randudongkal.</string>
+    <string name="search_hint">Cari syarat nikah, blangko, atau sarana…</string>
+
+    <!-- Announcement Strings -->
+    <string name="announcement_title">Jadwal Pendaftaran Nikah Bulan Syawal</string>
+    <string name="announcement_desc">Bagi calon pengantin yang merencanakan akad nikah di bulan Syawal, kuota pendaftaran balai nikah dan luar kantor telah dibuka. Segera lengkapi berkas Anda.</string>
+    <string name="btn_check_quota">Lihat Kuota</string>
+    <!-- Integrated Services Strings -->
+    <string name="section_services_title">Layanan Terpadu</string>
+    <string name="btn_see_all">Semua</string>
+
+    <string name="service_daftar_nikah_title">Daftar Nikah</string>
+    <string name="service_daftar_nikah_desc">Pendaftaran akta nikah online</string>
+
+    <string name="service_blangko_title">Blangko N</string>
+    <string name="service_blangko_desc">Format model N1 - N6</string>
+
+    <string name="service_konsultasi_title">Konsultasi</string>
+    <string name="service_konsultasi_desc">Bimbingan perkawinan &amp; BP4</string>
+
+    <string name="service_sarana_title">Sarana Keagamaan</string>
+    <string name="service_sarana_desc">Balai nikah &amp; wakaf masjid</string>
+
+
+    <!-- Info & Operational Strings -->
+    <string name="section_info_title">Informasi &amp; Pelayanan Kantor</string>
+    
+    <string name="card_hours_title">Jam Pelayanan Kantor</string>
+    <string name="hours_weekend">Sabtu &amp; Minggu : Libur (Kecuali Akad Luar Kantor)</string>
+
+    <string name="card_location_title">KUA Kecamatan Randudongkal</string>
+    <string name="card_location_address"> Dusun II, Randudongkal, Kec. Randudongkal, Kabupaten Pemalang, Jawa Tengah 52353</string>
+    <string name="btn_directions">Petunjuk Arah</string>
+
+    <string name="card_contact_title">Layanan Aduan &amp; Bantuan Cepat</string>
+    <string name="card_contact_desc">Butuh bantuan mendesak atau kendala berkas? Hubungi petugas resmi KUA Randudongkal.</string>
+    <string name="btn_whatsapp">WhatsApp Admin</string>
+    <string name="btn_call">Telepon Kantor</string>
+
+    <!-- Editorial Quote -->
+    <string name="editorial_quote">“Pernikahan yang kokoh berakar pada niat suci, saling memahami, dan komunikasi yang terbuka. KUA Randudongkal hadir mendampingi awal perjalanan bahagia Anda.”</string>
+    <string name="editorial_author">— Seksi Kepenghuluan &amp; BP4 KUA Kec. Randudongkal</string>
+
+    <!-- Bottom Navigation Tabs -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_services">Layanan</string>
+    <string name="nav_consultation">Konsultasi</string>
+    <string name="nav_facilities">Sarana</string>
+    <string name="nav_forms">Blangko</string>
+
+    <!-- ==================== Services Screen ==================== -->
+    <string name="services_toolbar_title">Layanan</string>
+    <string name="services_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="services_nav_drawer_open">Buka navigasi</string>
+    <string name="services_nav_drawer_close">Tutup navigasi</string>
+    <string name="services_back">Kembali</string>
+
+    <string name="services_banner_title">Layanan KUA</string>
+    <string name="services_banner_desc">Informasi mengenai persyaratan, alur, dan prosedur pernikahan serta layanan administrasi keagamaan resmi KUA Kecamatan Randudongkal.</string>
+
+    <string name="services_search_hint">Cari layanan (misal: nikah, isbat, wakaf)…</string>
+    <string name="services_search_clear">Hapus pencarian</string>
+
+    <string name="services_filter_all">Semua Layanan</string>
+    <string name="services_filter_marriage">Pernikahan</string>
+    <string name="services_filter_admin">Administrasi &amp; Dokumen</string>
+    <string name="services_filter_wakaf">Kemasjidan &amp; Wakaf</string>
+
+    <string name="services_section_list_title">8 Layanan Esensial</string>
+    <string name="services_section_list_subtitle">Ketuk kartu untuk melihat persyaratan lengkap</string>
+
+    <!-- Service Item Titles & Descriptions -->
+    <string name="service_nikah_syarat_title">Syarat Nikah</string>
+    <string name="service_nikah_syarat_desc">Kelengkapan dokumen N1–N4 &amp; pemeriksaan berkas</string>
+    <string name="service_nikah_syarat_badge">Lengkap</string>
+
+    <string name="service_nikah_rekom_title">Rekomendasi Nikah</string>
+    <string name="service_nikah_rekom_desc">Surat pengantar nikah ke KUA tujuan</string>
+    <string name="service_nikah_rekom_badge">Surat Pengantar</string>
+
+    <string name="service_isbat_title">Isbat Nikah</string>
+    <string name="service_isbat_desc">Pencatatan nikah bagi pasangan yang belum tercatat</string>
+    <string name="service_isbat_badge">Pengadilan Agama</string>
+
+    <string name="service_duplikat_title">Duplikat Buku Nikah</string>
+    <string name="service_duplikat_desc">Penerbitan ulang buku nikah hilang/rusak</string>
+    <string name="service_duplikat_badge">Dokumen</string>
+
+    <string name="service_wali_title">Wali Nikah</string>
+    <string name="service_wali_desc">Pengesahan wali nasab &amp; jadwal wali</string>
+    <string name="service_wali_badge">Akad</string>
+
+    <string name="service_taukil_title">Taukil Wali</string>
+    <string name="service_taukil_desc">Pelimpahan wali kepada penghulu KUA</string>
+    <string name="service_taukil_badge">Akad</string>
+
+    <string name="service_pengumuman_title">Pengumuman Kehendak Nikah</string>
+    <string name="service_pengumuman_desc">Papan pengumuman rencana akad 10 hari kerja</string>
+    <string name="service_pengumuman_badge">Publik</string>
+
+    <string name="service_wakaf_title">Wakaf</string>
+    <string name="service_wakaf_desc">Akta ikrar wakaf tanah, uang, &amp; benda bergerak</string>
+    <string name="service_wakaf_badge">Sosial Keagamaan</string>
+
+    <string name="services_chevron_desc">Buka detail layanan</string>
+
+    <!-- Empty State -->
+    <string name="services_empty_title">Layanan tidak ditemukan</string>
+    <string name="services_empty_desc">Coba kata kunci lain seperti \"nikah\", \"wakaf\", atau \"isbat\".</string>
+
+    <!-- Help Card -->
+    <string name="services_help_title">Bingung menentukan berkas?</string>
+    <string name="services_help_desc">Petugas RIKUA siap membantu Anda memilih layanan dan menyiapkan dokumen secara daring.</string>
+    <string name="services_help_btn">Tanya Petugas Online</string>
+
+    <!-- Footer / Anti-Corruption -->
+    <string name="services_footer_note">KUA tidak memungut biaya melalui situs ini (Gratis di kantor pada jam kerja).</string>
+    <string name="services_footer_zero_fee">Zero Rupiah Service</string>
+
+    <!-- Categories -->
+    <string name="cat_pernikahan">pernikahan nikah taukil wali isbat pengumuman</string>
+    <string name="cat_administrasi">administrasi dokumen duplikat buku nikah rekomendasi pengantar</string>
+    <string name="cat_kemasjidan">wakaf kemasjidan masjid sosial</string>
+
+    <!-- ==================== Consultation Screen ==================== -->
+    <string name="consultation_toolbar_title">Konsultasi dengan Petugas</string>
+    <string name="consultation_toolbar_subtitle">KUA Kec. Randudongkal</string>
+
+    <string name="consultation_banner_title">Konsultasi dengan Petugas KUA</string>
+    <string name="consultation_banner_desc">Bimbingan langsung bersama petugas resmi: syarat nikah, dispensasi, taukil wali, keluarga sakinah, hingga wakaf.</string>
+
+     <string name="hours_weekday">Senin - Kamis : 07.30 - 16.00 WIB</string>
+    <string name="hours_friday">Jumat : 07.30 - 16.30 WIB</string>
+
+
+    <string name="consultation_section_title">4 Petugas Pelayanan</string>
+    <string name="consultation_section_subtitle">Pilih petugas sesuai bidang konsultasi Anda</string>
+
+    <string name="consultation_btn_whatsapp">WhatsApp</string>
+    <string name="consultation_btn_telepon">Telepon</string>
+    <string name="consultation_status_available">Tersedia</string>
+    <string name="consultation_status_offline">Di luar jam layanan</string>
+    <string name="consultation_hours_prefix">Jam layanan: %1$s</string>
+    <string name="consultation_hours_desc">Jam layanan petugas</string>
+    <string name="consultation_avatar_desc">Inisial petugas</string>
+    <string name="consultation_expertise_title">Bidang keahlian</string>
+
+    <string name="consultation_wa_message">Halo %1$s, saya ingin konsultasi mengenai %2$s melalui RIKUA KUA Randudongkal.</string>
+    <string name="consultation_wa_unavailable">WhatsApp tidak tersedia di perangkat ini</string>
+    <string name="consultation_dial_unavailable">Tidak dapat membuka aplikasi telepon</string>
+
+    <string name="consultation_reassurance_title">Layanan Gratis, Bebas Pungli</string>
+    <string name="consultation_reassurance_desc">Semua layanan konsultasi KUA Randudongkal tidak dipungut biaya (Gratis).</string>
+    <string name="consultation_footer_note">KUA tidak memungut biaya melalui situs ini.</string>
+    <string name="consultation_footer_address">KUA Kecamatan Randudongkal, Kabupaten Pemalang</string>
+
+    <!-- Officer Data (Randudongkal) -->
+    <string name="officer_1_name">Fatchuroji Alhad, S.Ag.</string>
+    <string name="officer_1_role">Kepala KUA Randudongkal</string>
+    <string name="officer_1_hours">08.00 – 15.00 WIB</string>
+    <string name="officer_1_expertise">Kebijakan Umum, Wali Hakim, Dispensasi</string>
+    <string name="officer_1_whatsapp">+6282323064741</string>
+
+    <string name="officer_2_name">Ahmad Fajar, S.Ud</string>
+    <string name="officer_2_role">Penyuluh Agama Islam</string>
+    <string name="officer_2_hours">08.00 – 16.00 WIB</string>
+    <string name="officer_2_expertise">Pendaftaran Nikah, Taukil Wali, Rekomendasi Nikah</string>
+    <string name="officer_2_whatsapp">+6285179831189</string>
+
+    <string name="officer_3_name">Nur Faizah, S.Ag</string>
+    <string name="officer_3_role">Penyuluh Agama Islam</string>
+    <string name="officer_3_hours">08.00 – 15.00 WIB</string>
+    <string name="officer_3_expertise">Bimbingan Catin, Konsultasi Keluarga Sakinah, Wakaf</string>
+    <string name="officer_3_whatsapp">+6282329302641</string>
+
+    <string name="officer_4_name">Zaenal Arifin, S.Ud</string>
+    <string name="officer_4_role">Penyuluh Agama Islam &amp; Blanko</string>
+    <string name="officer_4_hours">08.00 – 16.00 WIB</string>
+    <string name="officer_4_expertise">Cek Berkas N1–N6, Duplikat Buku Nikah, Cek Status</string>
+    <string name="officer_4_whatsapp">+6285801119912</string>
+
+    <!-- ==================== Facilities (Sarana Keagamaan) Screen ==================== -->
+    <string name="facilities_toolbar_title">Sarana Keagamaan</string>
+    <string name="facilities_toolbar_subtitle">KUA Kec. Randudongkal</string>
+
+
+    <string name="facilities_section_title">Direktori Sarana Keagamaan</string>
+    <string name="facilities_section_desc">Data resmi masjid, musholla, pondok pesantren, TPQ, dan madrasah diniyah di wilayah binaan KUA Randudongkal.</string>
+
+    <string name="facilities_search_hint">Cari nama masjid, pesantren, atau lokasi…</string>
+    <string name="facilities_search_clear">Hapus pencarian</string>
+
+    <string name="facilities_filter_all">Semua</string>
+    <string name="facilities_filter_masjid">Masjid</string>
+    <string name="facilities_filter_musholla">Musholla</string>
+    <string name="facilities_filter_pesantren">Pesantren</string>
+    <string name="facilities_filter_tpq">TPQ</string>
+    <string name="facilities_filter_madin">Madrasah Diniyah</string>
+
+    <string name="facilities_village_label">Filter Desa / Kelurahan</string>
+
+    <string name="facilities_result_count">%1$d sarana ditemukan</string>
+    <string name="facilities_empty_title">Sarana tidak ditemukan</string>
+    <string name="facilities_empty_desc">Coba kata kunci lain, ubah kategori, atau pilih \"Semua Desa\".</string>
+
+    <string name="facilities_help_title">Sarana Anda belum tercantum?</string>
+    <string name="facilities_help_desc">Bantu kami memperbarui data. Hubungi petugas untuk pengusulan atau koreksi pendataan sarana keagamaan.</string>
+    <string name="facilities_help_btn">Konsultasi Pendataan</string>
+    <string name="facilities_footer_note">KUA tidak memungut biaya melalui situs ini.</string>
+
+    <!-- Facility item data -->
+    <string name="facility_1_name">Masjid Besar Baitul Muttaqin</string>
+    <string name="facility_1_category">Masjid Jami\'</string>
+    <string name="facility_1_location">Randudongkal</string>
+    <string name="facility_1_detail1">Jamaah ±1.200 orang</string>
+    <string name="facility_1_detail2">Wakaf Bersertifikat</string>
+
+    <string name="facility_2_name">Masjid Baiturrahim</string>
+    <string name="facility_2_category">Masjid Desa</string>
+    <string name="facility_2_location">Desa KaliTorong</string>
+    <string name="facility_2_detail1">Jamaah ±450 orang</string>
+    <string name="facility_2_detail2">AIW Resmi</string>
+
+    <string name="facility_3_name">Pondok Pesantren Al-Hikmah</string>
+    <string name="facility_3_category">Pesantren Salafiyah</string>
+    <string name="facility_3_location">Randudongkal</string>
+    <string name="facility_3_detail1">Pimpinan: K.H. Mustofa Kamal</string>
+    <string name="facility_3_detail2">Santri ±350 orang</string>
+
+    <string name="facility_4_name">Musholla Nurul Iman</string>
+    <string name="facility_4_category">Musholla Warga</string>
+    <string name="facility_4_location">Desa Kalimas</string>
+    <string name="facility_4_detail1">Jamaah ±120 orang</string>
+
+    <string name="facility_5_name">TPQ &amp; Madrasah Diniyah Miftahul Huda</string>
+    <string name="facility_5_category">TPQ / Madin</string>
+    <string name="facility_5_location">Desa Karang Moncol</string>
+    <string name="facility_5_detail1">Santri ±180 anak</string>
+
+    <string name="facility_thumb_desc">Thumbnail sarana keagamaan</string>
+
+    <!-- ==================== Facility Detail Screen ==================== -->
+    <string name="facility_detail_toolbar_title">Detail Sarana</string>
+    <string name="facility_detail_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="facility_detail_back">Kembali</string>
+
+    <string name="facility_detail_status_active">Aktif Terdata</string>
+    <string name="facility_detail_simas_prefix">SIMAS Kemenag: %1$s</string>
+    <string name="facility_detail_simas_unknown">SIMAS Kemenag: Belum terdaftar</string>
+
+    <string name="facility_detail_section_identity">Identitas Sarana</string>
+    <string name="facility_detail_section_capacity">Kapasitas &amp; Legalitas</string>
+    <string name="facility_detail_section_management">Pengurus &amp; Kontak</string>
+
+    <string name="facility_detail_lbl_category">Kategori</string>
+    <string name="facility_detail_lbl_address">Alamat Lengkap</string>
+    <string name="facility_detail_lbl_capacity">Kapasitas Jamaah</string>
+    <string name="facility_detail_lbl_land">Legalitas Tanah</string>
+    <string name="facility_detail_lbl_building">Luas Bangunan</string>
+    <string name="facility_detail_lbl_year">Tahun Berdiri</string>
+    <string name="facility_detail_lbl_takmir">Ketua Takmir / Pengurus</string>
+    <string name="facility_detail_lbl_phone">Telepon</string>
+    <string name="facility_detail_lbl_email">Email</string>
+    <string name="facility_detail_lbl_qibla">Arah Kiblat</string>
+
+    <string name="facility_detail_placeholder">—</string>
+
+    <string name="facility_detail_btn_maps">Lihat di Peta (Google Maps)</string>
+    <string name="facility_detail_btn_consult">Konsultasi Layanan Kemasjidan &amp; Wakaf</string>
+
+    <string name="facility_detail_maps_unavailable">Google Maps tidak tersedia di perangkat ini</string>
+    <string name="facility_detail_whatsapp_unavailable">WhatsApp tidak tersedia di perangkat ini</string>
+    <string name="facility_detail_footer_note">Data bersumber dari pendataan resmi KUA Kec. Randudongkal.</string>
+
+    <string name="facility_detail_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi layanan Kemasjidan &amp; Wakaf untuk sarana: %1$s.</string>
+
+    <!-- Spinner desa options -->
+    <string-array name="facilities_villages">
+        <item>Semua Desa</item>
+        <item>Banjaranyar</item>
+        <item>Gembyang</item>
+        <item>Gongseng</item>
+        <item>Kalimas</item>
+        <item>KaliTorong</item>
+        <item>KarangMoncol</item>
+        <item>Kecepit</item>
+        <item>Kejene</item>
+        <item>Kreyo</item>
+        <item>Lodaya</item>
+        <item>Mangli</item>
+        <item>Mejagong</item>
+        <item>Penusupan</item>
+        <item>Randudongkal</item>
+        <item>Rembul</item>
+        <item>Semaya</item>
+        <item>Semingkir</item>
+        <item>Tanah Baya</item>
+    </string-array>
+
+    <!-- ==================== Blanko / Forms Screen ==================== -->
+    <string name="blanko_banner_title">Dokumen Resmi Kemenag RI</string>
+    <string name="blanko_banner_desc">Cetak mandiri formulir N1–N6 menggunakan kertas A4 70gsm. Isi sesuai petunjuk, tanda tangani di atas materai, lalu serahkan ke petugas KUA pada jam kerja.</string>
+    <string name="blanko_section_title">Daftar Blanko N1 \u2013 N6</string>
+    <string name="blanko_section_subtitle">Ketuk \"Unduh PDF\" untuk membuka &amp; mencetak berkas.</string>
+    <string name="blanko_btn_unduh">Unduh PDF</string>
+    <string name="blanko_btn_retry">Coba Lagi</string>
+    <string name="blanko_btn_daftar_nikah">Lanjut ke Daftar Nikah</string>
+    <string name="blanko_btn_wa_konsultasi">Tanya Petugas via WhatsApp</string>
+    <string name="blanko_error_default">Gagal memuat data blanko. Periksa koneksi jaringan Anda.</string>
+
+    <!-- ==================== Syarat Nikah Screen ==================== -->
+    <string name="syarat_toolbar_title">Syarat Nikah</string>
+    <string name="syarat_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="syarat_back">Kembali</string>
+    <string name="syarat_institution_badge">Prosedur resmi Kemenag RI</string>
+    <string name="syarat_hero_desc_default">
+        Kelengkapan dokumen yang harus disiapkan calon pengantin sebelum mendaftar ke KUA.
+        Periksa satu per satu agar berkas tidak ditolak petugas.
+    </string>
+
+    <string name="syarat_biaya_label">Biaya Pencatatan</string>
+    <string name="syarat_biaya_rp0">Rp 0</string>
+    <string name="syarat_badge_gratis">GRATIS</string>
+
+    <!-- Meta hero: %1$s = tanggal pembaruan format Indonesia dari kolom updated_at -->
+    <string name="syarat_diperbarui_format">Diperbarui %1$s</string>
+    <string name="syarat_estimasi_format">Estimasi proses: %1$s</string>
+
+    <string name="syarat_check_desc">Tandai syarat yang sudah disiapkan</string>
+    <string name="syarat_dokumen_label">Dokumen yang disiapkan</string>
+    <string name="syarat_buka_semua">Buka semua</string>
+    <string name="syarat_tutup_semua">Tutup semua</string>
+    <string name="syarat_progress_format">%1$d dari %2$d syarat sudah disiapkan</string>
+    <string name="syarat_progress_kosong">Belum ada syarat yang ditandai siap</string>
+
+    <string name="syarat_section_umum">Untuk Semua Pendaftar</string>
+    <string name="syarat_section_umum_desc">Syarat Umum</string>
+    <string name="syarat_section_khusus">Jika Berlaku untuk Anda</string>
+    <string name="syarat_section_khusus_desc">Kondisi Tertentu</string>
+
+    <string name="syarat_badge_wajib">WAJIB</string>
+    <string name="syarat_badge_kondisi">SESUAI KONDISI</string>
+
+    <string name="syarat_langkah_title">Langkah Pendaftaran</string>
+    <string name="syarat_langkah_subtitle">%1$d langkah dari persiapan berkas hingga buku nikah terbit</string>
+
+    <string name="syarat_btn_daftar">Daftar Nikah</string>
+    <string name="syarat_btn_unduh_blanko">Unduh Blanko N1 \u2013 N4</string>
+    <string name="syarat_btn_retry">Coba Lagi</string>
+    <string name="syarat_error_default">Gagal memuat data syarat nikah. Periksa koneksi jaringan Anda.</string>
+    <string name="syarat_footer_note">
+        Layanan bebas pungli. Pemungutan biaya hanya berlaku untuk pencatatan di luar kantor
+        dan luar jam kerja sesuai PP No. 60 Tahun 2021.
+    </string>
+
+    <string name="syarat_loading">Memuat data syarat nikah…</string>
+    <!-- ===== Redesign syarat nikah (MD3 summary card, notice, sticky help) ===== -->
+    <string name="syarat_badge_resmi_kemenag">Resmi Kemenag</string>
+    <string name="syarat_diperbarui_statis">Terakhir diperbarui: 1 Oktober 2026</string>
+    <string name="syarat_summary_title">Dokumen dan langkah untuk mendaftar nikah</string>
+    <string name="syarat_summary_desc">
+        Checklist lengkap berkas N1\u2013N6 plus alur pendaftaran dari surat pengantar
+        desa hingga akad nikah. Tandai tiap berkas yang sudah Anda siapkan.
+    </string>
+    <string name="syarat_biaya_note_prefix">Biaya Nikah di KUA:</string>
+    <string name="syarat_biaya_note_suffix">(Gratis) | Hari Kerja</string>
+
+    <string name="syarat_section_umum_hint">berkas wajib dilengkapi</string>
+    <string name="syarat_section_khusus_hint">berkas tambahan kondisi tertentu</string>
+
+    <string name="syarat_langkah_hint_5">5 langkah alur dari desa hingga akad nikah</string>
+
+    <string name="syarat_notice_title">Pendampingan Petugas Setiap Hari Kerja</string>
+    <string name="syarat_notice_desc">
+        Bingung soal berkas atau kondisi khusus? Petugas KUA Randudongkal siap menjawab
+        pertanyaan Anda setiap hari kerja pukul 08.00 \u2013 15.00 WIB.
+    </string>
+    <string name="syarat_notice_btn">Tanya Petugas</string>
+    <string name="syarat_feature_soon">Fitur ini segera hadir</string>
+    <string name="syarat_bantuan_link">Butuh bantuan? Hubungi KUA</string>
+
+    <!-- Format pesan WhatsApp dari halaman syarat nikah -->
+    <string name="syarat_wa_message">Assalamu\'alaikum, Admin RIKUA KUA Randudongkal, saya ingin menanyakan persyaratan nikah: %1$s</string>
+<string name="syarat_wa_umum">Assalamu\'alaikum, saya ingin bertanya tentang syarat pendaftaran nikah.</string>
+
+    <!-- ==================== Rekomendasi Nikah Screen ==================== -->
+    <string name="rekom_toolbar_title">Rekomendasi Nikah</string>
+    <string name="rekom_back">Kembali</string>
+    <string name="rekom_badge_resmi">Layanan Resmi KUA Randudongkal</string>
+    <string name="rekom_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+
+    <string name="rekom_hero_title">Nikah di Luar Kecamatan</string>
+    <string name="rekom_hero_desc">Bagi warga ber-KTP Randudongkal yang akan melangsungkan akad nikah di KUA kecamatan lain, cukup ambil surat rekomendasi (N2) di sini — tanpa perlu menunggu lama.</string>
+
+    <string name="rekom_kapan_title">Kapan Diperlukan?</string>
+    <string name="rekom_kapan_desc">Rekomendasi nikah diperlukan bila lokasi akad nikah berbeda dari KUA tempat pendaftaran pertama (KUA sesuai domisili KTP). Surat ini mengalihkan pencatatan ke KUA tujuan sambil tetap mencatat asal berkas di SIMKAH.</string>
+    <string name="rekom_kapan_info">Berkas Anda tervalidasi otomatis di sistem SIMKAH Kemenag, sehingga KUA tujuan dapat langsung memverifikasi secara online saat pendaftaran.</string>
+
+    <string name="rekom_siap_title">Yang Perlu Disiapkan</string>
+    <string name="rekom_siap_subtitle">Bawa dokumen asli berikut saat mengajukan rekomendasi</string>
+    <string name="rekom_berkas_1_title">Formulir N1 (Surat Pengantar Nikah)</string>
+    <string name="rekom_berkas_1_desc">Ditandatangani Lurah/Kepala Desa domisili</string>
+    <string name="rekom_berkas_2_title">KTP &amp; Kartu Keluarga</string>
+    <string name="rekom_berkas_2_desc">Asli + fotokopi, keduanya calon pengantin</string>
+    <string name="rekom_berkas_3_title">Pas Foto 3×4 Latar Biru</string>
+    <string name="rekom_berkas_3_desc">2 lembar masing-masing calon</string>
+    <string name="rekom_berkas_4_title">KTP Orang Tua / Wali</string>
+    <string name="rekom_berkas_4_desc">Untuk pengecekan data wali nasab</string>
+
+    <string name="rekom_langkah_title">Alur Pengajuan Rekomendasi</string>
+    <string name="rekom_langkah_subtitle">3 langkah mudah, rata-rata selesai 1×24 jam kerja</string>
+    <string name="rekom_step_1_number">1</string>
+    <string name="rekom_step_2_number">2</string>
+    <string name="rekom_step_3_number">3</string>
+    <string name="rekom_langkah_1_title">Pengajuan Berkas</string>
+    <string name="rekom_langkah_1_desc">Serahkan berkas lengkap ke petugas loket KUA Randudongkal pada jam kerja atau ajukan via konsultasi online.</string>
+    <string name="rekom_langkah_2_title">Verifikasi &amp; Penerbitan</string>
+    <string name="rekom_langkah_2_desc">Petugas memverifikasi data di SIMKAH lalu menerbitkan surat rekomendasi N2 bertanda tangan Kepala KUA.</string>
+    <string name="rekom_langkah_3_title">Daftar di KUA Tujuan</string>
+    <string name="rekom_langkah_3_desc">Bawa N2 ke KUA tempat akad untuk pendaftaran akhir. Akad dapat dilangsungkan sesuai jadwal pilihan.</string>
+
+    <string name="rekom_garansi_title">Jaminan Layanan Resmi</string>
+    <string name="rekom_garansi_desc">Penerbitan surat rekomendasi nikah sepenuhnya GRATIS (Rp 0,-). Tidak ada pungutan liar di luar ketentuan PP No. 60/2021.</string>
+
+    <string name="rekom_btn_unduh_blanko">Unduh Blanko</string>
+    <string name="rekom_btn_konsultasi">Konsultasi</string>
+    <string name="rekom_bantuan_petugas">Butuh bantuan petugas? Chat via WhatsApp</string>
+
+    <!-- Tab navigasi bawah khusus layar rekomendasi -->
+    <string name="rekom_nav_daftar_nikah">Daftar Nikah</string>
+    <string name="rekom_nav_lainnya">Lainnya</string>
+
+    <string name="rekom_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Rekomendasi Nikah luar kecamatan.</string>
+    <string name="rekom_wa_unavailable">WhatsApp tidak tersedia di perangkat ini</string>
+    <string name="rekom_feature_soon">Menu segera hadir — pantau update RIKUA ya.</string>
+
+    <!-- ==================== Isbat Nikah Screen ==================== -->
+    <string name="isbat_toolbar_title">Isbat Nikah</string>
+    <string name="isbat_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="isbat_badge_resmi">Layanan Resmi KUA Randudongkal</string>
+    <string name="isbat_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+    <string name="isbat_hero_title">Isbat Nikah Terpadu &amp; Mandiri</string>
+    <string name="isbat_hero_desc">Pencatatan nikah bagi pasangan yang pernikahannya belum tercatat di KUA. Setelah permohonan ditetapkan oleh Pengadilan Agama, pernikahan dicatat resmi dan Buku Nikah diterbitkan.</string>
+    <string name="isbat_flow_summary">Sidang Pengadilan Agama → Buku Nikah Sah</string>
+
+    <string name="isbat_kapan_title">Kapan Diperlukan?</string>
+    <string name="isbat_kapan_subtitle">Isbat nikah diperlukan bila nikah Anda sah secara agama namun belum tercatat oleh negara.</string>
+    <string name="isbat_kapan_1_title">Penerbitan Buku Nikah Resmi</string>
+    <string name="isbat_kapan_1_desc">Buku nikah yang sah dari negara bagi pasangan yang belum tercatat.</string>
+    <string name="isbat_kapan_2_title">Administrasi Hak Anak</string>
+    <string name="isbat_kapan_2_desc">Syarat penerbitan Akta Kelahiran agar hak perdata anak terlindungi.</string>
+    <string name="isbat_kapan_3_title">Pendaftaran Paspor &amp; Haji/Umrah</string>
+    <string name="isbat_kapan_3_desc">Buku nikah dibutuhkan untuk pembuatan paspor calon jamaah haji dan umrah.</string>
+
+    <string name="isbat_siap_title">Yang Perlu Disiapkan</string>
+    <string name="isbat_siap_badge">4 Berkas</string>
+    <string name="isbat_berkas_1_title">Formulir N3 (Permohonan Isbat)</string>
+    <string name="isbat_berkas_1_desc">Ditandatangani bermaterai oleh suami &amp; istri</string>
+    <string name="isbat_berkas_2_title">KTP &amp; Kartu Keluarga</string>
+    <string name="isbat_berkas_2_desc">Fotokopi sah pasangan beserta kartu keluarga</string>
+    <string name="isbat_berkas_3_title">Bukti Pendukung Pernikahan</string>
+    <string name="isbat_berkas_3_desc">Foto akad, surat keterangan wali/masjid, saksi</string>
+    <string name="isbat_berkas_4_title">Pas Foto Suami Istri</string>
+    <string name="isbat_berkas_4_desc">Latar biru, ukuran sesuai ketentuan PA</string>
+
+    <string name="isbat_badge_wajib">WAJIB</string>
+    <string name="isbat_badge_fotokopi">FOTOKOPI</string>
+
+    <string name="isbat_alur_title">Alur Proses 4 Langkah</string>
+    <string name="isbat_alur_subtitle">Runtut dari permohonan hingga Buku Nikah terbit</string>
+    <string name="isbat_alur_1_title">Ajukan Permohonan ke Pengadilan Agama Pemalang</string>
+    <string name="isbat_alur_1_desc">Serahkan berkas permohonan isbat ke meja panitera PA Pemalang; pendaftaran online via e-Court juga didukung.</string>
+    <string name="isbat_alur_2_title">Ikuti Persidangan Pemeriksaan Perkara</string>
+    <string name="isbat_alur_2_desc">Hadir di sidang dan hadirkan 2 saksi yang mengetahui akad Anda.</string>
+    <string name="isbat_alur_3_title">Ambil Penetapan Isbat Nikah</string>
+    <string name="isbat_alur_3_desc">Salinan penetapan PA yang menyatakan nikah Anda sah dan terbukti.</string>
+    <string name="isbat_alur_4_title">Bawa Penetapan ke KUA untuk Dicatat</string>
+    <string name="isbat_alur_4_desc">Petugas KUA Randudongkal mencatat nikah dan menerbitkan Buku Nikah.</string>
+
+    <string name="isbat_biaya_title">Biaya di KUA: Bebas Biaya (Rp 0,-)</string>
+    <string name="isbat_biaya_desc">Pencatatan nikah dan penerbitan Buku Nikah di KUA setelah penetapan PA tidak dipungut biaya.</string>
+    <string name="isbat_biaya_footnote">Biaya perkara sidang di Pengadilan Agama mengikuti ketentuan peraturan perundang-undangan.</string>
+
+    <string name="isbat_faq_question">Berapa lama proses pembuatan Buku Nikah di KUA?</string>
+    <string name="isbat_faq_answer">Setelah salinan penetapan Pengadilan Agama diserahkan lengkap ke loket KUA, pencatatan dan penerbitan Buku Nikah umumnya selesai hari yang sama (15–60 menit) pada jam kerja, selama seluruh berkas sudah sesuai.</string>
+
+    <string name="isbat_btn_unduh_blanko">Unduh Blanko N3</string>
+    <string name="isbat_btn_konsultasi">Konsultasi</string>
+    <string name="isbat_bantuan_petugas">Butuh bantuan? Konsultasi langsung dengan petugas KUA</string>
+    <string name="isbat_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Isbat Nikah.</string>
+    <string name="isbat_blanko_info">Membuka daftar Blanko N1–N6 untuk formulir N3…</string>
+    <string name="isbat_checklist_selesai">Bagus! Semua berkas utama sudah ditandai siap.</string>
+
+    <!-- ==================== Duplikat Buku Nikah Screen ==================== -->
+    <string name="dup_toolbar_title">Duplikat Buku Nikah</string>
+    <string name="dup_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="dup_badge_resmi">Layanan Resmi KUA Randudongkal</string>
+    <string name="dup_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+    <string name="dup_hero_title">Penggantian Buku Nikah Sah</string>
+    <string name="dup_hero_desc">Buku nikah hilang atau rusak dapat digantikan dengan buku nikah duplikat yang sah dan berlaku sama seperti buku asli, diterbitkan kembali oleh KUA penerbit awal.</string>
+    <string name="dup_flow_summary">Buku hilang/rusak → Duplikat Sah Terbit</string>
+
+    <string name="dup_biaya_title">Biaya Duplikat di KUA</string>
+    <string name="dup_biaya_desc">Penerbitan duplikat buku nikah karena hilang atau rusak tidak dipungut biaya (gratis).</string>
+
+    <string name="dup_siap_title">Persyaratan Dokumen</string>
+    <string name="dup_siap_badge">4 Dokumen</string>
+    <string name="dup_siap_subtitle">Centang dokumen yang sudah Anda siapkan</string>
+    <string name="dup_dok_1_title">Surat Keterangan Kehilangan</string>
+    <string name="dup_dok_1_desc">Diterbitkan Kepolisian Sektor (Polsek) setempat</string>
+    <string name="dup_dok_2_title">Fotokopi KTP &amp; Kartu Keluarga</string>
+    <string name="dup_dok_2_desc">Kedua pasangan, sinkron data Dukcapil Kab. Pemalang</string>
+    <string name="dup_dok_3_title">Buku Nikah Fisik yang Rusak</string>
+    <string name="dup_dok_3_desc">Dilampirkan bila penggantian karena buku rusak</string>
+    <string name="dup_dok_4_title">Pas Foto 2×3 Suami Istri</string>
+    <string name="dup_dok_4_desc">Latar biru, masing-masing 2 lembar</string>
+
+    <string name="dup_badge_polsek">POLSEK</string>
+    <string name="dup_badge_sesuai_kondisi">JIKA RUSAK</string>
+
+    <string name="dup_alur_title">Langkah Pengurusan</string>
+    <string name="dup_alur_subtitle">4 tahapan dari surat kehilangan hingga duplikat terbit</string>
+    <string name="dup_alur_1_title">Buat Surat Kehilangan</string>
+    <string name="dup_alur_1_desc">Laporkan kehilangan buku nikah ke Polsek domisili dan minta surat keterangan kehilangan.</string>
+    <string name="dup_alur_2_title">Datang ke KUA Penerbit Awal</string>
+    <string name="dup_alur_2_desc">Serahkan berkas lengkap ke loket KUA Kec. Randudongkal (KUA tempat buku nikah asli diterbitkan).</string>
+    <string name="dup_alur_3_title">Verifikasi Data Register</string>
+    <string name="dup_alur_3_desc">Petugas mencocokkan data Anda dengan register akta nikah dan sistem SIMKAH.</string>
+    <string name="dup_alur_4_title">Penerbitan Duplikat Buku Nikah</string>
+    <string name="dup_alur_4_desc">Duplikat buku nikah diterbitkan dan disahkan — Status: Selesai.</string>
+
+    <string name="dup_pungli_title">Layanan Tanpa Pungutan Liar</string>
+    <string name="dup_pungli_desc">Pengurusan duplikat buku nikah gratis total. Tolak segala bentuk biaya di luar ketentuan resmi.</string>
+
+    <string name="dup_jam_title">Jam Layanan KUA</string>
+    <string name="dup_btn_hubungi">Hubungi</string>
+
+    <string name="dup_btn_syarat">Lihat Syarat Nikah</string>
+    <string name="dup_btn_konsultasi">Konsultasi</string>
+
+    <string name="dup_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin bertanya tentang pengajuan Duplikat Buku Nikah.</string>
+    <string name="dup_checklist_selesai">Mantap! Semua dokumen pengajuan duplikat sudah ditandai siap.</string>
+
+    <!-- ==================== Wakaf & Kemasjidan Screen ==================== -->
+    <string name="wakaf_toolbar_title">Wakaf</string>
+    <string name="wakaf_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="wakaf_status_layanan">Layanan Kemasjidan &amp; Wakaf</string>
+    <string name="wakaf_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+
+    <string name="wakaf_hero_title">Layanan Wakaf &amp; Kemasjidan</string>
+    <string name="wakaf_hero_subtitle">Ikrar wakaf dan bimbingan bagi nadzir</string>
+    <string name="wakaf_hero_desc">KUA Kecamatan berperan sebagai Pejabat Pembuat Akta Ikrar Wakaf (PPAIW): memfasilitasi ikrar wakaf, mencatat akta, dan membimbing nadzir agar harta wakaf dikelola sesuai peruntukan syariat.</string>
+
+    <string name="wakaf_aiw_title">Tentang Akta Ikrar Wakaf (AIW)</string>
+    <string name="wakaf_aiw_desc">AIW adalah akta resmi yang dibuat PPAIW sebagai bukti sah ikrar wakaf. Akta ini menjadi dasar pendaftaran tanah wakaf ke BPN dan landasan hukum pengelolaan oleh nadzir.</string>
+    <string name="wakaf_aiw_regulasi">Landasan hukum: UU No. 41 Tahun 2004 tentang Wakaf</string>
+
+    <string name="wakaf_siap_title">Yang Perlu Disiapkan</string>
+    <string name="wakaf_siap_badge">3 Berkas Utama</string>
+    <string name="wakaf_siap_subtitle">Berkas berikut dibawa saat ikrar wakaf</string>
+    <string name="wakaf_berkas_1_title">Identitas Wakif</string>
+    <string name="wakaf_berkas_1_desc">KTP, Kartu Keluarga, dan surat persetujuan ahli waris bermaterai</string>
+    <string name="wakaf_berkas_2_title">Bukti Kepemilikan Tanah / Harta</string>
+    <string name="wakaf_berkas_2_desc">SHM / Petuk / Letter C sesuai harta yang diwakafkan</string>
+    <string name="wakaf_berkas_3_title">Identitas Nadzir</string>
+    <string name="wakaf_berkas_3_desc">Susunan pengurus, KTP nadzir, surat pengesahan KUA/BWI</string>
+
+    <string name="wakaf_langkah_title">Langkah Pengurusan</string>
+    <string name="wakaf_langkah_subtitle">4 tahapan dari konsultasi hingga sertifikat tanah wakaf</string>
+    <string name="wakaf_langkah_1_title">Konsultasi &amp; Verifikasi Tanah</string>
+    <string name="wakaf_langkah_1_desc">Konsultasi rencana wakaf; petugas meneliti status tanah dan dokumen kepemilikan.</string>
+    <string name="wakaf_langkah_2_title">Pendaftaran Nadzir &amp; Permohonan Ikrar</string>
+    <string name="wakaf_langkah_2_desc">Nadzir didaftarkan dan berkas permohonan ikrar wakaf diajukan ke PPAIW.</string>
+    <string name="wakaf_langkah_3_title">Pelaksanaan Ikrar Wakaf di Hadapan PPAIW</string>
+    <string name="wakaf_langkah_3_desc">Wakif mengucapkan ikrar wakaf disaksikan 2 saksi dan dituangkan dalam AIW.</string>
+    <string name="wakaf_langkah_4_title">Penerbitan AIW / APAIW &amp; Sertifikat BPN</string>
+    <string name="wakaf_langkah_4_desc">AIW/APAIW terbit, tanah wakaf didaftarkan ke BPN — Status: Selesai.</string>
+
+    <string name="wakaf_pungli_title">Layanan Tanpa Pungutan</string>
+    <string name="wakaf_pungli_desc">Pencatatan ikrar wakaf dan penerbitan AIW di KUA tidak dipungut biaya (Gratis Rp 0,-).</string>
+
+    <string name="wakaf_btn_sarana">Sarana Keagamaan</string>
+    <string name="wakaf_btn_konsultasi">Konsultasi</string>
+    <string name="wakaf_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
+    <string name="wakaf_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Wakaf &amp; Kemasjidan.</string>
+
+    <!-- ==================== Wali Nikah Screen ==================== -->
+    <string name="wali_toolbar_title">Wali Nikah</string>
+    <string name="wali_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="wali_badge_resmi">Layanan Resmi KUA Randudongkal</string>
+    <string name="wali_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+
+    <string name="wali_headline_title">Panduan Sah &amp; Terpercaya</string>
+    <string name="wali_headline_desc">Siapa yang boleh menjadi wali dan kapan wali hakim digunakan.</string>
+
+    <string name="wali_urutan_title">Urutan Wali Nasab</string>
+    <string name="wali_urutan_intro">Wali nikah ditunjuk berurutan menurut silsilah (tertib). Selama wali pada urutan sebelumnya ada, mampu, dan bersikap adil, wali setelahnya tidak berhak mendahului.</string>
+
+    <string name="wali_nasab_1_title">Ayah Kandung</string>
+    <string name="wali_nasab_1_desc">Wali paling utama; tidak dapat digantikan selama ada dan mampu</string>
+    <string name="wali_nasab_2_title">Kakek (Ayah dari Ayah)</string>
+    <string name="wali_nasab_2_desc">Garis nasab ayah ke atas</string>
+    <string name="wali_nasab_3_title">Saudara Laki-laki Kandung</string>
+    <string name="wali_nasab_3_desc">Seayah dan seibu dengan calon pengantin wanita</string>
+    <string name="wali_nasab_4_title">Saudara Laki-laki Seayah</string>
+    <string name="wali_nasab_4_desc">Semister hanya seayah dengan calon pengantin wanita</string>
+    <string name="wali_nasab_5_title">Paman Kandung</string>
+    <string name="wali_nasab_5_desc">Kakak atau adik kandung ayah (seayah dan seibu)</string>
+    <string name="wali_nasab_6_title">Paman Seayah</string>
+    <string name="wali_nasab_6_desc">Kakak atau adik ayah semister satu ayah</string>
+    <string name="wali_nasab_7_title">Anak Laki-laki dari Paman</string>
+    <string name="wali_nasab_7_desc">Sepupu jalur ayah; urutan terakhir wali nasab</string>
+
+    <string name="wali_badge_prioritas">PRIORITAS UTAMA</string>
+
+    <string name="wali_hakim_question">Kapan Memakai Wali Hakim?</string>
+    <string name="wali_hakim_intro">Wali hakim diangkat oleh Kementerian Agama bila wali nasab tidak dapat menjalankan tugasnya. Kondisi yang memungkinkan:</string>
+    <string name="wali_hakim_c1_title">Putus Nasab</string>
+    <string name="wali_hakim_c1_desc">Tidak ditemukan wali nasab yang sah atau silsilah tidak dapat dibuktikan</string>
+    <string name="wali_hakim_c2_title">Wali Mafqud</string>
+    <string name="wali_hakim_c2_desc">Keberadaan wali tidak diketahui dan tidak dapat dihubungi</string>
+    <string name="wali_hakim_c3_title">Wali Berhalangan Jauh</string>
+    <string name="wali_hakim_c3_desc">Wali berada di luar wilayah ±85 km atau perjalanan memakan waktu ±3 hari</string>
+    <string name="wali_hakim_c4_title">Wali Adhal</string>
+    <string name="wali_hakim_c4_desc">Wali enggan/menolak menikahkan tanpa alasan syar\u02bbi</string>
+    <string name="wali_hakim_note">Pengangkatan wali hakim dipandu langsung oleh petugas KUA tanpa biaya tambahan.</string>
+
+    <string name="wali_notice_text">Konsultasikan silsilah wali sebelum mendaftar agar berkas akad nikah terverifikasi lancar.</string>
+
+    <string name="wali_btn_syarat">Syarat Nikah</string>
+    <string name="wali_btn_konsultasi">Konsultasi</string>
+    <string name="wali_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
+    <string name="wali_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai penentuan wali nikah.</string>
+
+    <!-- ==================== Taukil Wali bil Kitabah Screen ==================== -->
+    <string name="taukil_toolbar_title">Taukil Wali bil Kitabah</string>
+    <string name="taukil_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="taukil_badge_resmi">Layanan Resmi KUA Randudongkal</string>
+    <string name="taukil_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+
+    <string name="taukil_hero_label">Panduan Kepenghuluan</string>
+    <string name="taukil_hero_title">Taukil Wali bil Kitabah</string>
+    <string name="taukil_hero_subtitle">Untuk wali yang berhalangan hadir saat akad</string>
+    <string name="taukil_hero_desc">Pelimpahan wewenang secara tertulis dari wali nasab kepada wakil wali yang berhak, agar ijab kabul dapat diucapkan oleh wakil di hadapan penghulu atas nama wali.</string>
+
+    <string name="taukil_kapan_title">Kapan Diperlukan?</string>
+    <string name="taukil_kapan_subtitle">Empat kondisi umum pelimpahan wali secara tertulis</string>
+    <string name="taukil_kapan_1_title">Jarak Jauh</string>
+    <string name="taukil_kapan_1_desc">Wali domisili jauh &amp; tak dapat hadir ke lokasi akad</string>
+    <string name="taukil_kapan_2_title">Kondisi Sakit</string>
+    <string name="taukil_kapan_2_desc">Wali sakit sehingga belum memungkinkan hadir</string>
+    <string name="taukil_kapan_3_title">Tugas Luar Daerah/Negeri</string>
+    <string name="taukil_kapan_3_desc">Wali tengah menunaikan tugas di luar wilayah</string>
+    <string name="taukil_kapan_4_title">Perwakilan Ijab Kabul</string>
+    <string name="taukil_kapan_4_desc">Wali melimpahkan ucapan ijab kepada wakil yang berhak</string>
+
+    <string name="taukil_siap_title">Yang Perlu Disiapkan</string>
+    <string name="taukil_siap_badge">3 Dokumen Utama</string>
+    <string name="taukil_siap_subtitle">Berkas taukil dibawa saat pendaftaran akad</string>
+    <string name="taukil_badge_perwakilan">BILA PERWAKILAN</string>
+    <string name="taukil_dok_1_title">Surat Kuasa Taukil Wali bil Kitabah</string>
+    <string name="taukil_dok_1_desc">Bermaterai &amp; disaksikan pejabat KUA/pemerintah setempat</string>
+    <string name="taukil_dok_2_title">Fotokopi KTP &amp; KK Wali Nasab</string>
+    <string name="taukil_dok_2_desc">Sertakan asli untuk pengecekan oleh petugas</string>
+    <string name="taukil_dok_3_title">Fotokopi KTP Wakil Wali / Penerima Kuasa</string>
+    <string name="taukil_dok_3_desc">Termasuk surat penugasan penghulu bila perwakilan</string>
+
+    <string name="taukil_langkah_title">Langkah Pengurusan</string>
+    <string name="taukil_langkah_subtitle">3 tahapan dari surat taukil hingga akad dilaksanakan</string>
+    <string name="taukil_langkah_1_title">Pembuatan &amp; Penandatanganan Surat Taukil</string>
+    <string name="taukil_langkah_1_desc">Wali nasab membuat surat kuasa tertulis bermaterai, disaksikan pejabat setempat.</string>
+    <string name="taukil_langkah_2_title">Penyerahan Berkas ke KUA Randudongkal</string>
+    <string name="taukil_langkah_2_desc">Serahkan surat taukil beserta fotokopi KTP/KK ke loket bersama berkas nikah.</string>
+    <string name="taukil_langkah_3_title">Verifikasi Petugas &amp; Pelaksanaan Akad</string>
+    <string name="taukil_langkah_3_desc">Petugas memverifikasi keabsahan taukil, lalu wakil mengucapkan ijab kabul di hadapan penghulu.</string>
+
+    <string name="taukil_note_title">Konsultasi Gratis Tanpa Pungutan</string>
+    <string name="taukil_note_desc">Verifikasi surat taukil dan konsultasi kepenghuluan di KUA Kec. Randudongkal tidak dipungut biaya (Rp 0,-).</string>
+
+    <string name="taukil_btn_wali">Lihat Wali Nikah</string>
+    <string name="taukil_btn_konsultasi">Konsultasi</string>
+    <string name="taukil_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
+    <string name="taukil_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Taukil Wali bil Kitabah.</string>
+
+    <!-- ==================== Pengumuman Kehendak Nikah Screen ==================== -->
+    <string name="peng_toolbar_title">Pengumuman Kehendak Nikah</string>
+    <string name="peng_toolbar_subtitle">KUA Kec. Randudongkal</string>
+    <string name="peng_transparansi">Transparansi Layanan Publik</string>
+    <string name="peng_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+
+    <string name="peng_hero_title">Pengumuman Kehendak Nikah</string>
+    <string name="peng_hero_desc">Daftar rencana akad nikah diumumkan terbuka untuk transparansi publik sesuai regulasi Kementerian Agama, agar masyarakat dapat memberikan sanggahan bila mengenal adanya halangan syar\u02bbi atau administratif.</string>
+    <string name="peng_info_petugas">Data ditampilkan langsung oleh petugas KUA Randudongkal.</string>
+
+    <string name="peng_search_hint">Cari nama calon pengantin atau desa…</string>
+    <string name="peng_search_clear">Hapus pencarian</string>
+
+    <string name="peng_filter_all">Semua Jadwal</string>
+    <string name="peng_filter_month">Bulan Ini</string>
+    <string name="peng_filter_randudongkal">Desa Randudongkal</string>
+    <string name="peng_filter_cibuyur">Cibuyur</string>
+
+    <string name="peng_daftar_title">Daftar Rencana Akad</string>
+    <string name="peng_daftar_subtitle">Diumumkan ±10 hari kerja sebelum akad dilangsungkan</string>
+
+    <string name="peng_status_terverifikasi">Terverifikasi</string>
+    <string name="peng_status_publikasi">Pengumuman / Uji Publik</string>
+    <string name="peng_label_berkas">Nomor berkas:</string>
+    <string name="peng_label_sanggah">Masa sanggah:</string>
+    <string name="peng_sanggah_10hari">±10 hari kerja</string>
+
+    <string name="peng_empty_title">Nama yang dicari tidak ditemukan</string>
+    <string name="peng_empty_desc">Coba kata kunci lain atau pilih filter “Semua Jadwal” untuk melihat seluruh rencana akad.</string>
+
+    <string name="peng_readonly_title">Pengumuman Resmi — Hanya Dibaca</string>
+    <string name="peng_readonly_desc">Halaman ini bersifat read-only sebagai papan pengumuman kehendak nikah. Sanggahan dapat disampaikan langsung ke loket pelayanan KUA Kec. Randudongkal dengan membawa identitas pemohon.</string>
+
+    <string name="peng_btn_syarat">Lihat Syarat Nikah</string>
+    <string name="peng_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
+    <string name="peng_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin menyampaikan sanggahan / bertanya tentang Pengumuman Kehendak Nikah.</string>
+
+    <!-- ==================== Daftar Nikah: Pengantar (Langkah 1/6) ==================== -->
+    <string name="daf_toolbar_title">Daftar Nikah: Pengantar</string>
+    <string name="daf_toolbar_subtitle">KUA Kec. Randudongkal</string>
+
+    <!-- Stepper pada app bar -->
+    <string name="daf_stepper_label">Langkah 1 dari 6 — Pengantar</string>
+    <string name="daf_stepper_content_desc">Progres langkah 1 dari 6</string>
+    <string name="daf_btn_simpan_draf">Simpan Draf</string>
+    <string name="daf_draft_saved">Draf formulir berhasil disimpan sementara di perangkat Anda.</string>
+
+    <!-- Kartu pengantar -->
+    <string name="daf_intro_title">Selamat Datang di Alur Pendaftaran Nikah</string>
+    <string name="daf_intro_desc">Isi formulir nikah online dalam 6 langkah terarah. Siapkan dokumen berikut agar pengisian data berjalan lancar dan berkas Anda segera diverifikasi petugas KUA.</string>
+
+    <!-- Checklist dokumen & informasi -->
+    <string name="daf_checklist_title">Checklist Dokumen &amp; Informasi</string>
+    <string name="daf_checklist_subtitle">Dokumen yang perlu Anda siapkan sebelum mengisi data</string>
+    <string name="daf_dok_n1_title">Surat Pengantar Nikah (N1)</string>
+    <string name="daf_dok_n1_desc">Diterahkan Kepala Desa/Lurah domisili calon mempelai</string>
+    <string name="daf_dok_ktp_title">KTP &amp; Kartu Keluarga</string>
+    <string name="daf_dok_ktp_desc">Asli + fotokopi kedua calon mempelai</string>
+    <string name="daf_dok_akta_title">Akta Kelahiran atau Ijazah</string>
+    <string name="daf_dok_akta_desc">Sebagai bukti tanggal lahir dan identitas orang tua</string>
+    <string name="daf_dok_foto_title">Pas Foto Latar Biru 3×4</string>
+    <string name="daf_dok_foto_desc">4 lembar, kedua calon mempelai</string>
+    <string name="daf_dok_n4_title">Persetujuan N4 / N5</string>
+    <string name="daf_dok_n4_desc">Persetujuan calon &amp; wali (N4) dan saksi (N5)</string>
+    <string name="daf_btn_lihat_syarat">Lihat Syarat Nikah</string>
+    <string name="daf_btn_unduh_blanko">Unduh Blanko Desa</string>
+
+    <!-- Kotak persetujuan kebijakan privasi -->
+    <string name="daf_consent_title">Persetujuan Kebijakan Privasi</string>
+    <string name="daf_consent_text">Saya menyetujui data pribadi saya diproses oleh KUA Kec. Randudongkal untuk keperluan pendaftaran dan pencatatan pernikahan sesuai ketentuan perlindungan data peraturan perundang-undangan.</string>
+    <string name="daf_consent_hint">Centang persetujuan untuk mengaktifkan tombol Mulai Mendaftar</string>
+
+    <!-- Aksi utama & sekunder -->
+    <string name="daf_btn_mulai">Mulai Mendaftar</string>
+    <string name="daf_btn_simkah">Daftar mandiri lewat SIMKAH Kemenag</string>
+    <string name="daf_simkah_unavailable">Browser tidak tersedia di perangkat ini</string>
+
+    <!-- Item drawer tambahan -->
+    <string name="daf_nav_cek_status">Cek Status</string>
+    <string name="daf_nav_pengumuman">Pengumuman Kehendak Nikah</string>
+    <string name="daf_nav_faq">FAQ</string>
+    <string name="daf_nav_profil">Profil KUA</string>
+    <string name="daf_nav_simkah">SIMKAH Kemenag</string>
+    <string name="daf_nav_login">Masuk Petugas</string>
+    <string name="daf_feature_soon">Fitur segera tersedia</string>
+
+    <!-- ==================== Daftar Nikah Langkah 2 — Data Calon Suami ==================== -->
+    <string name="s2_toolbar_title">Data Calon Suami</string>
+    <string name="s2_stepper_label">Langkah 2 dari 6 — Data Calon Suami</string>
+    <string name="s2_stepper_content_desc">Progres 33 persen, tahap Data Calon Suami</string>
+    <string name="s2_btn_simpan_draf">Simpan Draf</string>
+    <string name="s2_draf_saved">Draf data calon suami disimpan sementara di perangkat Anda.</string>
+
+    <!-- Label tahap pada stepper mini -->
+    <string name="s2_stage_kua">KUA &amp; Jadwal</string>
+    <string name="s2_stage_suami">Calon Suami</string>
+    <string name="s2_stage_istri">Calon Istri</string>
+    <string name="s2_stage_wali">Wali &amp; Saksi</string>
+
+    <!-- Banner petunjuk -->
+    <string name="s2_banner_title">Identitas Calon Pengantin Pria</string>
+    <string name="s2_banner_desc">Isi data sesuai KTP &amp; Akta Kelahiran. Kesalahan identitas dapat menghambat pencatatan nikah.</string>
+
+    <!-- Field: Nama -->
+    <string name="s2_hint_nama">Nama Lengkap Calon Suami *</string>
+    <string name="s2_help_nama">Tulis lengkap tanpa singkatan, sama seperti di KTP</string>
+    <string name="s2_err_nama">Nama wajib diisi sesuai KTP</string>
+
+    <!-- Field: NIK -->
+    <string name="s2_hint_nik">NIK Calon Suami (16 Digit) *</string>
+    <string name="s2_help_nik">16 digit Nomor Induk Kependudukan</string>
+    <string name="s2_err_nik">NIK harus terdiri dari 16 digit angka</string>
+
+    <!-- Field: Tempat &amp; Tanggal Lahir -->
+    <string name="s2_hint_tempat">Tempat Lahir *</string>
+    <string name="s2_err_tempat">Tempat lahir wajib diisi</string>
+    <string name="s2_hint_tanggal">Tanggal Lahir *</string>
+    <string name="s2_tanggal_format">Format: HH/BB/TTTT (contoh 15/08/1995)</string>
+    <string name="s2_err_tanggal">Tanggal tidak valid, gunakan format HH/BB/TTTT</string>
+
+    <!-- Field: Agama &amp; Pekerjaan &amp; Pendidikan -->
+    <string name="s2_hint_agama">Agama *</string>
+    <string name="s2_hint_pekerjaan">Pekerjaan *</string>
+    <string name="s2_err_pekerjaan">Pekerjaan wajib diisi</string>
+    <string name="s2_hint_pendidikan">Pendidikan Terakhir *</string>
+
+    <!-- Field: Alamat -->
+    <string name="s2_hint_alamat">Alamat Domisili Lengkap *</string>
+    <string name="s2_help_alamat">RT/RW, Kelurahan/Desa, Kecamatan, Kabupaten</string>
+    <string name="s2_err_alamat">Alamat lengkap wajib diisi</string>
+
+    <!-- Field: Telepon -->
+    <string name="s2_hint_telepon">Nomor WhatsApp / HP Aktif *</string>
+    <string name="s2_prefix_telepon">+62</string>
+    <string name="s2_help_telepon">Nomor yang aktif untuk pemberitahuan jadwal</string>
+    <string name="s2_err_telepon">Nomor telepon minimal 9 digit</string>
+
+    <!-- Status Pernikahan (radio cards) -->
+    <string name="s2_label_status">Status Pernikahan *</string>
+    <string name="s2_opt_jejaka">Jejaka</string>
+    <string name="s2_opt_jejaka_desc">Belum pernah menikah</string>
+    <string name="s2_badge_utama">Utama</string>
+    <string name="s2_opt_duda_hidup">Duda Cerai Hidup</string>
+    <string name="s2_opt_duda_hidup_desc">Lampirkan Akta Cerai Pengadilan Agama</string>
+    <string name="s2_opt_duda_mati">Duda Cerai Mati</string>
+    <string name="s2_opt_duda_mati_desc">Lampirkan Surat Kematian (N6)</string>
+    <string name="s2_err_status">Pilih status pernikahan</string>
+
+    <!-- Aksi bawah -->
+    <string name="s2_btn_lanjut">Lanjut ke Data Calon Istri</string>
+    <string name="s2_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
+    <string name="s2_err_wajib_lengkap">Lengkapi seluruh field wajib (*) sebelum melanjutkan</string>
+
+    <!-- ==================== Daftar Nikah Langkah 3 — Data Calon Istri ==================== -->
+    <string name="dai_toolbar_title">Data Calon Istri</string>
+    <string name="dai_toolbar_subtitle">Layanan Pendaftaran Nikah</string>
+    <string name="dai_stepper_label">Langkah 3 dari 6 — Data Calon Istri</string>
+    <string name="dai_stepper_content_desc">Progres 50 persen, tahap Data Calon Istri</string>
+    <string name="dai_stepper_prev">Sebelumnya: Calon Suami</string>
+    <string name="dai_stepper_next">Berikutnya: Wali Nikah</string>
+    <string name="dai_draf_saved">Draf data calon istri disimpan sementara di perangkat Anda.</string>
+
+    <!-- Header info validasi -->
+    <string name="dai_badge_validasi">Validasi Data Kemenag &amp; Disdukcapil</string>
+    <string name="dai_header_title">Identitas Calon Pengantin Wanita</string>
+    <string name="dai_header_desc">Isi data sesuai KTP &amp; Akta Kelahiran. Sistem SIMKAH akan memvalidasi identitas secara otomatis terkoneksi data Dukcapil — kesalahan data dapat menghambat pencatatan nikah.</string>
+
+    <!-- Field spesifik istri (label generik memakai string s2_*) -->
+    <string name="dai_hint_nama">Nama Lengkap Calon Istri *</string>
+    <string name="dai_hint_nik">NIK Calon Istri (16 Digit) *</string>
+
+    <!-- Status pernikahan wanita -->
+    <string name="dai_opt_perawan">Perawan</string>
+    <string name="dai_opt_perawan_desc">Belum pernah menikah</string>
+    <string name="dai_opt_janda_hidup">Janda Cerai Hidup</string>
+    <string name="dai_opt_janda_hidup_desc">Lampirkan Akta Cerai Pengadilan Agama</string>
+    <string name="dai_opt_janda_mati">Janda Cerai Mati</string>
+    <string name="dai_opt_janda_mati_desc">Lampirkan Surat Kematian (N7)</string>
+
+    <!-- Kartu switch anak pertama -->
+    <string name="dai_anak_pertama">Anak Pertama?</string>
+    <string name="dai_anak_ya">Ya (Sulung)</string>
+    <string name="dai_anak_bukan">Bukan (Bungsu/Tengah)</string>
+
+    <!-- Banner bantuan petugas -->
+    <string name="dai_bantu_title">Petugas Siap Membantu</string>
+    <string name="dai_bantu_desc">Ada kendala mengisi data? Tim KUA Kec. Randudongkal siap memandu pengisian hingga berkas siap verifikasi.</string>
+    <string name="dai_bantu_btn">Tanya Petugas</string>
+
+    <!-- Aksi bawah -->
+    <string name="dai_btn_lanjut">Lanjut: Data Wali Nikah</string>
+    <string name="dai_dock_hint">Pastikan data sesuai KTP &amp; akta kelahiran sebelum melanjutkan</string>
+
+    <!-- ==================== Daftar Nikah Langkah 4 — Wali, Saksi & Rencana Akad ==================== -->
+    <string name="s4_toolbar_title">Wali, Saksi &amp; Rencana Akad</string>
+    <string name="s4_stepper_label">Langkah 4 dari 6 — Wali, Saksi &amp; Rencana Akad</string>
+    <string name="s4_stepper_content_desc">Progres 66 persen, tahap wali, saksi &amp; rencana akad</string>
+    <string name="s4_draf_saved">Draf data wali, saksi &amp; rencana akad disimpan sementara di perangkat Anda.</string>
+
+    <!-- Banner perhatian khusus -->
+    <string name="s4_notice_title">Perhatian Khusus</string>
+    <string name="s4_notice_desc">Jawaban kuesioner kondisi khusus menentukan perlunya pemeriksaan tambahan, rekomendasi, atau dispensasi nikah. Isi dengan jujur sesuai kondisi sebenarnya.</string>
+
+    <!-- Seksi 1: Data Wali Nikah -->
+    <string name="s4_sec_wali">Data Wali Nikah</string>
+    <string name="s4_hint_nama_wali">Nama Lengkap Wali *</string>
+    <string name="s4_hint_nik_wali">NIK Wali (16 Digit) *</string>
+    <string name="s4_hint_hubungan_wali">Hubungan Wali / Status Nasab *</string>
+    <string name="s4_help_wali">Wali nasab wajib ayah kandung; jika berhalangan mengikuti urutan nasab atau dipilih wali hakim</string>
+    <string name="s4_err_hubungan">Pilih hubungan wali / status nasab</string>
+
+    <!-- Seksi 2: Data Dua Saksi Nikah -->
+    <string name="s4_sec_saksi">Data Dua Saksi Nikah</string>
+    <string name="s4_subcard_saksi1">Saksi Pertama</string>
+    <string name="s4_subcard_saksi2">Saksi Kedua</string>
+    <string name="s4_hint_nama_saksi">Nama Lengkap Saksi *</string>
+    <string name="s4_hint_nik_saksi">NIK Saksi (16 Digit) *</string>
+    <string name="s4_catatan_saksi">Syarat saksi: beragama Islam, dewasa (minimal 17 tahun), berakal sehat, dan dapat mendengar serta melihat.</string>
+
+    <!-- Seksi 3: Rencana Akad Nikah -->
+    <string name="s4_sec_akad">Rencana Akad Nikah</string>
+    <string name="s4_hint_tanggal_akad">Tanggal Akad *</string>
+    <string name="s4_tanggal_akad_format">Format: HH/BB/TTTT (min. 10 hari kerja ke depan)</string>
+    <string name="s4_err_tanggal_akad">Tentukan tanggal akad yang valid</string>
+    <string name="s4_hint_waktu_akad">Waktu Akad *</string>
+    <string name="s4_waktu_format">Format: HH:mm (mis. 08:00)</string>
+    <string name="s4_err_waktu_akad">Tentukan waktu akad (jam &amp; menit)</string>
+    <string name="s4_label_lokasi_akad">Lokasi Akad *</string>
+    <string name="s4_opt_kua">Balai Nikah KUA Randudongkal</string>
+    <string name="s4_opt_kua_desc">Akad di kantor KUA — tidak dipungut biaya</string>
+    <string name="s4_badge_gratis">Gratis / Rp 0,-</string>
+    <string name="s4_opt_luar">Di Luar KUA / Rumah / Masjid</string>
+    <string name="s4_opt_luar_desc">Akad di luar kantor KUA dengan pelayanan petugas</string>
+    <string name="s4_badge_pnbp">PNBP Rp 600.000,-</string>
+    <string name="s4_hint_alamat_akad">Alamat Lengkap Tempat Akad *</string>
+    <string name="s4_help_alamat_akad">Hanya wajib diisi jika lokasi akad di luar KUA</string>
+    <string name="s4_err_alamat_luar">Alamat tempat akad wajib diisi untuk lokasi di luar KUA</string>
+
+    <!-- Seksi 4: Kuesioner Kondisi Khusus -->
+    <string name="s4_sec_kuesioner">Kuesioner Kondisi Khusus</string>
+    <string name="s4_kuesioner_desc">Pilih Ya atau Tidak untuk setiap pertanyaan (default: Tidak).</string>
+    <string name="s4_q1">Akad dilaksanakan di luar kecamatan tempat tinggal?</string>
+    <string name="s4_q2">Usia salah satu calon pengantin di bawah 21 tahun?</string>
+    <string name="s4_q3">Usia salah satu calon pengantin di bawah 19 tahun?</string>
+    <string name="s4_q4">Calon pengantin anggota TNI/Polri?</string>
+    <string name="s4_q5">Suami akan berpoligami?</string>
+    <string name="s4_q6">Mendaftar kurang dari 10 hari kerja sebelum akad?</string>
+    <string name="s4_ya">Ya</string>
+    <string name="s4_tidak">Tidak</string>
+
+    <!-- Aksi bawah -->
+    <string name="s4_btn_lanjut">Lanjut ke Inkuri/Unggah Dokumen</string>
+    <string name="s4_bantuan_petugas">Butuh bantuan? Tanya petugas KUA</string>
+
+    <!-- ==================== Daftar Nikah Langkah 5 — Inkuri & Unggah Dokumen ==================== -->
+    <string name="s5_toolbar_title">Unggah Dokumen</string>
+    <string name="s5_stepper_label">Langkah 5 dari 6 — Inkuri/Unggah Dokumen</string>
+    <string name="s5_stepper_content_desc">Progres 83 persen, tahap unggah dokumen</string>
+    <string name="s5_draf_saved">Draf unggah dokumen disimpan sementara di perangkat Anda.</string>
+
+    <!-- Kartu ringkasan kelengkapan -->
+    <string name="s5_summary_title">Status Kelengkapan Dokumen</string>
+    <string name="s5_summary_subtitle">Unggah seluruh berkas berikut agar pengajuan dapat segera diverifikasi petugas.</string>
+    <string name="s5_summary_count">%1$d dari %2$d Dokumen</string>
+    <string name="s5_summary_percent">%1$d%%</string>
+    <string name="s5_summary_content_desc">Progres dokumen terunggah</string>
+    <string name="s5_btn_unduh_blanko">Unduh Blanko N1–N6</string>
+
+    <!-- Grup dokumen -->
+    <string name="s5_section_utama">Dokumen Utama</string>
+    <string name="s5_section_utama_desc">10 dokumen wajib — pindai berwarna, jelas, dan tidak terpotong</string>
+    <string name="s5_section_tambahan">Dokumen Tambahan (sesuai jawaban Anda)</string>
+    <string name="s5_section_tambahan_desc">Muncul berdasarkan kuesioner kondisi khusus pada Langkah 4</string>
+
+    <!-- Status & aksi baris dokumen -->
+    <string name="s5_status_terunggah">Terunggah</string>
+    <string name="s5_status_perlu_perbaikan">Perlu Perbaikan</string>
+    <string name="s5_status_belum">Belum Diunggah</string>
+    <string name="s5_btn_unggah">Unggah Dokumen</string>
+    <string name="s5_btn_unggah_ulang">Unggah Ulang File</string>
+    <string name="s5_btn_ganti_file">Ganti File</string>
+    <string name="s5_camera_content_desc">Ambil foto langsung dengan kamera</string>
+    <string name="s5_file_terunggah">Berkas: %1$s</string>
+    <string name="s5_doc_default_desc">Unggah pindai/foto berkas asli yang jelas</string>
+
+    <!-- Judul 10 dokumen utama -->
+    <string name="s5_doc_n1">Surat Pengantar Nikah (N1)</string>
+    <string name="s5_doc_n1_desc">Diterahkan Kepala Desa/Lurah domisili calon</string>
+    <string name="s5_doc_n2">Surat Keterangan Pembacaan Kehendak Nikah (N2)</string>
+    <string name="s5_doc_n2_desc">Dibacakan di hadapan kedua calon &amp; saksi</string>
+    <string name="s5_doc_n3">Surat Keterangan Asal-Usul (N3)</string>
+    <string name="s5_doc_n3_desc">Berita Desa asal-usul masing-masing calon</string>
+    <string name="s5_doc_n4">Surat Keterangan Tidak Ada Halangan (N4)</string>
+    <string name="s5_doc_n4_desc">Tidak ada halangan syar\'i maupun peraturan</string>
+    <string name="s5_doc_ktp_suami">KTP Calon Suami</string>
+    <string name="s5_doc_ktp_istri">KTP Calon Istri</string>
+    <string name="s5_doc_kk_suami">Kartu Keluarga Calon Suami</string>
+    <string name="s5_doc_kk_istri">Kartu Keluarga Calon Istri</string>
+    <string name="s5_doc_akta_suami">Akta Kelahiran Calon Suami</string>
+    <string name="s5_doc_akta_istri">Akta Kelahiran / Ijazah Calon Istri</string>
+    <string name="s5_doc_pas_foto">Pas Foto 4x6 Latar Merah</string>
+    <string name="s5_doc_pas_foto_desc">Masing-masing calon 2 lembar, berdampingan</string>
+
+    <!-- Judul dokumen tambahan -->
+    <string name="s5_doc_n5">Surat Sumpah (N5)</string>
+    <string name="s5_doc_n5_desc">Ditandatangani di hadapan Penghulu</string>
+    <string name="s5_doc_dispensasi">Dispensasi Kawin</string>
+    <string name="s5_doc_dispensasi_desc">Penetapan Pengadilan Agama usia calon</string>
+    <string name="s5_doc_rekom_luar">Rekomendasi Nikah Luar Kecamatan</string>
+    <string name="s5_doc_rekom_luar_desc">Diterbitkan KUA domisili asal</string>
+    <string name="s5_doc_akta_kematian">Akta Kematian Istri Terdahulu</string>
+    <string name="s5_doc_akta_kematian_desc">Bagi duda — pengganti surat keterangan kematian</string>
+
+    <!-- Pesan pemeriksaan petugas (status Perlu Perbaikan) -->
+    <string name="s5_err_n3">Berkas berupa foto formulir, bukan surat resmi. Unggah ulang N3 hasil pindai format PDF.</string>
+    <string name="s5_err_ktp_istri">Pindai KTP buram dan nomor NIK tidak terbaca. Foto ulang dengan resolusi tertinggi.</string>
+    <string name="s5_err_dispensasi">Penetapan dispensasi belum diberi stempel Pengadilan Agama. Unggah dokumen lengkap.</string>
+    <string name="s5_err_pas_foto">Latar foto biru, ketentuan latar merah. Foto ulang di studio/fitur RIKUA.</string>
+
+    <!-- Kartu ketentuan berkas -->
+    <string name="s5_info_title">Ketentuan Berkas RIKUA</string>
+    <string name="s5_info_desc">• Ukuran maksimal 2 MB per berkas\n• Format PDF, JPG, atau PNG\n• Pindai/foto berwarna, jelas, dan tidak terpotong</string>
+
+    <!-- Aksi bawah -->
+    <string name="s5_btn_lanjut">Lanjut ke Tinjau &amp; Kirim</string>
+    <string name="s5_bantuan_petugas">Butuh bantuan? Tanya petugas KUA</string>
+
+    <!-- Validasi & umpan balik unggah -->
+    <string name="s5_err_ukuran">Ukuran berkas %1$s melebihi batas maksimal 2 MB. Kompres atau foto ulang dokumen.</string>
+    <string name="s5_ok_terunggah">%1$s berhasil diunggah &amp; siap ditinjau.</string>
+    <string name="s5_err_incomplete">Masih ada %1$d berkas belum terunggah/lengkap. Selesaikan sebelum lanjut.</string>
+    <string name="s5_tinjau_soon">Halaman Tinjau &amp; Kirim segera tersedia — draf Anda telah disimpan.</string>
+    <string name="s5_camera_unavailable">Aplikasi kamera tidak ditemukan di perangkat ini.</string>
+    <string name="s5_camera_failed">Gagal menyiapkan berkas foto kamera.</string>
+    <string name="s5_picker_unavailable">Aplikasi pemilihan berkas tidak tersedia di perangkat ini.</string>
+
+    <!-- ==================== Daftar Nikah Langkah 6 — Tinjau & Kirim ==================== -->
+    <!-- App bar & stepper -->
+    <string name="s6_toolbar_title">Tinjau &amp; Kirim</string>
+    <string name="s6_toolbar_subtitle">Langkah Terakhir</string>
+    <string name="s6_stepper_label">Langkah 6/6: Tinjau Akhir</string>
+    <string name="s6_stepper_content_desc">Progres 100 persen, tahap tinjau dan kirim</string>
+    <string name="s6_status_lengkap">Semua data &amp; dokumen siap dikirim</string>
+    <string name="s6_status_kurang">Masih ada data yang perlu diperiksa (%1$d)</string>
+
+    <!-- Header kartu ringkasan + aksi ubah -->
+    <string name="s6_btn_ubah">Ubah</string>
+    <string name="s6_card_suami">Data Calon Suami</string>
+    <string name="s6_card_istri">Data Calon Istri</string>
+    <string name="s6_card_wali">Wali &amp; Saksi</string>
+    <string name="s6_card_akad">Rencana Akad Nikah</string>
+    <string name="s6_card_dokumen">Dokumen Terunggah</string>
+
+    <!-- Label field ringkasan -->
+    <string name="s6_lbl_nama">Nama Lengkap</string>
+    <string name="s6_lbl_nik">NIK</string>
+    <string name="s6_lbl_status_perkawinan">Status Perkawinan</string>
+    <string name="s6_lbl_hp">Nomor HP</string>
+    <string name="s6_lbl_kelahiran">Urutan Kelahiran</string>
+    <string name="s6_lbl_wali">Nama Wali</string>
+    <string name="s6_lbl_hubungan_wali">Hubungan Nasab</string>
+    <string name="s6_lbl_saksi1">Saksi 1</string>
+    <string name="s6_lbl_saksi2">Saksi 2</string>
+    <string name="s6_lbl_tanggal">Hari/Tanggal</string>
+    <string name="s6_lbl_waktu">Waktu/Jam Akad</string>
+    <string name="s6_lbl_lokasi">Lokasi Akad</string>
+    <string name="s6_lbl_tarif">Tarif PNBP</string>
+    <string name="s6_dokumen_count">%1$d berkas terverifikasi</string>
+    <string name="s6_dokumen_desc">Seluruh dokumen wajib telah melewati inkuri petugas.</string>
+
+    <!-- Nilai default (fallback demo sebelum integrasi penuh) -->
+    <string name="s6_val_kosong">—</string>
+    <string name="s6_nilai_lokasi_kua">KUA Kec. Randudongkal</string>
+    <string name="s6_nilai_tarif_kua">Rp 0 (di luar jam kerja: Rp 600.000)</string>
+
+    <!-- Pernyataan & validasi -->
+    <string name="s6_pernyataan_title">Pernyataan Kebenaran Data</string>
+    <string name="s6_pernyataan_text">Saya menyatakan bahwa seluruh data dan dokumen yang saya isikan adalah benar dan sesuai keadaan sebenarnya, serta dapat dipertanggungjawabkan menurut peraturan perundang-undangan yang berlaku.</string>
+    <string name="s6_pernyataan_hint">Centang pernyataan untuk mengaktifkan tombol Kirim Pendaftaran</string>
+    <string name="s6_err_belum_setuju">Centang pernyataan kebenaran data sebelum mengirim.</string>
+
+    <!-- Aksi bawah -->
+    <string name="s6_btn_kirim">Kirim Pendaftaran</string>
+    <string name="s6_btn_kembali_dokumen">Kembali ke Dokumen</string>
+    <string name="s6_draf_saved">Draf tinjauan disimpan sementara di perangkat Anda.</string>
+    <string name="s6_sending">Mengirim pendaftaran…</string>
+    <string name="s6_kirim_gagal">Gagal mengirim pendaftaran. Periksa koneksi lalu coba lagi.</string>
+
+    <!-- Modal sukses -->
+    <string name="s6_sukses_title">Pendaftaran Berhasil Dikirim</string>
+    <string name="s6_sukses_subtitle">Terima kasih, pengajuan nikah Anda telah tercatat. Simpan kode tiket berikut untuk melacak status.</string>
+    <string name="s6_tiket_label">Kode Tiket</string>
+    <string name="s6_btn_salin_tiket">Salin</string>
+    <string name="s6_tiket_disalin">Kode tiket %1$s disalin ke papan klip.</string>
+    <string name="s6_btn_unduh_pdf">Unduh Bukti PDF</string>
+    <string name="s6_btn_cek_status">Cek Status Pendaftaran</string>
+    <string name="s6_btn_selesai">Selesai</string>
+    <string name="s6_unduh_soon">Bukti PDF akan tersedia setelah verifikasi petugas.</string>
+    <string name="s6_next_steps_title">Tahapan Selanjutnya</string>
+    <string name="s6_step_verifikasi">Verifikasi Petugas</string>
+    <string name="s6_step_verifikasi_desc">Petugas KUA memeriksa kelengkapan &amp; keabsahan data.</string>
+    <string name="s6_step_nb">Pemeriksaan N1–N6 (NB)</string>
+    <string name="s6_step_nb_desc">Blanko dan pengumuman kehendak nikah diproses.</string>
+    <string name="s6_step_akad">Pelaksanaan Akad Nikah</string>
+    <string name="s6_step_akad_desc">Akad dilaksanakan sesuai jadwal &amp; lokasi terpilih.</string>
+
+    <!-- Navigasi ubah (kembali ke langkah terkait) -->
+    <string name="s6_nav_ubah_soon">Halaman terkait segera dibuka kembali.</string>
+
+    <!-- ==================== Cek Status Pendaftaran ==================== -->
+    <!-- App bar -->
+    <string name="cs_toolbar_title">Cek Status Pendaftaran</string>
+    <string name="cs_toolbar_subtitle">KUA Randudongkal</string>
+
+    <!-- Section input pencarian -->
+    <string name="cs_input_title">Telusuri Pengajuan Anda</string>
+    <string name="cs_input_subtitle">Masukkan nomor tiket &amp; tanggal lahir calon pengantin untuk melihat posisi berkas.</string>
+    <string name="cs_hint_kode_tiket">Nomor Tiket Pendaftaran</string>
+    <string name="cs_help_kode_tiket">Contoh: RKA-2026-00123</string>
+    <string name="cs_hint_tanggal_lahir">Tanggal Lahir Calon Pengantin</string>
+    <string name="cs_ph_tanggal_lahir">DD/MM/YYYY</string>
+    <string name="cs_btn_cek">Cek Status</string>
+
+    <!-- Validasi & umpan balik -->
+    <string name="cs_err_kode_tiket">Masukkan nomor tiket yang valid.</string>
+    <string name="cs_err_tanggal_lahir">Format tanggal lahir harus DD/MM/YYYY.</string>
+    <string name="cs_loading">Memeriksa status…</string>
+    <string name="cs_not_found">Data tidak ditemukan. Periksa kembali nomor tiket &amp; tanggal lahir.</string>
+    <string name="cs_net_error">Gagal terhubung ke server. Periksa koneksi Anda lalu coba lagi.</string>
+    <string name="cs_demo_fallback">Server belum terjangkau — menampilkan contoh hasil pelacakan.</string>
+
+    <!-- Empty state -->
+    <string name="cs_empty_title">Belum Ada Hasil</string>
+    <string name="cs_empty_desc">Isi nomor tiket lalu ketuk “Cek Status” untuk melihat posisi berkas pengajuan Anda.</string>
+
+    <!-- Kartu hasil pelacakan -->
+    <string name="cs_result_title">Status Pengajuan</string>
+    <string name="cs_label_pasangan">Nama Pasangan</string>
+    <string name="cs_label_tiket">Nomor Tiket</string>
+    <string name="cs_label_daftar">Tanggal Terdaftar</string>
+
+    <!-- Label badge status -->
+    <string name="cs_badge_diterima">Diterima</string>
+    <string name="cs_badge_diperiksa">Sedang Diperiksa</string>
+    <string name="cs_badge_perlu_perbaikan">Perlu Perbaikan</string>
+    <string name="cs_badge_lengkap">Lengkap</string>
+    <string name="cs_badge_dijadwalkan">Dijadwalkan</string>
+    <string name="cs_badge_ditolak">Ditolak</string>
+
+    <!-- Timeline tracking -->
+    <string name="cs_timeline_title">Riwayat Proses</string>
+    <string name="cs_stage_diterima">Diterima</string>
+    <string name="cs_stage_diterima_desc">Berkas &amp; data Anda telah masuk sistem KUA.</string>
+    <string name="cs_stage_diperiksa">Sedang Diperiksa</string>
+    <string name="cs_stage_diperiksa_desc">Petugas memverifikasi keabsahan dokumen.</string>
+    <string name="cs_stage_perbaikan">Perlu Perbaikan</string>
+    <string name="cs_stage_perbaikan_desc">Beberapa berkas perlu diperbaiki/diunggah ulang.</string>
+    <string name="cs_stage_lengkap">Lengkap</string>
+    <string name="cs_stage_lengkap_desc">Seluruh dokumen dinyatakan lengkap &amp; valid.</string>
+    <string name="cs_stage_jadwal">Dijadwalkan</string>
+    <string name="cs_stage_jadwal_desc">Akad nikah terjadwal sesuai tanggal &amp; lokasi terpilih.</string>
+
+    <!-- Kartu catatan petugas -->
+    <string name="cs_catatan_title">Catatan Petugas</string>
+    <string name="cs_pemeriksa_label">Diperiksa oleh</string>
+    <string name="cs_btn_unggah_ulang">Unggah Ulang Dokumen</string>
+
+    <!-- Section bantuan -->
+    <string name="cs_help_title">Butuh Bantuan?</string>
+    <string name="cs_help_desc">Konsultasikan status pengajuan Anda langsung dengan petugas KUA.</string>
+    <string name="cs_btn_wa">Chat WhatsApp Petugas</string>
+    <string name="cs_wa_message">Halo Petugas KUA Randudongkal, saya ingin menanyakan status pendaftaran nikah saya (tiket %1$s).</string>
+    <string name="cs_wa_unavailable">Aplikasi WhatsApp tidak tersedia di perangkat ini.</string>
+    <string name="cs_transparansi_title">Zona Integritas — Bebas Pungutan Liar</string>
+    <string name="cs_transparansi_desc">Verifikasi berkas tidak dipungut biaya di luar ketentuan resmi (PP No. 60/2021). Tolak gratifikasi.</string>
+
+    <!-- ==================== Tambahan: string yang hilang (penyebab error linking) ==================== -->
+    <string name="dup_jam_desc">Senin - Kamis 07.30 - 16.00 WIB, Jumat 07.30 - 16.30 WIB. Sabtu &amp; Minggu libur.</string>
+</resources>

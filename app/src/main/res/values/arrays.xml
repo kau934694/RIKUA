@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Opsi dropdown form Daftar Nikah (Agama & Pendidikan Terakhir).
+     Item pertama = nilai default yang dipilih otomatis di Activity. -->
+<resources>
+    <string-array name="agama_options">
+        <item>Islam</item>
+        <item>Kristen</item>
+        <item>Katolik</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <item>Konghucu</item>
+        <item>Kepercayaan kepada Tuhan YME</item>
+    </string-array>
+
+    <string-array name="pendidikan_options">
+        <item>SD</item>
+        <item>SMP</item>
+        <item>SMA</item>
+        <item>SMK</item>
+        <item>D1</item>
+        <item>D2</item>
+        <item>D3</item>
+        <item>S1</item>
+        <item>S2</item>
+        <item>S3</item>
+        <item>Lainnya</item>
+    </string-array>
+
+    <!-- Hubungan wali / status nasab (Langkah 4 — Daftar Nikah) -->
+    <string-array name="wali_hubungan_options">
+        <item>Ayah Kandung</item>
+        <item>Kakek (Ayah dari Ayah)</item>
+        <item>Saudara Laki-laki Kandung</item>
+        <item>Paman Kandung (Saudara Ayah)</item>
+        <item>Wali Hakim</item>
+    </string-array>
+</resources>

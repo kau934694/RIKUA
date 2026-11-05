@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Baris ringkasan "label → nilai" untuk kartu Tinjau & Kirim (Langkah 6).
+    View Binding menyajikannya sebagai binding nested (mis. binding.rowSuamiNama),
+    dengan tv_review_label & tv_review_value diisi dinamis dari Activity.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/tv_review_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.02"
+        android:textAllCaps="true"
+        android:textColor="@color/text_tertiary"
+        android:textSize="11sp"
+        tools:text="Nama Lengkap" />
+
+    <TextView
+        android:id="@+id/tv_review_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/md3_on_surface"
+        android:textSize="14sp"
+        tools:text="Ahmad Fauzi" />
+</LinearLayout>

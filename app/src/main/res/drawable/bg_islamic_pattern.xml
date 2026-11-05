@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+  <!-- Subtle Islamic Geometric Ornament Overlay -->
+  <group
+      android:pivotX="150"
+      android:pivotY="150"
+      android:rotation="0">
+    <!-- Center 8-pointed star rosette -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2"
+        android:strokeAlpha="0.08"
+        android:fillColor="#00000000"
+        android:pathData="M150,60 L176,124 L240,150 L176,176 L150,240 L124,176 L60,150 L124,124 Z" />
+    <path
+        android:strokeColor="#FECA68"
+        android:strokeWidth="1.2"
+        android:strokeAlpha="0.10"
+        android:fillColor="#00000000"
+        android:pathData="M150,85 L168,132 L215,150 L168,168 L150,215 L132,168 L85,150 L132,132 Z" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.0"
+        android:strokeAlpha="0.06"
+        android:fillColor="#00000000"
+        android:pathData="M104,104 L196,104 L196,196 L104,196 Z" />
+    <!-- Outer concentric octagonal rings -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="0.8"
+        android:strokeAlpha="0.05"
+        android:fillColor="#00000000"
+        android:pathData="M150,30 L235,65 L270,150 L235,235 L150,270 L65,235 L30,150 L65,65 Z" />
+    <path
+        android:strokeColor="#FECA68"
+        android:strokeWidth="0.8"
+        android:strokeAlpha="0.07"
+        android:fillColor="#00000000"
+        android:pathData="M150,10 L249,51 L290,150 L249,249 L150,290 L51,249 L10,150 L51,51 Z" />
+  </group>
+</vector>

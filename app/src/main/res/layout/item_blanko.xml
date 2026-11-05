@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_blanko_item"
+    style="@style/Widget.Rikua.CardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="100dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:rippleColor="@color/primary_forest_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Kode N1/N2 — Kotak Hijau Tua -->
+        <TextView
+            android:id="@+id/tv_blanko_kode"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_blanko_kode"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:textColor="@color/text_white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="N1" />
+
+        <!-- Konten Tengah: Judul, Deskripsi, Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_blanko_judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Surat Keterangan Belum Pernah Nikah" />
+
+            <TextView
+                android:id="@+id/tv_blanko_deskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="Formulir pernyataan belum pernah menikah, bermaterai" />
+
+            <!-- Baris Info: Ukuran File + Badge Kategori -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_blanko_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp"
+                    tools:text="PDF • 120 KB" />
+
+                <TextView
+                    android:id="@+id/tv_blanko_kategori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_badge_emerald"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="3dp"
+                    android:textColor="@color/status_green_dark"
+                    android:textSize="10sp"
+                    tools:text="Wajib" />
+            </LinearLayout>
+
+            <!-- Tombol Unduh PDF -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_unduh_pdf"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:minWidth="130dp"
+                android:text="@string/blanko_btn_unduh"
+                android:textColor="@color/text_white"
+                android:textSize="12sp"
+                app:backgroundTint="@color/consult_primary"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/ic_download"
+                app:iconGravity="start"
+                app:iconSize="16dp"
+                app:iconTint="@color/text_white" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

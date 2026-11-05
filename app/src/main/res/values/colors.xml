@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Color & Forest Green Palette -->
+    <color name="primary_forest_deep">#02342D</color>
+    <color name="primary_forest">#1F4B43</color>
+    <color name="primary_forest_dark">#163630</color>
+    <color name="primary_forest_light">#2D6B60</color>
+    <color name="primary_forest_container">#D4EBE5</color>
+    <color name="on_primary_forest_container">#00201B</color>
+
+    <!-- Secondary & Gold Accent Palette -->
+    <color name="gold_primary">#C99A3E</color>
+    <color name="gold_accent">#FECA68</color>
+    <color name="gold_dark">#7C5800</color>
+    <color name="gold_container">#FFF3D6</color>
+    <color name="gold_border">#ECD7B5</color>
+
+    <!-- Surface & Backgrounds -->
+    <color name="surface_cream_light">#F9FAEF</color>
+    <color name="surface_cream">#F3F5E9</color>
+    <color name="surface_white">#FFFFFF</color>
+    <color name="surface_container_low">#F8FAF4</color>
+    <color name="surface_card_border">#E2E7DE</color>
+
+    <!-- Announcement Card Gradient -->
+    <color name="announcement_bg_start">#FDF9F0</color>
+    <color name="announcement_bg_end">#F7EFE1</color>
+
+    <!-- Text & Typography -->
+    <color name="text_primary">#1A1D16</color>
+    <color name="text_secondary">#404846</color>
+    <color name="text_tertiary">#707976</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_white_80">#CCFFFFFF</color>
+    <color name="text_white_60">#99FFFFFF</color>
+
+    <!-- Status & Functional Accents -->
+    <color name="status_green">#10B981</color>
+    <color name="status_green_dark">#059669</color>
+    <color name="status_green_container">#E6F9F0</color>
+    <color name="badge_teal_bg">#E2F5F1</color>
+    <color name="badge_teal_text">#166555</color>
+    <color name="badge_blue_bg">#E0F2FE</color>
+    <color name="badge_blue_text">#0369A1</color>
+    <color name="badge_rose_bg">#FEE2E2</color>
+    <color name="badge_rose_text">#B91C1C</color>
+    <color name="badge_purple_bg">#EDE9FE</color>
+    <color name="badge_purple_text">#6D28D9</color>
+    <color name="badge_amber_bg">#FEF3C7</color>
+    <color name="badge_amber_text">#B45309</color>
+    <color name="badge_sky_bg">#E0F2FE</color>
+    <color name="badge_sky_text">#0369A1</color>
+    <color name="badge_emerald_bg">#D1FAE5</color>
+    <color name="badge_emerald_text">#047857</color>
+
+    <!-- Consultation Screen Teal Primary Palette -->
+    <color name="consult_primary">#005145</color>
+    <color name="consult_primary_dark">#003A31</color>
+    <color name="consult_primary_light">#0A6B5C</color>
+    <color name="consult_teal_container">#D4EBE5</color>
+    <color name="whatsapp_brand">#25D366</color>
+    <color name="whatsapp_brand_dark">#1DA851</color>
+
+    <!-- Officer Availability Status -->
+    <color name="status_offline_bg">#F1F3F1</color>
+    <color name="status_offline_text">#667069</color>
+    <color name="status_offline_dot">#9AA39C</color>
+    <color name="avatar_gray_bg">#B8C2BD</color>
+
+    <!-- Rekomendasi Nikah — MD3 spec palette -->
+    <color name="md3_primary">#005145</color>
+    <color name="md3_on_primary">#FFFFFF</color>
+
+    <!-- Syarat Nikah (redesign) — MD3 + Tailwind custom palette -->
+    <color name="syarat_primary">#0F6B5C</color>
+    <color name="syarat_on_primary">#FFFFFF</color>
+    <color name="syarat_primary_soft">#E6F2EF</color>
+    <color name="syarat_background">#F6F8F7</color>
+    <color name="syarat_card_border">#E5E9E7</color>
+    <color name="syarat_accent_brown">#795902</color>
+    <color name="syarat_accent_gold">#C9A24B</color>
+    <color name="syarat_notice_bg">#FBF5E6</color>
+    <color name="syarat_success">#0E9F6E</color>
+    <color name="md3_primary_container">#0F6B5C</color>
+    <color name="md3_on_primary_container">#99E8D5</color>
+    <color name="md3_secondary">#795902</color>
+    <color name="md3_secondary_container">#FDD275</color>
+    <color name="md3_background">#F7F9FF</color>
+    <color name="md3_surface_card">#FFFFFF</color>
+    <color name="md3_outline_variant_40">#66BEC9C5</color> <!-- #BEC9C5 @ 40% opacity -->
+    <color name="md3_info_blue_bg">#EFF6FF</color>
+    <color name="md3_info_blue_border">#BFDBFE</color>
+    <color name="md3_info_blue_text">#1D4ED8</color>
+    <color name="md3_surface_container_low">#EDF4FF</color>
+    <color name="md3_primary_container_light">#A2F2DE</color>
+
+    <!-- Daftar Nikah Langkah 5 — inkuri/unggah dokumen (MD3 amber/emerald semantics) -->
+    <color name="md3_surface_container_high">#DFE9F7</color>
+    <color name="s5_amber_border">#FCD34D</color>      <!-- Tailwind amber-300: stroke Perlu Perbaikan -->
+    <color name="s5_amber_bg">#FFFBEB</color>          <!-- Tailwind amber-50: latar peringatan -->
+    <color name="s5_amber_text">#92400E</color>        <!-- Tailwind amber-800: teks peringatan -->
+    <color name="s5_amber_stroke_soft">#FDE68A</color> <!-- Tailwind amber-200: stroke kotak error -->
+    <color name="s5_emerald_badge_bg">#ECFDF5</color>  <!-- Tailwind emerald-50: badge Terunggah -->
+    <color name="s5_emerald_badge_text">#065F46</color><!-- Tailwind emerald-800: teks badge -->
+    <color name="s5_emerald_stroke_soft">#BBF7D0</color><!-- Tailwind emerald-200: stroke badge -->
+
+    <!-- Daftar Nikah (pengantar) — state nonaktif tombol utama -->
+    <color name="daf_surface_variant">#E4E7E4</color>
+    <color name="daf_on_surface_variant">#8A938F</color>
+    <color name="daf_progress_track">#4DFFFFFF</color>
+
+    <!-- Daftar Nikah form (MD3 semantic) — on-surface & indikator error -->
+    <color name="md3_on_surface">#121D26</color>
+    <color name="md3_on_surface_variant">#3F4946</color>
+    <color name="md3_error">#BA1A1A</color>
+    <color name="md3_error_container">#FFDAD6</color>
+    <color name="md3_container_contrast">#E4EFFD</color>
+    <color name="md3_outline_soft">#C4C9C5</color>
+    <color name="md3_radio_selected_bg">#E6F2EF</color>
+
+    <!-- Base Fallbacks -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="divider">#ECEFEA</color>
+</resources>

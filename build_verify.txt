@@ -1,0 +1,24 @@
+Calculating task graph as no cached configuration is available for tasks: :app:compileDebugJavaWithJavac
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResources
+> Task :app:processDebugNavigationResources
+> Task :app:javaPreCompileDebug
+> Task :app:packageDebugResources
+
+> Task :app:parseDebugLocalResources
+D:\Rikua\app\build\intermediates\packaged_res\debug\packageDebugResources\xml\network_security_config.xml contains trailing content. Trailing is stripped during XML parsing. 
+Trailing content was: 'oh'
+
+> Task :app:generateDebugRFile
+> Task :app:compileDebugKotlin NO-SOURCE
+
+> Task :app:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+[Incubating] Problems report is available at: file:///D:/Rikua/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 8s
+7 actionable tasks: 7 executed
+Configuration cache entry stored.

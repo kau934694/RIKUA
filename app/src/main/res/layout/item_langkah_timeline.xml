@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Node timeline alur pendaftaran (tabel langkah_layanan).
+    Kolom kiri: dot bernomor + garis penghubung; kolom kanan: kartu langkah.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="14dp">
+
+    <!-- ============ KOLOM DOT + GARIS ============ -->
+    <LinearLayout
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_timeline_dot">
+
+            <TextView
+                android:id="@+id/tv_nomor_langkah"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="@color/text_white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="1" />
+        </FrameLayout>
+
+        <!-- Garis penghubung; disembunyikan pada langkah terakhir oleh Activity -->
+        <View
+            android:id="@+id/view_timeline_line"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_timeline_line" />
+    </LinearLayout>
+
+    <!-- ============ KARTU LANGKAH ============ -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/surface_white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/syarat_card_border"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:id="@+id/tv_judul_langkah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                tools:text="Siapkan dan legalisasi berkas N1-N4" />
+
+            <TextView
+                android:id="@+id/tv_deskripsi_langkah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                tools:text="Ambil surat pengantar dari desa dan lengkapi fotokopi KTP." />
+
+            <!-- Meta: lokasi & estimasi waktu -->
+            <LinearLayout
+                android:id="@+id/layout_meta_langkah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_lokasi_langkah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp"
+                    app:drawableStartCompat="@drawable/ic_location"
+                    app:drawableTint="@color/text_tertiary"
+                    tools:text="Loket 1 KUA" />
+
+                <TextView
+                    android:id="@+id/tv_estimasi_langkah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/syarat_primary"
+                    android:textSize="11sp"
+                    app:drawableStartCompat="@drawable/ic_schedule"
+                    app:drawableTint="@color/syarat_primary"
+                    tools:text="15 menit" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

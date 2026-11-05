@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bottom navigation khusus layar Rekomendasi Nikah:
+     Beranda | Layanan (aktif, ikon apps) | Daftar Nikah | Konsultasi | Lainnya -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_nav_home"
+        android:title="@string/nav_home" />
+    <item
+        android:id="@+id/menu_services"
+        android:icon="@drawable/ic_apps"
+        android:title="@string/nav_services" />
+    <item
+        android:id="@+id/menu_daftar_nikah"
+        android:icon="@drawable/ic_how_to_reg"
+        android:title="@string/rekom_nav_daftar_nikah" />
+    <item
+        android:id="@+id/menu_consultation"
+        android:icon="@drawable/ic_nav_consultation"
+        android:title="@string/nav_consultation" />
+    <item
+        android:id="@+id/menu_lainnya"
+        android:icon="@drawable/ic_more_horiz"
+        android:title="@string/rekom_nav_lainnya" />
+</menu>

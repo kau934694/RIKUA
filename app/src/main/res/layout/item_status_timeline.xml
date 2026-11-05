@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Satu baris timeline tracking status (Cek Status). Di-inflate dinamis per tahap.
+    Rail kiri = segmen penghubung atas/bawah + dot state (done/aktif/belum);
+    kolom kanan = judul tahap, deskripsi, & opsional stempel waktu.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Rail vertikal: garis penghubung + dot state -->
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/tl_seg_top"
+            android:layout_width="3dp"
+            android:layout_height="12dp"
+            android:background="@drawable/bg_timeline_line" />
+
+        <FrameLayout
+            android:layout_width="28dp"
+            android:layout_height="28dp">
+
+            <View
+                android:id="@+id/tl_dot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_status_dot_done" />
+
+            <ImageView
+                android:id="@+id/tl_icon"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_check_circle"
+                app:tint="@color/md3_on_primary" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/tl_seg_bottom"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_timeline_line" />
+    </LinearLayout>
+
+    <!-- Konten teks tahap -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tl_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/md3_on_surface"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Diterima" />
+
+        <TextView
+            android:id="@+id/tl_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp"
+            tools:text="Berkas &amp; data Anda telah masuk sistem KUA." />
+
+        <TextView
+            android:id="@+id/tl_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_badge_teal"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/badge_teal_text"
+            android:textSize="10sp"
+            android:visibility="gone"
+            tools:text="12 Jan 2026"
+            tools:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

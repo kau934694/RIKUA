@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ============================================================================
+     RIKUA — activity_daftar_nikah_step2.xml
+     Halaman "Daftar Nikah: Data Calon Suami" (Langkah 2 dari 6) MD3
+     Palette: primary #005145 / #0f6b5c, surface #f7f9ff, card #ffffff,
+              container kontras #e4effd / #edf4ff, error #ba1a1a,
+              on-surface #121d26, on-surface-variant #3f4946.
+    ============================================================================
+     Struktur:
+       DrawerLayout
+         └─ CoordinatorLayout
+              ├─ AppBarLayout + MaterialToolbar  (back | judul tengah | burger)
+              ├─ NestedScrollView (paddingBottom 220dp — bebas dock)
+              │    ├─ Kartu stepper & draf : "Langkah 2 dari 6", Simpan Draf,
+              │    │                         LinearProgress 33,33% (1/3),
+              │    │                         label 4 tahap
+              │    ├─ Banner petunjuk      : teal "Identitas Calon Pengantin
+              │    │                         Pria" + ikon assignment_ind
+              │    ├─ Kartu form identitas : TextInputLayout OutlinedBox —
+              │    │                         nama, NIK 16 digit, tempat &
+              │    │                         tanggal lahir, agama (dropdown),
+              │    │                         pekerjaan, pendidikan (dropdown),
+              │    │                         alamat multiline, telepon +62
+              │    └─ Status pernikahan    : 3 kartu radio (Jejaka terpilih
+              │                              default + badge "Utama")
+              ├─ layout_bottom_sticky : Lanjut ke Data Calon Istri +
+              │                         bantuan petugas + bottom nav
+              │                         (tab "Daftar Nikah" aktif)
+              └─ NavigationView (drawer 12 menu, end)
+    ============================================================================
+-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".DaftarNikahStep2Activity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/step2_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md3_background">
+
+        <!-- =================== TOP APP BAR (STICKY) =================== -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md3_primary"
+            app:elevation="0dp"
+            app:liftOnScroll="false">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/md3_primary"
+                app:contentInsetStartWithNavigation="0dp"
+                app:menu="@menu/services_toolbar_menu"
+                app:navigationContentDescription="@string/syarat_back"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/md3_on_primary">
+
+                <!-- Judul tengah + subjudul KUA (custom center view) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
+                        android:maxLines="1"
+                        android:text="@string/s2_toolbar_title"
+                        android:textColor="@color/md3_on_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/daf_toolbar_subtitle"
+                        android:textColor="@color/md3_on_primary_container"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- =================== SCROLLABLE BODY =================== -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="220dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="18dp">
+
+                <!-- ============ 1. KARTU STEPPER & DRAF ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/md3_outline_variant_40"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Baris 1: label langkah + tombol simpan draf -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_stepper_label"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_simpan_draf"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_btn_simpan_draf"
+                                android:textAllCaps="false"
+                                android:textColor="@color/md3_primary"
+                                android:textSize="12sp"
+                                app:icon="@drawable/ic_save"
+                                app:iconGravity="start"
+                                app:iconSize="16dp"
+                                app:iconTint="@color/md3_primary" />
+                        </LinearLayout>
+
+                        <!-- Baris 2: progress linear 33,33% (1 dari 3 tahapform) -->
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progress_langkah"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/s2_stepper_content_desc"
+                            android:max="3"
+                            android:progress="1"
+                            app:indicatorColor="@color/md3_primary"
+                            app:trackColor="@color/syarat_primary_soft"
+                            app:trackCornerRadius="4dp"
+                            app:trackThickness="8dp" />
+
+                        <!-- Baris 3: label empat tahap alur -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/s2_stage_kua"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-medium"
+                                android:gravity="center"
+                                android:text="@string/s2_stage_suami"
+                                android:textColor="@color/md3_primary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/s2_stage_istri"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="10sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/s2_stage_wali"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 2. BANNER PETUNJUK PENGISIAN (TEAL) ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardBackgroundColor="@color/md3_primary_container"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_rekom_icon_teal_soft"
+                            android:contentDescription="@null"
+                            android:padding="8dp"
+                            android:src="@drawable/ic_assignment_ind"
+                            app:tint="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_banner_title"
+                                android:textColor="@color/md3_on_primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:lineSpacingExtra="2dp"
+                                android:text="@string/s2_banner_desc"
+                                android:textColor="@color/md3_on_primary_container"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 3. KARTU FORM IDENTITAS CALON SUAMI ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/md3_outline_variant_40"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- 3.1 Nama lengkap -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_nama"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/s2_hint_nama"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:helperText="@string/s2_help_nama"
+                            app:helperTextEnabled="true"
+                            app:startIconContentDescription="@null"
+                            app:startIconDrawable="@drawable/ic_person"
+                            app:startIconTint="@color/md3_primary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_nama"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:inputType="textPersonName|textCapWords"
+                                android:maxLength="60"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="15sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- 3.2 NIK 16 digit -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_nik"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="@string/s2_hint_nik"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="16"
+                            app:helperText="@string/s2_help_nik"
+                            app:helperTextEnabled="true"
+                            app:startIconContentDescription="@null"
+                            app:startIconDrawable="@drawable/ic_badge"
+                            app:startIconTint="@color/md3_primary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_nik"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:inputType="number"
+                                android:maxLength="16"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="15sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- 3.3 Tempat & tanggal lahir (grid horizontal) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_tempat_lahir"
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="@string/s2_hint_tempat"
+                                app:boxCornerRadiusBottomEnd="12dp"
+                                app:boxCornerRadiusBottomStart="12dp"
+                                app:boxCornerRadiusTopEnd="12dp"
+                                app:boxCornerRadiusTopStart="12dp"
+                                app:startIconContentDescription="@null"
+                                app:startIconDrawable="@drawable/ic_location_city"
+                                app:startIconTint="@color/md3_primary">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/et_tempat_lahir"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="40"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="15sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/til_tanggal_lahir"
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="1"
+                                android:hint="@string/s2_hint_tanggal"
+                                app:boxCornerRadiusBottomEnd="12dp"
+                                app:boxCornerRadiusBottomStart="12dp"
+                                app:boxCornerRadiusTopEnd="12dp"
+                                app:boxCornerRadiusTopStart="12dp"
+                                app:helperText="@string/s2_tanggal_format"
+                                app:helperTextEnabled="true"
+                                app:startIconContentDescription="@null"
+                                app:startIconDrawable="@drawable/ic_calendar"
+                                app:startIconTint="@color/md3_primary">
+
+                                <!-- Klik memunculkan DatePicker (focusable=false) -->
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/et_tanggal_lahir"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="true"
+                                    android:cursorVisible="false"
+                                    android:focusable="false"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:inputType="none"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="15sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- 3.5 Pekerjaan -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_pekerjaan"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="@string/s2_hint_pekerjaan"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:startIconContentDescription="@null"
+                            app:startIconDrawable="@drawable/ic_work"
+                            app:startIconTint="@color/md3_primary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_pekerjaan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:inputType="textCapWords"
+                                android:maxLength="40"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="15sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- 3.6 Pendidikan terakhir (dropdown) -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_pendidikan"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="@string/s2_hint_pendidikan"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/dropdown_pendidikan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:inputType="none"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="15sp"
+                                tools:ignore="LabelFor" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- 3.7 Alamat domisili (multiline / textarea) -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_alamat"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="@string/s2_hint_alamat"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="200"
+                            app:helperText="@string/s2_help_alamat"
+                            app:helperTextEnabled="true"
+                            app:startIconContentDescription="@null"
+                            app:startIconDrawable="@drawable/ic_location"
+                            app:startIconTint="@color/md3_primary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_alamat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:gravity="top"
+                                android:inputType="textMultiLine|textCapSentences"
+                                android:maxLength="200"
+                                android:minLines="3"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="15sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- 3.8 Nomor WhatsApp / HP aktif (prefix +62) -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_telepon"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="@string/s2_hint_telepon"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:helperText="@string/s2_help_telepon"
+                            app:helperTextEnabled="true"
+                            app:prefixText="@string/s2_prefix_telepon"
+                            app:startIconContentDescription="@null"
+                            app:startIconDrawable="@drawable/ic_phone"
+                            app:startIconTint="@color/md3_primary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_telepon"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:inputType="phone"
+                                android:maxLength="13"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="15sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 4. STATUS PERNIKAHAN (RADIO CARDS) ============ -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/s2_label_status"
+                    android:textColor="@color/md3_on_surface"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <!-- Kartu 1: Jejaka (terpilih default, badge "Utama") -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_status_jejaka"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:checkable="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/md3_radio_selected_bg"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/md3_primary"
+                    app:strokeWidth="1.5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="12dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="12dp">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_jejaka"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:checked="true"
+                            android:focusable="false"
+                            app:buttonTint="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_opt_jejaka"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/s2_opt_jejaka_desc"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_badge_teal"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingStart="10dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="4dp"
+                            android:text="@string/s2_badge_utama"
+                            android:textColor="@color/badge_teal_text"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Kartu 2: Duda cerai hidup -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_status_duda_hidup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:checkable="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/md3_outline_variant_40"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="12dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="12dp">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_duda_hidup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            app:buttonTint="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_opt_duda_hidup"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/s2_opt_duda_hidup_desc"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Kartu 3: Duda cerai mati -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_status_duda_mati"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:checkable="false"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/md3_outline_variant_40"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="12dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="12dp">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/rb_duda_mati"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
+                            app:buttonTint="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_opt_duda_mati"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/s2_opt_duda_mati_desc"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- ============ STICKY BOTTOM: AKSI + BOTTOM NAV ============ -->
+        <LinearLayout
+            android:id="@+id/layout_bottom_sticky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/md3_background"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_action_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="8dp">
+
+                <!-- Aksi utama: lanjut ke Langkah 3 (Data Calon Istri) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_lanjut_istri"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/s2_btn_lanjut"
+                    android:textAllCaps="false"
+                    android:textColor="@color/md3_on_primary"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/md3_primary"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconGravity="end"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/md3_on_primary" />
+
+                <!-- Tautan bantuan -> halaman konsultasi petugas -->
+                <TextView
+                    android:id="@+id/tv_bantuan_petugas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center_vertical"
+                    android:minHeight="32dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/s2_bantuan_petugas"
+                    android:textColor="@color/md3_primary"
+                    android:textSize="12sp"
+                    app:drawableStartCompat="@drawable/ic_help_center"
+                    app:drawableTint="@color/md3_primary" />
+            </LinearLayout>
+
+            <!-- Bottom Navigation Persisten (5 tab, Daftar Nikah aktif) -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/surface_white"
+                app:elevation="0dp"
+                app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+                app:itemIconTint="@color/bottom_nav_color_selector"
+                app:itemRippleColor="@color/primary_forest_container"
+                app:itemTextColor="@color/bottom_nav_color_selector"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/rekom_bottom_nav_menu" />
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- =================== NAVIGATION DRAWER (12 MENU) =================== -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/surface_white"
+        app:headerLayout="@layout/nav_drawer_header"
+        app:itemIconTint="@color/bottom_nav_color_selector"
+        app:itemTextColor="@color/bottom_nav_color_selector"
+        app:menu="@menu/daftar_nikah_drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

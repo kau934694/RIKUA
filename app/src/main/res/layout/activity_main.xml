@@ -1,0 +1,969 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/surface_cream_light">
+
+        <!-- Scrollable Main Content -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="88dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- ======================================================== -->
+                <!-- A & B. HERO SECTION WITH INTEGRATED TOP APP BAR           -->
+                <!-- ======================================================== -->
+                <FrameLayout
+                    android:id="@+id/hero_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_hero_curved">
+
+                    <!-- Subtle Islamic Geometric Ornament Overlay -->
+                    <ImageView
+                        android:layout_width="260dp"
+                        android:layout_height="260dp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="-20dp"
+                        android:layout_marginEnd="-40dp"
+                        android:alpha="0.85"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/bg_islamic_pattern" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="20dp"
+                        android:paddingTop="36dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="30dp">
+
+                        <!-- TOP APP BAR -->
+                        <LinearLayout
+                            android:id="@+id/top_app_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- Logo Aplikasi RIKUA -->
+                            <FrameLayout
+                                android:id="@+id/btn_profile"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/logo" />
+
+                            </FrameLayout>
+
+                            <!-- Brand & Institution Title -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="serif"
+                                    android:letterSpacing="0.04"
+                                    android:text="@string/app_name"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="126dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/kua_subtitle"
+                                    android:textColor="@color/gold_accent"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <!-- Tombol Menu Navigasi -->
+                            <ImageButton
+                                android:id="@+id/btn_menu"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Buka menu navigasi"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_menu"
+                                app:tint="@color/text_white" />
+                        </LinearLayout>
+
+                        <!-- GREETING & VALUE PROPOSITION -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="22dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/hero_greeting_prefix"
+                                android:textColor="@color/gold_accent"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="@string/hero_greeting_title"
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:lineSpacingExtra="2dp"
+                                android:text="@string/hero_greeting_desc"
+                                android:textColor="@color/text_white_80"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <!-- FLOATING SEARCH BAR -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_search_bar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/surface_white"
+                            app:cardCornerRadius="26dp"
+                            app:cardElevation="6dp"
+                            app:strokeColor="#DDE6E2"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="52dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_search"
+                                    app:tint="@color/primary_forest" />
+
+                                <EditText
+                                    android:id="@+id/et_global_search"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:hint="@string/search_hint"
+                                    android:imeOptions="actionSearch"
+                                    android:inputType="text"
+                                    android:maxLines="1"
+                                    android:padding="0dp"
+                                    android:textColor="@color/text_primary"
+                                    android:textColorHint="@color/text_tertiary"
+                                    android:textSize="13sp" />
+
+                                <ImageView
+                                    android:id="@+id/btn_filter_search"
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_tune"
+                                    app:tint="@color/primary_forest" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- SEARCH RESULTS -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_search_results"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:visibility="gone"
+                            app:cardBackgroundColor="@color/surface_white"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="5dp"
+                            app:strokeColor="#DDE6E2"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:id="@+id/layout_search_results"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="12dp" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!-- ======================================================== -->
+                <!-- C. ANNOUNCEMENT / PENGUMUMAN KHUSUS                       -->
+                <!-- ======================================================== -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_announcement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="18dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="3dp"
+                    app:strokeColor="@color/gold_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_announcement_card"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+
+                        <!-- Announcement Title -->
+                        <TextView
+                            android:id="@+id/tv_announcement_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_announcement_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:lineSpacingExtra="2dp"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <!-- Action Button "Lihat Kuota" -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_lihat_kuota"
+                            android:layout_width="wrap_content"
+                            android:layout_height="42dp"
+                            android:layout_marginTop="14dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:letterSpacing="0.02"
+                            android:text="@string/btn_check_quota"
+                            android:textColor="@color/text_white"
+                            android:textSize="13sp"
+                            app:backgroundTint="@color/primary_forest"
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_arrow_forward"
+                            app:iconGravity="end"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/text_white" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ======================================================== -->
+                <!-- D. LAYANAN TERPADU (GRID 2x2)                             -->
+                <!-- ======================================================== -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/section_services_title"
+                        android:textColor="@color/text_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_lihat_semua_layanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:padding="6dp"
+                        android:text="@string/btn_see_all"
+                        android:textColor="@color/primary_forest"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <!-- Grid 2x2 Menu Cards -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical">
+
+                    <!-- Row 1: Daftar Nikah & Blangko N -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <!-- 1. Daftar Nikah -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_daftar_nikah"
+                            style="@style/Widget.Rikua.CardView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <FrameLayout
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/bg_icon_rounded_rose">
+
+                                        <ImageView
+                                            android:layout_width="22dp"
+                                            android:layout_height="22dp"
+                                            android:layout_gravity="center"
+                                            android:contentDescription="@null"
+                                            android:src="@drawable/ic_favorite"
+                                            app:tint="@color/badge_rose_text" />
+                                    </FrameLayout>
+
+                                
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="@string/service_daftar_nikah_title"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/service_daftar_nikah_desc"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 2. Blangko N -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_blangko"
+                            style="@style/Widget.Rikua.CardView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <FrameLayout
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/bg_icon_rounded_green">
+
+                                        <ImageView
+                                            android:layout_width="22dp"
+                                            android:layout_height="22dp"
+                                            android:layout_gravity="center"
+                                            android:contentDescription="@null"
+                                            android:src="@drawable/ic_description"
+                                            app:tint="@color/primary_forest" />
+                                    </FrameLayout>
+
+                                   
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="@string/service_blangko_title"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/service_blangko_desc"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <!-- Row 2: Konsultasi & Sarana Keagamaan -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <!-- 3. Konsultasi -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_konsultasi"
+                            style="@style/Widget.Rikua.CardView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <FrameLayout
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/bg_icon_rounded_gold">
+
+                                        <ImageView
+                                            android:layout_width="22dp"
+                                            android:layout_height="22dp"
+                                            android:layout_gravity="center"
+                                            android:contentDescription="@null"
+                                            android:src="@drawable/ic_chat"
+                                            app:tint="@color/gold_dark" />
+                                    </FrameLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="@string/service_konsultasi_title"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/service_konsultasi_desc"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 4. Sarana Keagamaan -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_sarana"
+                            style="@style/Widget.Rikua.CardView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="14dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <FrameLayout
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/bg_icon_rounded_blue">
+
+                                        <ImageView
+                                            android:layout_width="22dp"
+                                            android:layout_height="22dp"
+                                            android:layout_gravity="center"
+                                            android:contentDescription="@null"
+                                            android:src="@drawable/ic_mosque"
+                                            app:tint="@color/badge_blue_text" />
+                                    </FrameLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="@string/service_sarana_title"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/service_sarana_desc"
+                                    android:textColor="@color/text_secondary"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- ======================================================== -->
+                <!-- E. INFORMASI BALAI NIKAH & PELAYANAN (LIST CARDS)         -->
+                <!-- ======================================================== -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/section_info_title"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Card 1: Jam Pelayanan Kantor -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_jam_layanan"
+                    style="@style/Widget.Rikua.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_icon_rounded_green">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_schedule"
+                                    app:tint="@color/primary_forest" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:text="@string/card_hours_title"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@color/divider" />
+
+                        <!-- Schedule Details -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/hours_weekday"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/hours_friday"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/hours_weekend"
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 2: Lokasi KUA -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_lokasi"
+                    style="@style/Widget.Rikua.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_icon_rounded_gold">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_location"
+                                    app:tint="@color/gold_dark" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:text="@string/card_location_title"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:lineSpacingExtra="2dp"
+                            android:text="@string/card_location_address"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_petunjuk_arah"
+                            style="@style/Widget.Material3.Button.TonalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/btn_directions"
+                            android:textColor="@color/primary_forest"
+                            app:backgroundTint="@color/primary_forest_container"
+                            app:cornerRadius="10dp"
+                            app:icon="@drawable/ic_navigation"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/primary_forest" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card 3: Kontak Pengaduan & Bantuan -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_kontak"
+                    style="@style/Widget.Rikua.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="38dp"
+                                android:layout_height="38dp"
+                                android:background="@drawable/bg_icon_rounded_green">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_phone"
+                                    app:tint="@color/primary_forest" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:text="@string/card_contact_title"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:lineSpacingExtra="2dp"
+                            android:text="@string/card_contact_desc"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <!-- Contact Action Buttons -->
+                        <!-- Contact Action Buttons -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_whatsapp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="6dp"
+        android:layout_weight="1"
+        android:minWidth="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/btn_whatsapp"
+        android:textColor="@color/text_white"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="none"
+        app:backgroundTint="@color/primary_forest"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_whatsapp"
+        app:iconGravity="textStart"
+        app:iconSize="16dp"
+        app:iconPadding="4dp"
+        app:iconTint="@color/text_white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_telepon"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="6dp"
+        android:layout_weight="1"
+        android:minWidth="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="@string/btn_call"
+        android:textColor="@color/primary_forest"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="none"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_phone"
+        app:iconGravity="textStart"
+        app:iconSize="15dp"
+        app:iconPadding="4dp"
+        app:iconTint="@color/primary_forest"
+        app:strokeColor="@color/primary_forest" />
+
+</LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ======================================================== -->
+                <!-- F. CATATAN EDITORIAL / LIFE MILESTONE (QUOTE CARD)        -->
+                <!-- ======================================================== -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_editorial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="1dp"
+                    app:strokeColor="#DBE3DD"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_quote_card"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_format_quote"
+                            app:tint="@color/gold_primary" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="serif"
+                            android:lineSpacingExtra="4dp"
+                            android:text="@string/editorial_quote"
+                            android:textColor="@color/primary_forest_deep"
+                            android:textSize="14sp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/editorial_author"
+                            android:textColor="@color/gold_dark"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- ======================================================== -->
+        <!-- G. BOTTOM NAVIGATION BAR (FIXED AT SCREEN BOTTOM)        -->
+        <!-- ======================================================== -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="64dp"
+            android:layout_gravity="bottom"
+            android:background="@color/surface_white"
+            app:elevation="10dp"
+            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+            app:itemIconTint="@color/bottom_nav_color_selector"
+            app:itemRippleColor="@color/primary_forest_container"
+            app:itemTextColor="@color/bottom_nav_color_selector"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav_menu" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/surface_white"
+        app:headerLayout="@layout/nav_drawer_header"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

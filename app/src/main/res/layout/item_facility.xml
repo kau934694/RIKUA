@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_facility_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:checkable="false"
+    app:strokeColor="@color/surface_card_border"
+    app:strokeWidth="1dp"
+    app:cardBackgroundColor="@color/surface_white"
+    app:cardCornerRadius="16dp"
+     app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!-- ===== Left accent border ===== -->
+        <View
+            android:id="@+id/view_accent_strip"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/consult_primary" />
+
+        <!-- ===== Thumbnail ===== -->
+        <FrameLayout
+            android:id="@+id/frame_thumb"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/bg_icon_rounded_green">
+
+            <ImageView
+                android:id="@+id/iv_thumb_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/facility_thumb_desc"
+                android:src="@drawable/ic_mosque"
+                app:tint="@color/primary_forest" />
+        </FrameLayout>
+
+        <!-- ===== Content ===== -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Name + category badge -->
+            <TextView
+                android:id="@+id/tv_facility_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Masjid Besar Baitul Muttaqin" />
+
+            <TextView
+                android:id="@+id/tv_facility_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_badge_emerald"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/status_green_dark"
+                android:textSize="11sp"
+                tools:text="Masjid Jami'" />
+
+            <!-- Location line -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/text_tertiary" />
+
+                <TextView
+                    android:id="@+id/tv_facility_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    tools:text="Randudongkal" />
+            </LinearLayout>
+
+            <!-- Detail lines -->
+            <TextView
+                android:id="@+id/tv_facility_detail1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                app:drawableStartCompat="@drawable/ic_verified"
+                app:drawableTint="@color/primary_forest_light"
+                tools:text="Jamaah ±1.200 orang" />
+
+            <TextView
+                android:id="@+id/tv_facility_detail2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_badge_gold"
+                android:fontFamily="sans-serif-medium"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/gold_dark"
+                android:textSize="11sp"
+                tools:text="Wakaf Bersertifikat" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

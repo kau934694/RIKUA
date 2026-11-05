@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    RIKUA — jalur FileProvider untuk foto dokumen langsung (Langkah 5).
+    Cache dir subfolder "photos" diekspos sebagai konten URI sementara.
+-->
+<paths>
+    <cache-path
+        name="kamera_dokumen"
+        path="photos/" />
+</paths>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Teks tombol "Mulai Mendaftar": nonaktif = abu outline, aktif = putih on-primary -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/daf_on_surface_variant" android:state_enabled="false" />
+    <item android:color="@color/md3_on_primary" />
+</selector>

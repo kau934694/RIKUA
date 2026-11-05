@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ============================================================================
+     RIKUA — activity_daftar_nikah_step6.xml
+     Alur "Daftar Nikah" Langkah 6 dari 6 — Tinjau & Kirim (Review & Submit).
+     Scaffold MD3: TopAppBar sticky "Tinjau & Kirim" / "Langkah Terakhir",
+     stepper 6/6 (100%) + Simpan Draf + status kelengkapan, 5 kartu ringkasan
+     dengan border-left aksen (Primary untuk catin & dokumen; Secondary untuk
+     wali/akad), kotak pernyataan kebenaran data (mengisi persetujuan_data),
+     dock sticky "Kirim Pendaftaran" + "Kembali ke Dokumen", bottom nav tab
+     ke-3 aktif, dan drawer 12 menu.
+    ============================================================================
+-->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".DaftarNikahStep6Activity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/step6_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md3_background">
+
+        <!-- =================== TOP APP BAR (STICKY) =================== -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md3_primary"
+            app:elevation="0dp"
+            app:liftOnScroll="false">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/md3_primary"
+                app:contentInsetStartWithNavigation="0dp"
+                app:menu="@menu/services_toolbar_menu"
+                app:navigationContentDescription="@string/syarat_back"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/md3_on_primary">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
+                        android:maxLines="1"
+                        android:text="@string/s6_toolbar_title"
+                        android:textColor="@color/md3_on_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/s6_toolbar_subtitle"
+                        android:textColor="@color/md3_on_primary_container"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- =================== SCROLLABLE BODY =================== -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="180dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="18dp">
+
+                <!-- ============ 1. KARTU STEPPER 6/6 (100%) + SIMPAN DRAF ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/syarat_card_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s6_stepper_label"
+                                android:textColor="@color/md3_on_surface"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_simpan_draf"
+                                style="@style/Widget.Material3.Button.TextButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s2_btn_simpan_draf"
+                                android:textAllCaps="false"
+                                android:textColor="@color/md3_primary"
+                                android:textSize="12sp"
+                                app:icon="@drawable/ic_save"
+                                app:iconGravity="start"
+                                app:iconSize="16dp"
+                                app:iconTint="@color/md3_primary" />
+                        </LinearLayout>
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progress_langkah"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/s6_stepper_content_desc"
+                            android:max="6"
+                            android:progress="6"
+                            app:indicatorColor="@color/md3_primary"
+                            app:trackColor="@color/syarat_primary_soft"
+                            app:trackCornerRadius="4dp"
+                            app:trackThickness="8dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ic_status_kelengkapan"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_check_circle"
+                                app:tint="@color/md3_primary" />
+
+                            <TextView
+                                android:id="@+id/tv_status_kelengkapan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/s6_status_lengkap"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 2. CARD 1 — DATA CALON SUAMI ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/syarat_card_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_person"
+                                    app:tint="@color/md3_primary" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/s6_card_suami"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_ubah_suami"
+                                    style="@style/Widget.Material3.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="4dp"
+                                    android:text="@string/s6_btn_ubah"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/md3_primary"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_suami_nama" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_suami_nik" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_suami_status" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_suami_hp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 3. CARD 2 — DATA CALON ISTRI ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/syarat_card_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_person_circle"
+                                    app:tint="@color/md3_primary" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/s6_card_istri"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_ubah_istri"
+                                    style="@style/Widget.Material3.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="4dp"
+                                    android:text="@string/s6_btn_ubah"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/md3_primary"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_istri_nama" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_istri_nik" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_istri_status" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_istri_kelahiran" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 4. CARD 3 — WALI & SAKSI (accent Secondary) ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/syarat_card_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/md3_secondary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_gavel"
+                                    app:tint="@color/md3_secondary" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/s6_card_wali"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_ubah_wali"
+                                    style="@style/Widget.Material3.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="4dp"
+                                    android:text="@string/s6_btn_ubah"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/md3_secondary"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_wali_nama" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_wali_hubungan" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_saksi1" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_saksi2" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 5. CARD 4 — RENCANA AKAD (accent Secondary) ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/syarat_card_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/md3_secondary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="@color/md3_secondary" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/s6_card_akad"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_ubah_akad"
+                                    style="@style/Widget.Material3.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="4dp"
+                                    android:text="@string/s6_btn_ubah"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/md3_secondary"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_akad_tanggal" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_akad_waktu" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_akad_lokasi" />
+
+                                <include layout="@layout/item_review_row"
+                                    android:id="@+id/row_akad_tarif" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 6. CARD 5 — DOKUMEN TERUNGGAH (accent Primary) ============ -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="@color/md3_surface_card"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/syarat_card_border"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/md3_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_description"
+                                    app:tint="@color/md3_primary" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="@string/s6_card_dokumen"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btn_ubah_dokumen"
+                                    style="@style/Widget.Material3.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:minWidth="0dp"
+                                    android:minHeight="0dp"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="4dp"
+                                    android:text="@string/s6_btn_ubah"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/md3_primary"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/ic_verified"
+                                    app:tint="@color/status_green" />
+
+                                <TextView
+                                    android:id="@+id/tv_dokumen_count"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:textColor="@color/md3_on_surface"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    tools:text="10 berkas terverifikasi" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tv_dokumen_desc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:lineSpacingExtra="2dp"
+                                android:text="@string/s6_dokumen_desc"
+                                android:textColor="@color/md3_on_surface_variant"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ============ 7. KOTAK PERNYATAAN KEBENARAN DATA ============ -->
+                <LinearLayout
+                    android:id="@+id/layout_pernyataan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_daf_consent_box"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/cb_pernyataan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/s6_pernyataan_title"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingEnd="4dp"
+                        tools:ignore="RtlSymmetry" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/s6_pernyataan_title"
+                            android:textColor="@color/md3_on_surface"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:lineSpacingExtra="2dp"
+                            android:text="@string/s6_pernyataan_text"
+                            android:textColor="@color/md3_on_surface_variant"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_pernyataan_hint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/s6_pernyataan_hint"
+                            android:textColor="@color/md3_primary"
+                            android:textSize="11sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- ============ STICKY BOTTOM: AKSI + BOTTOM NAV ============ -->
+        <LinearLayout
+            android:id="@+id/layout_bottom_sticky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/md3_background"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_action_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_kirim_pendaftaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:enabled="false"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/s6_btn_kirim"
+                    android:textAllCaps="false"
+                    android:textColor="@color/md3_on_primary"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/md3_primary_container"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_how_to_reg"
+                    app:iconGravity="end"
+                    app:iconSize="18dp"
+                    app:iconTint="@color/md3_on_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_kembali_dokumen"
+                    style="@style/Widget.Material3.Button.TextButton.Icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/s6_btn_kembali_dokumen"
+                    android:textAllCaps="false"
+                    android:textColor="@color/md3_primary"
+                    android:textSize="13sp"
+                    app:icon="@drawable/ic_arrow_back"
+                    app:iconGravity="start"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/md3_primary" />
+            </LinearLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/surface_white"
+                app:elevation="0dp"
+                app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+                app:itemIconTint="@color/bottom_nav_color_selector"
+                app:itemRippleColor="@color/primary_forest_container"
+                app:itemTextColor="@color/bottom_nav_color_selector"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/rekom_bottom_nav_menu" />
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- =================== NAVIGATION DRAWER (12 MENU) =================== -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/surface_white"
+        app:headerLayout="@layout/nav_drawer_header"
+        app:itemIconTint="@color/bottom_nav_color_selector"
+        app:itemTextColor="@color/bottom_nav_color_selector"
+        app:menu="@menu/daftar_nikah_drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

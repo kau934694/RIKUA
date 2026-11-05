@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/surface_cream_light"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_judul_jadwal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jadwal Pernikahan"
+        android:textColor="@color/md3_primary"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Informasi jadwal akad nikah"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="14sp" />
+
+    <ProgressBar
+        android:id="@+id/progress_jadwal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/tv_status_jadwal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Memuat jadwal pernikahan..."
+        android:textSize="14sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_jadwal_pernikahan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp" />
+
+</LinearLayout>
