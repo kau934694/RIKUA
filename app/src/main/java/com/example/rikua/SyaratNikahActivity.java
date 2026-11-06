@@ -974,7 +974,6 @@ public class SyaratNikahActivity extends AppCompatActivity {
                 navigateTo(BlankoActivity.class));
 
         // Sticky redesign: tautan bantuan & tombol "Tanya Petugas" membuka konsultasi.
-        findViewById(R.id.tv_bantuan_petugas).setOnClickListener(v -> bukaWhatsAppPetugas());
         findViewById(R.id.btn_notice_konsultasi).setOnClickListener(v ->
                 startActivity(new Intent(this, ConsultationActivity.class)));
         findViewById(R.id.card_bantuan_harian).setOnClickListener(v ->

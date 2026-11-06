@@ -354,7 +354,7 @@
     <string name="syarat_langkah_subtitle">%1$d langkah dari persiapan berkas hingga buku nikah terbit</string>
 
     <string name="syarat_btn_daftar">Daftar Nikah</string>
-    <string name="syarat_btn_unduh_blanko">Unduh Blanko N1 \u2013 N4</string>
+    <string name="syarat_btn_unduh_blanko">Unduh Blanko N1 \u2013 N6</string>
     <string name="syarat_btn_retry">Coba Lagi</string>
     <string name="syarat_error_default">Gagal memuat data syarat nikah. Periksa koneksi jaringan Anda.</string>
     <string name="syarat_footer_note">
@@ -394,7 +394,6 @@
     <string name="rekom_toolbar_title">Rekomendasi Nikah</string>
     <string name="rekom_back">Kembali</string>
     <string name="rekom_badge_resmi">Layanan Resmi KUA Randudongkal</string>
-    <string name="rekom_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
 
     <string name="rekom_hero_title">Nikah di Luar Kecamatan</string>
     <string name="rekom_hero_desc">Bagi warga ber-KTP Randudongkal yang akan melangsungkan akad nikah di KUA kecamatan lain, cukup ambil surat rekomendasi (N2) di sini — tanpa perlu menunggu lama.</string>
@@ -431,7 +430,6 @@
 
     <string name="rekom_btn_unduh_blanko">Unduh Blanko</string>
     <string name="rekom_btn_konsultasi">Konsultasi</string>
-    <string name="rekom_bantuan_petugas">Butuh bantuan petugas? Chat via WhatsApp</string>
 
     <!-- Tab navigasi bawah khusus layar rekomendasi -->
     <string name="rekom_nav_daftar_nikah">Daftar Nikah</string>

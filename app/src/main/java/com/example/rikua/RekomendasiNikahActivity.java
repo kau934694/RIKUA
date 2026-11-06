@@ -143,9 +143,6 @@ public class RekomendasiNikahActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_konsultasi).setOnClickListener(v ->
                 startActivity(new Intent(this, ConsultationActivity.class)));
-
-        TextView tvBantuan = findViewById(R.id.tv_bantuan_petugas);
-        tvBantuan.setOnClickListener(v -> bukaWhatsAppKonsultasi());
     }
 
     /** Buka WhatsApp admin dengan pesan pra-isi konsultasi rekomendasi nikah. */
