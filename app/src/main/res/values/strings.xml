@@ -442,11 +442,8 @@
     <!-- ==================== Isbat Nikah Screen ==================== -->
     <string name="isbat_toolbar_title">Isbat Nikah</string>
     <string name="isbat_toolbar_subtitle">KUA Kec. Randudongkal</string>
-    <string name="isbat_badge_resmi">Layanan Resmi KUA Randudongkal</string>
-    <string name="isbat_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
     <string name="isbat_hero_title">Isbat Nikah Terpadu &amp; Mandiri</string>
     <string name="isbat_hero_desc">Pencatatan nikah bagi pasangan yang pernikahannya belum tercatat di KUA. Setelah permohonan ditetapkan oleh Pengadilan Agama, pernikahan dicatat resmi dan Buku Nikah diterbitkan.</string>
-    <string name="isbat_flow_summary">Sidang Pengadilan Agama → Buku Nikah Sah</string>
 
     <string name="isbat_kapan_title">Kapan Diperlukan?</string>
     <string name="isbat_kapan_subtitle">Isbat nikah diperlukan bila nikah Anda sah secara agama namun belum tercatat oleh negara.</string>
@@ -469,8 +466,6 @@
     <string name="isbat_berkas_4_desc">Latar biru, ukuran sesuai ketentuan PA</string>
 
     <string name="isbat_badge_wajib">WAJIB</string>
-    <string name="isbat_badge_fotokopi">FOTOKOPI</string>
-
     <string name="isbat_alur_title">Alur Proses 4 Langkah</string>
     <string name="isbat_alur_subtitle">Runtut dari permohonan hingga Buku Nikah terbit</string>
     <string name="isbat_alur_1_title">Ajukan Permohonan ke Pengadilan Agama Pemalang</string>
@@ -482,16 +477,11 @@
     <string name="isbat_alur_4_title">Bawa Penetapan ke KUA untuk Dicatat</string>
     <string name="isbat_alur_4_desc">Petugas KUA Randudongkal mencatat nikah dan menerbitkan Buku Nikah.</string>
 
-    <string name="isbat_biaya_title">Biaya di KUA: Bebas Biaya (Rp 0,-)</string>
-    <string name="isbat_biaya_desc">Pencatatan nikah dan penerbitan Buku Nikah di KUA setelah penetapan PA tidak dipungut biaya.</string>
-    <string name="isbat_biaya_footnote">Biaya perkara sidang di Pengadilan Agama mengikuti ketentuan peraturan perundang-undangan.</string>
-
     <string name="isbat_faq_question">Berapa lama proses pembuatan Buku Nikah di KUA?</string>
     <string name="isbat_faq_answer">Setelah salinan penetapan Pengadilan Agama diserahkan lengkap ke loket KUA, pencatatan dan penerbitan Buku Nikah umumnya selesai hari yang sama (15–60 menit) pada jam kerja, selama seluruh berkas sudah sesuai.</string>
 
-    <string name="isbat_btn_unduh_blanko">Unduh Blanko N3</string>
+    <string name="isbat_btn_unduh_blanko">Unduh Blanko</string>
     <string name="isbat_btn_konsultasi">Konsultasi</string>
-    <string name="isbat_bantuan_petugas">Butuh bantuan? Konsultasi langsung dengan petugas KUA</string>
     <string name="isbat_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Isbat Nikah.</string>
     <string name="isbat_blanko_info">Membuka daftar Blanko N1–N6 untuk formulir N3…</string>
     <string name="isbat_checklist_selesai">Bagus! Semua berkas utama sudah ditandai siap.</string>
@@ -499,13 +489,9 @@
     <!-- ==================== Duplikat Buku Nikah Screen ==================== -->
     <string name="dup_toolbar_title">Duplikat Buku Nikah</string>
     <string name="dup_toolbar_subtitle">KUA Kec. Randudongkal</string>
-    <string name="dup_badge_resmi">Layanan Resmi KUA Randudongkal</string>
-    <string name="dup_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
-    <string name="dup_hero_title">Penggantian Buku Nikah Sah</string>
+    <string name="dup_hero_title">Syarat Penggantian Buku Nikah Sah</string>
     <string name="dup_hero_desc">Buku nikah hilang atau rusak dapat digantikan dengan buku nikah duplikat yang sah dan berlaku sama seperti buku asli, diterbitkan kembali oleh KUA penerbit awal.</string>
-    <string name="dup_flow_summary">Buku hilang/rusak → Duplikat Sah Terbit</string>
 
-    <string name="dup_biaya_title">Biaya Duplikat di KUA</string>
     <string name="dup_biaya_desc">Penerbitan duplikat buku nikah karena hilang atau rusak tidak dipungut biaya (gratis).</string>
 
     <string name="dup_siap_title">Persyaratan Dokumen</string>
@@ -533,9 +519,6 @@
     <string name="dup_alur_3_desc">Petugas mencocokkan data Anda dengan register akta nikah dan sistem SIMKAH.</string>
     <string name="dup_alur_4_title">Penerbitan Duplikat Buku Nikah</string>
     <string name="dup_alur_4_desc">Duplikat buku nikah diterbitkan dan disahkan — Status: Selesai.</string>
-
-    <string name="dup_pungli_title">Layanan Tanpa Pungutan Liar</string>
-    <string name="dup_pungli_desc">Pengurusan duplikat buku nikah gratis total. Tolak segala bentuk biaya di luar ketentuan resmi.</string>
 
     <string name="dup_jam_title">Jam Layanan KUA</string>
     <string name="dup_btn_hubungi">Hubungi</string>

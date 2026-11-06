@@ -413,12 +413,6 @@
                                 style="@style/RekomChecklistDesc"
                                 android:text="@string/taukil_dok_2_desc" />
                         </LinearLayout>
-
-                        <TextView
-                            style="@style/IsbatBerkasBadge"
-                            android:background="@drawable/bg_badge_gray"
-                            android:text="@string/isbat_badge_fotokopi"
-                            android:textColor="@color/text_tertiary" />
                     </LinearLayout>
 
                     <!-- Dokumen 3 — KTP Wakil Wali / Penerima Kuasa -->

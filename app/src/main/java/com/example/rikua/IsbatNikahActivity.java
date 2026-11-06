@@ -302,7 +302,6 @@ public class IsbatNikahActivity extends AppCompatActivity {
         binding.btnKonsultasi.setOnClickListener(v ->
                 startActivity(new Intent(this, ConsultationActivity.class)));
 
-        binding.tvBantuanPetugas.setOnClickListener(v -> bukaWhatsAppKonsultasi());
     }
 
     /** Buka WhatsApp admin dengan pesan pra-isi konsultasi isbat nikah. */
