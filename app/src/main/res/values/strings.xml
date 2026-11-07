@@ -215,8 +215,6 @@
     <string name="facilities_help_title">Sarana Anda belum tercantum?</string>
     <string name="facilities_help_desc">Bantu kami memperbarui data. Hubungi petugas untuk pengusulan atau koreksi pendataan sarana keagamaan.</string>
     <string name="facilities_help_btn">Konsultasi Pendataan</string>
-    <string name="facilities_footer_note">KUA tidak memungut biaya melalui situs ini.</string>
-
     <!-- Facility item data -->
     <string name="facility_1_name">Masjid Besar Baitul Muttaqin</string>
     <string name="facility_1_category">Masjid Jami\'</string>

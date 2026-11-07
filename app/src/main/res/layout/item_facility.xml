@@ -5,12 +5,13 @@
     android:id="@+id/card_facility_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
     android:checkable="false"
-    app:strokeColor="@color/surface_card_border"
-    app:strokeWidth="1dp"
     app:cardBackgroundColor="@color/surface_white"
     app:cardCornerRadius="16dp"
-     app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:strokeColor="@color/surface_card_border"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,35 +19,27 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <!-- ===== Left accent border ===== -->
+        <!-- Border aksen kiri -->
         <View
             android:id="@+id/view_accent_strip"
             android:layout_width="5dp"
             android:layout_height="match_parent"
             android:background="@color/consult_primary" />
 
-        <!-- ===== Thumbnail ===== -->
-        <FrameLayout
-            android:id="@+id/frame_thumb"
+        <!-- Image / Thumbnail dari Database / Fallback Icon -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_thumb_icon"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="14dp"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/bg_icon_rounded_green">
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+            tools:src="@drawable/ic_mosque" />
 
-            <ImageView
-                android:id="@+id/iv_thumb_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/facility_thumb_desc"
-                android:src="@drawable/ic_mosque"
-                app:tint="@color/primary_forest" />
-        </FrameLayout>
-
-        <!-- ===== Content ===== -->
+        <!-- Content -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,7 +51,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- Name + category badge -->
+            <!-- Nama & Badge Kategori -->
             <TextView
                 android:id="@+id/tv_facility_name"
                 android:layout_width="match_parent"
@@ -85,7 +78,7 @@
                 android:textSize="11sp"
                 tools:text="Masjid Jami'" />
 
-            <!-- Location line -->
+            <!-- Lokasi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,7 +105,7 @@
                     tools:text="Randudongkal" />
             </LinearLayout>
 
-            <!-- Detail lines -->
+            <!-- Detail 1 (Jumlah Jamaah) -->
             <TextView
                 android:id="@+id/tv_facility_detail1"
                 android:layout_width="match_parent"
@@ -126,6 +119,7 @@
                 app:drawableTint="@color/primary_forest_light"
                 tools:text="Jamaah ±1.200 orang" />
 
+            <!-- Detail 2 (Keterangan/Alamat) -->
             <TextView
                 android:id="@+id/tv_facility_detail2"
                 android:layout_width="wrap_content"
@@ -139,7 +133,7 @@
                 android:paddingBottom="3dp"
                 android:textColor="@color/gold_dark"
                 android:textSize="11sp"
-                tools:text="Wakaf Bersertifikat" />
+                tools:text="Jl. Raya Randudongkal No. 04" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

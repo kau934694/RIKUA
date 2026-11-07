@@ -1,26 +1,22 @@
 package com.example.rikua;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Adapter untuk merender daftar sarana keagamaan pada {@link FacilitiesActivity}.
- * Mendukung pembaruan in-place melalui {@link #submitList(List)} ketika filter
- * (kategori / desa / teks) berubah.
- */
 public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.FacilityViewHolder> {
 
     public interface OnItemClickListener {
@@ -63,8 +59,7 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
     class FacilityViewHolder extends RecyclerView.ViewHolder {
         private final MaterialCardView card;
         private final View accentStrip;
-        private final FrameLayout thumbFrame;
-        private final ImageView thumbIcon;
+        private final ShapeableImageView thumbIcon;
         private final TextView name;
         private final TextView categoryBadge;
         private final TextView location;
@@ -75,7 +70,6 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
             super(itemView);
             card = itemView.findViewById(R.id.card_facility_item);
             accentStrip = itemView.findViewById(R.id.view_accent_strip);
-            thumbFrame = itemView.findViewById(R.id.frame_thumb);
             thumbIcon = itemView.findViewById(R.id.iv_thumb_icon);
             name = itemView.findViewById(R.id.tv_facility_name);
             categoryBadge = itemView.findViewById(R.id.tv_facility_category);
@@ -83,41 +77,46 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
             detail1 = itemView.findViewById(R.id.tv_facility_detail1);
             detail2 = itemView.findViewById(R.id.tv_facility_detail2);
         }
-void bind(FacilityItem item) {
+
+        void bind(FacilityItem item) {
             name.setText(item.getName());
             location.setText(item.getLocation());
             detail1.setText(item.getDetail1());
 
-            // Badge kategori
+            // Badge Kategori
             categoryBadge.setText(item.getCategoryLabel());
             categoryBadge.setBackgroundResource(item.getBadgeBgRes());
             categoryBadge.setTextColor(ContextCompat.getColor(
                     categoryBadge.getContext(), item.getBadgeTextColorRes()));
 
-            // Border aksen kiri
+            // Strip Akses Kiri
             accentStrip.setBackgroundColor(ContextCompat.getColor(
                     accentStrip.getContext(), item.getAccentColorRes()));
 
-            // Thumbnail / Gambar dari Database menggunakan Glide
-            thumbFrame.setBackgroundResource(item.getThumbBgRes());
-            
-            if (item.getImageUrl() != null && !item.getImageUrl().isEmpty()) {
-                Log.d("GLIDE_DEBUG", "Memuat gambar dari: " + item.getImageUrl());
-                
-                com.bumptech.glide.Glide.with(itemView.getContext())
-                        .load(item.getImageUrl())
-                        .placeholder(item.getThumbIconRes())
-                        .error(item.getThumbIconRes())
-                        .centerCrop()
-                        .into(thumbIcon);
+            // Handling Pembuatan Gambar dengan Glide
+            if (item.getImageUrl() != null && !item.getImageUrl().trim().isEmpty()) {
                 thumbIcon.clearColorFilter();
+                thumbIcon.setPadding(0, 0, 0, 0);
+
+                Log.d("GLIDE_DEBUG", "Memuat foto: " + item.getImageUrl());
+
+                Glide.with(itemView.getContext())
+                        .load(item.getImageUrl())
+                        .centerCrop()
+                        .placeholder(item.getThumbBgRes())
+                        .error(item.getThumbIconRes())
+                        .into(thumbIcon);
             } else {
                 thumbIcon.setImageResource(item.getThumbIconRes());
+                thumbIcon.setBackgroundResource(item.getThumbBgRes());
                 thumbIcon.setColorFilter(ContextCompat.getColor(
                         thumbIcon.getContext(), item.getThumbTintRes()));
+                
+                int paddingPx = (int) (12 * itemView.getContext().getResources().getDisplayMetrics().density);
+                thumbIcon.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
             }
 
-            // Detail kedua opsional
+            // Detail 2 (Keterangan)
             if (item.getDetail2() != null && !item.getDetail2().isEmpty()) {
                 detail2.setVisibility(View.VISIBLE);
                 detail2.setText(item.getDetail2());

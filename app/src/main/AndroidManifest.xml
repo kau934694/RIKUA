@@ -48,7 +48,7 @@
 
         <activity
             android:name=".FacilitiesActivity"
-            android:exported="false"
+            android:exported="true"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustResize" />
 
