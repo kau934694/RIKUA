@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ============================================================================
-     RIKUA — activity_wakaf.xml
-     Halaman "Wakaf & Kemasjidan" (ikrar wakaf via PPAIW) MD3
-     Palette: primary #005145 / #0f6b5c, container #a2f2de, secondary #795902 /
-              #fdd275, surface #f7f9ff, card #ffffff, border #bec9c5 @ 40%.
-    ============================================================================
-     Struktur:
-       DrawerLayout
-         └─ CoordinatorLayout
-              ├─ AppBarLayout + MaterialToolbar   (back | judul tengah | burger)
-              ├─ NestedScrollView (paddingBottom 220dp — bebas dock)
-              │    ├─ Meta & status banner : titik hijau + tanggal diperbarui
-              │    ├─ Hero / bento card     : ikon masjid, judul, subjudul,
-              │    │                          peran PPAIW
-              │    ├─ Tentang AIW           : fungsi hukum + strip regulasi
-              │    ├─ Berkas 1–3            : row bernomor (lingkar teal)
-              │    ├─ Timeline 4 langkah    : dashed + langkah-4 emas (Selesai)
-              │    └─ Info biaya            : banner "Layanan Tanpa Pungutan"
-              └─ layout_bottom_sticky  (dock aksi + teks bantuan + bottom nav)
-    ============================================================================
--->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -101,49 +79,6 @@
                 android:paddingStart="18dp"
                 android:paddingTop="14dp"
                 android:paddingEnd="18dp">
-
-                <!-- ============ 1. META & STATUS BANNER ============ -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_rekom_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="14dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="14dp"
-                    android:paddingBottom="10dp">
-
-                    <!-- Indikator layanan aktif: titik hijau + label -->
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/dot_status_online" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/wakaf_status_layanan"
-                        android:textColor="@color/badge_emerald_text"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="4dp"
-                        android:ellipsize="end"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="end|center_vertical"
-                        android:maxLines="1"
-                        android:text="@string/wakaf_diperbarui"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="10sp"
-                        app:drawableEndCompat="@drawable/ic_schedule"
-                        app:drawableTint="@color/text_tertiary" />
-                </LinearLayout>
 
                 <!-- ============ 2. HERO / SUMMARY BENTO CARD ============ -->
                 <LinearLayout
@@ -274,21 +209,6 @@
                         android:textColor="@color/text_primary"
                         android:textSize="17sp"
                         android:textStyle="bold" />
-
-                    <!-- Badge jumlah berkas -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_badge_teal"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingStart="10dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="3dp"
-                        android:text="@string/wakaf_siap_badge"
-                        android:textColor="@color/badge_teal_text"
-                        android:textSize="11sp" />
                 </LinearLayout>
 
                 <TextView
@@ -522,7 +442,7 @@
                     </com.google.android.material.card.MaterialCardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Langkah 4 — highlight sekunder emas (AIW terbit: Selesai) -->
+                <!-- Langkah 4 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -537,87 +457,25 @@
 
                     <com.google.android.material.card.MaterialCardView
                         style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_secondary_container"
+                        app:cardBackgroundColor="@color/md3_surface_card"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="0dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_4"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:strokeColor="@color/syarat_accent_gold"
-                        app:strokeWidth="1dp">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout style="@style/RekomStepCardBody">
 
                             <TextView
                                 style="@style/RekomStepTitle"
-                                android:text="@string/wakaf_langkah_4_title"
-                                android:textColor="@color/md3_secondary" />
+                                android:text="@string/wakaf_langkah_4_title" />
 
                             <TextView
                                 style="@style/RekomStepDesc"
-                                android:text="@string/wakaf_langkah_4_desc"
-                                android:textColor="@color/md3_secondary" />
+                                android:text="@string/wakaf_langkah_4_desc" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- ============ 6. INFO BOX BIAYA (TANPA PUNGUTAN) ============ -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_rekom_garansi_banner"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_wallet"
-                        app:tint="@color/md3_secondary" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/wakaf_pungli_title"
-                            android:textColor="@color/md3_secondary"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/wakaf_pungli_desc"
-                            android:textColor="@color/md3_secondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_badge_gold"
-                        android:fontFamily="sans-serif-black"
-                        android:paddingStart="10dp"
-                        android:paddingTop="5dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="@string/syarat_biaya_rp0"
-                        android:textColor="@color/md3_secondary"
-                        android:textSize="12sp" />
-                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -684,26 +542,6 @@
                         app:iconSize="18dp"
                         app:iconTint="@color/md3_on_primary" />
                 </LinearLayout>
-
-                <!-- Tautan bantuan petugas -> WhatsApp resmi -->
-                <TextView
-                    android:id="@+id/tv_bantuan_petugas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:drawablePadding="6dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="center_vertical"
-                    android:minHeight="32dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/wakaf_bantuan_petugas"
-                    android:textColor="@color/md3_primary"
-                    android:textSize="12sp"
-                    app:drawableStartCompat="@drawable/ic_help_center"
-                    app:drawableTint="@color/md3_primary" />
             </LinearLayout>
 
             <!-- Bottom Navigation Persistent (5 tab, Layanan aktif) -->

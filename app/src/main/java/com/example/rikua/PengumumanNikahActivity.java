@@ -99,7 +99,6 @@ public class PengumumanNikahActivity extends AppCompatActivity {
         setupWindowAndStatusBar();
         setupToolbar();
         setupDrawer();
-        setupPulseDot();
         setupJadwalList();
         setupSearch();
         setupFilterChips();
@@ -175,14 +174,6 @@ public class PengumumanNikahActivity extends AppCompatActivity {
     }
 
     /** Titik hijau "live status" berkedip halus (alpha 1.0 ↔ 0.25, terus-menerus). */
-    private void setupPulseDot() {
-        pulseAnimator = ObjectAnimator.ofFloat(binding.viewStatusDot, "alpha", 1f, 0.25f);
-        pulseAnimator.setDuration(900);
-        pulseAnimator.setRepeatCount(ObjectAnimator.INFINITE);
-        pulseAnimator.setRepeatMode(ObjectAnimator.REVERSE);
-        pulseAnimator.setInterpolator(new LinearInterpolator());
-        pulseAnimator.start();
-    }
 
     // =======================================================================
     // Daftar jadwal + muat data server + pencarian/filter
@@ -360,21 +351,10 @@ public class PengumumanNikahActivity extends AppCompatActivity {
     private void setupActionButtons() {
         binding.btnLihatSyarat.setOnClickListener(v ->
                 startActivity(new Intent(this, SyaratNikahActivity.class)));
-
-        binding.tvBantuanPetugas.setOnClickListener(v -> bukaWhatsAppKonsultasi());
     }
 
     /** Buka WhatsApp admin dengan pesan pra-isi sanggahan/pertanyaan pengumuman. */
-    private void bukaWhatsAppKonsultasi() {
-        try {
-            String pesan = Uri.encode(getString(R.string.peng_wa_message));
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://wa.me/" + ADMIN_WHATSAPP + "?text=" + pesan));
-            startActivity(intent);
-        } catch (Exception e) {
-            Toast.makeText(this, R.string.rekom_wa_unavailable, Toast.LENGTH_SHORT).show();
-        }
-    }
+  
 
     /**
      * Baca Intent mengikuti konvensi project: objek layanan (Serializable) sebagai

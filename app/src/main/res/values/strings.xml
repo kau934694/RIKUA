@@ -532,8 +532,6 @@
     <!-- ==================== Wakaf & Kemasjidan Screen ==================== -->
     <string name="wakaf_toolbar_title">Wakaf</string>
     <string name="wakaf_toolbar_subtitle">KUA Kec. Randudongkal</string>
-    <string name="wakaf_status_layanan">Layanan Kemasjidan &amp; Wakaf</string>
-    <string name="wakaf_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
 
     <string name="wakaf_hero_title">Layanan Wakaf &amp; Kemasjidan</string>
     <string name="wakaf_hero_subtitle">Ikrar wakaf dan bimbingan bagi nadzir</string>
@@ -544,7 +542,6 @@
     <string name="wakaf_aiw_regulasi">Landasan hukum: UU No. 41 Tahun 2004 tentang Wakaf</string>
 
     <string name="wakaf_siap_title">Yang Perlu Disiapkan</string>
-    <string name="wakaf_siap_badge">3 Berkas Utama</string>
     <string name="wakaf_siap_subtitle">Berkas berikut dibawa saat ikrar wakaf</string>
     <string name="wakaf_berkas_1_title">Identitas Wakif</string>
     <string name="wakaf_berkas_1_desc">KTP, Kartu Keluarga, dan surat persetujuan ahli waris bermaterai</string>
@@ -564,20 +561,13 @@
     <string name="wakaf_langkah_4_title">Penerbitan AIW / APAIW &amp; Sertifikat BPN</string>
     <string name="wakaf_langkah_4_desc">AIW/APAIW terbit, tanah wakaf didaftarkan ke BPN — Status: Selesai.</string>
 
-    <string name="wakaf_pungli_title">Layanan Tanpa Pungutan</string>
-    <string name="wakaf_pungli_desc">Pencatatan ikrar wakaf dan penerbitan AIW di KUA tidak dipungut biaya (Gratis Rp 0,-).</string>
 
     <string name="wakaf_btn_sarana">Sarana Keagamaan</string>
     <string name="wakaf_btn_konsultasi">Konsultasi</string>
-    <string name="wakaf_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
-    <string name="wakaf_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Wakaf &amp; Kemasjidan.</string>
 
     <!-- ==================== Wali Nikah Screen ==================== -->
     <string name="wali_toolbar_title">Wali Nikah</string>
     <string name="wali_toolbar_subtitle">KUA Kec. Randudongkal</string>
-    <string name="wali_badge_resmi">Layanan Resmi KUA Randudongkal</string>
-    <string name="wali_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
-
     <string name="wali_headline_title">Panduan Sah &amp; Terpercaya</string>
     <string name="wali_headline_desc">Siapa yang boleh menjadi wali dan kapan wali hakim digunakan.</string>
 
@@ -617,14 +607,11 @@
 
     <string name="wali_btn_syarat">Syarat Nikah</string>
     <string name="wali_btn_konsultasi">Konsultasi</string>
-    <string name="wali_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
-    <string name="wali_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai penentuan wali nikah.</string>
 
     <!-- ==================== Taukil Wali bil Kitabah Screen ==================== -->
     <string name="taukil_toolbar_title">Taukil Wali bil Kitabah</string>
     <string name="taukil_toolbar_subtitle">KUA Kec. Randudongkal</string>
-    <string name="taukil_badge_resmi">Layanan Resmi KUA Randudongkal</string>
-    <string name="taukil_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
+
 
     <string name="taukil_hero_label">Panduan Kepenghuluan</string>
     <string name="taukil_hero_title">Taukil Wali bil Kitabah</string>
@@ -662,19 +649,12 @@
     <string name="taukil_langkah_3_title">Verifikasi Petugas &amp; Pelaksanaan Akad</string>
     <string name="taukil_langkah_3_desc">Petugas memverifikasi keabsahan taukil, lalu wakil mengucapkan ijab kabul di hadapan penghulu.</string>
 
-    <string name="taukil_note_title">Konsultasi Gratis Tanpa Pungutan</string>
-    <string name="taukil_note_desc">Verifikasi surat taukil dan konsultasi kepenghuluan di KUA Kec. Randudongkal tidak dipungut biaya (Rp 0,-).</string>
 
     <string name="taukil_btn_wali">Lihat Wali Nikah</string>
     <string name="taukil_btn_konsultasi">Konsultasi</string>
-    <string name="taukil_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
-    <string name="taukil_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Taukil Wali bil Kitabah.</string>
-
     <!-- ==================== Pengumuman Kehendak Nikah Screen ==================== -->
     <string name="peng_toolbar_title">Pengumuman Kehendak Nikah</string>
     <string name="peng_toolbar_subtitle">KUA Kec. Randudongkal</string>
-    <string name="peng_transparansi">Transparansi Layanan Publik</string>
-    <string name="peng_diperbarui">Terakhir diperbarui: 1 Oktober 2026</string>
 
     <string name="peng_hero_title">Pengumuman Kehendak Nikah</string>
     <string name="peng_hero_desc">Daftar rencana akad nikah diumumkan terbuka untuk transparansi publik sesuai regulasi Kementerian Agama, agar masyarakat dapat memberikan sanggahan bila mengenal adanya halangan syar\u02bbi atau administratif.</string>
@@ -700,12 +680,7 @@
     <string name="peng_empty_title">Nama yang dicari tidak ditemukan</string>
     <string name="peng_empty_desc">Coba kata kunci lain atau pilih filter “Semua Jadwal” untuk melihat seluruh rencana akad.</string>
 
-    <string name="peng_readonly_title">Pengumuman Resmi — Hanya Dibaca</string>
-    <string name="peng_readonly_desc">Halaman ini bersifat read-only sebagai papan pengumuman kehendak nikah. Sanggahan dapat disampaikan langsung ke loket pelayanan KUA Kec. Randudongkal dengan membawa identitas pemohon.</string>
-
     <string name="peng_btn_syarat">Lihat Syarat Nikah</string>
-    <string name="peng_bantuan_petugas">Butuh bantuan? Konsultasi dengan petugas</string>
-    <string name="peng_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin menyampaikan sanggahan / bertanya tentang Pengumuman Kehendak Nikah.</string>
 
     <!-- ==================== Daftar Nikah: Pengantar (Langkah 1/6) ==================== -->
     <string name="daf_toolbar_title">Daftar Nikah: Pengantar</string>

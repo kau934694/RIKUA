@@ -1,4 +1,3 @@
-
 package com.example.rikua;
 
 import android.os.Bundle;
@@ -37,9 +36,9 @@ public class JadwalPernikahanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal_pernikahan);
 
-        progressJadwal = findViewById(R.id.progress_jadwal);
+/*progressJadwal = findViewById(R.id.progress_jadwal);
         tvStatusJadwal = findViewById(R.id.tv_status_jadwal);
-        rvJadwalPernikahan = findViewById(R.id.rv_jadwal_pernikahan);
+        rvJadwalPernikahan = findViewById(R.id.rv_jadwal_pernikahan);*/
 
         adapter = new JadwalPernikahanAdapter();
 
@@ -51,8 +50,13 @@ public class JadwalPernikahanActivity extends AppCompatActivity {
     }
 
     private void muatJadwal() {
-        progressJadwal.setVisibility(View.VISIBLE);
-        tvStatusJadwal.setText("Memuat jadwal pernikahan...");
+        if (progressJadwal != null) {
+            progressJadwal.setVisibility(View.VISIBLE);
+        }
+        if (tvStatusJadwal != null) {
+            tvStatusJadwal.setText("Memuat jadwal pernikahan...");
+            tvStatusJadwal.setVisibility(View.VISIBLE);
+        }
 
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -127,10 +131,15 @@ public class JadwalPernikahanActivity extends AppCompatActivity {
                     return;
                 }
 
-                progressJadwal.setVisibility(View.GONE);
+                if (progressJadwal != null) {
+                    progressJadwal.setVisibility(View.GONE);
+                }
 
                 if (pesanError != null) {
-                    tvStatusJadwal.setText(pesanError);
+                    if (tvStatusJadwal != null) {
+                        tvStatusJadwal.setText(pesanError);
+                        tvStatusJadwal.setVisibility(View.VISIBLE);
+                    }
                     android.util.Log.e(
                             "JadwalPernikahan", pesanError);
                     return;
@@ -138,12 +147,14 @@ public class JadwalPernikahanActivity extends AppCompatActivity {
 
                 adapter.setData(dataHasil);
 
-                if (dataHasil.isEmpty()) {
-                    tvStatusJadwal.setText(
-                            "Belum ada jadwal pernikahan.");
-                    tvStatusJadwal.setVisibility(View.VISIBLE);
-                } else {
-                    tvStatusJadwal.setVisibility(View.GONE);
+                if (tvStatusJadwal != null) {
+                    if (dataHasil.isEmpty()) {
+                        tvStatusJadwal.setText(
+                                "Belum ada jadwal pernikahan.");
+                        tvStatusJadwal.setVisibility(View.VISIBLE);
+                    } else {
+                        tvStatusJadwal.setVisibility(View.GONE);
+                    }
                 }
             });
         }).start();

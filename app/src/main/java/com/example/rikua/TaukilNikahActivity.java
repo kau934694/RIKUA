@@ -151,22 +151,7 @@ public class TaukilNikahActivity extends AppCompatActivity {
 
         binding.btnKonsultasi.setOnClickListener(v ->
                 startActivity(new Intent(this, ConsultationActivity.class)));
-
-        binding.tvBantuanPetugas.setOnClickListener(v -> bukaWhatsAppKonsultasi());
     }
-
-    /** Buka WhatsApp admin dengan pesan pra-isi konsultasi taukil wali. */
-    private void bukaWhatsAppKonsultasi() {
-        try {
-            String pesan = Uri.encode(getString(R.string.taukil_wa_message));
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://wa.me/" + ADMIN_WHATSAPP + "?text=" + pesan));
-            startActivity(intent);
-        } catch (Exception e) {
-            Toast.makeText(this, R.string.rekom_wa_unavailable, Toast.LENGTH_SHORT).show();
-        }
-    }
-
     /**
      * Baca Intent mengikuti konvensi project: objek layanan (Serializable) sebagai
      * sumber utama, fallback ke extra String. Judul dari pengantar dipakai

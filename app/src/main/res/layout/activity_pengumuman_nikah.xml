@@ -3,21 +3,6 @@
     ============================================================================
      RIKUA — activity_pengumuman_nikah.xml
      Halaman "Pengumuman Kehendak Nikah" (uji publik rencana akad) MD3
-     Palette: primary #005145 / #0f6b5c, container #a2f2de, secondary #795902 /
-              #fdd275, surface #f7f9ff, card #ffffff, border #bec9c5 @ 40%.
-    ============================================================================
-     Struktur:
-       DrawerLayout
-         └─ CoordinatorLayout
-              ├─ AppBarLayout + MaterialToolbar   (back | judul tengah | burger)
-              ├─ NestedScrollView (paddingBottom 220dp — bebas dock)
-              │    ├─ Banner transparansi : titik hijau berkedip + diperbarui
-              │    ├─ Hero card           : judul, deskripsi, info petugas
-              │    ├─ Pencarian + chips   : et_search + 4 chip filter tunggal
-              │    ├─ rv_pengumuman       : kartu jadwal (adapter)
-              │    ├─ layout_empty_state  : preview saat data tak ditemukan
-              │    └─ Notice legal        : papan pengumuman read-only + sanggah
-              └─ layout_bottom_sticky  (tombol syarat nikah + bantuan + nav)
     ============================================================================
 -->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +20,7 @@
         android:layout_height="match_parent"
         android:background="@color/md3_background">
 
-        <!-- =================== TOP APP BAR (STICKY) =================== -->
+        <!-- TOP APP BAR -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -55,7 +40,6 @@
                 app:navigationIcon="@drawable/ic_arrow_back"
                 app:navigationIconTint="@color/md3_on_primary">
 
-                <!-- Judul tengah + subjudul KUA (custom center view) -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,7 +69,7 @@
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- =================== SCROLLABLE BODY =================== -->
+        <!-- SCROLLABLE BODY -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_scroll"
             android:layout_width="match_parent"
@@ -103,51 +87,7 @@
                 android:paddingTop="14dp"
                 android:paddingEnd="18dp">
 
-                <!-- ============ 1. TRANSPARENCY & STATUS BANNER ============ -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_rekom_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="14dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="14dp"
-                    android:paddingBottom="10dp">
-
-                    <!-- Titik hijau berkedip (live status, animasi dari Activity) -->
-                    <View
-                        android:id="@+id/view_status_dot"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/dot_status_online" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/peng_transparansi"
-                        android:textColor="@color/badge_emerald_text"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="4dp"
-                        android:ellipsize="end"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="end|center_vertical"
-                        android:maxLines="1"
-                        android:text="@string/peng_diperbarui"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="10sp"
-                        app:drawableEndCompat="@drawable/ic_schedule"
-                        app:drawableTint="@color/text_tertiary" />
-                </LinearLayout>
-
-                <!-- ============ 2. HERO / INSTITUTIONAL NOTICE ============ -->
+                <!-- HERO CARD -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -174,7 +114,6 @@
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
-                    <!-- Info: data ditampilkan langsung oleh petugas KUA -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -194,7 +133,7 @@
                         app:drawableTint="@color/md3_info_blue_text" />
                 </LinearLayout>
 
-                <!-- ============ 3. SEARCH FIELD ============ -->
+                <!-- SEARCH FIELD -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -245,7 +184,7 @@
                         tools:visibility="visible" />
                 </LinearLayout>
 
-                <!-- ============ 4. STATUS FILTER CHIPS ============ -->
+                <!-- FILTER CHIPS -->
                 <HorizontalScrollView
                     android:id="@+id/chip_scroll"
                     android:layout_width="match_parent"
@@ -297,7 +236,7 @@
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
-                <!-- ============ 5. DAFTAR RENCANA AKAD ============ -->
+                <!-- DAFTAR RENCANA AKAD -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -329,7 +268,7 @@
                     tools:itemCount="3"
                     tools:listitem="@layout/item_pengumuman_jadwal" />
 
-                <!-- ============ 6. EMPTY STATE PREVIEW BOX ============ -->
+                <!-- EMPTY STATE -->
                 <LinearLayout
                     android:id="@+id/layout_empty_state"
                     android:layout_width="match_parent"
@@ -376,54 +315,10 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- ============ 7. READ-ONLY LEGAL PUBLIC NOTICE ============ -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_notice_amber"
-                    android:orientation="vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_policy_shield"
-                            app:tint="@color/badge_amber_text" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/peng_readonly_title"
-                            android:textColor="@color/badge_amber_text"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:lineSpacingExtra="2dp"
-                        android:text="@string/peng_readonly_desc"
-                        android:textColor="@color/badge_amber_text"
-                        android:textSize="12sp" />
-                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- ============ STICKY BOTTOM: DOCK AKSI + BOTTOM NAV ============ -->
+        <!-- STICKY BOTTOM DOCK -->
         <LinearLayout
             android:id="@+id/layout_bottom_sticky"
             android:layout_width="match_parent"
@@ -433,7 +328,6 @@
             android:elevation="10dp"
             android:orientation="vertical">
 
-            <!-- Contextual action tray -->
             <LinearLayout
                 android:id="@+id/layout_action_panel"
                 android:layout_width="match_parent"
@@ -459,29 +353,8 @@
                     app:iconGravity="start"
                     app:iconSize="18dp"
                     app:iconTint="@color/md3_on_primary" />
-
-                <!-- Tautan bantuan petugas -> WhatsApp resmi -->
-                <TextView
-                    android:id="@+id/tv_bantuan_petugas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:drawablePadding="6dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="center_vertical"
-                    android:minHeight="32dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/peng_bantuan_petugas"
-                    android:textColor="@color/md3_primary"
-                    android:textSize="12sp"
-                    app:drawableStartCompat="@drawable/ic_help_center"
-                    app:drawableTint="@color/md3_primary" />
             </LinearLayout>
 
-            <!-- Bottom Navigation Persistent (5 tab, Layanan aktif) -->
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
@@ -497,7 +370,6 @@
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- =================== NAVIGATION DRAWER =================== -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="wrap_content"
