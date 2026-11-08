@@ -54,7 +54,7 @@ import java.util.List;
  */
 public class FacilitiesActivity extends AppCompatActivity 
         implements FacilityAdapter.OnItemClickListener {
-private static final String API_URL = "http://192.168.1.4/rikua_api/get_sarana.php";
+private static final String API_URL = "http://192.168.1.5/rikua_api/get_sarana.php";
 
     // State filter
     private String currentCategory = null; // null = "Semua"
@@ -116,24 +116,12 @@ private static final String API_URL = "http://192.168.1.4/rikua_api/get_sarana.p
         }
     }
 
-    // ==================== TOOLBAR ====================
-    private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> {
-            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                getSupportFragmentManager().popBackStack();
-            } else {
-                finish();
-            }
-        });
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_open_drawer) {
-                toggleDrawer();
-                return true;
-            }
-            return false;
-        });
+private void setupToolbar() {
+    View btnMenu = findViewById(R.id.btn_menu_drawer);
+    if (btnMenu != null) {
+        btnMenu.setOnClickListener(v -> toggleDrawer());
     }
+}
 
     private void toggleDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
@@ -197,10 +185,10 @@ private static final String API_URL = "http://192.168.1.4/rikua_api/get_sarana.p
                         String id = String.valueOf(obj.optInt("id", 0));
                         String namaFileGambar = obj.optString("gambar", "");
                         
-                        // PERBAIKAN 1: Sesuaikan IP gambar dengan IP server laptop (192.168.1.4)
+                        // PERBAIKAN 1: Sesuaikan IP gambar dengan IP server laptop (192.168.1.5)
                         String imageUrl = "";
                         if (!namaFileGambar.isEmpty()) {
-                            imageUrl = "http://192.168.1.4/rikua_api/uploads/" + namaFileGambar;
+                            imageUrl = "http://192.168.1.5/rikua_api/uploads/" + namaFileGambar;
                         }
 
                         String namaSarana = obj.optString("nama_sarana", "-");

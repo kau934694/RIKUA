@@ -24,7 +24,7 @@ import java.util.List;
 public class JadwalPernikahanActivity extends AppCompatActivity {
 
     private static final String API_URL =
-            "http://192.168.1.4/rikua_api/get_pengumuman.php?semua=1";
+            "http://192.168.1.5/rikua_api/get_pengumuman.php?semua=1";
 
     private ProgressBar progressJadwal;
     private TextView tvStatusJadwal;

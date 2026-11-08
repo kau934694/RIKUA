@@ -60,7 +60,7 @@ import java.util.regex.Pattern;
 public class DataCalonIstriActivity extends AppCompatActivity {
 
     /** Pendaftaran mandiri lewat portal SIMKAH Kemenag (menu drawer). */
-    private static final String API_URL = "http://192.168.1.4/rikua_api/get_calon_pengantin.php";
+    private static final String API_URL = "http://192.168.1.5/rikua_api/get_calon_pengantin.php";
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
     /** NIK: tepat 16 digit angka. */

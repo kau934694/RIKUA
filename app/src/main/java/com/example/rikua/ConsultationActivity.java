@@ -49,7 +49,7 @@ public class ConsultationActivity extends AppCompatActivity
     private static final String WA_BASE = "https://wa.me/";
 
     // URL API PHP Anda (Ganti dengan IPv4 laptop Anda yang terhubung dalam satu WiFi)
-    private static final String API_URL = "http://192.168.1.4/rikua_api/get_petugas.php";
+    private static final String API_URL = "http://192.168.1.5/rikua_api/get_petugas.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
          getDelegate().setLocalNightMode(
@@ -91,22 +91,11 @@ public class ConsultationActivity extends AppCompatActivity
 
     // ==================== TOOLBAR ====================
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> {
-            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                getSupportFragmentManager().popBackStack();
-            } else {
-                finish();
-            }
-        });
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_open_drawer) {
-                toggleDrawer();
-                return true;
-            }
-            return false;
-        });
+    View btnMenu = findViewById(R.id.btn_menu_drawer);
+    if (btnMenu != null) {
+        btnMenu.setOnClickListener(v -> toggleDrawer());
     }
+}
 
     private void toggleDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {

@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
     /** Endpoint kuota akad. Ganti IP bila IP laptop berubah. */
-    private static final String API_KUOTA = "http://192.168.1.4/rikua_api/get_kuota.php";
+    private static final String API_KUOTA = "http://192.168.1.5/rikua_api/get_kuota.php";
 
     /**
      * Saat true, pendaftaran berstatus 'draf' ikut dihitung (untuk uji coba).
@@ -80,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout layoutSearchResults;
     // Data fasilitas untuk pencarian global
 private static final String URL_SARANA =
-        "http://192.168.1.4/rikua_api/get_sarana.php";
+        "http://192.168.1.5/rikua_api/get_sarana.php";
 
 private static final String URL_GAMBAR_SARANA =
-        "http://192.168.1.4/rikua_api/uploads/";
+        "http://192.168.1.5/rikua_api/uploads/";
 
 private final List<FacilityItem> daftarFasilitasGlobal =
         new ArrayList<>();
@@ -682,7 +682,7 @@ private int dp(int value) {
     return (int) (value * getResources().getDisplayMetrics().density);
 }
 private static final String URL_LAYANAN =
-        "http://192.168.1.4/rikua_api/get_layanan.php";
+        "http://192.168.1.5/rikua_api/get_layanan.php";
 
 private final List<ServiceItem> daftarLayananFilter = new ArrayList<>();
 

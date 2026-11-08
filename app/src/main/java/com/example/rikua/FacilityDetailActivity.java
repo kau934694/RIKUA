@@ -50,7 +50,7 @@ public class FacilityDetailActivity extends AppCompatActivity {
 
     // Basis endpoint detail (Laragon). Mengikuti host API direktori sarana.
     private static final String DETAIL_API_URL =
-            "http://192.168.1.4/rikua_api/get_sarana_detail.php";
+            "http://192.168.1.5/rikua_api/get_sarana_detail.php";
     // Nomor WhatsApp admin KUA Randudongkal (konsultasi kemasjidan & wakaf).
     private static final String ADMIN_WHATSAPP = "6281234567890";
 

@@ -44,8 +44,8 @@ import java.util.List;
 public class BlankoActivity extends AppCompatActivity
         implements BlankoAdapter.OnDownloadClickListener {
 
-    private static final String API_URL = "http://192.168.1.4/rikua_api/get_blanko.php";
-    private static final String BASE_FILE_URL = "http:// 192.168.1.4/rikua_api/uploads/blanko/";
+    private static final String API_URL = "http://192.168.1.5/rikua_api/get_blanko.php";
+    private static final String BASE_FILE_URL = "http:// 192.168.1.5/rikua_api/uploads/blanko/";
 
     private final List<BlankoItem> blankoList = new ArrayList<>();
     private BlankoAdapter adapter;
@@ -92,16 +92,11 @@ public class BlankoActivity extends AppCompatActivity
 
     // ==================== TOOLBAR ====================
     private void setupToolbar() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
-        toolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_open_drawer) {
-                toggleDrawer();
-                return true;
-            }
-            return false;
-        });
+    View btnMenu = findViewById(R.id.btn_menu_drawer);
+    if (btnMenu != null) {
+        btnMenu.setOnClickListener(v -> toggleDrawer());
     }
+}
 
     private void toggleDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
@@ -143,122 +138,107 @@ public class BlankoActivity extends AppCompatActivity
      * pada background thread, lalu update UI via runOnUiThread().
      */
     private void fetchBlankoData() {
-        showLoading(true);
+    showLoading(true);
 
-        new Thread(() -> {
-            HttpURLConnection conn = null;
-            try {
-                URL url = new URL(API_URL);
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setConnectTimeout(8000);
-                conn.setReadTimeout(8000);
-                conn.connect();
+    new Thread(() -> {
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(API_URL);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(8000);
+            conn.setReadTimeout(8000);
+            conn.connect();
 
-                int responseCode = conn.getResponseCode();
-                if (responseCode != HttpURLConnection.HTTP_OK) {
-                    throw new Exception("Server merespon dengan kode: " + responseCode);
-                }
-
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                // Parse JSON
-                JSONObject jsonResponse = new JSONObject(response.toString());
-                String status = jsonResponse.optString("status", "error");
-
-                if (!status.equals("success")) {
-                    String msg = jsonResponse.optString("message", "Data tidak tersedia.");
-                    throw new Exception(msg);
-                }
-
-                JSONArray dataArray = jsonResponse.optJSONArray("data");
-                if (dataArray == null || dataArray.length() == 0) {
-                    throw new Exception("Tidak ada data blanko tersedia.");
-                }
-
-                List<BlankoItem> fetched = new ArrayList<>();
-                for (int i = 0; i < dataArray.length(); i++) {
-                    JSONObject obj = dataArray.getJSONObject(i);
-
-                    String id = obj.optString("id", String.valueOf(i + 1));
-                    String kode = obj.optString("kode", "N" + (i + 1));
-                    String judul = obj.optString("judul", "Blanko " + kode);
-                    String deskripsi = obj.optString("deskripsi", "Formulir resmi KUA model " + kode);
-                    String fileSize = obj.optString("file_size", "-");
-                    String kategori = obj.optString("kategori", "Wajib");
-
-                    // file_url bisa berupa nama file saja atau URL lengkap
-                   String fileUrlRaw = obj.optString("file_url", "");
-    String fileUrl;
-    if (fileUrlRaw.startsWith("http")) {
-        // Opsional: Jika ingin memastikan IP selalu mengikuti BASE_FILE_URL yang aktif
-        // Anda bisa mengganti domain/IP lama dengan BASE_FILE_URL jika diperlukan.
-        fileUrl = fileUrlRaw;
-    } else if (!fileUrlRaw.isEmpty()) {
-        fileUrl = BASE_FILE_URL + fileUrlRaw;
-    } else {
-        fileUrl = BASE_FILE_URL + kode.toLowerCase() + ".pdf";
-    }
-    
-    // Encode spasi dan karakter khusus agar bisa dibaca oleh Intent Android
-    fileUrl = fileUrl.replace(" ", "%20");
-
-                    fetched.add(new BlankoItem(id, kode, judul, deskripsi,
-                            fileSize, kategori, fileUrl));
-                }
-
-                // Update UI di Main Thread
-                runOnUiThread(() -> {
-                    showLoading(false);
-                    blankoList.clear();
-                    blankoList.addAll(fetched);
-                    adapter.submitList(blankoList);
-                    rvBlanko.setVisibility(View.VISIBLE);
-                    layoutError.setVisibility(View.GONE);
-                });
-
-            } catch (Exception e) {
-                final String errorMsg = e.getMessage() != null
-                        ? e.getMessage() : "Gagal terhubung ke server. Periksa koneksi internet Anda.";
-
-                runOnUiThread(() -> {
-                    showLoading(false);
-                    rvBlanko.setVisibility(View.GONE);
-                    layoutError.setVisibility(View.VISIBLE);
-                    tvErrorMessage.setText(errorMsg);
-                });
-            } finally {
-                if (conn != null) conn.disconnect();
+            int responseCode = conn.getResponseCode();
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                throw new Exception("Server merespon dengan kode: " + responseCode);
             }
-        }).start();
-    }
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // Parse JSON
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            String status = jsonResponse.optString("status", "error");
+
+            if (!status.equals("success")) {
+                String msg = jsonResponse.optString("message", "Data tidak tersedia.");
+                throw new Exception(msg);
+            }
+
+            JSONArray dataArray = jsonResponse.optJSONArray("data");
+            if (dataArray == null || dataArray.length() == 0) {
+                throw new Exception("Tidak ada data blanko tersedia.");
+            }
+
+            List<BlankoItem> fetched = new ArrayList<>();
+            for (int i = 0; i < dataArray.length(); i++) {
+                JSONObject obj = dataArray.getJSONObject(i);
+
+                String id = obj.optString("id", String.valueOf(i + 1));
+                String kode = obj.optString("kode", "N" + (i + 1));
+                String judul = obj.optString("judul", "Blanko " + kode);
+                String deskripsi = obj.optString("deskripsi", "Formulir resmi KUA model " + kode);
+                String fileSize = obj.optString("file_size", "-");
+                String kategori = obj.optString("kategori", "Wajib");
+
+                // Langsung ambil URL Google Drive dari JSON tanpa penggabungan BASE_FILE_URL
+                String fileUrl = obj.optString("file_url", "").trim();
+
+                fetched.add(new BlankoItem(id, kode, judul, deskripsi,
+                        fileSize, kategori, fileUrl));
+            }
+
+            // Update UI di Main Thread
+            runOnUiThread(() -> {
+                showLoading(false);
+                blankoList.clear();
+                blankoList.addAll(fetched);
+                adapter.submitList(blankoList);
+                rvBlanko.setVisibility(View.VISIBLE);
+                layoutError.setVisibility(View.GONE);
+            });
+
+        } catch (Exception e) {
+            final String errorMsg = e.getMessage() != null
+                    ? e.getMessage() : "Gagal terhubung ke server. Periksa koneksi internet Anda.";
+
+            runOnUiThread(() -> {
+                showLoading(false);
+                rvBlanko.setVisibility(View.GONE);
+                layoutError.setVisibility(View.VISIBLE);
+                tvErrorMessage.setText(errorMsg);
+            });
+        } finally {
+            if (conn != null) conn.disconnect();
+        }
+    }).start();
+}
 
     // ==================== DOWNLOAD ACTION ====================
  @Override
-    public void onDownloadClick(BlankoItem item) {
-        String urlString = item.getFileUrl();
-        if (urlString == null || urlString.isEmpty()) {
-            showToast("File belum tersedia untuk: " + item.getJudul());
-            return;
-        }
-
-        try {
-            // Pastikan spasi di-encode dengan aman
-            String encodedUrl = urlString.replace(" ", "%20");
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(encodedUrl));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (Exception e) {
-            showToast("Tidak dapat membuka file PDF.");
-        }
+public void onDownloadClick(BlankoItem item) {
+    String urlString = item.getFileUrl();
+    if (urlString == null || urlString.isEmpty()) {
+        showToast("File belum tersedia untuk: " + item.getJudul());
+        return;
     }
+
+    try {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    } catch (Exception e) {
+        showToast("Tidak dapat membuka link Google Drive.");
+    }
+}
 
     // ==================== BOTTOM NAVIGATION ====================
     private void setupBottomNavigation() {

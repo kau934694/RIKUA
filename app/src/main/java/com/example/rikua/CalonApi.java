@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class CalonApi {
 
     public static final String URL_CALON =
-            "http://192.168.1.4/rikua_api/get_calon_pengantin.php";
+            "http://192.168.1.5/rikua_api/get_calon_pengantin.php";
 
     private static final Handler UI = new Handler(Looper.getMainLooper());
 
