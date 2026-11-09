@@ -35,14 +35,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * BlankoActivity — Halaman "Unduh Blanko" RIKUA KUA Kec. Randudongkal.
- *
- * Menampilkan daftar formulir resmi N1–N6 yang diambil dari API PHP
- * via HttpURLConnection pada background thread.
- */
 public class BlankoActivity extends AppCompatActivity
         implements BlankoAdapter.OnDownloadClickListener {
+
+    private static final int CURRENT_TAB_INDEX = 4; // Blanko = 4
 
     private static final String API_URL = "http://192.168.1.5/rikua_api/get_blanko.php";
     private static final String BASE_FILE_URL = "http:// 192.168.1.5/rikua_api/uploads/blanko/";
@@ -69,7 +65,6 @@ public class BlankoActivity extends AppCompatActivity
         fetchBlankoData();
     }
 
-    // ==================== WINDOW / STATUS BAR ====================
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
@@ -90,13 +85,12 @@ public class BlankoActivity extends AppCompatActivity
         }
     }
 
-    // ==================== TOOLBAR ====================
     private void setupToolbar() {
-    View btnMenu = findViewById(R.id.btn_menu_drawer);
-    if (btnMenu != null) {
-        btnMenu.setOnClickListener(v -> toggleDrawer());
+        View btnMenu = findViewById(R.id.btn_menu_drawer);
+        if (btnMenu != null) {
+            btnMenu.setOnClickListener(v -> toggleDrawer());
+        }
     }
-}
 
     private void toggleDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
@@ -106,7 +100,6 @@ public class BlankoActivity extends AppCompatActivity
         }
     }
 
-    // ==================== INIT VIEWS ====================
     private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
         rvBlanko = findViewById(R.id.rv_blanko);
@@ -121,179 +114,167 @@ public class BlankoActivity extends AppCompatActivity
             return true;
         });
 
-        // Retry button
         findViewById(R.id.btn_retry).setOnClickListener(v -> fetchBlankoData());
     }
 
-    // ==================== RECYCLER ====================
     private void setupRecyclerView() {
         adapter = new BlankoAdapter(this);
         rvBlanko.setLayoutManager(new LinearLayoutManager(this));
         rvBlanko.setAdapter(adapter);
     }
 
-    // ==================== NETWORK FETCH ====================
-    /**
-     * Mengambil data blanko dari endpoint PHP menggunakan HttpURLConnection
-     * pada background thread, lalu update UI via runOnUiThread().
-     */
     private void fetchBlankoData() {
-    showLoading(true);
+        showLoading(true);
 
-    new Thread(() -> {
-        HttpURLConnection conn = null;
-        try {
-            URL url = new URL(API_URL);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(8000);
-            conn.setReadTimeout(8000);
-            conn.connect();
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                URL url = new URL(API_URL);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(8000);
+                conn.setReadTimeout(8000);
+                conn.connect();
 
-            int responseCode = conn.getResponseCode();
-            if (responseCode != HttpURLConnection.HTTP_OK) {
-                throw new Exception("Server merespon dengan kode: " + responseCode);
+                int responseCode = conn.getResponseCode();
+                if (responseCode != HttpURLConnection.HTTP_OK) {
+                    throw new Exception("Server merespon dengan kode: " + responseCode);
+                }
+
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(conn.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+
+                JSONObject jsonResponse = new JSONObject(response.toString());
+                String status = jsonResponse.optString("status", "error");
+
+                if (!status.equals("success")) {
+                    String msg = jsonResponse.optString("message", "Data tidak tersedia.");
+                    throw new Exception(msg);
+                }
+
+                JSONArray dataArray = jsonResponse.optJSONArray("data");
+                if (dataArray == null || dataArray.length() == 0) {
+                    throw new Exception("Tidak ada data blanko tersedia.");
+                }
+
+                List<BlankoItem> fetched = new ArrayList<>();
+                for (int i = 0; i < dataArray.length(); i++) {
+                    JSONObject obj = dataArray.getJSONObject(i);
+
+                    String id = obj.optString("id", String.valueOf(i + 1));
+                    String kode = obj.optString("kode", "N" + (i + 1));
+                    String judul = obj.optString("judul", "Blanko " + kode);
+                    String deskripsi = obj.optString("deskripsi", "Formulir resmi KUA model " + kode);
+                    String fileSize = obj.optString("file_size", "-");
+                    String kategori = obj.optString("kategori", "Wajib");
+                    String fileUrl = obj.optString("file_url", "").trim();
+
+                    fetched.add(new BlankoItem(id, kode, judul, deskripsi,
+                            fileSize, kategori, fileUrl));
+                }
+
+                runOnUiThread(() -> {
+                    showLoading(false);
+                    blankoList.clear();
+                    blankoList.addAll(fetched);
+                    adapter.submitList(blankoList);
+                    rvBlanko.setVisibility(View.VISIBLE);
+                    layoutError.setVisibility(View.GONE);
+                });
+
+            } catch (Exception e) {
+                final String errorMsg = e.getMessage() != null
+                        ? e.getMessage() : "Gagal terhubung ke server. Periksa koneksi internet Anda.";
+
+                runOnUiThread(() -> {
+                    showLoading(false);
+                    rvBlanko.setVisibility(View.GONE);
+                    layoutError.setVisibility(View.VISIBLE);
+                    tvErrorMessage.setText(errorMsg);
+                });
+            } finally {
+                if (conn != null) conn.disconnect();
             }
+        }).start();
+    }
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-            reader.close();
-
-            // Parse JSON
-            JSONObject jsonResponse = new JSONObject(response.toString());
-            String status = jsonResponse.optString("status", "error");
-
-            if (!status.equals("success")) {
-                String msg = jsonResponse.optString("message", "Data tidak tersedia.");
-                throw new Exception(msg);
-            }
-
-            JSONArray dataArray = jsonResponse.optJSONArray("data");
-            if (dataArray == null || dataArray.length() == 0) {
-                throw new Exception("Tidak ada data blanko tersedia.");
-            }
-
-            List<BlankoItem> fetched = new ArrayList<>();
-            for (int i = 0; i < dataArray.length(); i++) {
-                JSONObject obj = dataArray.getJSONObject(i);
-
-                String id = obj.optString("id", String.valueOf(i + 1));
-                String kode = obj.optString("kode", "N" + (i + 1));
-                String judul = obj.optString("judul", "Blanko " + kode);
-                String deskripsi = obj.optString("deskripsi", "Formulir resmi KUA model " + kode);
-                String fileSize = obj.optString("file_size", "-");
-                String kategori = obj.optString("kategori", "Wajib");
-
-                // Langsung ambil URL Google Drive dari JSON tanpa penggabungan BASE_FILE_URL
-                String fileUrl = obj.optString("file_url", "").trim();
-
-                fetched.add(new BlankoItem(id, kode, judul, deskripsi,
-                        fileSize, kategori, fileUrl));
-            }
-
-            // Update UI di Main Thread
-            runOnUiThread(() -> {
-                showLoading(false);
-                blankoList.clear();
-                blankoList.addAll(fetched);
-                adapter.submitList(blankoList);
-                rvBlanko.setVisibility(View.VISIBLE);
-                layoutError.setVisibility(View.GONE);
-            });
-
-        } catch (Exception e) {
-            final String errorMsg = e.getMessage() != null
-                    ? e.getMessage() : "Gagal terhubung ke server. Periksa koneksi internet Anda.";
-
-            runOnUiThread(() -> {
-                showLoading(false);
-                rvBlanko.setVisibility(View.GONE);
-                layoutError.setVisibility(View.VISIBLE);
-                tvErrorMessage.setText(errorMsg);
-            });
-        } finally {
-            if (conn != null) conn.disconnect();
+    @Override
+    public void onDownloadClick(BlankoItem item) {
+        String urlString = item.getFileUrl();
+        if (urlString == null || urlString.isEmpty()) {
+            showToast("File belum tersedia untuk: " + item.getJudul());
+            return;
         }
-    }).start();
-}
 
-    // ==================== DOWNLOAD ACTION ====================
- @Override
-public void onDownloadClick(BlankoItem item) {
-    String urlString = item.getFileUrl();
-    if (urlString == null || urlString.isEmpty()) {
-        showToast("File belum tersedia untuk: " + item.getJudul());
-        return;
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (Exception e) {
+            showToast("Tidak dapat membuka link Google Drive.");
+        }
     }
 
-    try {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    } catch (Exception e) {
-        showToast("Tidak dapat membuka link Google Drive.");
-    }
-}
-
-    // ==================== BOTTOM NAVIGATION ====================
     private void setupBottomNavigation() {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setSelectedItemId(R.id.menu_forms);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_forms) {
-                return true; // Already here
+                return true; 
             } else if (id == R.id.menu_home) {
-                navigateTo(MainActivity.class);
+                navigateTo(MainActivity.class, 0);
                 return true;
             } else if (id == R.id.menu_services) {
-                navigateTo(ServicesActivity.class);
+                navigateTo(ServicesActivity.class, 1);
                 return true;
             } else if (id == R.id.menu_consultation) {
-                navigateTo(ConsultationActivity.class);
+                navigateTo(ConsultationActivity.class, 2);
                 return true;
             } else if (id == R.id.menu_facilities) {
-                navigateTo(FacilitiesActivity.class);
+                navigateTo(FacilitiesActivity.class, 3);
                 return true;
             }
             return false;
         });
     }
 
-    private void navigateTo(Class<?> target) {
-        Intent intent = new Intent(this, target);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    private void navigateTo(Class<?> targetActivity, int targetIndex) {
+        if (targetIndex == CURRENT_TAB_INDEX) return;
+        Intent intent = new Intent(this, targetActivity);
         startActivity(intent);
+        if (targetIndex > CURRENT_TAB_INDEX) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
         finish();
     }
 
-    // ==================== DRAWER NAV ====================
     private void handleDrawerNavigation(int itemId) {
         if (itemId == R.id.menu_home) {
-            navigateTo(MainActivity.class);
+            navigateTo(MainActivity.class, 0);
         } else if (itemId == R.id.menu_services) {
-            navigateTo(ServicesActivity.class);
+            navigateTo(ServicesActivity.class, 1);
         } else if (itemId == R.id.menu_consultation) {
-            navigateTo(ConsultationActivity.class);
+            navigateTo(ConsultationActivity.class, 2);
         } else if (itemId == R.id.menu_facilities) {
-            navigateTo(FacilitiesActivity.class);
+            navigateTo(FacilitiesActivity.class, 3);
         } else if (itemId == R.id.menu_forms) {
             // Already on blanko
         }
     }
 
-    // ==================== ACTION BUTTONS ====================
     private void setupActionButtons() {
-        // Lanjut ke Daftar Nikah
         findViewById(R.id.btn_daftar_nikah).setOnClickListener(v ->
                 startActivity(new Intent(this, DaftarNikahActivity.class)));
 
-        // Tanya Petugas via WhatsApp
         findViewById(R.id.btn_wa_konsultasi).setOnClickListener(v -> openWhatsApp());
     }
 
@@ -308,13 +289,20 @@ public void onDownloadClick(BlankoItem item) {
         }
     }
 
-    // ==================== HELPERS ====================
     private void showLoading(boolean loading) {
         progressLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
         if (loading) {
             layoutError.setVisibility(View.GONE);
             rvBlanko.setVisibility(View.GONE);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 
     private void showToast(String message) {

@@ -1,4 +1,5 @@
 package com.example.rikua;
+
 import com.example.rikua.FacilityItem;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -41,31 +42,20 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * FacilitiesActivity — Halaman "Sarana Keagamaan" RIKUA KUA Kec. Randudongkal.
- *
- * Direktori sarana keagamaan (masjid, musholla, pesantren, TPQ, madrasah diniyah)
- * dengan fitur:
- * - Live text search filtering (TextWatcher)
- * - Category chip filter (horizontal carousel, single selection)
- * - Village dropdown filter (Spinner)
- * - Navigation drawer (trigger burger icon di kanan toolbar)
- * - Bottom navigation bar
- */
 public class FacilitiesActivity extends AppCompatActivity 
         implements FacilityAdapter.OnItemClickListener {
-private static final String API_URL = "http://192.168.1.5/rikua_api/get_sarana.php";
 
-    // State filter
-    private String currentCategory = null; // null = "Semua"
-    private String currentVillage = null;  // null = "Semua Desa"
+    private static final int CURRENT_TAB_INDEX = 3; // Sarana = 3
+
+    private static final String API_URL = "http://192.168.1.5/rikua_api/get_sarana.php";
+
+    private String currentCategory = null; 
+    private String currentVillage = null;  
     private String currentQuery = "";
 
-    // Data
     private final List<FacilityItem> allFacilities = new ArrayList<>();
     private final List<FacilityItem> filteredFacilities = new ArrayList<>();
 
-    // Views
     private EditText etSearch;
     private ImageButton btnClearSearch;
     private LinearLayout layoutEmptyState;
@@ -95,7 +85,6 @@ private static final String API_URL = "http://192.168.1.5/rikua_api/get_sarana.p
         applyFilters();
     }
 
-    // ==================== WINDOW / STATUS BAR ====================
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.primary_forest));
@@ -116,12 +105,12 @@ private static final String API_URL = "http://192.168.1.5/rikua_api/get_sarana.p
         }
     }
 
-private void setupToolbar() {
-    View btnMenu = findViewById(R.id.btn_menu_drawer);
-    if (btnMenu != null) {
-        btnMenu.setOnClickListener(v -> toggleDrawer());
+    private void setupToolbar() {
+        View btnMenu = findViewById(R.id.btn_menu_drawer);
+        if (btnMenu != null) {
+            btnMenu.setOnClickListener(v -> toggleDrawer());
+        }
     }
-}
 
     private void toggleDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
@@ -131,7 +120,6 @@ private void setupToolbar() {
         }
     }
 
-    // ==================== INIT VIEWS ====================
     private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
         etSearch = findViewById(R.id.et_search);
@@ -150,8 +138,6 @@ private void setupToolbar() {
         });
     }
 
-    // ==================== DATA ====================
-  // ==================== DATA ====================
     private void loadFacilityData() {
         new Thread(() -> {
             try {
@@ -170,7 +156,6 @@ private void setupToolbar() {
                 }
                 reader.close();
 
-                // Parsing JSON dari respons PHP
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 String status = jsonResponse.getString("status");
 
@@ -181,11 +166,9 @@ private void setupToolbar() {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
 
-                        // Ambil data aman menggunakan optString/optInt agar tidak crash
                         String id = String.valueOf(obj.optInt("id", 0));
                         String namaFileGambar = obj.optString("gambar", "");
                         
-                        // PERBAIKAN 1: Sesuaikan IP gambar dengan IP server laptop (192.168.1.5)
                         String imageUrl = "";
                         if (!namaFileGambar.isEmpty()) {
                             imageUrl = "http://192.168.1.5/rikua_api/uploads/" + namaFileGambar;
@@ -197,14 +180,12 @@ private void setupToolbar() {
                         int jumlahJamaah = obj.optInt("jumlah_jamaah", 0);
                         String keterangan = obj.optString("keterangan", obj.optString("alamat", "-"));
 
-                        // PERBAIKAN 2: Ambil koordinat latitude & longitude untuk fitur peta
                         double latitude = obj.optDouble("latitude", 0.0);
                         double longitude = obj.optDouble("longitude", 0.0);
 
                         String detail1 = "Jumlah Jamaah: " + jumlahJamaah + " orang";
                         String detail2 = "Keterangan: " + keterangan;
 
-                        // Buat objek FacilityItem
                         FacilityItem item = new FacilityItem(
                                 id,
                                 namaSarana,
@@ -223,14 +204,12 @@ private void setupToolbar() {
                                 R.color.primary_forest
                         );
 
-                        // PERBAIKAN 3: Masukkan koordinat latitude & longitude ke model
                         item.setLatitude(latitude);
                         item.setLongitude(longitude);
 
                         fetchedList.add(item);
                     }
 
-                    // Perbarui data dan UI di Main Thread
                     runOnUiThread(() -> {
                         allFacilities.clear();
                         allFacilities.addAll(fetchedList);
@@ -244,7 +223,7 @@ private void setupToolbar() {
             }
         }).start();
     }
-    // ==================== RECYCLER ====================
+
     private void setupRecyclerView() {
         adapter = new FacilityAdapter(this);
         rvFacilities.setLayoutManager(new LinearLayoutManager(this));
@@ -252,7 +231,6 @@ private void setupToolbar() {
         rvFacilities.setNestedScrollingEnabled(false);
     }
 
-    // ==================== SEARCH ====================
     private void setupSearchFilter() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -261,8 +239,7 @@ private void setupToolbar() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 currentQuery = s.toString().trim();
-                btnClearSearch.setVisibility(
-                        currentQuery.isEmpty() ? View.GONE : View.VISIBLE);
+                btnClearSearch.setVisibility(currentQuery.isEmpty() ? View.GONE : View.VISIBLE);
                 applyFilters();
             }
 
@@ -276,7 +253,6 @@ private void setupToolbar() {
         });
     }
 
-    // ==================== CATEGORY CHIPS ====================
     private void setupCategoryChips() {
         chipGroupFilters.setOnCheckedStateChangeListener((group, checkedIds) -> {
             if (checkedIds.isEmpty()) {
@@ -294,14 +270,13 @@ private void setupToolbar() {
                 } else if (id == R.id.chip_madin) {
                     currentCategory = FacilityItem.CAT_MADIN;
                 } else {
-                    currentCategory = null; // chip_all
+                    currentCategory = null;
                 }
             }
             applyFilters();
         });
     }
 
-    // ==================== VILLAGE SPINNER ====================
     private void setupVillageSpinner() {
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
                 this, R.array.facilities_villages, android.R.layout.simple_spinner_item);
@@ -311,7 +286,6 @@ private void setupToolbar() {
         spinnerVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Position 0 = "Semua Desa" -> no village filter
                 currentVillage = (position == 0) ? null : parent.getItemAtPosition(position).toString();
                 applyFilters();
             }
@@ -321,10 +295,6 @@ private void setupToolbar() {
         });
     }
 
-    // ==================== FILTER LOGIC ====================
-    /**
-     * Menerapkan filter gabungan (kategori + desa + query teks) pada dataset.
-     */
     private void applyFilters() {
         filteredFacilities.clear();
         for (FacilityItem item : allFacilities) {
@@ -342,47 +312,47 @@ private void setupToolbar() {
         rvFacilities.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
     }
 
-    // ==================== BOTTOM NAVIGATION ====================
     private void setupBottomNavigation() {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setSelectedItemId(R.id.menu_facilities);
         bottomNav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_facilities) {
-                return true; // Already here
+                return true;
             }
             handleNavigation(id);
             return true;
         });
     }
 
-    /** Routing bersama untuk bottom navigation maupun drawer item. */
     private void handleNavigation(int itemId) {
         if (itemId == R.id.menu_home) {
-            navigateTo(MainActivity.class);
+            navigateTo(MainActivity.class, 0);
         } else if (itemId == R.id.menu_services) {
-            navigateTo(ServicesActivity.class);
+            navigateTo(ServicesActivity.class, 1);
         } else if (itemId == R.id.menu_consultation) {
-            navigateTo(ConsultationActivity.class);
+            navigateTo(ConsultationActivity.class, 2);
         } else if (itemId == R.id.menu_facilities) {
             // current screen
-       } else if (itemId == R.id.menu_forms) {
-    Intent intent = new Intent(this, BlankoActivity.class);
-    startActivity(intent);
-}
-        else {
+        } else if (itemId == R.id.menu_forms) {
+            navigateTo(BlankoActivity.class, 4);
+        } else {
             showToast("Menu: " + itemId);
         }
     }
 
-    private void navigateTo(Class<?> targetActivity) {
+    private void navigateTo(Class<?> targetActivity, int targetIndex) {
+        if (targetIndex == CURRENT_TAB_INDEX) return;
         Intent intent = new Intent(this, targetActivity);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        if (targetIndex > CURRENT_TAB_INDEX) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
         finish();
     }
 
-    // ==================== HELP / CTA BUTTON ====================
     private void setupHelpButton() {
         findViewById(R.id.btn_konsultasi_pendataan).setOnClickListener(v -> openWhatsAppPendataan());
     }
@@ -398,13 +368,10 @@ private void setupToolbar() {
         }
     }
 
-    // ==================== FACILITY ITEM CLICK ====================
     @Override
     public void onFacilityClick(FacilityItem item) {
-        // Bawa objek FacilityItem (Serializable) ke halaman detail.
         Intent intent = new Intent(this, FacilityDetailActivity.class);
         intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY, item);
-        // Extra cadangan berbasis String (bila tak ingin mengirim objek utuh).
         intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY_ID, item.getId());
         intent.putExtra("extra_name", item.getName());
         intent.putExtra("extra_category", item.getCategoryLabel());
@@ -412,8 +379,14 @@ private void setupToolbar() {
         intent.putExtra("extra_image", item.getImageUrl());
         startActivity(intent);
     }
-
-    // ==================== UTILITIES ====================
+@Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
+    }
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

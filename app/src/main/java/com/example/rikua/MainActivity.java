@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.Button;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import android.content.Intent;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -48,21 +47,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    // ====== KONFIGURASI: sesuaikan dengan data KUA Randudongkal ======
+    private static final int CURRENT_TAB_INDEX = 0; // Beranda = 0
+
     private DrawerLayout drawerLayout;
-    private static final String WHATSAPP_NUMBER = "6287787080948"; // format internasional tanpa + atau 0 di depan
+    private static final String WHATSAPP_NUMBER = "6287787080948"; 
     private static final String PHONE_NUMBER = "+6287787080948";
     private static final String MAPS_QUERY = "KUA Randudongkal, Pemalang";
     private static final String WHATSAPP_MESSAGE = "Assalamu'alaikum, saya ingin bertanya terkait layanan KUA Randudongkal.";
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
-    /** Endpoint kuota akad. Ganti IP bila IP laptop berubah. */
     private static final String API_KUOTA = "http://192.168.1.5/rikua_api/get_kuota.php";
 
-    /**
-     * Saat true, pendaftaran berstatus 'draf' ikut dihitung (untuk uji coba).
-     * Ubah ke false untuk rilis.
-     */
     private static final boolean HITUNG_DRAF_UNTUK_UJI = true;
 
     private static final String[] NAMA_BULAN = {
@@ -74,29 +69,28 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvAnnouncementTitle;
     private TextView tvAnnouncementDesc;
-    // Pencarian global
+
     private EditText etGlobalSearch;
     private View cardSearchResults;
     private LinearLayout layoutSearchResults;
-    // Data fasilitas untuk pencarian global
-private static final String URL_SARANA =
-        "http://192.168.1.5/rikua_api/get_sarana.php";
 
-private static final String URL_GAMBAR_SARANA =
-        "http://192.168.1.5/rikua_api/uploads/";
+    private static final String URL_SARANA = "http://192.168.1.5/rikua_api/get_sarana.php";
+    private static final String URL_GAMBAR_SARANA = "http://192.168.1.5/rikua_api/uploads/";
 
-private final List<FacilityItem> daftarFasilitasGlobal =
-        new ArrayList<>();
+    private final List<FacilityItem> daftarFasilitasGlobal = new ArrayList<>();
 
-private volatile boolean fasilitasSudahDimuat = false;
-private volatile boolean sedangMemuatFasilitas = false;
+    private volatile boolean fasilitasSudahDimuat = false;
+    private volatile boolean sedangMemuatFasilitas = false;
 
-private final List<ServiceItem> daftarLayananGlobal = new ArrayList<>();
-private volatile boolean layananGlobalSudahDimuat = false;
-private volatile boolean sedangMemuatLayananGlobal = false;
+    private final List<ServiceItem> daftarLayananGlobal = new ArrayList<>();
+    private volatile boolean layananGlobalSudahDimuat = false;
+    private volatile boolean sedangMemuatLayananGlobal = false;
 
-    /** Isi dialog kuota; null bila data belum berhasil dimuat. */
     private String detailKuota = null;
+
+    // Variabel untuk tombol kembali (double tap to exit)
+    private long backPressedTime;
+    private Toast backToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,22 +99,16 @@ private volatile boolean sedangMemuatLayananGlobal = false;
         drawerLayout = findViewById(R.id.drawer_layout);
 
         View btnMenu = findViewById(R.id.btn_menu);
-        btnMenu.setOnClickListener(v ->
-                drawerLayout.openDrawer(GravityCompat.END)
-        );
-NavigationView navView = findViewById(R.id.nav_drawer);
+        btnMenu.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
 
-navView.setNavigationItemSelectedListener(item -> {
-    Toast.makeText(
-            MainActivity.this,
-            "Menu dipilih: " + item.getTitle(),
-            Toast.LENGTH_SHORT
-    ).show();
+        NavigationView navView = findViewById(R.id.nav_drawer);
+        navView.setNavigationItemSelectedListener(item -> {
+            Toast.makeText(MainActivity.this, "Menu dipilih: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+            handleNavigation(item.getItemId());
+            drawerLayout.closeDrawer(GravityCompat.END);
+            return true;
+        });
 
-    handleNavigation(item.getItemId());
-    drawerLayout.closeDrawer(GravityCompat.END);
-    return true;
-});
         bindAnnouncement();
         bindTopBar();
         bindServiceGrid();
@@ -128,35 +116,28 @@ navView.setNavigationItemSelectedListener(item -> {
         bindBottomNavigation();
         startStatusPulse();
     }
-private void handleNavigation(int itemId) {
 
-    if (itemId == R.id.menu_home) {
-        drawerLayout.closeDrawer(GravityCompat.END);
-
-    } else if (itemId == R.id.menu_services) {
-        startActivity(new Intent(this, ServicesActivity.class));
-
-    } else if (itemId == R.id.menu_consultation) {
-        startActivity(new Intent(this, ConsultationActivity.class));
-
-    } else if (itemId == R.id.menu_facilities) {
-        startActivity(new Intent(this, FacilitiesActivity.class));
-
-    } else if (itemId == R.id.menu_forms) {
-        startActivity(new Intent(this, BlankoActivity.class));
+    private void handleNavigation(int itemId) {
+        if (itemId == R.id.menu_home) {
+            drawerLayout.closeDrawer(GravityCompat.END);
+        } else if (itemId == R.id.menu_services) {
+            navigateTo(ServicesActivity.class, 1);
+        } else if (itemId == R.id.menu_consultation) {
+            navigateTo(ConsultationActivity.class, 2);
+        } else if (itemId == R.id.menu_facilities) {
+            navigateTo(FacilitiesActivity.class, 3);
+        } else if (itemId == R.id.menu_forms) {
+            navigateTo(BlankoActivity.class, 4);
+        }
     }
-}
+
     @Override
     protected void onResume() {
         super.onResume();
-        // Bulan & data kuota diperbarui setiap Beranda ditampilkan (realtime)
         perbaruiJudulKuota();
         muatKuota();
     }
 
-    // ------------------------------------------------------------
-    // Kuota pendaftaran nikah (judul bulan realtime + data server)
-    // ------------------------------------------------------------
     private void bindAnnouncement() {
         tvAnnouncementTitle = findViewById(R.id.tv_announcement_title);
         tvAnnouncementDesc = findViewById(R.id.tv_announcement_desc);
@@ -164,14 +145,10 @@ private void handleNavigation(int itemId) {
         perbaruiJudulKuota();
         tvAnnouncementDesc.setText("Memuat data kuota…");
 
-        // "Lihat Kuota" membuka daftar kuota per tanggal (bukan langsung ke pendaftaran)
-        
-findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
-    Intent intent = new Intent(MainActivity.this,
-            JadwalPernikahanActivity.class);
-    startActivity(intent);
-});
-
+        findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, JadwalPernikahanActivity.class);
+            startActivity(intent);
+        });
     }
 
     private String labelBulanSekarang() {
@@ -183,7 +160,6 @@ findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
         tvAnnouncementTitle.setText("Kuota Pendaftaran Nikah — " + labelBulanSekarang());
     }
 
-    /** Ambil ringkasan kuota bulan berjalan dari server (thread latar). */
     private void muatKuota() {
         Calendar c = Calendar.getInstance();
         final String bulan = String.format(Locale.US, "%04d-%02d",
@@ -240,8 +216,7 @@ findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
                     tvAnnouncementDesc.setText(fRingkas);
                 } else {
                     detailKuota = null;
-                    tvAnnouncementDesc.setText(
-                            "Data kuota belum bisa dimuat. Periksa koneksi ke server.");
+                    tvAnnouncementDesc.setText("Data kuota belum bisa dimuat. Periksa koneksi ke server.");
                 }
             });
         }).start();
@@ -284,8 +259,7 @@ findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
 
     private void tampilkanKuota() {
         if (detailKuota == null) {
-            Toast.makeText(this, "Data kuota belum bisa dimuat. Mencoba lagi…",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Data kuota belum bisa dimuat. Mencoba lagi…", Toast.LENGTH_SHORT).show();
             muatKuota();
             return;
         }
@@ -297,431 +271,375 @@ findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
                 .show();
     }
 
-    // ------------------------------------------------------------
-    // Top bar & pencarian
-    // ------------------------------------------------------------
-private void bindTopBar() {
-    etGlobalSearch = findViewById(R.id.et_global_search);
-    cardSearchResults = findViewById(R.id.card_search_results);
-    layoutSearchResults = findViewById(R.id.layout_search_results);
+    private void bindTopBar() {
+        etGlobalSearch = findViewById(R.id.et_global_search);
+        cardSearchResults = findViewById(R.id.card_search_results);
+        layoutSearchResults = findViewById(R.id.layout_search_results);
 
-    etGlobalSearch.setOnClickListener(v -> {
-        etGlobalSearch.requestFocus();
-    });
+        etGlobalSearch.setOnClickListener(v -> etGlobalSearch.requestFocus());
 
-    etGlobalSearch.setOnEditorActionListener((textView, actionId, event) -> {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-            jalankanPencarian(etGlobalSearch.getText().toString());
-            return true;
-        }
-        return false;
-    });
+        etGlobalSearch.setOnEditorActionListener((textView, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                jalankanPencarian(etGlobalSearch.getText().toString());
+                return true;
+            }
+            return false;
+        });
 
-    etGlobalSearch.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(
-                CharSequence s, int start, int count, int after) {
-        }
+        etGlobalSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        @Override
-        public void onTextChanged(
-                CharSequence s, int start, int before, int count) {
-            jalankanPencarian(s.toString());
-        }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                jalankanPencarian(s.toString());
+            }
 
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    });
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
-    findViewById(R.id.btn_filter_search)
-            .setOnClickListener(v -> tampilkanFilterKategori());
-}
-private void jalankanPencarian(String query) {
-    String kataKunci = query.trim();
-
-    layoutSearchResults.removeAllViews();
-
-    if (kataKunci.isEmpty()) {
-        cardSearchResults.setVisibility(View.GONE);
-        return;
+        findViewById(R.id.btn_filter_search).setOnClickListener(v -> tampilkanFilterKategori());
     }
 
-    cardSearchResults.setVisibility(View.VISIBLE);
+    private void jalankanPencarian(String query) {
+        String kataKunci = query.trim();
+        layoutSearchResults.removeAllViews();
 
-    if (!fasilitasSudahDimuat) {
-        TextView loading = new TextView(this);
-        loading.setText("Memuat data fasilitas...");
-        loading.setTextSize(14);
-        loading.setPadding(dp(12), dp(12), dp(12), dp(12));
-        layoutSearchResults.addView(loading);
-
-        muatFasilitasUntukPencarian();
-        return;
-    }
-
-    tampilkanHasilFasilitas(kataKunci);
-}
-private void tampilkanHasilFasilitas(String query) {
-    List<FacilityItem> hasil = new ArrayList<>();
-
-    for (FacilityItem item : daftarFasilitasGlobal) {
-        if (item.matchesQuery(query)) {
-            hasil.add(item);
+        if (kataKunci.isEmpty()) {
+            cardSearchResults.setVisibility(View.GONE);
+            return;
         }
 
-        if (hasil.size() >= 5) {
-            break;
+        cardSearchResults.setVisibility(View.VISIBLE);
+
+        if (!fasilitasSudahDimuat) {
+            TextView loading = new TextView(this);
+            loading.setText("Memuat data fasilitas...");
+            loading.setTextSize(14);
+            loading.setPadding(dp(12), dp(12), dp(12), dp(12));
+            layoutSearchResults.addView(loading);
+
+            muatFasilitasUntukPencarian();
+            return;
+        }
+
+        tampilkanHasilFasilitas(kataKunci);
+    }
+
+    private void tampilkanHasilFasilitas(String query) {
+        List<FacilityItem> hasil = new ArrayList<>();
+
+        for (FacilityItem item : daftarFasilitasGlobal) {
+            if (item.matchesQuery(query)) {
+                hasil.add(item);
+            }
+            if (hasil.size() >= 5) break;
+        }
+
+        if (hasil.isEmpty()) {
+            TextView kosong = new TextView(this);
+            kosong.setText("Fasilitas tidak ditemukan.");
+            kosong.setTextSize(14);
+            kosong.setPadding(dp(12), dp(12), dp(12), dp(12));
+            layoutSearchResults.addView(kosong);
+            return;
+        }
+
+        TextView judul = new TextView(this);
+        judul.setText("FASILITAS KEAGAMAAN");
+        judul.setTextSize(12);
+        judul.setTypeface(null, android.graphics.Typeface.BOLD);
+        judul.setTextColor(Color.GRAY);
+        judul.setPadding(dp(12), dp(8), dp(12), dp(8));
+
+        layoutSearchResults.addView(judul);
+
+        for (FacilityItem item : hasil) {
+            TextView baris = new TextView(this);
+            baris.setText(item.getName() + "\n" + item.getCategoryLabel() + " • " + item.getLocation());
+            baris.setTextSize(14);
+            baris.setTextColor(Color.BLACK);
+            baris.setPadding(dp(12), dp(12), dp(12), dp(12));
+            baris.setBackgroundResource(android.R.drawable.list_selector_background);
+
+            baris.setOnClickListener(v -> bukaDetailFasilitas(item));
+            layoutSearchResults.addView(baris);
         }
     }
 
-    if (hasil.isEmpty()) {
-        TextView kosong = new TextView(this);
-        kosong.setText("Fasilitas tidak ditemukan.");
-        kosong.setTextSize(14);
-        kosong.setPadding(dp(12), dp(12), dp(12), dp(12));
-        layoutSearchResults.addView(kosong);
-        return;
+    private void bukaDetailFasilitas(FacilityItem item) {
+        Intent intent = new Intent(MainActivity.this, FacilityDetailActivity.class);
+        intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY, item);
+        intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY_ID, item.getId());
+        intent.putExtra("extra_name", item.getName());
+        intent.putExtra("extra_category", item.getCategoryLabel());
+        intent.putExtra("extra_location", item.getLocation());
+        intent.putExtra("extra_image", item.getImageUrl());
+        startActivity(intent);
     }
 
-    TextView judul = new TextView(this);
-    judul.setText("FASILITAS KEAGAMAAN");
-    judul.setTextSize(12);
-    judul.setTypeface(null, android.graphics.Typeface.BOLD);
-    judul.setTextColor(Color.GRAY);
-    judul.setPadding(dp(12), dp(8), dp(12), dp(8));
+    private void tampilkanHasilPencarian(String query) {
+        if (layoutSearchResults == null) return;
 
-    layoutSearchResults.addView(judul);
+        layoutSearchResults.removeAllViews();
+        String q = query.toLowerCase(Locale.ROOT);
+        int jumlah = 0;
 
-    for (FacilityItem item : hasil) {
-        TextView baris = new TextView(this);
-        baris.setText(
-                item.getName() + "\n"
-                        + item.getCategoryLabel() + " • "
-                        + item.getLocation()
-        );
-        baris.setTextSize(14);
-        baris.setTextColor(Color.BLACK);
-        baris.setPadding(dp(12), dp(12), dp(12), dp(12));
-        baris.setBackgroundResource(
-                android.R.drawable.list_selector_background
-        );
+        if (!layananGlobalSudahDimuat || !fasilitasSudahDimuat) {
+            TextView loading = buatTeksPencarian("Memuat data pencarian…", true);
+            layoutSearchResults.addView(loading);
+        }
 
-        baris.setOnClickListener(v -> bukaDetailFasilitas(item));
+        List<ServiceItem> layananCocok = new ArrayList<>();
+        for (ServiceItem item : daftarLayananGlobal) {
+            String teks = (item.getTitle() + " " + item.getSlug()).toLowerCase(Locale.ROOT);
+            if (teks.contains(q)) layananCocok.add(item);
+        }
 
+        List<FacilityItem> fasilitasCocok = new ArrayList<>();
+        for (FacilityItem item : daftarFasilitasGlobal) {
+            if (item.matchesQuery(query)) fasilitasCocok.add(item);
+        }
+
+        if (!layananCocok.isEmpty()) {
+            tambahJudulGrup("Layanan");
+            for (ServiceItem item : layananCocok) {
+                tambahBarisHasil(item.getTitle(), "Ketuk untuk membuka layanan",
+                        () -> bukaDetailLayananDariFilter(item));
+                jumlah++;
+            }
+        }
+
+        if (!fasilitasCocok.isEmpty()) {
+            tambahJudulGrup("Fasilitas Keagamaan");
+            for (FacilityItem item : fasilitasCocok) {
+                tambahBarisHasil(item.getName(),
+                        item.getCategoryLabel() + " • " + item.getLocation(),
+                        () -> bukaDetailFasilitasDariPencarian(item));
+                jumlah++;
+            }
+        }
+
+        if (jumlah == 0 && layananGlobalSudahDimuat && fasilitasSudahDimuat) {
+            layoutSearchResults.addView(buatTeksPencarian("Tidak ada hasil untuk ‘" + query + "’. ", false));
+        }
+    }
+
+    private TextView buatTeksPencarian(String teks, boolean tebal) {
+        TextView view = new TextView(this);
+        view.setText(teks);
+        view.setTextSize(14);
+        view.setTextColor(Color.DKGRAY);
+        view.setPadding(dp(12), dp(12), dp(12), dp(12));
+        if (tebal) view.setTypeface(null, android.graphics.Typeface.BOLD);
+        return view;
+    }
+
+    private void tambahJudulGrup(String judul) {
+        TextView heading = buatTeksPencarian(judul, true);
+        heading.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.primary_forest));
+        layoutSearchResults.addView(heading);
+    }
+
+    private void tambahBarisHasil(String judul, String deskripsi, Runnable aksi) {
+        LinearLayout baris = new LinearLayout(this);
+        baris.setOrientation(LinearLayout.VERTICAL);
+        baris.setPadding(dp(12), dp(10), dp(12), dp(10));
+        baris.setBackgroundResource(android.R.drawable.list_selector_background);
+
+        TextView nama = buatTeksPencarian(judul, true);
+        nama.setPadding(0, 0, 0, dp(3));
+        TextView detail = buatTeksPencarian(deskripsi == null ? "" : deskripsi, false);
+        detail.setTextSize(12);
+        detail.setPadding(0, 0, 0, 0);
+
+        baris.addView(nama);
+        baris.addView(detail);
+        baris.setOnClickListener(v -> aksi.run());
         layoutSearchResults.addView(baris);
     }
-}
-private void bukaDetailFasilitas(FacilityItem item) {
-    Intent intent = new Intent(
-            MainActivity.this,
-            FacilityDetailActivity.class
-    );
 
-    intent.putExtra(
-            FacilityDetailActivity.EXTRA_FACILITY,
-            item
-    );
+    private void muatFasilitasUntukPencarian() {
+        if (fasilitasSudahDimuat || sedangMemuatFasilitas) return;
+        sedangMemuatFasilitas = true;
 
-    intent.putExtra(
-            FacilityDetailActivity.EXTRA_FACILITY_ID,
-            item.getId()
-    );
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection) new URL(URL_SARANA).openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(8000);
+                conn.setReadTimeout(8000);
 
-    intent.putExtra("extra_name", item.getName());
-    intent.putExtra("extra_category", item.getCategoryLabel());
-    intent.putExtra("extra_location", item.getLocation());
-    intent.putExtra("extra_image", item.getImageUrl());
-
-    startActivity(intent);
-}
-
-private void tampilkanHasilPencarian(String query) {
-    if (layoutSearchResults == null) return;
-
-    layoutSearchResults.removeAllViews();
-    String q = query.toLowerCase(Locale.ROOT);
-    int jumlah = 0;
-
-    if (!layananGlobalSudahDimuat || !fasilitasSudahDimuat) {
-        TextView loading = buatTeksPencarian("Memuat data pencarian…", true);
-        layoutSearchResults.addView(loading);
-    }
-
-    List<ServiceItem> layananCocok = new ArrayList<>();
-    for (ServiceItem item : daftarLayananGlobal) {
-        String teks = (item.getTitle() + " " + item.getSlug())
-                .toLowerCase(Locale.ROOT);
-        if (teks.contains(q)) layananCocok.add(item);
-    }
-
-    List<FacilityItem> fasilitasCocok = new ArrayList<>();
-    for (FacilityItem item : daftarFasilitasGlobal) {
-        if (item.matchesQuery(query)) fasilitasCocok.add(item);
-    }
-
-    if (!layananCocok.isEmpty()) {
-        tambahJudulGrup("Layanan");
-        for (ServiceItem item : layananCocok) {
-            tambahBarisHasil(item.getTitle(), "Ketuk untuk membuka layanan",
-                    () -> bukaDetailLayananDariFilter(item));
-            jumlah++;
-        }
-    }
-
-    if (!fasilitasCocok.isEmpty()) {
-        tambahJudulGrup("Fasilitas Keagamaan");
-        for (FacilityItem item : fasilitasCocok) {
-            tambahBarisHasil(item.getName(),
-                    item.getCategoryLabel() + " • " + item.getLocation(),
-                    () -> bukaDetailFasilitasDariPencarian(item));
-            jumlah++;
-        }
-    }
-
-    if (jumlah == 0 && layananGlobalSudahDimuat && fasilitasSudahDimuat) {
-        layoutSearchResults.addView(
-                buatTeksPencarian("Tidak ada hasil untuk ‘" + query + "’. ", false));
-    }
-}
-
-private TextView buatTeksPencarian(String teks, boolean tebal) {
-    TextView view = new TextView(this);
-    view.setText(teks);
-    view.setTextSize(14);
-    view.setTextColor(Color.DKGRAY);
-    view.setPadding(dp(12), dp(12), dp(12), dp(12));
-    if (tebal) view.setTypeface(null, android.graphics.Typeface.BOLD);
-    return view;
-}
-
-private void tambahJudulGrup(String judul) {
-    TextView heading = buatTeksPencarian(judul, true);
-    heading.setTextColor(androidx.core.content.ContextCompat.getColor(
-            this, R.color.primary_forest));
-    layoutSearchResults.addView(heading);
-}
-
-private void tambahBarisHasil(String judul, String deskripsi, Runnable aksi) {
-    LinearLayout baris = new LinearLayout(this);
-    baris.setOrientation(LinearLayout.VERTICAL);
-    baris.setPadding(dp(12), dp(10), dp(12), dp(10));
-    baris.setBackgroundResource(android.R.drawable.list_selector_background);
-
-    TextView nama = buatTeksPencarian(judul, true);
-    nama.setPadding(0, 0, 0, dp(3));
-    TextView detail = buatTeksPencarian(
-            deskripsi == null ? "" : deskripsi, false);
-    detail.setTextSize(12);
-    detail.setPadding(0, 0, 0, 0);
-
-    baris.addView(nama);
-    baris.addView(detail);
-    baris.setOnClickListener(v -> aksi.run());
-    layoutSearchResults.addView(baris);
-}
-
-private void muatFasilitasUntukPencarian() {
-    if (fasilitasSudahDimuat || sedangMemuatFasilitas) return;
-    sedangMemuatFasilitas = true;
-
-    new Thread(() -> {
-        HttpURLConnection conn = null;
-        try {
-            conn = (HttpURLConnection) new URL(URL_SARANA).openConnection();
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(8000);
-            conn.setReadTimeout(8000);
-
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new Exception("HTTP " + conn.getResponseCode());
-            }
-
-            StringBuilder response = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-            }
-
-            JSONObject root = new JSONObject(response.toString());
-            if (!"success".equals(root.optString("status"))) {
-                throw new Exception("Respons server fasilitas tidak valid");
-            }
-
-            JSONArray array = root.optJSONArray("data");
-            List<FacilityItem> hasil = new ArrayList<>();
-            if (array != null) {
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    String id = String.valueOf(obj.optInt("id", 0));
-                    String gambar = obj.optString("gambar", "");
-                    String imageUrl = gambar.isEmpty() ? "" : URL_GAMBAR_SARANA + gambar;
-                    String nama = obj.optString("nama_sarana", "-");
-                    String jenis = obj.optString("jenis", "-");
-                    String desa = obj.optString("desa", "-");
-                    int jumlahJamaah = obj.optInt("jumlah_jamaah", 0);
-                    String keterangan = obj.optString("keterangan",
-                            obj.optString("alamat", "-"));
-
-                    FacilityItem item = new FacilityItem(
-                            id, nama, jenis,
-                            (nama + " " + desa).toLowerCase(Locale.ROOT),
-                            keterangan, desa,
-                            "Jumlah Jamaah: " + jumlahJamaah + " orang",
-                            "Keterangan: " + keterangan,
-                            imageUrl,
-                            R.color.consult_primary,
-                            R.drawable.bg_badge_emerald,
-                            R.color.badge_emerald_text,
-                            R.drawable.ic_mosque,
-                            R.drawable.bg_icon_rounded_green,
-                            R.color.primary_forest
-                    );
-                    item.setLatitude(obj.optDouble("latitude", 0.0));
-                    item.setLongitude(obj.optDouble("longitude", 0.0));
-                    hasil.add(item);
+                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    throw new Exception("HTTP " + conn.getResponseCode());
                 }
-            }
 
-            runOnUiThread(() -> {
-                daftarFasilitasGlobal.clear();
-                daftarFasilitasGlobal.addAll(hasil);
-                fasilitasSudahDimuat = true;
-                sedangMemuatFasilitas = false;
-                perbaruiHasilPencarianTerakhir();
-            });
-        } catch (Exception e) {
-            android.util.Log.e("PencarianGlobal", "Gagal memuat fasilitas", e);
-            runOnUiThread(() -> {
-                sedangMemuatFasilitas = false;
-                Toast.makeText(this, "Gagal memuat data fasilitas",
-                        Toast.LENGTH_SHORT).show();
-                perbaruiHasilPencarianTerakhir();
-            });
-        } finally {
-            if (conn != null) conn.disconnect();
-        }
-    }).start();
-}
-
-private void muatLayananUntukPencarian() {
-    if (layananGlobalSudahDimuat || sedangMemuatLayananGlobal) return;
-    sedangMemuatLayananGlobal = true;
-
-    new Thread(() -> {
-        HttpURLConnection conn = null;
-        try {
-            conn = (HttpURLConnection) new URL(URL_LAYANAN).openConnection();
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(8000);
-            conn.setReadTimeout(8000);
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new Exception("HTTP " + conn.getResponseCode());
-            }
-
-            StringBuilder response = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-            }
-
-            JSONObject root = new JSONObject(response.toString());
-            if (!"success".equals(root.optString("status"))) {
-                throw new Exception("Respons server layanan tidak valid");
-            }
-
-            JSONArray array = root.optJSONArray("data");
-            List<ServiceItem> hasil = new ArrayList<>();
-            if (array != null) {
-                for (int i = 0; i < array.length(); i++) {
-                    hasil.add(parseLayananFilter(array.getJSONObject(i), i));
+                StringBuilder response = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) response.append(line);
                 }
+
+                JSONObject root = new JSONObject(response.toString());
+                if (!"success".equals(root.optString("status"))) {
+                    throw new Exception("Respons server fasilitas tidak valid");
+                }
+
+                JSONArray array = root.optJSONArray("data");
+                List<FacilityItem> hasil = new ArrayList<>();
+                if (array != null) {
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        String id = String.valueOf(obj.optInt("id", 0));
+                        String gambar = obj.optString("gambar", "");
+                        String imageUrl = gambar.isEmpty() ? "" : URL_GAMBAR_SARANA + gambar;
+                        String nama = obj.optString("nama_sarana", "-");
+                        String jenis = obj.optString("jenis", "-");
+                        String desa = obj.optString("desa", "-");
+                        int jumlahJamaah = obj.optInt("jumlah_jamaah", 0);
+                        String keterangan = obj.optString("keterangan", obj.optString("alamat", "-"));
+
+                        FacilityItem item = new FacilityItem(
+                                id, nama, jenis,
+                                (nama + " " + desa).toLowerCase(Locale.ROOT),
+                                keterangan, desa,
+                                "Jumlah Jamaah: " + jumlahJamaah + " orang",
+                                "Keterangan: " + keterangan,
+                                imageUrl,
+                                R.color.consult_primary,
+                                R.drawable.bg_badge_emerald,
+                                R.color.badge_emerald_text,
+                                R.drawable.ic_mosque,
+                                R.drawable.bg_icon_rounded_green,
+                                R.color.primary_forest
+                        );
+                        item.setLatitude(obj.optDouble("latitude", 0.0));
+                        item.setLongitude(obj.optDouble("longitude", 0.0));
+                        hasil.add(item);
+                    }
+                }
+
+                runOnUiThread(() -> {
+                    daftarFasilitasGlobal.clear();
+                    daftarFasilitasGlobal.addAll(hasil);
+                    fasilitasSudahDimuat = true;
+                    sedangMemuatFasilitas = false;
+                    perbaruiHasilPencarianTerakhir();
+                });
+            } catch (Exception e) {
+                android.util.Log.e("PencarianGlobal", "Gagal memuat fasilitas", e);
+                runOnUiThread(() -> {
+                    sedangMemuatFasilitas = false;
+                    Toast.makeText(this, "Gagal memuat data fasilitas", Toast.LENGTH_SHORT).show();
+                    perbaruiHasilPencarianTerakhir();
+                });
+            } finally {
+                if (conn != null) conn.disconnect();
             }
+        }).start();
+    }
 
-            runOnUiThread(() -> {
-                daftarLayananGlobal.clear();
-                daftarLayananGlobal.addAll(hasil);
-                layananGlobalSudahDimuat = true;
-                sedangMemuatLayananGlobal = false;
-                perbaruiHasilPencarianTerakhir();
-            });
-        } catch (Exception e) {
-            android.util.Log.e("PencarianGlobal", "Gagal memuat layanan", e);
-            runOnUiThread(() -> {
-                sedangMemuatLayananGlobal = false;
-                Toast.makeText(this, "Gagal memuat data layanan",
-                        Toast.LENGTH_SHORT).show();
-                perbaruiHasilPencarianTerakhir();
-            });
-        } finally {
-            if (conn != null) conn.disconnect();
-        }
-    }).start();
-}
+    private void muatLayananUntukPencarian() {
+        if (layananGlobalSudahDimuat || sedangMemuatLayananGlobal) return;
+        sedangMemuatLayananGlobal = true;
 
-private void perbaruiHasilPencarianTerakhir() {
-    if (etGlobalSearch == null || isFinishing() || isDestroyed()) return;
-    String query = etGlobalSearch.getText().toString().trim();
-    if (!query.isEmpty()) tampilkanHasilPencarian(query);
-}
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection) new URL(URL_LAYANAN).openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(8000);
+                conn.setReadTimeout(8000);
+                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    throw new Exception("HTTP " + conn.getResponseCode());
+                }
 
-private void bukaDetailFasilitasDariPencarian(FacilityItem item) {
-    Intent intent = new Intent(this, FacilityDetailActivity.class);
-    intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY, item);
-    intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY_ID, item.getId());
-    intent.putExtra("extra_name", item.getName());
-    intent.putExtra("extra_category", item.getCategoryLabel());
-    intent.putExtra("extra_location", item.getLocation());
-    intent.putExtra("extra_image", item.getImageUrl());
-    startActivity(intent);
-}
+                StringBuilder response = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) response.append(line);
+                }
 
-private int dp(int value) {
-    return (int) (value * getResources().getDisplayMetrics().density);
-}
-private static final String URL_LAYANAN =
-        "http://192.168.1.5/rikua_api/get_layanan.php";
+                JSONObject root = new JSONObject(response.toString());
+                if (!"success".equals(root.optString("status"))) {
+                    throw new Exception("Respons server layanan tidak valid");
+                }
 
-private final List<ServiceItem> daftarLayananFilter = new ArrayList<>();
+                JSONArray array = root.optJSONArray("data");
+                List<ServiceItem> hasil = new ArrayList<>();
+                if (array != null) {
+                    for (int i = 0; i < array.length(); i++) {
+                        hasil.add(parseLayananFilter(array.getJSONObject(i), i));
+                    }
+                }
 
-private final ExecutorService filterExecutor =
-        Executors.newSingleThreadExecutor();
+                runOnUiThread(() -> {
+                    daftarLayananGlobal.clear();
+                    daftarLayananGlobal.addAll(hasil);
+                    layananGlobalSudahDimuat = true;
+                    sedangMemuatLayananGlobal = false;
+                    perbaruiHasilPencarianTerakhir();
+                });
+            } catch (Exception e) {
+                android.util.Log.e("PencarianGlobal", "Gagal memuat layanan", e);
+                runOnUiThread(() -> {
+                    sedangMemuatLayananGlobal = false;
+                    Toast.makeText(this, "Gagal memuat data layanan", Toast.LENGTH_SHORT).show();
+                    perbaruiHasilPencarianTerakhir();
+                });
+            } finally {
+                if (conn != null) conn.disconnect();
+            }
+        }).start();
+    }
 
-    // ------------------------------------------------------------
-    // Grid layanan: tiap kartu memakai ID menu yang sama dengan navbar
-    // ------------------------------------------------------------
+    private void perbaruiHasilPencarianTerakhir() {
+        if (etGlobalSearch == null || isFinishing() || isDestroyed()) return;
+        String query = etGlobalSearch.getText().toString().trim();
+        if (!query.isEmpty()) tampilkanHasilPencarian(query);
+    }
+
+    private void bukaDetailFasilitasDariPencarian(FacilityItem item) {
+        Intent intent = new Intent(this, FacilityDetailActivity.class);
+        intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY, item);
+        intent.putExtra(FacilityDetailActivity.EXTRA_FACILITY_ID, item.getId());
+        intent.putExtra("extra_name", item.getName());
+        intent.putExtra("extra_category", item.getCategoryLabel());
+        intent.putExtra("extra_location", item.getLocation());
+        intent.putExtra("extra_image", item.getImageUrl());
+        startActivity(intent);
+    }
+
+    private int dp(int value) {
+        return (int) (value * getResources().getDisplayMetrics().density);
+    }
+
+    private static final String URL_LAYANAN = "http://192.168.1.5/rikua_api/get_layanan.php";
+
+    private final List<ServiceItem> daftarLayananFilter = new ArrayList<>();
+
+    private final ExecutorService filterExecutor = Executors.newSingleThreadExecutor();
+
     private void bindServiceGrid() {
-        findViewById(R.id.btn_lihat_semua_layanan)
-                .setOnClickListener(v -> bukaMenu(R.id.menu_services));
-        findViewById(R.id.card_daftar_nikah)
-                .setOnClickListener(v -> bukaMenu(R.id.menu_daftar_nikah));
-        findViewById(R.id.card_blangko)
-                .setOnClickListener(v -> bukaMenu(R.id.menu_forms));
-        findViewById(R.id.card_konsultasi)
-                .setOnClickListener(v -> bukaMenu(R.id.menu_consultation));
-        findViewById(R.id.card_sarana)
-                .setOnClickListener(v -> bukaMenu(R.id.menu_facilities));
+        findViewById(R.id.btn_lihat_semua_layanan).setOnClickListener(v -> bukaMenu(R.id.menu_services));
+        findViewById(R.id.card_daftar_nikah).setOnClickListener(v -> bukaMenu(R.id.menu_daftar_nikah));
+        findViewById(R.id.card_blangko).setOnClickListener(v -> bukaMenu(R.id.menu_forms));
+        findViewById(R.id.card_konsultasi).setOnClickListener(v -> bukaMenu(R.id.menu_consultation));
+        findViewById(R.id.card_sarana).setOnClickListener(v -> bukaMenu(R.id.menu_facilities));
     }
 
-    // ------------------------------------------------------------
-    // Kartu informasi: lokasi, WhatsApp, telepon
-    // ------------------------------------------------------------
     private void bindInfoCards() {
         findViewById(R.id.btn_petunjuk_arah).setOnClickListener(v -> openMaps());
         findViewById(R.id.btn_whatsapp).setOnClickListener(v -> openWhatsApp());
         findViewById(R.id.btn_telepon).setOnClickListener(v -> openDialer());
     }
 
-   private void openMaps() {
-    Uri uri = Uri.parse("https://www.google.com/maps/place/KUA+KEC.+RANDUDONGKAL/@-7.0986391,109.3140101,843m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2e6fe9681f12c5b3:0x2ba6aa1285f8c025!8m2!3d-7.0986391!4d109.316585!16s%2Fg%2F11srgyt91f?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D");
-
-    startExternal(
-            new Intent(Intent.ACTION_VIEW, uri),
-            "Aplikasi peta tidak ditemukan"
-    );
-}
+    private void openMaps() {
+        Uri uri = Uri.parse("https://www.google.com/maps/place/KUA+KEC.+RANDUDONGKAL/@-7.0986391,109.3140101,843m/data=!3m2!1e3!4b1!4m6!3m5!1s0x2e6fe9681f12c5b3:0x2ba6aa1285f8c025!8m2!3d-7.0986391!4d109.316585!16s%2Fg%2F11srgyt91f?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D");
+        startExternal(new Intent(Intent.ACTION_VIEW, uri), "Aplikasi peta tidak ditemukan");
+    }
 
     private void openWhatsApp() {
         Uri uri = Uri.parse("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + Uri.encode(WHATSAPP_MESSAGE));
@@ -729,7 +647,6 @@ private final ExecutorService filterExecutor =
     }
 
     private void openDialer() {
-        // ACTION_DIAL tidak memerlukan izin CALL_PHONE
         Uri uri = Uri.parse("tel:" + PHONE_NUMBER);
         startExternal(new Intent(Intent.ACTION_DIAL, uri), "Aplikasi telepon tidak ditemukan");
     }
@@ -742,385 +659,275 @@ private final ExecutorService filterExecutor =
         }
     }
 
-    // ------------------------------------------------------------
-    // Bottom navigation: Beranda | Layanan | Konsultasi | Sarana | Blanko
-    // Dipetakan lewat ID item menu (bukan urutan).
-    // ------------------------------------------------------------
     private void bindBottomNavigation() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         bottomNavigation.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_home) {
-                return true; // sudah di Beranda
+                return true; 
             }
             if (id == R.id.menu_lainnya) {
                 openScreen("Menu Lainnya");
                 return false;
             }
             bukaMenu(id);
-            return false; // Beranda tetap terpilih saat kembali
+            return false;
         });
     }
+
     private void tampilkanFilterKategori() {
-    BottomSheetDialog dialog = new BottomSheetDialog(this);
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
 
-    LinearLayout container = new LinearLayout(this);
-    container.setOrientation(LinearLayout.VERTICAL);
-    container.setPadding(dp(24), dp(20), dp(24), dp(24));
-    container.setBackgroundColor(Color.WHITE);
+        LinearLayout container = new LinearLayout(this);
+        container.setOrientation(LinearLayout.VERTICAL);
+        container.setPadding(dp(24), dp(20), dp(24), dp(24));
+        container.setBackgroundColor(Color.WHITE);
 
-    TextView title = new TextView(this);
-    title.setText("Pilih Layanan");
-    title.setTextSize(20);
-    title.setTextColor(Color.BLACK);
-    title.setTypeface(null, android.graphics.Typeface.BOLD);
+        TextView title = new TextView(this);
+        title.setText("Pilih Layanan");
+        title.setTextSize(20);
+        title.setTextColor(Color.BLACK);
+        title.setTypeface(null, android.graphics.Typeface.BOLD);
 
-    TextView loading = new TextView(this);
-    loading.setText("Memuat daftar layanan...");
-    loading.setTextSize(14);
-    loading.setTextColor(Color.GRAY);
-    loading.setPadding(0, dp(20), 0, dp(20));
+        TextView loading = new TextView(this);
+        loading.setText("Memuat daftar layanan...");
+        loading.setTextSize(14);
+        loading.setTextColor(Color.GRAY);
+        loading.setPadding(0, dp(20), 0, dp(20));
 
-    container.addView(title);
-    container.addView(loading);
+        container.addView(title);
+        container.addView(loading);
 
-    dialog.setContentView(container);
-    dialog.show();
+        dialog.setContentView(container);
+        dialog.show();
 
-    filterExecutor.execute(() -> {
-        HttpURLConnection conn = null;
+        filterExecutor.execute(() -> {
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection) new URL(URL_LAYANAN).openConnection();
+                conn.setRequestMethod("GET");
+                conn.setConnectTimeout(8000);
+                conn.setReadTimeout(8000);
 
-        try {
-            conn = (HttpURLConnection)
-                    new URL(URL_LAYANAN).openConnection();
-
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(8000);
-            conn.setReadTimeout(8000);
-
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new Exception("HTTP " + conn.getResponseCode());
-            }
-
-            StringBuilder sb = new StringBuilder();
-
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-            }
-
-            JSONObject root = new JSONObject(sb.toString());
-
-            if (!"success".equals(root.optString("status"))) {
-                throw new Exception("Respons server tidak valid");
-            }
-
-            JSONArray array = root.getJSONArray("data");
-            List<ServiceItem> hasil = new ArrayList<>();
-
-            for (int i = 0; i < array.length(); i++) {
-                hasil.add(parseLayananFilter(array.getJSONObject(i), i));
-            }
-
-            runOnUiThread(() -> {
-                if (isFinishing() || isDestroyed() || !dialog.isShowing()) {
-                    return;
+                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    throw new Exception("HTTP " + conn.getResponseCode());
                 }
 
-                if (hasil.isEmpty()) {
-                    loading.setText("Belum ada layanan tersedia.");
-                    return;
+                StringBuilder sb = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) sb.append(line);
                 }
 
-                tampilkanPilihanLayanan(
-                        dialog,
-                        container,
-                        title,
-                        hasil
-                );
-            });
-
-        } catch (Exception e) {
-            runOnUiThread(() -> {
-                if (isFinishing() || isDestroyed() || !dialog.isShowing()) {
-                    return;
+                JSONObject root = new JSONObject(sb.toString());
+                if (!"success".equals(root.optString("status"))) {
+                    throw new Exception("Respons server tidak valid");
                 }
 
-                loading.setText("Gagal memuat layanan: " + e.getMessage());
-            });
+                JSONArray array = root.getJSONArray("data");
+                List<ServiceItem> hasil = new ArrayList<>();
+                for (int i = 0; i < array.length(); i++) {
+                    hasil.add(parseLayananFilter(array.getJSONObject(i), i));
+                }
 
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed() || !dialog.isShowing()) return;
+                    if (hasil.isEmpty()) {
+                        loading.setText("Belum ada layanan tersedia.");
+                        return;
+                    }
+                    tampilkanPilihanLayanan(dialog, container, title, hasil);
+                });
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed() || !dialog.isShowing()) return;
+                    loading.setText("Gagal memuat layanan: " + e.getMessage());
+                });
+            } finally {
+                if (conn != null) conn.disconnect();
             }
-        }
-    });
-}
-private void tampilkanPilihanLayanan(
-        BottomSheetDialog dialog,
-        LinearLayout container,
-        TextView title,
-        List<ServiceItem> layanan
-) {
-    container.removeAllViews();
-    container.addView(title);
-
-    TextView subtitle = new TextView(this);
-    subtitle.setText("Pilih salah satu layanan yang ingin dibuka");
-    subtitle.setTextSize(13);
-    subtitle.setTextColor(Color.GRAY);
-
-    container.addView(subtitle);
-
-    RadioGroup radioGroup = new RadioGroup(this);
-    radioGroup.setOrientation(RadioGroup.VERTICAL);
-    radioGroup.setPadding(0, dp(12), 0, dp(12));
-
-    for (int i = 0; i < layanan.size(); i++) {
-        ServiceItem item = layanan.get(i);
-
-        RadioButton radioButton = new RadioButton(this);
-        radioButton.setId(View.generateViewId());
-        radioButton.setText(item.getTitle());
-        radioButton.setTextSize(15);
-        radioButton.setTextColor(Color.BLACK);
-        radioButton.setPadding(0, dp(8), 0, dp(8));
-
-        radioGroup.addView(radioButton);
+        });
     }
 
-    android.widget.Button btnTerapkan =
-        new android.widget.Button(this);
-    btnTerapkan.setText("Terapkan Filter");
-    btnTerapkan.setAllCaps(false);
-// Kondisi awal: tombol abu-abu dan nonaktif
-btnTerapkan.setEnabled(false);
-btnTerapkan.setBackgroundTintList(
-        android.content.res.ColorStateList.valueOf(
-                Color.parseColor("#BDBDBD")
-        )
-);
+    private void tampilkanPilihanLayanan(
+            BottomSheetDialog dialog,
+            LinearLayout container,
+            TextView title,
+            List<ServiceItem> layanan
+    ) {
+        container.removeAllViews();
+        container.addView(title);
 
-// Tombol berubah hijau setelah layanan dipilih
-radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-    boolean sudahDipilih = checkedId != -1;
+        TextView subtitle = new TextView(this);
+        subtitle.setText("Pilih salah satu layanan yang ingin dibuka");
+        subtitle.setTextSize(13);
+        subtitle.setTextColor(Color.GRAY);
 
-    btnTerapkan.setEnabled(sudahDipilih);
+        container.addView(subtitle);
 
-    int warna = sudahDipilih
-            ? androidx.core.content.ContextCompat.getColor(
-                    this, R.color.primary_forest)
-            : Color.parseColor("#BDBDBD");
+        RadioGroup radioGroup = new RadioGroup(this);
+        radioGroup.setOrientation(RadioGroup.VERTICAL);
+        radioGroup.setPadding(0, dp(12), 0, dp(12));
 
-    btnTerapkan.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(warna)
-    );
-});
-    btnTerapkan.setOnClickListener(v -> {
-        int checkedId = radioGroup.getCheckedRadioButtonId();
+        for (int i = 0; i < layanan.size(); i++) {
+            ServiceItem item = layanan.get(i);
 
-        if (checkedId == -1) {
-            Toast.makeText(
-                    this,
-                    "Pilih layanan terlebih dahulu",
-                    Toast.LENGTH_SHORT
-            ).show();
-            return;
+            RadioButton radioButton = new RadioButton(this);
+            radioButton.setId(View.generateViewId());
+            radioButton.setText(item.getTitle());
+            radioButton.setTextSize(15);
+            radioButton.setTextColor(Color.BLACK);
+            radioButton.setPadding(0, dp(8), 0, dp(8));
+
+            radioGroup.addView(radioButton);
         }
 
-        int posisi = radioGroup.indexOfChild(
-                radioGroup.findViewById(checkedId)
+        android.widget.Button btnTerapkan = new android.widget.Button(this);
+        btnTerapkan.setText("Terapkan Filter");
+        btnTerapkan.setAllCaps(false);
+        btnTerapkan.setEnabled(false);
+        btnTerapkan.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#BDBDBD")));
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            boolean sudahDipilih = checkedId != -1;
+            btnTerapkan.setEnabled(sudahDipilih);
+            int warna = sudahDipilih
+                    ? androidx.core.content.ContextCompat.getColor(this, R.color.primary_forest)
+                    : Color.parseColor("#BDBDBD");
+            btnTerapkan.setBackgroundTintList(android.content.res.ColorStateList.valueOf(warna));
+        });
+
+        btnTerapkan.setOnClickListener(v -> {
+            int checkedId = radioGroup.getCheckedRadioButtonId();
+            if (checkedId == -1) {
+                Toast.makeText(this, "Pilih layanan terlebih dahulu", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int posisi = radioGroup.indexOfChild(radioGroup.findViewById(checkedId));
+            ServiceItem itemDipilih = layanan.get(posisi);
+
+            dialog.dismiss();
+            bukaDetailLayananDariFilter(itemDipilih);
+        });
+
+        container.addView(radioGroup);
+        container.addView(btnTerapkan);
+    }
+
+    private ServiceItem parseLayananFilter(JSONObject o, int index) {
+        String id = firstNonEmpty(o, String.valueOf(index), "id_layanan", "id");
+        String title = firstNonEmpty(o, "-", "nama_layanan", "judul", "nama", "title");
+        String desc = firstNonEmpty(o, "", "deskripsi", "keterangan", "description");
+        String badge = firstNonEmpty(o, null, "badge", "label", "estimasi");
+        String kategori = normalizeCategory(firstNonEmpty(o, "", "kategori", "category"));
+        String slug = firstNonEmpty(o, "", "kode_layanan", "slug", "kode");
+
+        return new ServiceItem(
+                id, title, desc, badge, kategori, slug,
+                R.drawable.ic_verified, R.drawable.bg_icon_rounded_green,
+                R.drawable.bg_trust_strip, R.color.gold_dark, R.color.primary_forest
         );
+    }
 
-        ServiceItem itemDipilih = layanan.get(posisi);
-
-        dialog.dismiss();
-        bukaDetailLayananDariFilter(itemDipilih);
-    });
-
-    container.addView(radioGroup);
-    container.addView(btnTerapkan);
-}
-private ServiceItem parseLayananFilter(JSONObject o, int index) {
-    String id = firstNonEmpty(o, String.valueOf(index),
-            "id_layanan", "id");
-
-    String title = firstNonEmpty(o, "-",
-            "nama_layanan", "judul", "nama", "title");
-
-    String desc = firstNonEmpty(o, "",
-            "deskripsi", "keterangan", "description");
-
-    String badge = firstNonEmpty(o, null,
-            "badge", "label", "estimasi");
-
-    String kategori = normalizeCategory(
-            firstNonEmpty(o, "", "kategori", "category")
-    );
-
-    String slug = firstNonEmpty(o, "",
-            "kode_layanan", "slug", "kode");
-
-    return new ServiceItem(
-            id,
-            title,
-            desc,
-            badge,
-            kategori,
-            slug,
-            R.drawable.ic_verified,
-            R.drawable.bg_icon_rounded_green,
-            R.drawable.bg_trust_strip,
-            R.color.gold_dark,
-            R.color.primary_forest
-    );
-}
-
-private String firstNonEmpty(
-        JSONObject o,
-        String fallback,
-        String... keys
-) {
-    for (String key : keys) {
-        if (o.has(key) && !o.isNull(key)) {
-            String value = o.optString(key, "").trim();
-
-            if (!value.isEmpty()) {
-                return value;
+    private String firstNonEmpty(JSONObject o, String fallback, String... keys) {
+        for (String key : keys) {
+            if (o.has(key) && !o.isNull(key)) {
+                String value = o.optString(key, "").trim();
+                if (!value.isEmpty()) return value;
             }
         }
+        return fallback;
     }
 
-    return fallback;
-}
-
-private String normalizeCategory(String raw) {
-    String category = raw == null ? "" : raw.toLowerCase().trim();
-
-    if (category.contains("nikah") || category.contains("rujuk")) {
-        return ServiceItem.CATEGORY_PERNIKAHAN;
+    private String normalizeCategory(String raw) {
+        String category = raw == null ? "" : raw.toLowerCase().trim();
+        if (category.contains("nikah") || category.contains("rujuk")) return ServiceItem.CATEGORY_PERNIKAHAN;
+        if (category.contains("wakaf")) return ServiceItem.CATEGORY_WAKAF;
+        return ServiceItem.CATEGORY_ADMINISTRASI;
     }
 
-    if (category.contains("wakaf")) {
-        return ServiceItem.CATEGORY_WAKAF;
-    }
+    private void bukaDetailLayananDariFilter(ServiceItem item) {
+        String slug = item.getSlug() == null ? "" : item.getSlug().trim().toLowerCase();
 
-    return ServiceItem.CATEGORY_ADMINISTRASI;
-}
-private void bukaDetailLayananDariFilter(ServiceItem item) {
-    String slug = item.getSlug() == null
-            ? ""
-            : item.getSlug().trim().toLowerCase();
+        if (slug.isEmpty()) {
+            String judul = item.getTitle() == null ? "" : item.getTitle().toLowerCase();
 
-    if (slug.isEmpty()) {
-        String judul = item.getTitle() == null
-                ? ""
-                : item.getTitle().toLowerCase();
-
-        if (judul.contains("rekomendasi")) {
-            slug = "rekomendasi-nikah";
-        } else if (judul.contains("isbat")) {
-            slug = "isbat-nikah";
-        } else if (judul.contains("duplikat")) {
-            slug = "duplikat-buku-nikah";
-        } else if (judul.contains("wakaf")) {
-            slug = "wakaf-kemasjidan";
-        } else if (judul.contains("taukil")) {
-            slug = "taukil-wali-bil-kitabah";
-        } else if (judul.contains("wali")) {
-            slug = "wali-nikah";
-        } else if (judul.contains("pengumuman")) {
-            slug = "pengumuman-kehendak-nikah";
-        } else if (judul.contains("syarat")) {
-            slug = "syarat-nikah";
+            if (judul.contains("rekomendasi")) slug = "rekomendasi-nikah";
+            else if (judul.contains("isbat")) slug = "isbat-nikah";
+            else if (judul.contains("duplikat")) slug = "duplikat-buku-nikah";
+            else if (judul.contains("wakaf")) slug = "wakaf-kemasjidan";
+            else if (judul.contains("taukil")) slug = "taukil-wali-bil-kitabah";
+            else if (judul.contains("wali")) slug = "wali-nikah";
+            else if (judul.contains("pengumuman")) slug = "pengumuman-kehendak-nikah";
+            else if (judul.contains("syarat")) slug = "syarat-nikah";
         }
-    }
 
-    Intent intent;
+        Intent intent;
+        if (slug.contains("rekomendasi")) {
+            intent = new Intent(this, RekomendasiNikahActivity.class);
+            intent.putExtra(RekomendasiNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(RekomendasiNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(RekomendasiNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else if (slug.contains("isbat")) {
+            intent = new Intent(this, IsbatNikahActivity.class);
+            intent.putExtra(IsbatNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(IsbatNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(IsbatNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else if (slug.contains("duplikat")) {
+            intent = new Intent(this, DuplikatBukuNikahActivity.class);
+            intent.putExtra(DuplikatBukuNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(DuplikatBukuNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(DuplikatBukuNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else if (slug.contains("wakaf")) {
+            intent = new Intent(this, WakafActivity.class);
+            intent.putExtra(WakafActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(WakafActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(WakafActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else if (slug.contains("taukil")) {
+            intent = new Intent(this, TaukilNikahActivity.class);
+            intent.putExtra(TaukilNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(TaukilNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(TaukilNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else if (slug.contains("wali")) {
+            intent = new Intent(this, WaliNikahActivity.class);
+            intent.putExtra(WaliNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(WaliNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(WaliNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else if (slug.contains("pengumuman")) {
+            intent = new Intent(this, PengumumanNikahActivity.class);
+            intent.putExtra(PengumumanNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(PengumumanNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(PengumumanNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        } else {
+            intent = new Intent(this, SyaratNikahActivity.class);
+            intent.putExtra(SyaratNikahActivity.EXTRA_LAYANAN, item);
+            intent.putExtra(SyaratNikahActivity.EXTRA_KODE_LAYANAN, slug);
+            intent.putExtra(SyaratNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        }
 
-    if (slug.contains("rekomendasi")) {
-        intent = new Intent(this, RekomendasiNikahActivity.class);
-        intent.putExtra(RekomendasiNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(RekomendasiNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(RekomendasiNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
+        startActivity(intent);
+    }   
 
-    } else if (slug.contains("isbat")) {
-        intent = new Intent(this, IsbatNikahActivity.class);
-        intent.putExtra(IsbatNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(IsbatNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(IsbatNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-
-    } else if (slug.contains("duplikat")) {
-        intent = new Intent(this, DuplikatBukuNikahActivity.class);
-        intent.putExtra(DuplikatBukuNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(DuplikatBukuNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(DuplikatBukuNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-
-    } else if (slug.contains("wakaf")) {
-        intent = new Intent(this, WakafActivity.class);
-        intent.putExtra(WakafActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(WakafActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(WakafActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-
-    } else if (slug.contains("taukil")) {
-        intent = new Intent(this, TaukilNikahActivity.class);
-        intent.putExtra(TaukilNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(TaukilNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(TaukilNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-
-    } else if (slug.contains("wali")) {
-        intent = new Intent(this, WaliNikahActivity.class);
-        intent.putExtra(WaliNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(WaliNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(WaliNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-
-    } else if (slug.contains("pengumuman")) {
-        intent = new Intent(this, PengumumanNikahActivity.class);
-        intent.putExtra(PengumumanNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(PengumumanNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(PengumumanNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-
-    } else {
-        intent = new Intent(this, SyaratNikahActivity.class);
-        intent.putExtra(SyaratNikahActivity.EXTRA_LAYANAN, item);
-        intent.putExtra(SyaratNikahActivity.EXTRA_KODE_LAYANAN, slug);
-        intent.putExtra(SyaratNikahActivity.EXTRA_JUDUL_LAYANAN, item.getTitle());
-    }
-
-    startActivity(intent);
-}   
-
-
-    // ------------------------------------------------------------
-    // Satu tempat untuk semua tujuan menu (ID sama dengan file menu)
-    // ------------------------------------------------------------
     private void bukaMenu(int id) {
         if (id == R.id.menu_services) {
-            buka(ServicesActivity.class);
+            navigateTo(ServicesActivity.class, 1);
         } else if (id == R.id.menu_daftar_nikah) {
             buka(DaftarNikahActivity.class);
         } else if (id == R.id.menu_cek_status) {
             buka(CekStatusActivity.class);
         } else if (id == R.id.menu_forms) {
-            buka(BlankoActivity.class);
+            navigateTo(BlankoActivity.class, 4);
         } else if (id == R.id.menu_facilities) {
-            buka(FacilitiesActivity.class);
+            navigateTo(FacilitiesActivity.class, 3);
         } else if (id == R.id.menu_consultation) {
-            buka(ConsultationActivity.class);
+            navigateTo(ConsultationActivity.class, 2);
         } else if (id == R.id.menu_pengumuman) {
             buka(PengumumanNikahActivity.class);
         } else if (id == R.id.menu_simkah) {
-            startExternal(new Intent(Intent.ACTION_VIEW, Uri.parse(URL_SIMKAH)),
-                    getString(R.string.daf_simkah_unavailable));
-        } else if (id == R.id.menu_faq
-                || id == R.id.menu_profil
-                || id == R.id.menu_login) {
-            // Halaman ini memang belum dibuat
+            startExternal(new Intent(Intent.ACTION_VIEW, Uri.parse(URL_SIMKAH)), getString(R.string.daf_simkah_unavailable));
+        } else if (id == R.id.menu_faq || id == R.id.menu_profil || id == R.id.menu_login) {
             Toast.makeText(this, R.string.daf_feature_soon, Toast.LENGTH_SHORT).show();
         }
     }
@@ -1129,31 +936,45 @@ private void bukaDetailLayananDariFilter(ServiceItem item) {
         startActivity(new Intent(this, tujuan));
     }
 
-    // ------------------------------------------------------------
-    // Animasi indikator status "Buka Sekarang"
-    // ------------------------------------------------------------
-    private void startStatusPulse() {
-        /*View indicator = findViewById(R.id.indicator_status_pulse);
-        pulseAnimator = ObjectAnimator.ofFloat(indicator, View.ALPHA, 1f, 0.3f);
-        pulseAnimator.setDuration(900);
-        pulseAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        pulseAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        pulseAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        pulseAnimator.start();*/
+    private void navigateTo(Class<?> targetActivity, int targetIndex) {
+        if (targetIndex == CURRENT_TAB_INDEX) return;
+        Intent intent = new Intent(this, targetActivity);
+        startActivity(intent);
+        if (targetIndex > CURRENT_TAB_INDEX) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        finish();
+    }
+
+    private void startStatusPulse() {}
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawer(GravityCompat.END);
+            return;
+        }
+
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            if (backToast != null) backToast.cancel();
+            super.onBackPressed();
+            finishAffinity();
+        } else {
+            backToast = Toast.makeText(getBaseContext(), "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 
     @Override
     protected void onDestroy() {
-        if (pulseAnimator != null) {
-            pulseAnimator.cancel();
-        }
+        if (pulseAnimator != null) pulseAnimator.cancel();
         super.onDestroy();
         filterExecutor.shutdownNow();
     }
 
-    // ------------------------------------------------------------
-    // Placeholder untuk fitur yang memang belum dibuat
-    // ------------------------------------------------------------
     private void openScreen(String name) {
         Toast.makeText(this, name + " segera hadir", Toast.LENGTH_SHORT).show();
     }

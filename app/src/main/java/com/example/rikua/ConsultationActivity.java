@@ -35,26 +35,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * ConsultationActivity — Halaman "Konsultasi dengan Petugas" RIKUA KUA Kec. Randudongkal.
- * Data petugas dimuat secara dinamis dari database MySQL melalui API PHP lokal.
- */
 public class ConsultationActivity extends AppCompatActivity
         implements OfficerAdapter.OnActionListener {
+
+    private static final int CURRENT_TAB_INDEX = 2; // Konsultasi = 2
 
     private DrawerLayout drawerLayout;
     private OfficerAdapter adapter;
     private RecyclerView rvOfficers;
 
     private static final String WA_BASE = "https://wa.me/";
-
-    // URL API PHP Anda (Ganti dengan IPv4 laptop Anda yang terhubung dalam satu WiFi)
     private static final String API_URL = "http://192.168.1.5/rikua_api/get_petugas.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-         getDelegate().setLocalNightMode(
-            AppCompatDelegate.MODE_NIGHT_NO
-    );
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultation);
 
@@ -64,11 +59,9 @@ public class ConsultationActivity extends AppCompatActivity
         setupRecyclerView();
         setupBottomNavigation();
 
-        // Panggil fungsi untuk mengambil data dari database PHP
         fetchOfficersFromDatabase();
     }
 
-    // ==================== WINDOW / STATUS BAR ====================
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
@@ -89,13 +82,12 @@ public class ConsultationActivity extends AppCompatActivity
         }
     }
 
-    // ==================== TOOLBAR ====================
     private void setupToolbar() {
-    View btnMenu = findViewById(R.id.btn_menu_drawer);
-    if (btnMenu != null) {
-        btnMenu.setOnClickListener(v -> toggleDrawer());
+        View btnMenu = findViewById(R.id.btn_menu_drawer);
+        if (btnMenu != null) {
+            btnMenu.setOnClickListener(v -> toggleDrawer());
+        }
     }
-}
 
     private void toggleDrawer() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
@@ -105,7 +97,6 @@ public class ConsultationActivity extends AppCompatActivity
         }
     }
 
-    // ==================== INIT VIEWS ====================
     private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -117,7 +108,6 @@ public class ConsultationActivity extends AppCompatActivity
         });
     }
 
-    // ==================== RECYCLER ====================
     private void setupRecyclerView() {
         rvOfficers = findViewById(R.id.rv_officers);
         adapter = new OfficerAdapter(this);
@@ -126,9 +116,6 @@ public class ConsultationActivity extends AppCompatActivity
         rvOfficers.setNestedScrollingEnabled(false);
     }
 
-    /**
-     * Mengambil data petugas secara asynchronous dari server PHP / MySQL
-     */
     private void fetchOfficersFromDatabase() {
         new Thread(() -> {
             try {
@@ -147,7 +134,6 @@ public class ConsultationActivity extends AppCompatActivity
                 }
                 reader.close();
 
-                // Parsing JSON dari PHP
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 String status = jsonResponse.getString("status");
 
@@ -168,7 +154,6 @@ public class ConsultationActivity extends AppCompatActivity
                         boolean isAvailable = statusAktif.equalsIgnoreCase("Tersedia");
                         String[] expertiseArray = bidangKeahlianStr.split(", ");
 
-                        // Menentukan inisial dan warna avatar otomatis berdasarkan data
                         int avatarBg = R.drawable.bg_avatar_teal;
                         if (i == 1) avatarBg = R.drawable.bg_avatar_gold;
                         else if (i == 2) avatarBg = R.drawable.bg_avatar_purple;
@@ -189,7 +174,6 @@ public class ConsultationActivity extends AppCompatActivity
                         ));
                     }
 
-                    // Perbarui UI di Main Thread
                     runOnUiThread(() -> adapter.submitList(officers));
                 }
 
@@ -201,7 +185,6 @@ public class ConsultationActivity extends AppCompatActivity
         }).start();
     }
 
-    /** Helper untuk membuat inisial nama otomatis (Contoh: "H. M. Syaifuddin" -> "HM") */
     private String getInitials(String name) {
         String[] parts = name.replace(".", "").trim().split("\\s+");
         if (parts.length >= 2) {
@@ -212,7 +195,6 @@ public class ConsultationActivity extends AppCompatActivity
         return "KU";
     }
 
-    // ==================== WHATSAPP / PHONE ACTIONS ====================
     @Override
     public void onWhatsAppClick(OfficerItem officer) {
         String topic = officer.getExpertise().length > 0 ? officer.getExpertise()[0] : "layanan KUA";
@@ -239,7 +221,6 @@ public class ConsultationActivity extends AppCompatActivity
         }
     }
 
-    // ==================== BOTTOM NAVIGATION ====================
     private void setupBottomNavigation() {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setSelectedItemId(R.id.menu_consultation);
@@ -255,30 +236,40 @@ public class ConsultationActivity extends AppCompatActivity
 
     private void handleNavigation(int itemId) {
         if (itemId == R.id.menu_home) {
-            navigateTo(MainActivity.class);
+            navigateTo(MainActivity.class, 0);
         } else if (itemId == R.id.menu_services) {
-            navigateTo(ServicesActivity.class);
+            navigateTo(ServicesActivity.class, 1);
         } else if (itemId == R.id.menu_consultation) {
             // current screen
         } else if (itemId == R.id.menu_facilities) {
-            navigateTo(FacilitiesActivity.class);
-       } else if (itemId == R.id.menu_forms) {
-    Intent intent = new Intent(this, BlankoActivity.class);
-    startActivity(intent);
-}
-        else {
+            navigateTo(FacilitiesActivity.class, 3);
+        } else if (itemId == R.id.menu_forms) {
+            navigateTo(BlankoActivity.class, 4);
+        } else {
             showToast("Menu: " + itemId);
         }
     }
 
-    private void navigateTo(Class<?> targetActivity) {
+    private void navigateTo(Class<?> targetActivity, int targetIndex) {
+        if (targetIndex == CURRENT_TAB_INDEX) return;
         Intent intent = new Intent(this, targetActivity);
+        startActivity(intent);
+        if (targetIndex > CURRENT_TAB_INDEX) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        finish();
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 
-    // ==================== UTILITIES ====================
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

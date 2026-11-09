@@ -36,6 +36,8 @@ import java.util.concurrent.Executors;
 
 public class ServicesActivity extends AppCompatActivity {
 
+    private static final int CURRENT_TAB_INDEX = 1; // Layanan = 1
+
     private static final String TAG = "Layanan";
     private static final String URL_LAYANAN = "http://192.168.1.5/rikua_api/get_layanan.php";
     private static final String KODE_SYARAT_NIKAH = "syarat-nikah";
@@ -85,6 +87,7 @@ public class ServicesActivity extends AppCompatActivity {
         insetsController.setAppearanceLightStatusBars(false);
         insetsController.setAppearanceLightNavigationBars(true);
     }
+
     private void setupMenuDrawer() {
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         View btnMenuDrawer = findViewById(R.id.btn_menu_drawer);
@@ -95,6 +98,7 @@ public class ServicesActivity extends AppCompatActivity {
             });
         }
     }
+
     private void initViews() {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         rvServices = findViewById(R.id.rv_services);
@@ -106,7 +110,7 @@ public class ServicesActivity extends AppCompatActivity {
     private void setupToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
-            toolbar.setNavigationOnClickListener(v -> navigateTo(MainActivity.class));
+            toolbar.setNavigationOnClickListener(v -> navigateTo(MainActivity.class, 0));
         }
     }
 
@@ -247,7 +251,7 @@ public class ServicesActivity extends AppCompatActivity {
     private void setupClickListeners() {
         View btnTanya = findViewById(R.id.btn_tanya_petugas);
         if (btnTanya != null) {
-            btnTanya.setOnClickListener(v -> navigateTo(ConsultationActivity.class));
+            btnTanya.setOnClickListener(v -> navigateTo(ConsultationActivity.class, 2));
         }
     }
 
@@ -257,18 +261,18 @@ public class ServicesActivity extends AppCompatActivity {
             bottomNavigation.setOnItemSelectedListener(item -> {
                 int itemId = item.getItemId();
                 if (itemId == R.id.menu_home) {
-                    navigateTo(MainActivity.class);
+                    navigateTo(MainActivity.class, 0);
                     return true;
                 } else if (itemId == R.id.menu_services) {
                     return true;
                 } else if (itemId == R.id.menu_consultation) {
-                    navigateTo(ConsultationActivity.class);
+                    navigateTo(ConsultationActivity.class, 2);
                     return true;
                 } else if (itemId == R.id.menu_facilities) {
-                    navigateTo(FacilitiesActivity.class);
+                    navigateTo(FacilitiesActivity.class, 3);
                     return true;
                 } else if (itemId == R.id.menu_forms) {
-                    navigateTo(BlankoActivity.class);
+                    navigateTo(BlankoActivity.class, 4);
                     return true;
                 }
                 return false;
@@ -341,7 +345,6 @@ public class ServicesActivity extends AppCompatActivity {
 
         int iconTint;
 
-        // Jika file ada di res/drawable, beri iconTint = 0 agar warna asli foto/PNG muncul
         if (iconRes != 0) {
             iconTint = 0;
         } else {
@@ -401,9 +404,23 @@ public class ServicesActivity extends AppCompatActivity {
         adapter.submitList(filtered);
     }
 
-    private void navigateTo(Class<?> targetActivity) {
+    private void navigateTo(Class<?> targetActivity, int targetIndex) {
+        if (targetIndex == CURRENT_TAB_INDEX) return;
         Intent intent = new Intent(this, targetActivity);
         startActivity(intent);
+        if (targetIndex > CURRENT_TAB_INDEX) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        }
+        finish();
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 
