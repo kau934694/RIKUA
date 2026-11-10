@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.activity.OnBackPressedCallback;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -54,14 +55,24 @@ public class ServicesActivity extends AppCompatActivity {
     private String searchQuery = "";
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-
-    @Override
+@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
 
+        // Callback tombol kembali ke MainActivity
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(ServicesActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
         setupWindowAndStatusBar();
-        initViews();
+        initViews(); // <-- Ubah dari setupInitViews() menjadi initViews()
         setupMenuDrawer();
         setupToolbar();
         setupServiceList();
@@ -78,7 +89,6 @@ public class ServicesActivity extends AppCompatActivity {
         super.onDestroy();
         executor.shutdownNow();
     }
-
     private void setupWindowAndStatusBar() {
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary_forest));
 
@@ -413,14 +423,6 @@ public class ServicesActivity extends AppCompatActivity {
         } else {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
-        finish();
-    }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 

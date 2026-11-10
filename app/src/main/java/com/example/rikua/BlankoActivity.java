@@ -8,7 +8,14 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.activity.OnBackPressedCallback;
+import android.view.View;
+import android.view.Window;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -56,6 +63,18 @@ public class BlankoActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blanko);
 
+        // ===== TEMPAT MENARUH KODENYA DI SINI =====
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(BlankoActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+        // ===========================================
+
         setupWindowAndStatusBar();
         setupToolbar();
         initViews();
@@ -64,27 +83,6 @@ public class BlankoActivity extends AppCompatActivity
         setupActionButtons();
         fetchBlankoData();
     }
-
-    private void setupWindowAndStatusBar() {
-        Window window = getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
-        WindowInsetsControllerCompat controller =
-                WindowCompat.getInsetsController(window, window.getDecorView());
-        controller.setAppearanceLightStatusBars(false);
-        controller.setAppearanceLightNavigationBars(true);
-
-        View bottomNav = findViewById(R.id.bottom_navigation);
-        if (bottomNav != null) {
-            ViewCompat.setOnApplyWindowInsetsListener(bottomNav, (view, insets) -> {
-                androidx.core.graphics.Insets bars =
-                        insets.getInsets(WindowInsetsCompat.Type.systemBars());
-                view.setPadding(view.getPaddingLeft(), view.getPaddingTop(),
-                        view.getPaddingRight(), bars.bottom);
-                return insets;
-            });
-        }
-    }
-
     private void setupToolbar() {
         View btnMenu = findViewById(R.id.btn_menu_drawer);
         if (btnMenu != null) {
@@ -296,15 +294,26 @@ public class BlankoActivity extends AppCompatActivity
             rvBlanko.setVisibility(View.GONE);
         }
     }
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        finish();
-    }
+    // ==================== WINDOW / STATUS BAR ====================
+    private void setupWindowAndStatusBar() {
+        Window window = getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
+        WindowInsetsControllerCompat controller =
+                WindowCompat.getInsetsController(window, window.getDecorView());
+        controller.setAppearanceLightStatusBars(false);
+        controller.setAppearanceLightNavigationBars(true);
 
+        View bottomNav = findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(bottomNav, (view, insets) -> {
+                androidx.core.graphics.Insets bars =
+                        insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                view.setPadding(view.getPaddingLeft(), view.getPaddingTop(),
+                        view.getPaddingRight(), bars.bottom);
+                return insets;
+            });
+        }
+    }
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }

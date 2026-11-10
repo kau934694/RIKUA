@@ -18,6 +18,7 @@ import android.widget.Button;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
+import androidx.activity.OnBackPressedCallback;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,11 +93,33 @@ public class MainActivity extends AppCompatActivity {
     private long backPressedTime;
     private Toast backToast;
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawerLayout = findViewById(R.id.drawer_layout);
+
+        // --- DAFTARKAN CALLBACK TOMBOL KEMBALI DI SINI ---
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // 1. Jika Drawer/Menu Samping terbuka, tutup drawer dulu
+                if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                    drawerLayout.closeDrawer(GravityCompat.END);
+                    return;
+                }
+
+                // 2. Cek selisih waktu 2 detik untuk double-tap exit
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    if (backToast != null) backToast.cancel();
+                    finishAffinity(); // Keluar penuh dari aplikasi
+                } else {
+                    backToast = Toast.makeText(getBaseContext(), "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT);
+                    backToast.show();
+                }
+                backPressedTime = System.currentTimeMillis();
+            }
+        });
 
         View btnMenu = findViewById(R.id.btn_menu);
         btnMenu.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.END));
@@ -117,6 +140,12 @@ public class MainActivity extends AppCompatActivity {
         startStatusPulse();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        perbaruiJudulKuota();
+        muatKuota();
+    }
     private void handleNavigation(int itemId) {
         if (itemId == R.id.menu_home) {
             drawerLayout.closeDrawer(GravityCompat.END);
@@ -129,13 +158,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (itemId == R.id.menu_forms) {
             navigateTo(BlankoActivity.class, 4);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        perbaruiJudulKuota();
-        muatKuota();
     }
 
     private void bindAnnouncement() {
@@ -949,24 +971,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startStatusPulse() {}
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.END)) {
-            drawerLayout.closeDrawer(GravityCompat.END);
-            return;
-        }
-
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            if (backToast != null) backToast.cancel();
-            super.onBackPressed();
-            finishAffinity();
-        } else {
-            backToast = Toast.makeText(getBaseContext(), "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT);
-            backToast.show();
-        }
-        backPressedTime = System.currentTimeMillis();
-    }
 
     @Override
     protected void onDestroy() {

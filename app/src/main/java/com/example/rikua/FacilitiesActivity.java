@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -71,6 +72,17 @@ public class FacilitiesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facilities);
 
+        // Callback tombol kembali ke MainActivity
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(FacilitiesActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
         setupWindowAndStatusBar();
         setupToolbar();
         initViews();
@@ -84,7 +96,6 @@ public class FacilitiesActivity extends AppCompatActivity
 
         applyFilters();
     }
-
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.primary_forest));
@@ -379,14 +390,7 @@ public class FacilitiesActivity extends AppCompatActivity
         intent.putExtra("extra_image", item.getImageUrl());
         startActivity(intent);
     }
-@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        finish();
-    }
+
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
