@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Skala spasi beranda: 4 / 8 / 12 / 16 / 20 / 28.
+         Gutter 20dp dipakai untuk semua tepi konten beranda agar judul seksi
+         dan kartu rata pada satu garis. -->
+    <dimen name="page_gutter">20dp</dimen>
+    <dimen name="grid_margin">16dp</dimen>
+    <dimen name="grid_gap">8dp</dimen>
+    <dimen name="section_gap">28dp</dimen>
+
+    <!-- Satu keluarga radius: kartu 16dp, kontrol 12dp, kolom cari 14dp. -->
+    <dimen name="radius_card">16dp</dimen>
+    <dimen name="radius_control">12dp</dimen>
+    <dimen name="radius_search">14dp</dimen>
+
+    <dimen name="touch_target">44dp</dimen>
+    <dimen name="content_bottom_inset">96dp</dimen>
+</resources>

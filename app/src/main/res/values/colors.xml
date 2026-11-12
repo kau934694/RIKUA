@@ -30,9 +30,13 @@
     <color name="text_primary">#1A1D16</color>
     <color name="text_secondary">#404846</color>
     <color name="text_tertiary">#707976</color>
+    <!-- Teks kecil di atas permukaan terang: 5,9:1 pada putih, 5,7:1 pada krem. -->
+    <color name="text_muted">#5B6663</color>
     <color name="text_white">#FFFFFF</color>
     <color name="text_white_80">#CCFFFFFF</color>
     <color name="text_white_60">#99FFFFFF</color>
+    <!-- Garis pemisah di dalam hero hijau. -->
+    <color name="white_hairline">#33FFFFFF</color>
 
     <!-- Status & Functional Accents -->
     <color name="status_green">#10B981</color>
@@ -59,13 +63,15 @@
     <color name="consult_primary_light">#0A6B5C</color>
     <color name="consult_teal_container">#D4EBE5</color>
     <color name="whatsapp_brand">#25D366</color>
-    <color name="whatsapp_brand_dark">#1DA851</color>
+    <!-- Hijau tombol WhatsApp: versi lebih gelap agar teks putih lolos 4,5:1 (5,4:1). -->
+    <color name="whatsapp_brand_dark">#0E7A44</color>
 
     <!-- Officer Availability Status -->
     <color name="status_offline_bg">#F1F3F1</color>
     <color name="status_offline_text">#667069</color>
     <color name="status_offline_dot">#9AA39C</color>
-    <color name="avatar_gray_bg">#B8C2BD</color>
+    <!-- Avatar inisial: abu netral digelapkan agar inisial putih lolos 4,5:1 (5,9:1). -->
+    <color name="avatar_gray_bg">#5B6663</color>
 
     <!-- Rekomendasi Nikah — MD3 spec palette -->
     <color name="md3_primary">#005145</color>

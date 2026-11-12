@@ -64,7 +64,7 @@ public class CekStatusActivity extends AppCompatActivity {
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
     /** Endpoint pelacakan status berkas (parameter kode_tiket & tanggal_lahir). */
-    private static final String API_URL = "http://192.168.1.5/rikua_api/api_cek_status.php";
+    private static final String API_URL = "http://192.168.1.23/rikua_api/api_cek_status.php";
 
     /** Admin KUA Randudongkal untuk konsultasi status (format 62…). */
     private static final String ADMIN_WHATSAPP = "6287787080948";

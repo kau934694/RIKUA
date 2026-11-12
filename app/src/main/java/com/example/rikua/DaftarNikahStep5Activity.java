@@ -55,10 +55,10 @@ public class DaftarNikahStep5Activity extends AppCompatActivity {
             "https://simkah.kemenag.go.id";
 
     private static final String API_DAFTAR_DOKUMEN =
-            "http://192.168.1.5/rikua_api/get_jenis_dokumen.php";
+            "http://192.168.1.23/rikua_api/get_jenis_dokumen.php";
 
     private static final String API_UPLOAD_DOKUMEN =
-            "http://192.168.1.5/rikua_api/upload_dokumen.php";
+            "http://192.168.1.23/rikua_api/upload_dokumen.php";
 
     private static final long MAKS_UKURAN_BYTE =
             2L * 1024L * 1024L;

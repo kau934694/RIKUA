@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 
@@ -22,7 +23,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ConsultationActivity extends AppCompatActivity
         implements OfficerAdapter.OnActionListener {
@@ -45,8 +46,15 @@ public class ConsultationActivity extends AppCompatActivity
     private OfficerAdapter adapter;
     private RecyclerView rvOfficers;
 
+    private View progressOfficers;
+    private View layoutOfficersEmpty;
+    private TextView tvOfficersEmptyTitle;
+    private TextView tvOfficersEmptyDesc;
+    private boolean sudahDimuat = false;
+    private boolean gagalMemuat = false;
+
     private static final String WA_BASE = "https://wa.me/";
-    private static final String API_URL = "http://192.168.1.5/rikua_api/get_petugas.php";
+    private static final String API_URL = "http://192.168.1.23/rikua_api/get_petugas.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +84,7 @@ public class ConsultationActivity extends AppCompatActivity
 
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primary_forest));
         WindowInsetsControllerCompat controller =
                 WindowCompat.getInsetsController(window, window.getDecorView());
         controller.setAppearanceLightStatusBars(false);
@@ -111,6 +119,11 @@ public class ConsultationActivity extends AppCompatActivity
 
     private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
+
+        progressOfficers = findViewById(R.id.progress_officers);
+        layoutOfficersEmpty = findViewById(R.id.layout_officers_empty);
+        tvOfficersEmptyTitle = findViewById(R.id.tv_officers_empty_title);
+        tvOfficersEmptyDesc = findViewById(R.id.tv_officers_empty_desc);
 
         NavigationView navView = findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(item -> {
@@ -186,23 +199,62 @@ public class ConsultationActivity extends AppCompatActivity
                         ));
                     }
 
-                    runOnUiThread(() -> adapter.submitList(officers));
+                    runOnUiThread(() -> {
+                        adapter.submitList(officers);
+                        sudahDimuat = true;
+                        gagalMemuat = false;
+                        sembunyikanProgress();
+                        perbaruiStatusDaftar();
+                    });
+                } else {
+                    throw new Exception("Status server: " + status);
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e("DB_ERROR", "Gagal memuat data petugas: " + e.getMessage());
-                runOnUiThread(() -> showToast("Gagal terhubung ke database server"));
+                runOnUiThread(() -> {
+                    sudahDimuat = true;
+                    gagalMemuat = true;
+                    sembunyikanProgress();
+                    perbaruiStatusDaftar();
+                    showToast("Gagal terhubung ke database server");
+                });
             }
         }).start();
     }
 
+    private void sembunyikanProgress() {
+        if (progressOfficers != null) progressOfficers.setVisibility(View.GONE);
+    }
+
+    private void perbaruiStatusDaftar() {
+        boolean kosong = sudahDimuat && adapter != null && adapter.getItemCount() == 0;
+        if (layoutOfficersEmpty == null) return;
+
+        if (kosong) {
+            // Muat gagal dan daftar kosong butuh pesan berbeda.
+            if (tvOfficersEmptyTitle != null) {
+                tvOfficersEmptyTitle.setText(gagalMemuat
+                        ? R.string.consultation_error_title
+                        : R.string.consultation_empty_title);
+            }
+            if (tvOfficersEmptyDesc != null) {
+                tvOfficersEmptyDesc.setText(gagalMemuat
+                        ? R.string.consultation_error_desc
+                        : R.string.consultation_empty_desc);
+            }
+        }
+        layoutOfficersEmpty.setVisibility(kosong ? View.VISIBLE : View.GONE);
+    }
+
     private String getInitials(String name) {
         String[] parts = name.replace(".", "").trim().split("\\s+");
+        // Locale.ROOT: huruf inisial tetap i/I walau bahasa perangkat memakai locale Turki.
         if (parts.length >= 2) {
-            return (parts[0].substring(0, 1) + parts[1].substring(0, 1)).toUpperCase();
+            return (parts[0].substring(0, 1) + parts[1].substring(0, 1)).toUpperCase(Locale.ROOT);
         } else if (parts.length == 1 && parts[0].length() >= 2) {
-            return parts[0].substring(0, 2).toUpperCase();
+            return parts[0].substring(0, 2).toUpperCase(Locale.ROOT);
         }
         return "KU";
     }

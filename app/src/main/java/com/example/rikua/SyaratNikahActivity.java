@@ -79,7 +79,7 @@ public class SyaratNikahActivity extends AppCompatActivity {
 
     /** Endpoint data — host API Laragon yang sama dengan layar lain. */
     private static final String API_URL =
-            "http://192.168.1.5/rikua_api/get_syarat_nikah.php";
+            "http://192.168.1.23/rikua_api/get_syarat_nikah.php";
     /** Slug default (kolom {@code kode_layanan}) bila Intent tidak mengirim slug. */
     private static final String KODE_LAYANAN = "syarat-nikah";
 

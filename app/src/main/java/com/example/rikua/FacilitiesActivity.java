@@ -48,7 +48,7 @@ public class FacilitiesActivity extends AppCompatActivity
 
     private static final int CURRENT_TAB_INDEX = 3; // Sarana = 3
 
-    private static final String API_URL = "http://192.168.1.5/rikua_api/get_sarana.php";
+    private static final String API_URL = "http://192.168.1.23/rikua_api/get_sarana.php";
 
     private String currentCategory = null; 
     private String currentVillage = null;  
@@ -182,7 +182,7 @@ public class FacilitiesActivity extends AppCompatActivity
                         
                         String imageUrl = "";
                         if (!namaFileGambar.isEmpty()) {
-                            imageUrl = "http://192.168.1.5/rikua_api/uploads/" + namaFileGambar;
+                            imageUrl = "http://192.168.1.23/rikua_api/uploads/" + namaFileGambar;
                         }
 
                         String namaSarana = obj.optString("nama_sarana", "-");

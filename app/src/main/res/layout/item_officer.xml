@@ -3,13 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_officer"
+    style="@style/Widget.Rikua.FlatCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="14dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="2dp"
-    app:strokeColor="@color/surface_card_border"
-    app:strokeWidth="1dp">
+    android:layout_marginBottom="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,40 +14,41 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- ===== Top row: Avatar + Identity ===== -->
+        <!-- Identitas: avatar berstatus, nama, jabatan, pil ketersediaan -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:baselineAligned="false"
+            android:gravity="top"
             android:orientation="horizontal">
 
-            <!-- Avatar circle with status dot overlay -->
             <FrameLayout
-                android:layout_width="56dp"
-                android:layout_height="56dp">
+                android:layout_width="52dp"
+                android:layout_height="52dp">
 
                 <TextView
                     android:id="@+id/tv_avatar"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:background="@drawable/bg_avatar_teal"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
+                    android:importantForAccessibility="no"
                     android:letterSpacing="0.02"
                     android:textColor="@color/text_white"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     tools:text="HS" />
 
                 <ImageView
                     android:id="@+id/iv_status_dot"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     android:layout_gravity="bottom|end"
-                    android:contentDescription="@string/consultation_status_available"
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no"
                     android:src="@drawable/dot_status_online" />
             </FrameLayout>
 
-            <!-- Name, role, status badge -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,92 +71,103 @@
                     android:id="@+id/tv_officer_role"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:textColor="@color/consult_primary"
-                    android:textSize="13sp"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:maxLines="2"
+                    android:textColor="@color/primary_forest"
+                    android:textSize="12sp"
                     tools:text="Kepala KUA Randudongkal" />
 
                 <TextView
                     android:id="@+id/tv_status_badge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_badge_emerald"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_status_pill_available"
                     android:fontFamily="sans-serif-medium"
                     android:paddingStart="10dp"
-                    android:paddingTop="3dp"
+                    android:paddingTop="4dp"
                     android:paddingEnd="10dp"
-                    android:paddingBottom="3dp"
-                    android:textColor="@color/status_green_dark"
+                    android:paddingBottom="4dp"
+                    android:textColor="@color/primary_forest"
                     android:textSize="11sp"
                     tools:text="Tersedia" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ===== Service hours line ===== -->
+        <!-- Ikon jam sengaja 15dp agar seimbang dengan teks 12sp; compound drawable memakai ukuran intrinsik vektor 24dp. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:contentDescription="@string/consultation_hours_desc"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:contentDescription="@null"
                 android:src="@drawable/ic_schedule"
-                app:tint="@color/text_tertiary" />
+                app:tint="@color/text_muted" />
 
             <TextView
                 android:id="@+id/tv_service_hours"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="@color/text_secondary"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 tools:text="Jam layanan: 08.00 - 15.00 WIB" />
         </LinearLayout>
 
-        <!-- ===== Expertise chips ===== -->
+        <!-- Bidang keahlian dari API, satu tag per bidang -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.02"
             android:text="@string/consultation_expertise_title"
-            android:textColor="@color/text_tertiary"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+            android:textColor="@color/text_muted"
+            android:textSize="11sp" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group_expertise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
+            app:chipSpacingHorizontal="6dp"
             app:chipSpacingVertical="4dp" />
 
-        <!-- ===== Action buttons ===== -->
+        <!-- Aksi: WhatsApp utama, telepon pendamping -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_whatsapp"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="6dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@string/consultation_btn_whatsapp"
                 android:textColor="@color/text_white"
                 android:textSize="13sp"
                 app:backgroundTint="@color/whatsapp_brand_dark"
-                app:cornerRadius="12dp"
+                app:cornerRadius="14dp"
                 app:icon="@drawable/ic_whatsapp"
-                app:iconGravity="start"
+                app:iconGravity="textStart"
+                app:iconPadding="6dp"
                 app:iconSize="18dp"
                 app:iconTint="@color/text_white" />
 
@@ -166,19 +175,23 @@
                 android:id="@+id/btn_telepon"
                 style="@style/Widget.Material3.Button.OutlinedButton.Icon"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="6dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@string/consultation_btn_telepon"
-                android:textColor="@color/consult_primary"
+                android:textColor="@color/primary_forest"
                 android:textSize="13sp"
-                app:cornerRadius="12dp"
+                app:cornerRadius="14dp"
                 app:icon="@drawable/ic_phone"
-                app:iconGravity="start"
+                app:iconGravity="textStart"
+                app:iconPadding="6dp"
                 app:iconSize="18dp"
-                app:iconTint="@color/consult_primary"
-                app:strokeColor="@color/consult_primary" />
+                app:iconTint="@color/primary_forest"
+                app:strokeColor="@color/primary_forest"
+                app:strokeWidth="1dp" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

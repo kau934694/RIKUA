@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Badge layanan: permukaan emas datar. Gradient lama diganti warna solid
+     karena badge berulang di setiap kartu. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/gold_container" />
+    <corners android:radius="100dp" />
+</shape>

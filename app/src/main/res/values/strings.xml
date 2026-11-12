@@ -5,24 +5,27 @@
     
     
     <!-- Hero Strings -->
-    <string name="hero_greeting_prefix">Assalamu\'alaikum,</string>
-    <string name="hero_greeting_title">Warga Sejahtera</string>
-    <string name="hero_greeting_desc">Layanan informasi dan administrasi pernikahan terpadu KUA Kecamatan Randudongkal.</string>
-    <string name="search_hint">Cari syarat nikah, blangko, atau sarana…</string>
+    <string name="hero_greeting_prefix">Assalamu\'alaikum</string>
+    <string name="hero_greeting_title">Ada yang bisa kami bantu?</string>
+    <string name="hero_greeting_desc">Informasi nikah, blangko, dan sarana keagamaan KUA Kec. Randudongkal.</string>
+    <string name="search_hint">Cari layanan atau sarana</string>
+    <string name="search_filter_desc">Atur filter layanan</string>
+    <string name="menu_open_desc">Buka menu navigasi</string>
 
     <!-- Announcement Strings -->
     <string name="announcement_title">Jadwal Pendaftaran Nikah Bulan Syawal</string>
     <string name="announcement_desc">Bagi calon pengantin yang merencanakan akad nikah di bulan Syawal, kuota pendaftaran balai nikah dan luar kantor telah dibuka. Segera lengkapi berkas Anda.</string>
-    <string name="btn_check_quota">Lihat Kuota</string>
+    <string name="btn_check_quota">Lihat Jadwal &amp; Kuota</string>
+    <string name="btn_retry_kuota">Coba lagi</string>
     <!-- Integrated Services Strings -->
     <string name="section_services_title">Layanan Terpadu</string>
-    <string name="btn_see_all">Semua</string>
+    <string name="btn_see_all">Lihat semua</string>
 
     <string name="service_daftar_nikah_title">Daftar Nikah</string>
     <string name="service_daftar_nikah_desc">Pendaftaran akta nikah online</string>
 
     <string name="service_blangko_title">Blangko N</string>
-    <string name="service_blangko_desc">Format model N1 - N6</string>
+    <string name="service_blangko_desc">Format model N1-N6</string>
 
     <string name="service_konsultasi_title">Konsultasi</string>
     <string name="service_konsultasi_desc">Bimbingan perkawinan &amp; BP4</string>
@@ -35,10 +38,10 @@
     <string name="section_info_title">Informasi &amp; Pelayanan Kantor</string>
     
     <string name="card_hours_title">Jam Pelayanan Kantor</string>
-    <string name="hours_weekend">Sabtu &amp; Minggu : Libur (Kecuali Akad Luar Kantor)</string>
+    <string name="hours_weekend">Sabtu dan Minggu libur, kecuali akad di luar kantor</string>
 
-    <string name="card_location_title">KUA Kecamatan Randudongkal</string>
-    <string name="card_location_address"> Dusun II, Randudongkal, Kec. Randudongkal, Kabupaten Pemalang, Jawa Tengah 52353</string>
+    <string name="card_location_title">Lokasi kantor</string>
+    <string name="card_location_address">Dusun II, Randudongkal, Kec. Randudongkal, Kabupaten Pemalang, Jawa Tengah 52353</string>
     <string name="btn_directions">Petunjuk Arah</string>
 
     <string name="card_contact_title">Layanan Aduan &amp; Bantuan Cepat</string>
@@ -48,7 +51,7 @@
 
     <!-- Editorial Quote -->
     <string name="editorial_quote">“Pernikahan yang kokoh berakar pada niat suci, saling memahami, dan komunikasi yang terbuka. KUA Randudongkal hadir mendampingi awal perjalanan bahagia Anda.”</string>
-    <string name="editorial_author">— Seksi Kepenghuluan &amp; BP4 KUA Kec. Randudongkal</string>
+    <string name="editorial_author">Seksi Kepenghuluan &amp; BP4, KUA Kec. Randudongkal</string>
 
     <!-- Bottom Navigation Tabs -->
     <string name="nav_home">Beranda</string>
@@ -69,13 +72,14 @@
 
     <string name="services_search_hint">Cari layanan (misal: nikah, isbat, wakaf)…</string>
     <string name="services_search_clear">Hapus pencarian</string>
+    <string name="services_trust_strip">Informasi layanan resmi KUA Kecamatan Randudongkal, Kabupaten Pemalang. Mudah dipahami dan transparan.</string>
 
     <string name="services_filter_all">Semua Layanan</string>
     <string name="services_filter_marriage">Pernikahan</string>
     <string name="services_filter_admin">Administrasi &amp; Dokumen</string>
     <string name="services_filter_wakaf">Kemasjidan &amp; Wakaf</string>
 
-    <string name="services_section_list_title">8 Layanan Esensial</string>
+    <string name="services_section_list_title">Daftar layanan</string>
     <string name="services_section_list_subtitle">Ketuk kartu untuk melihat persyaratan lengkap</string>
 
     <!-- Service Item Titles & Descriptions -->
@@ -116,6 +120,8 @@
     <!-- Empty State -->
     <string name="services_empty_title">Layanan tidak ditemukan</string>
     <string name="services_empty_desc">Coba kata kunci lain seperti \"nikah\", \"wakaf\", atau \"isbat\".</string>
+    <string name="services_error_title">Layanan belum bisa dimuat</string>
+    <string name="services_error_desc">Periksa koneksi internet, lalu buka kembali halaman ini.</string>
 
     <!-- Help Card -->
     <string name="services_help_title">Bingung menentukan berkas?</string>
@@ -132,26 +138,22 @@
     <string name="cat_kemasjidan">wakaf kemasjidan masjid sosial</string>
 
     <!-- ==================== Consultation Screen ==================== -->
-    <string name="consultation_toolbar_title">Konsultasi dengan Petugas</string>
     <string name="consultation_toolbar_subtitle">KUA Kec. Randudongkal</string>
 
     <string name="consultation_banner_title">Konsultasi dengan Petugas KUA</string>
     <string name="consultation_banner_desc">Bimbingan langsung bersama petugas resmi: syarat nikah, dispensasi, taukil wali, keluarga sakinah, hingga wakaf.</string>
 
-     <string name="hours_weekday">Senin - Kamis : 07.30 - 16.00 WIB</string>
-    <string name="hours_friday">Jumat : 07.30 - 16.30 WIB</string>
+    <string name="hours_weekday">Senin-Kamis, 07.30-16.00 WIB</string>
+    <string name="hours_friday">Jumat, 07.30-16.30 WIB</string>
 
-
-    <string name="consultation_section_title">4 Petugas Pelayanan</string>
-    <string name="consultation_section_subtitle">Pilih petugas sesuai bidang konsultasi Anda</string>
+    <string name="consultation_section_title">Konsultasikan Kebutuhan Anda</string>
+    <string name="consultation_section_subtitle">Pilih petugas sesuai bidang keahliannya, lalu hubungi lewat WhatsApp atau telepon.</string>
 
     <string name="consultation_btn_whatsapp">WhatsApp</string>
     <string name="consultation_btn_telepon">Telepon</string>
     <string name="consultation_status_available">Tersedia</string>
     <string name="consultation_status_offline">Di luar jam layanan</string>
     <string name="consultation_hours_prefix">Jam layanan: %1$s</string>
-    <string name="consultation_hours_desc">Jam layanan petugas</string>
-    <string name="consultation_avatar_desc">Inisial petugas</string>
     <string name="consultation_expertise_title">Bidang keahlian</string>
 
     <string name="consultation_wa_message">Halo %1$s, saya ingin konsultasi mengenai %2$s melalui RIKUA KUA Randudongkal.</string>
@@ -162,6 +164,11 @@
     <string name="consultation_reassurance_desc">Semua layanan konsultasi KUA Randudongkal tidak dipungut biaya (Gratis).</string>
     <string name="consultation_footer_note">KUA tidak memungut biaya melalui situs ini.</string>
     <string name="consultation_footer_address">KUA Kecamatan Randudongkal, Kabupaten Pemalang</string>
+
+    <string name="consultation_empty_title">Belum ada petugas</string>
+    <string name="consultation_empty_desc">Daftar petugas akan tampil setelah datanya tersedia.</string>
+    <string name="consultation_error_title">Daftar petugas belum bisa dimuat</string>
+    <string name="consultation_error_desc">Periksa koneksi internet, lalu buka kembali halaman ini.</string>
 
     <!-- Officer Data (Randudongkal) -->
     <string name="officer_1_name">Fatchuroji Alhad, S.Ag.</string>

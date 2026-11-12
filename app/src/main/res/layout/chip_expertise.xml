@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Tag bidang keahlian: informatif, bukan tombol, jadi dibuat ringkas tanpa stroke. -->
 <com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.Material3.Chip.Assist"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textColor="@color/consult_primary"
-    android:textSize="12sp"
-    app:chipBackgroundColor="@color/consult_teal_container"
+    android:clickable="false"
+    android:focusable="false"
+    android:textColor="@color/primary_forest"
+    android:textSize="11sp"
+    app:chipBackgroundColor="@color/primary_forest_container"
+    app:chipCornerRadius="8dp"
+    app:chipEndPadding="9dp"
     app:chipIconEnabled="false"
-    app:chipStrokeColor="@color/consult_primary_light"
-    app:chipStrokeWidth="0.8dp" />
+    app:chipMinHeight="26dp"
+    app:chipStartPadding="9dp"
+    app:chipStrokeWidth="0dp"
+    app:ensureMinTouchTargetSize="false" />

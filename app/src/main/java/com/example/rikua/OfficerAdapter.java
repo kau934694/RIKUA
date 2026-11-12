@@ -1,5 +1,6 @@
 package com.example.rikua;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,8 @@ public class OfficerAdapter extends RecyclerView.Adapter<OfficerAdapter.OfficerV
         this.listener = listener;
     }
 
+    // Seluruh daftar diganti utuh sekali per pemuatan, jadi diff per item tidak memberi manfaat.
+    @SuppressLint("NotifyDataSetChanged")
     public void submitList(List<OfficerItem> officers) {
         items.clear();
         if (officers != null) {
@@ -103,15 +106,15 @@ public class OfficerAdapter extends RecyclerView.Adapter<OfficerAdapter.OfficerV
             if (item.isAvailable()) {
                 statusDot.setImageResource(R.drawable.dot_status_online);
                 statusBadge.setText(R.string.consultation_status_available);
-                statusBadge.setBackgroundResource(R.drawable.bg_badge_emerald);
+                statusBadge.setBackgroundResource(R.drawable.bg_status_pill_available);
                 statusBadge.setTextColor(ContextCompat.getColor(
-                        statusBadge.getContext(), R.color.status_green_dark));
+                        statusBadge.getContext(), R.color.primary_forest));
             } else {
                 statusDot.setImageResource(R.drawable.dot_status_offline);
                 statusBadge.setText(R.string.consultation_status_offline);
-                statusBadge.setBackgroundResource(R.drawable.bg_badge_gray);
+                statusBadge.setBackgroundResource(R.drawable.bg_status_pill_offline);
                 statusBadge.setTextColor(ContextCompat.getColor(
-                        statusBadge.getContext(), R.color.status_offline_text));
+                        statusBadge.getContext(), R.color.text_muted));
             }
 
             // Chip bidang keahlian (dinamis)

@@ -54,7 +54,7 @@ Atau lewat phpMyAdmin: buat database `rikua`, lalu impor `01_struktur.sql` dan `
 
 ### 3. Hubungkan aplikasi
 
-Alamat server di kode Android masih ditulis langsung. Ganti `192.168.1.5` dengan IP komputer Anda (cek dengan `ipconfig`) di semua file Java, dan tambahkan IP yang sama ke `app/src/main/res/xml/network_security_config.xml`. Gunakan fitur Find and Replace di Android Studio (Ctrl+Shift+R). Ponsel dan komputer harus berada di jaringan Wi-Fi yang sama.
+Alamat server di kode Android masih ditulis langsung. Ganti `192.168.1.23` dengan IP komputer Anda (cek dengan `ipconfig`) di semua file Java, dan tambahkan IP yang sama ke `app/src/main/res/xml/network_security_config.xml`. Gunakan fitur Find and Replace di Android Studio (Ctrl+Shift+R). Ponsel dan komputer harus berada di jaringan Wi-Fi yang sama.
 
 Setelah itu, buka proyek di Android Studio, tunggu sinkronisasi Gradle, lalu jalankan di emulator atau perangkat.
 

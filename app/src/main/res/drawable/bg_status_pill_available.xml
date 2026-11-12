@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pil status petugas tersedia: hijau lembut dengan teks hijau tua (7,8:1). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/primary_forest_container" />
+    <corners android:radius="100dp" />
+</shape>

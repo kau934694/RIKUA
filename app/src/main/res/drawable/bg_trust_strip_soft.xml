@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strip kepercayaan halaman Layanan: hijau muda datar, tanpa gradient. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/primary_forest_container" />
+    <corners android:radius="14dp" />
+</shape>

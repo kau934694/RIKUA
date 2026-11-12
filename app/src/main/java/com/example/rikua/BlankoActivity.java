@@ -47,8 +47,8 @@ public class BlankoActivity extends AppCompatActivity
 
     private static final int CURRENT_TAB_INDEX = 4; // Blanko = 4
 
-    private static final String API_URL = "http://192.168.1.5/rikua_api/get_blanko.php";
-    private static final String BASE_FILE_URL = "http:// 192.168.1.5/rikua_api/uploads/blanko/";
+    private static final String API_URL = "http://192.168.1.23/rikua_api/get_blanko.php";
+    private static final String BASE_FILE_URL = "http:// 192.168.1.23/rikua_api/uploads/blanko/";
 
     private final List<BlankoItem> blankoList = new ArrayList<>();
     private BlankoAdapter adapter;

@@ -58,7 +58,7 @@ public class PengumumanNikahActivity extends AppCompatActivity {
     private static final String ADMIN_WHATSAPP = "6287787080948";
 
     /** Endpoint daftar pengumuman. */
-    private static final String API_URL = "http://192.168.1.5/rikua_api/get_pengumuman.php";
+    private static final String API_URL = "http://192.168.1.23/rikua_api/get_pengumuman.php";
 
     /**
      * Saat true, pendaftaran berstatus 'draf' ikut ditampilkan (untuk uji coba).

@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 public class DaftarNikahStep2Activity extends AppCompatActivity {
 
     private static final String API_URL =
-            "http://192.168.1.5/rikua_api/get_calon_pengantin.php";
+            "http://192.168.1.23/rikua_api/get_calon_pengantin.php";
     private static final Pattern POLA_NIK = Pattern.compile("\\d{16}");
     private static final Pattern POLA_TANGGAL = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
     private static final Pattern POLA_TELEPON = Pattern.compile("\\d{9,13}");

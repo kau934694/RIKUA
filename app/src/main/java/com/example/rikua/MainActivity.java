@@ -14,7 +14,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.Button;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
@@ -23,6 +22,9 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.ColorStateList;
+import androidx.core.content.ContextCompat;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
@@ -37,8 +39,6 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String WHATSAPP_MESSAGE = "Assalamu'alaikum, saya ingin bertanya terkait layanan KUA Randudongkal.";
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
-    private static final String API_KUOTA = "http://192.168.1.5/rikua_api/get_kuota.php";
+    private static final String API_KUOTA = "http://192.168.1.23/rikua_api/get_kuota.php";
 
     private static final boolean HITUNG_DRAF_UNTUK_UJI = true;
 
@@ -70,13 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvAnnouncementTitle;
     private TextView tvAnnouncementDesc;
+    private View progressKuota;
+    private View btnKuotaRetry;
 
     private EditText etGlobalSearch;
     private View cardSearchResults;
     private LinearLayout layoutSearchResults;
 
-    private static final String URL_SARANA = "http://192.168.1.5/rikua_api/get_sarana.php";
-    private static final String URL_GAMBAR_SARANA = "http://192.168.1.5/rikua_api/uploads/";
+    private static final String URL_SARANA = "http://192.168.1.23/rikua_api/get_sarana.php";
+    private static final String URL_GAMBAR_SARANA = "http://192.168.1.23/rikua_api/uploads/";
 
     private final List<FacilityItem> daftarFasilitasGlobal = new ArrayList<>();
 
@@ -163,14 +165,24 @@ public class MainActivity extends AppCompatActivity {
     private void bindAnnouncement() {
         tvAnnouncementTitle = findViewById(R.id.tv_announcement_title);
         tvAnnouncementDesc = findViewById(R.id.tv_announcement_desc);
+        progressKuota = findViewById(R.id.progress_kuota);
+        btnKuotaRetry = findViewById(R.id.btn_kuota_retry);
 
         perbaruiJudulKuota();
         tvAnnouncementDesc.setText("Memuat data kuota…");
 
-        findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, JadwalPernikahanActivity.class);
-            startActivity(intent);
-        });
+        btnKuotaRetry.setOnClickListener(v -> muatKuota());
+
+       findViewById(R.id.btn_lihat_kuota).setOnClickListener(v -> {
+    Calendar c = Calendar.getInstance();
+    String bulanSekarang = String.format(Locale.US, "%04d-%02d", 
+            c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1);
+
+    Intent intent = new Intent(MainActivity.this, JadwalPernikahanActivity.class);
+    intent.putExtra("EXTRA_BULAN", bulanSekarang);
+    startActivity(intent);
+    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+});
     }
 
     private String labelBulanSekarang() {
@@ -179,13 +191,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void perbaruiJudulKuota() {
-        tvAnnouncementTitle.setText("Kuota Pendaftaran Nikah — " + labelBulanSekarang());
+        tvAnnouncementTitle.setText("Kuota Pendaftaran Nikah, " + labelBulanSekarang());
     }
 
     private void muatKuota() {
         Calendar c = Calendar.getInstance();
         final String bulan = String.format(Locale.US, "%04d-%02d",
                 c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1);
+
+        // Indikator tampil selama permintaan berjalan; detail lama tetap terbaca.
+        if (progressKuota != null) progressKuota.setVisibility(View.VISIBLE);
+        if (btnKuotaRetry != null) btnKuotaRetry.setVisibility(View.GONE);
 
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -236,10 +252,13 @@ public class MainActivity extends AppCompatActivity {
                 if (fGalat == null) {
                     detailKuota = fDetail;
                     tvAnnouncementDesc.setText(fRingkas);
+                    btnKuotaRetry.setVisibility(View.GONE);
                 } else {
                     detailKuota = null;
-                    tvAnnouncementDesc.setText("Data kuota belum bisa dimuat. Periksa koneksi ke server.");
+                    tvAnnouncementDesc.setText("Data kuota belum bisa dimuat. Periksa koneksi lalu coba lagi.");
+                    btnKuotaRetry.setVisibility(View.VISIBLE);
                 }
+                if (progressKuota != null) progressKuota.setVisibility(View.GONE);
             });
         }).start();
     }
@@ -257,9 +276,9 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject o = arr.getJSONObject(i);
                 sb.append("• ").append(o.optString("label"));
                 if (o.optBoolean("penuh")) {
-                    sb.append(" — PENUH");
+                    sb.append(": PENUH");
                 } else {
-                    sb.append(" — terisi ").append(o.optInt("terisi"))
+                    sb.append(": terisi ").append(o.optInt("terisi"))
                             .append(", sisa ").append(o.optInt("sisa"));
                 }
                 sb.append('\n');
@@ -336,11 +355,7 @@ public class MainActivity extends AppCompatActivity {
         cardSearchResults.setVisibility(View.VISIBLE);
 
         if (!fasilitasSudahDimuat) {
-            TextView loading = new TextView(this);
-            loading.setText("Memuat data fasilitas...");
-            loading.setTextSize(14);
-            loading.setPadding(dp(12), dp(12), dp(12), dp(12));
-            layoutSearchResults.addView(loading);
+            layoutSearchResults.addView(buatTeksPencarian("Sedang memuat data fasilitas…", false));
 
             muatFasilitasUntukPencarian();
             return;
@@ -360,33 +375,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasil.isEmpty()) {
-            TextView kosong = new TextView(this);
-            kosong.setText("Fasilitas tidak ditemukan.");
-            kosong.setTextSize(14);
-            kosong.setPadding(dp(12), dp(12), dp(12), dp(12));
-            layoutSearchResults.addView(kosong);
+            layoutSearchResults.addView(buatTeksPencarian(
+                    "Fasilitas tidak ditemukan. Coba kata lain seperti masjid atau balai nikah.", false));
             return;
         }
 
-        TextView judul = new TextView(this);
-        judul.setText("FASILITAS KEAGAMAAN");
+        TextView judul = buatTeksPencarian("Fasilitas keagamaan", true);
         judul.setTextSize(12);
-        judul.setTypeface(null, android.graphics.Typeface.BOLD);
-        judul.setTextColor(Color.GRAY);
-        judul.setPadding(dp(12), dp(8), dp(12), dp(8));
-
+        judul.setTextColor(ContextCompat.getColor(this, R.color.primary_forest));
         layoutSearchResults.addView(judul);
 
         for (FacilityItem item : hasil) {
-            TextView baris = new TextView(this);
-            baris.setText(item.getName() + "\n" + item.getCategoryLabel() + " • " + item.getLocation());
-            baris.setTextSize(14);
-            baris.setTextColor(Color.BLACK);
-            baris.setPadding(dp(12), dp(12), dp(12), dp(12));
-            baris.setBackgroundResource(android.R.drawable.list_selector_background);
-
-            baris.setOnClickListener(v -> bukaDetailFasilitas(item));
-            layoutSearchResults.addView(baris);
+            tambahBarisHasil(item.getName(),
+                    item.getCategoryLabel() + " • " + item.getLocation(),
+                    () -> bukaDetailFasilitas(item));
         }
     }
 
@@ -409,7 +411,7 @@ public class MainActivity extends AppCompatActivity {
         int jumlah = 0;
 
         if (!layananGlobalSudahDimuat || !fasilitasSudahDimuat) {
-            TextView loading = buatTeksPencarian("Memuat data pencarian…", true);
+            TextView loading = buatTeksPencarian("Memuat data pencarian…", false);
             layoutSearchResults.addView(loading);
         }
 
@@ -444,34 +446,40 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (jumlah == 0 && layananGlobalSudahDimuat && fasilitasSudahDimuat) {
-            layoutSearchResults.addView(buatTeksPencarian("Tidak ada hasil untuk ‘" + query + "’. ", false));
+            layoutSearchResults.addView(buatTeksPencarian(
+                    "Tidak ada hasil untuk ‘" + query + "’. Coba kata lain seperti masjid atau isbat.", false));
         }
     }
 
     private TextView buatTeksPencarian(String teks, boolean tebal) {
         TextView view = new TextView(this);
         view.setText(teks);
-        view.setTextSize(14);
-        view.setTextColor(Color.DKGRAY);
-        view.setPadding(dp(12), dp(12), dp(12), dp(12));
-        if (tebal) view.setTypeface(null, android.graphics.Typeface.BOLD);
+        view.setTextSize(tebal ? 14 : 13);
+        view.setLineSpacing(dp(2), 1f);
+        view.setTextColor(ContextCompat.getColor(this,
+                tebal ? R.color.text_primary : R.color.text_secondary));
+        view.setPadding(dp(12), dp(10), dp(12), dp(10));
+        if (tebal) view.setTypeface(view.getTypeface(), android.graphics.Typeface.BOLD);
         return view;
     }
 
     private void tambahJudulGrup(String judul) {
         TextView heading = buatTeksPencarian(judul, true);
-        heading.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.primary_forest));
+        heading.setTextSize(12);
+        heading.setTextColor(ContextCompat.getColor(this, R.color.primary_forest));
         layoutSearchResults.addView(heading);
     }
 
     private void tambahBarisHasil(String judul, String deskripsi, Runnable aksi) {
         LinearLayout baris = new LinearLayout(this);
         baris.setOrientation(LinearLayout.VERTICAL);
+        baris.setMinimumHeight(dp(48));
         baris.setPadding(dp(12), dp(10), dp(12), dp(10));
         baris.setBackgroundResource(android.R.drawable.list_selector_background);
 
         TextView nama = buatTeksPencarian(judul, true);
-        nama.setPadding(0, 0, 0, dp(3));
+        nama.setTextSize(14);
+        nama.setPadding(0, 0, 0, dp(2));
         TextView detail = buatTeksPencarian(deskripsi == null ? "" : deskripsi, false);
         detail.setTextSize(12);
         detail.setPadding(0, 0, 0, 0);
@@ -638,7 +646,7 @@ public class MainActivity extends AppCompatActivity {
         return (int) (value * getResources().getDisplayMetrics().density);
     }
 
-    private static final String URL_LAYANAN = "http://192.168.1.5/rikua_api/get_layanan.php";
+    private static final String URL_LAYANAN = "http://192.168.1.23/rikua_api/get_layanan.php";
 
     private final List<ServiceItem> daftarLayananFilter = new ArrayList<>();
 
@@ -703,20 +711,20 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout container = new LinearLayout(this);
         container.setOrientation(LinearLayout.VERTICAL);
-        container.setPadding(dp(24), dp(20), dp(24), dp(24));
-        container.setBackgroundColor(Color.WHITE);
+        container.setPadding(dp(20), dp(20), dp(20), dp(20));
+        container.setBackgroundColor(ContextCompat.getColor(this, R.color.surface_white));
 
         TextView title = new TextView(this);
-        title.setText("Pilih Layanan");
-        title.setTextSize(20);
-        title.setTextColor(Color.BLACK);
+        title.setText("Filter layanan");
+        title.setTextSize(18);
+        title.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
         title.setTypeface(null, android.graphics.Typeface.BOLD);
 
         TextView loading = new TextView(this);
-        loading.setText("Memuat daftar layanan...");
-        loading.setTextSize(14);
-        loading.setTextColor(Color.GRAY);
-        loading.setPadding(0, dp(20), 0, dp(20));
+        loading.setText("Memuat daftar layanan…");
+        loading.setTextSize(13);
+        loading.setTextColor(ContextCompat.getColor(this, R.color.text_muted));
+        loading.setPadding(0, dp(16), 0, dp(16));
 
         container.addView(title);
         container.addView(loading);
@@ -764,7 +772,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     if (isFinishing() || isDestroyed() || !dialog.isShowing()) return;
-                    loading.setText("Gagal memuat layanan: " + e.getMessage());
+                    loading.setText("Daftar layanan belum bisa dimuat. Periksa koneksi lalu coba lagi.");
                 });
             } finally {
                 if (conn != null) conn.disconnect();
@@ -782,9 +790,9 @@ public class MainActivity extends AppCompatActivity {
         container.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Pilih salah satu layanan yang ingin dibuka");
+        subtitle.setText("Pilih satu layanan untuk membuka panduannya.");
         subtitle.setTextSize(13);
-        subtitle.setTextColor(Color.GRAY);
+        subtitle.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
 
         container.addView(subtitle);
 
@@ -799,26 +807,33 @@ public class MainActivity extends AppCompatActivity {
             radioButton.setId(View.generateViewId());
             radioButton.setText(item.getTitle());
             radioButton.setTextSize(15);
-            radioButton.setTextColor(Color.BLACK);
+            radioButton.setTextColor(ContextCompat.getColor(this, R.color.text_primary));
+            radioButton.setMinHeight(dp(48));
             radioButton.setPadding(0, dp(8), 0, dp(8));
 
             radioGroup.addView(radioButton);
         }
 
-        android.widget.Button btnTerapkan = new android.widget.Button(this);
-        btnTerapkan.setText("Terapkan Filter");
+        MaterialButton btnTerapkan = new MaterialButton(this);
+        btnTerapkan.setText("Buka layanan");
         btnTerapkan.setAllCaps(false);
+        btnTerapkan.setTextSize(14);
+        btnTerapkan.setCornerRadius(dp(12));
+        btnTerapkan.setInsetTop(0);
+        btnTerapkan.setInsetBottom(0);
+        btnTerapkan.setMinimumHeight(dp(48));
+        btnTerapkan.setBackgroundTintList(new ColorStateList(
+                new int[][]{{android.R.attr.state_enabled}, {}},
+                new int[]{ContextCompat.getColor(this, R.color.primary_forest),
+                        ContextCompat.getColor(this, R.color.daf_surface_variant)}));
+        btnTerapkan.setTextColor(new ColorStateList(
+                new int[][]{{android.R.attr.state_enabled}, {}},
+                new int[]{ContextCompat.getColor(this, R.color.text_white),
+                        ContextCompat.getColor(this, R.color.daf_on_surface_variant)}));
         btnTerapkan.setEnabled(false);
-        btnTerapkan.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#BDBDBD")));
 
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            boolean sudahDipilih = checkedId != -1;
-            btnTerapkan.setEnabled(sudahDipilih);
-            int warna = sudahDipilih
-                    ? androidx.core.content.ContextCompat.getColor(this, R.color.primary_forest)
-                    : Color.parseColor("#BDBDBD");
-            btnTerapkan.setBackgroundTintList(android.content.res.ColorStateList.valueOf(warna));
-        });
+        radioGroup.setOnCheckedChangeListener((group, checkedId) ->
+                btnTerapkan.setEnabled(checkedId != -1));
 
         btnTerapkan.setOnClickListener(v -> {
             int checkedId = radioGroup.getCheckedRadioButtonId();

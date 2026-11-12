@@ -47,7 +47,7 @@ public class DaftarNikahStep4Activity extends AppCompatActivity {
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
     
     // Endpoint API PHP yang konsisten
-    private static final String API_URL = "http://192.168.1.5/rikua_api/get_langkah_4_wali.php";
+    private static final String API_URL = "http://192.168.1.23/rikua_api/get_langkah_4_wali.php";
 
     private int idPendaftaran = 0;
     private String kodeTiketAktif = "";
