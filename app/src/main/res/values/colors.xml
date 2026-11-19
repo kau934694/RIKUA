@@ -21,6 +21,26 @@
     <color name="surface_white">#FFFFFF</color>
     <color name="surface_container_low">#F8FAF4</color>
     <color name="surface_card_border">#E2E7DE</color>
+    <!-- Garis rambut tombol Google: abu netral panduan merek Google. -->
+    <color name="google_button_border">#DADCE0</color>
+
+    <!-- Duplikat Buku Nikah — palet netral khusus halaman (tanpa hijau) -->
+    <color name="dup_bg">#F4F5F3</color>
+    <color name="dup_charcoal">#22262B</color>
+    <color name="dup_text">#22262B</color>
+    <color name="dup_desc">#4E5651</color>
+    <color name="dup_muted">#5F6865</color>
+    <color name="dup_border">#E5E8E3</color>
+    <color name="dup_chip_bg">#EEF1F4</color>
+    <color name="dup_status_idle">#7C867F</color>
+    <color name="dup_champagne">#F7EFDE</color>
+    <color name="dup_champagne_border">#E9DCBE</color>
+    <color name="dup_champagne_text">#6F5405</color>
+    <color name="dup_gold">#A9822F</color>
+    <color name="dup_rail">#CDD3CF</color>
+
+    <!-- Wakaf & Kemasjidan — lembar layanan resmi (kanvas off-white) -->
+    <color name="wakaf_bg">#F5F7F1</color>
 
     <!-- Announcement Card Gradient -->
     <color name="announcement_bg_start">#FDF9F0</color>
@@ -75,6 +95,10 @@
 
     <!-- Rekomendasi Nikah — MD3 spec palette -->
     <color name="md3_primary">#005145</color>
+    <!-- Rel timeline alur: 3,6:1 di atas krem, cukup terlihat tanpa menyamai angka. -->
+    <color name="rekom_rail">#5F8A80</color>
+    <!-- Tepi kartu berkas: 3,3:1 di atas krem, batas kartu terlihat. -->
+    <color name="rekom_card_edge">#7E8C85</color>
     <color name="md3_on_primary">#FFFFFF</color>
 
     <!-- Syarat Nikah (redesign) — MD3 + Tailwind custom palette -->

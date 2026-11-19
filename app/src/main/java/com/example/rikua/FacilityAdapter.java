@@ -58,7 +58,6 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
 
     class FacilityViewHolder extends RecyclerView.ViewHolder {
         private final MaterialCardView card;
-        private final View accentStrip;
         private final ShapeableImageView thumbIcon;
         private final TextView name;
         private final TextView categoryBadge;
@@ -69,7 +68,6 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
         FacilityViewHolder(@NonNull View itemView) {
             super(itemView);
             card = itemView.findViewById(R.id.card_facility_item);
-            accentStrip = itemView.findViewById(R.id.view_accent_strip);
             thumbIcon = itemView.findViewById(R.id.iv_thumb_icon);
             name = itemView.findViewById(R.id.tv_facility_name);
             categoryBadge = itemView.findViewById(R.id.tv_facility_category);
@@ -83,17 +81,12 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
             location.setText(item.getLocation());
             detail1.setText(item.getDetail1());
 
-            // Badge Kategori
             categoryBadge.setText(item.getCategoryLabel());
             categoryBadge.setBackgroundResource(item.getBadgeBgRes());
             categoryBadge.setTextColor(ContextCompat.getColor(
                     categoryBadge.getContext(), item.getBadgeTextColorRes()));
 
-            // Strip Akses Kiri
-            accentStrip.setBackgroundColor(ContextCompat.getColor(
-                    accentStrip.getContext(), item.getAccentColorRes()));
-
-            // Handling Pembuatan Gambar dengan Glide
+            // Foto bila ada URL; tanpa URL, ikon asli di-tint sebagai fallback.
             if (item.getImageUrl() != null && !item.getImageUrl().trim().isEmpty()) {
                 thumbIcon.clearColorFilter();
                 thumbIcon.setPadding(0, 0, 0, 0);
@@ -116,7 +109,6 @@ public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.Facili
                 thumbIcon.setPadding(paddingPx, paddingPx, paddingPx, paddingPx);
             }
 
-            // Detail 2 (Keterangan)
             if (item.getDetail2() != null && !item.getDetail2().isEmpty()) {
                 detail2.setVisibility(View.VISIBLE);
                 detail2.setText(item.getDetail2());

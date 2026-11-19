@@ -27,7 +27,7 @@ import java.util.Locale;
 
 public class JadwalPernikahanActivity extends AppCompatActivity {
 
-    private static final String API_KUOTA = "http://192.168.1.23/rikua_api/get_kuota.php";
+    private static final String API_KUOTA = "http://192.168.1.8/rikua_api/get_kuota.php";
 
     private ProgressBar progressJadwal;
     private TextView tvStatusJadwal;

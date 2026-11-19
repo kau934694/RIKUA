@@ -83,12 +83,12 @@ public class BlankoAdapter extends RecyclerView.Adapter<BlankoAdapter.BlankoView
             tvDeskripsi.setText(item.getDeskripsi());
             tvSize.setText("PDF \u2022 " + item.getFileSize());
 
-            // Badge kategori: Wajib (emerald) / Kondisional (amber)
+            // Badge kategori: Wajib (emerald) / Kondisional (amber), mengikuti data server.
             tvKategori.setText(item.getKategori());
             if (item.isWajib()) {
                 tvKategori.setBackgroundResource(R.drawable.bg_badge_emerald);
                 tvKategori.setTextColor(ContextCompat.getColor(
-                        tvKategori.getContext(), R.color.status_green_dark));
+                        tvKategori.getContext(), R.color.badge_emerald_text));
             } else {
                 tvKategori.setBackgroundResource(R.drawable.bg_badge_amber);
                 tvKategori.setTextColor(ContextCompat.getColor(

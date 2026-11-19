@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Badge GRATIS di atas hero: pil emas transparan.stroke emas kontrasnya
+     terhitung terhadap titik gradasi paling terang (#0F6B5C): 3,5:1 (lolos
+     non-text 3:1). Teks gold_accent di area gelap >=4,7:1. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#1FFFCA68" />
+    <corners android:radius="100dp" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/gold_accent" />
+</shape>

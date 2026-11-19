@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Header section accordion syarat (redesign MD3).
+    Header section accordion syarat (editorial checklist).
     Digunakan dua kali pada activity_syarat_nikah.xml lewat <include> dengan
     android:id berbeda (@+id/section_umum, @+id/section_khusus).
     Judul, hint jumlah ("11 berkas wajib dilengkapi"), ikon section, sub-judul,
@@ -11,22 +11,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="18dp"
-    android:layout_marginTop="24dp"
-    android:layout_marginEnd="18dp"
+    android:layout_marginTop="26dp"
     android:orientation="vertical">
 
-    <!-- Baris atas: ikon tile + judul/count + tombol buka/tutup semua -->
+    <!-- Garis emas pembuka bagian (motif editorial halaman) -->
+    <View style="@style/SyaratGoldRule" />
+
+    <!-- Baris judul: ikon tile + judul/count + tombol buka/tutup semua -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/bg_rekom_icon_teal_soft">
+            android:background="@drawable/bg_syarat_icon_soft">
 
             <ImageView
                 android:id="@+id/iv_section_icon"
@@ -47,12 +49,7 @@
 
             <TextView
                 android:id="@+id/tv_section_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                style="@style/SyaratSectionTitle"
                 tools:text="Untuk Semua Pendaftar" />
 
             <!-- "11 berkas wajib dilengkapi" — angka dari server, hint statis -->
@@ -85,25 +82,26 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/text_tertiary"
+                    android:textColor="@color/text_muted"
                     android:textSize="11sp"
                     tools:text="berkas wajib dilengkapi" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Tombol toggle massal rata kanan -->
+        <!-- Toggle massal: teks, target sentuh 44dp (R-03) -->
         <TextView
             android:id="@+id/btn_toggle_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_field"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:minHeight="48dp"
+            android:minHeight="44dp"
+            android:minWidth="80dp"
             android:paddingStart="14dp"
-            android:paddingTop="12dp"
             android:paddingEnd="14dp"
-            android:paddingBottom="12dp"
             android:text="@string/syarat_buka_semua"
             android:textColor="@color/syarat_primary"
             android:textSize="12sp" />
@@ -115,11 +113,9 @@
     -->
     <TextView
         android:id="@+id/tv_section_subjudul"
+        style="@style/SyaratCaption"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="@color/text_tertiary"
-        android:textSize="11sp"
         android:visibility="gone"
         tools:text="Syarat Umum"
         tools:visibility="visible" />

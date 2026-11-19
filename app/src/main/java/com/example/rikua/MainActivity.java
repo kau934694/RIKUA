@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String WHATSAPP_MESSAGE = "Assalamu'alaikum, saya ingin bertanya terkait layanan KUA Randudongkal.";
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
-    private static final String API_KUOTA = "http://192.168.1.23/rikua_api/get_kuota.php";
+    private static final String API_KUOTA = "http://192.168.1.8/rikua_api/get_kuota.php";
 
     private static final boolean HITUNG_DRAF_UNTUK_UJI = true;
 
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
     private View cardSearchResults;
     private LinearLayout layoutSearchResults;
 
-    private static final String URL_SARANA = "http://192.168.1.23/rikua_api/get_sarana.php";
-    private static final String URL_GAMBAR_SARANA = "http://192.168.1.23/rikua_api/uploads/";
+    private static final String URL_SARANA = "http://192.168.1.8/rikua_api/get_sarana.php";
+    private static final String URL_GAMBAR_SARANA = "http://192.168.1.8/rikua_api/uploads/";
 
     private final List<FacilityItem> daftarFasilitasGlobal = new ArrayList<>();
 
@@ -128,8 +128,14 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationView navView = findViewById(R.id.nav_drawer);
         navView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.menu_logout) {
+                drawerLayout.closeDrawer(GravityCompat.END);
+                logout();
+                return true;
+            }
             Toast.makeText(MainActivity.this, "Menu dipilih: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-            handleNavigation(item.getItemId());
+            handleNavigation(id);
             drawerLayout.closeDrawer(GravityCompat.END);
             return true;
         });
@@ -646,7 +652,7 @@ public class MainActivity extends AppCompatActivity {
         return (int) (value * getResources().getDisplayMetrics().density);
     }
 
-    private static final String URL_LAYANAN = "http://192.168.1.23/rikua_api/get_layanan.php";
+    private static final String URL_LAYANAN = "http://192.168.1.8/rikua_api/get_layanan.php";
 
     private final List<ServiceItem> daftarLayananFilter = new ArrayList<>();
 
@@ -997,4 +1003,30 @@ public class MainActivity extends AppCompatActivity {
     private void openScreen(String name) {
         Toast.makeText(this, name + " segera hadir", Toast.LENGTH_SHORT).show();
     }
+    private void logout() {
+    new AlertDialog.Builder(this)
+            .setTitle("Keluar dari RIKUA?")
+            .setMessage("Apakah Anda yakin ingin keluar dari akun?")
+            .setNegativeButton("Batal", (dialog, which) -> {
+                dialog.dismiss();
+            })
+            .setPositiveButton("Keluar", (dialog, which) -> {
+                SessionManager sessionManager = new SessionManager(this);
+                sessionManager.clearSession();
+
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        LoginActivity.class
+                );
+
+                intent.setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                );
+
+                startActivity(intent);
+                finish();
+            })
+            .show();
+}
 }

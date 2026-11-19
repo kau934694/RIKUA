@@ -1,7 +1,6 @@
 package com.example.rikua;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
@@ -31,13 +30,12 @@ import com.google.android.material.navigation.NavigationView;
  * seluruh interaksi difokuskan pada navigasi dan aksi bawah layar.
  *
  * Struktur tampilan (lihat activity_rekomendasi_nikah.xml):
- *   1. Hero badge resmi + kartu info (ikon transfer_within_a_station)
- *   2. Section "Kapan Diperlukan?"  : kartu border-l-4 primary + catatan SIMKAH
- *   3. Section "Yang Perlu Disiapkan": checklist 4 berkas utama
- *   4. Section "Langkah"             : timeline 3 langkah bergaris putus-putus
- *   5. Banner jaminan institusi "Gratis Rp 0,-"
- *   6. Sticky actions: Unduh Blanko, Konsultasi, tautan bantuan petugas
- *   7. Bottom navigation persisten (5 tab, "Layanan" aktif dengan indikator pill)
+ *   1. Hero krem: judul + deskripsi layanan
+ *   2. Section "Kapan Diperlukan?"   : narasi di atas krem + catatan SIMKAH teal
+ *   3. Section "Yang Perlu Disiapkan": 4 berkas berikon dokumen dalam kartu
+ *   4. Section "Alur Pengajuan"      : timeline rel hijau, teks tanpa kartu
+ *   5. Sticky actions: Unduh Blanko dan Konsultasi
+ *   6. Bottom navigation persisten (5 tab, "Layanan" aktif dengan indikator pill)
  */
 public class RekomendasiNikahActivity extends AppCompatActivity {
 
@@ -50,9 +48,6 @@ public class RekomendasiNikahActivity extends AppCompatActivity {
 
     /** Slug layanan yang diarahkan ke halaman ini dari daftar Layanan. */
     public static final String KODE_LAYANAN = "rekomendasi-nikah";
-
-    /** Admin KUA untuk konsultasi rekomendasi (format 62…). */
-    private static final String ADMIN_WHATSAPP = "6287787080948";
 
     private DrawerLayout drawerLayout;
 
@@ -133,9 +128,8 @@ public class RekomendasiNikahActivity extends AppCompatActivity {
 
     /**
      * Aksi sticky bawah:
-     *   - Unduh Blanko  -> BlankoActivity (formulir N1 s.d. N6)
-     *   - Konsultasi    -> ConsultationActivity (daftar petugas)
-     *   - Tautan bantuan-> WhatsApp resmi admin KUA dengan pesan siap kirim
+     *   - Unduh Blanko -> BlankoActivity (formulir N1 s.d. N6)
+     *   - Konsultasi   -> ConsultationActivity (daftar petugas)
      */
     private void setupActionButtons() {
         findViewById(R.id.btn_unduh_blanko).setOnClickListener(v ->
@@ -143,18 +137,6 @@ public class RekomendasiNikahActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_konsultasi).setOnClickListener(v ->
                 startActivity(new Intent(this, ConsultationActivity.class)));
-    }
-
-    /** Buka WhatsApp admin dengan pesan pra-isi konsultasi rekomendasi nikah. */
-    private void bukaWhatsAppKonsultasi() {
-        try {
-            String pesan = Uri.encode(getString(R.string.rekom_wa_message));
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://wa.me/" + ADMIN_WHATSAPP + "?text=" + pesan));
-            startActivity(intent);
-        } catch (Exception e) {
-            Toast.makeText(this, R.string.rekom_wa_unavailable, Toast.LENGTH_SHORT).show();
-        }
     }
 
     /**

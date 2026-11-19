@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Latar hero Syarat Nikah: hijau RIKUA dengan gradasi vertikal halus.
+     Fungsi: menyatukan toolbar + ringkasan layanan jadi satu blok identitas,
+     dan memastikan putih di atasnya lolos 4,5:1 di seluruh area (#0F6B5C=6,41,
+     #0A4F43 lebih gelap lagi). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="#0F6B5C"
+        android:endColor="#0A4F43" />
+    <corners android:bottomLeftRadius="28dp" android:bottomRightRadius="28dp" />
+</shape>

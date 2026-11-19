@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout 
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@color/syarat_background">
 
-        <!-- ================= TOP APP BAR ================= -->
+        <!-- AppBar: Hanya Toolbar hijau yang diam di atas -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:background="@color/syarat_primary"
                 app:contentInsetStartWithNavigation="0dp"
                 app:menu="@menu/services_toolbar_menu"
-                app:navigationContentDescription="@string/syarat_back"
+                app:navigationContentDescription="Kembali"
                 app:navigationIcon="@drawable/ic_arrow_back"
                 app:navigationIconTint="@color/syarat_on_primary">
 
@@ -45,47 +45,58 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="@string/syarat_toolbar_title"
+                        android:text="Syarat Nikah"
                         android:textColor="@color/syarat_on_primary"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:text="@string/syarat_toolbar_subtitle"
+                        android:letterSpacing="0.02"
+                        android:text="KUA Kec. Randudongkal"
                         android:textColor="@color/md3_on_primary_container"
-                        android:textSize="11sp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- ================= SCROLLABLE CONTENT ================= -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:fillViewport="true"
-            android:paddingBottom="200dp"
+            android:paddingBottom="190dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.progressindicator.LinearProgressIndicator
+                <!-- State muat -->
+                <LinearLayout
                     android:id="@+id/progress_loading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:visibility="gone"
-                    app:indicatorColor="@color/syarat_primary"
-                    app:trackThickness="4dp" />
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <!-- KONTEN UTAMA -->
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        app:indicatorColor="@color/syarat_primary"
+                        app:trackThickness="4dp" />
+
+                    <TextView
+                        style="@style/SyaratCaption"
+                        android:layout_marginTop="10dp"
+                        android:text="Memuat daftar persyaratan..." />
+                </LinearLayout>
+
+                <!-- KONTEN UTAMA (Ikut ter-scroll semuanya) -->
                 <LinearLayout
                     android:id="@+id/layout_content"
                     android:layout_width="match_parent"
@@ -93,147 +104,63 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="16dp">
 
-                    <!-- 1. HEADER HERO CARD -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:cardBackgroundColor="@color/surface_white"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
-                        app:strokeColor="#E5E9E7"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <TextView
-                                android:id="@+id/tv_layanan_judul"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-medium"
-                                android:text="@string/syarat_summary_title"
-                                android:textColor="@color/text_primary"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_layanan_deskripsi"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
-                                android:lineSpacingExtra="3dp"
-                                android:text="@string/syarat_summary_desc"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_estimasi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="12dp"
-                                android:background="@drawable/bg_badge_teal"
-                                android:paddingHorizontal="10dp"
-                                android:paddingVertical="4dp"
-                                android:textColor="@color/badge_teal_text"
-                                android:textSize="11sp"
-                                tools:text="Estimasi proses: 15-30 menit" />
-
-                            <!-- BIAYA STRIP -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="14dp"
-                                android:background="@drawable/bg_syarat_biaya_strip"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="8dp">
-
-                                <ImageView
-                                    android:layout_width="18dp"
-                                    android:layout_height="18dp"
-                                    android:contentDescription="@null"
-                                    android:src="@drawable/ic_verified"
-                                    app:tint="@color/syarat_primary" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:text="@string/syarat_biaya_note_prefix"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_biaya"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:fontFamily="sans-serif-black"
-                                    android:text="@string/syarat_biaya_rp0"
-                                    android:textColor="@color/syarat_primary"
-                                    android:textSize="13sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_biaya_catatan"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_weight="1"
-                                    android:ellipsize="end"
-                                    android:maxLines="1"
-                                    android:text="@string/syarat_biaya_note_suffix"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="11sp" />
-
-                                <TextView
-                                    android:id="@+id/tv_badge_gratis"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="6dp"
-                                    android:background="@drawable/bg_status_active"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="3dp"
-                                    android:text="@string/syarat_badge_gratis"
-                                    android:textColor="@color/status_green_dark"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- 2. PROGRESS CHECKLIST -->
+                    <!-- Hero ringkasan layanan: latar putih & ikut ter-scroll -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:orientation="vertical">
+                        android:background="@drawable/bg_search_field"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/tv_progress_label"
+                            android:id="@+id/tv_layanan_judul"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"
-                            tools:text="0 dari 11 syarat sudah disiapkan" />
+                            android:fontFamily="serif"
+                            android:text="Syarat Nikah"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
 
-                        <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:id="@+id/progress_checklist"
+                        <TextView
+                            android:id="@+id/tv_layanan_deskripsi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            app:indicatorColor="@color/syarat_primary"
-                            app:trackColor="@color/syarat_primary_soft"
-                            app:trackCornerRadius="4dp"
-                            app:trackThickness="6dp" />
-                    </LinearLayout>
+                            android:lineSpacingExtra="2dp"
+                            android:text="Silakan lengkapi berkas persyaratan administrasi berikut sebelum mendaftar di KUA Randudongkal."
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
 
-                    <!-- 3. ACCORDION SECTIONS -->
+                        <!-- Legalitas -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_verified"
+                                app:tint="@color/syarat_primary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:letterSpacing="0.04"
+                                android:text="RESMI KEMENTERIAN AGAMA RI"
+                                android:textAllCaps="true"
+                                android:textColor="@color/syarat_primary"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!-- Section accordion umum & khusus -->
                     <include
                         android:id="@+id/section_umum"
                         layout="@layout/section_syarat_header" />
@@ -242,7 +169,7 @@
                         android:id="@+id/container_syarat_umum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical" />
 
                     <include
@@ -253,108 +180,108 @@
                         android:id="@+id/container_syarat_khusus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical" />
 
-                    <!-- 4. TIMELINE LANGKAH PENDAFTARAN -->
+                    <!-- Timeline langkah pendaftaran -->
+                    <View
+                        style="@style/SyaratGoldRule"
+                        android:layout_marginTop="28dp" />
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/syarat_langkah_title"
-                        android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        style="@style/SyaratSectionTitle"
+                        android:layout_marginTop="10dp"
+                        android:text="Langkah Pendaftaran" />
 
                     <TextView
                         android:id="@+id/tv_langkah_subtitle"
+                        style="@style/SyaratCaption"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="@string/syarat_langkah_hint_5"
-                        android:textColor="@color/text_tertiary"
+                        android:text="5 tahapan pendaftaran"
                         android:textSize="12sp" />
 
                     <LinearLayout
                         android:id="@+id/container_langkah"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="14dp"
                         android:orientation="vertical" />
 
-                    <!-- 5. BANNER BANTUAN -->
+                    <!-- Banner bantuan konsultasi petugas -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_bantuan_harian"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        app:cardBackgroundColor="#FFFBEB"
-                        app:cardCornerRadius="12dp"
+                        android:layout_marginTop="24dp"
+                        app:cardBackgroundColor="@color/gold_container"
+                        app:cardCornerRadius="16dp"
                         app:cardElevation="0dp"
-                        app:strokeColor="#FDE68A"
+                        app:strokeColor="@color/gold_border"
                         app:strokeWidth="1dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="12dp">
-
-                            <ImageView
-                                android:layout_width="36dp"
-                                android:layout_height="36dp"
-                                android:background="@drawable/bg_badge_gold"
-                                android:contentDescription="@null"
-                                android:padding="8dp"
-                                android:src="@drawable/ic_chat"
-                                app:tint="@color/syarat_accent_brown" />
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
                             <LinearLayout
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="12dp"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/bg_badge_gold"
+                                    android:contentDescription="@null"
+                                    android:padding="8dp"
+                                    android:src="@drawable/ic_chat"
+                                    app:tint="@color/syarat_accent_brown" />
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
                                     android:fontFamily="sans-serif-medium"
-                                    android:text="@string/syarat_notice_title"
+                                    android:text="Butuh Bantuan Melengkapi Berkas?"
                                     android:textColor="@color/syarat_accent_brown"
-                                    android:textSize="13sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:ellipsize="end"
-                                    android:maxLines="2"
-                                    android:text="@string/syarat_notice_desc"
-                                    android:textColor="@color/syarat_accent_brown"
-                                    android:textSize="11sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                             <TextView
-                                android:id="@+id/btn_notice_konsultasi"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:background="@drawable/bg_syarat_badge_resmi"
-                                android:gravity="center"
-                                android:minHeight="36dp"
-                                android:paddingHorizontal="12dp"
-                                android:text="@string/syarat_notice_btn"
+                                android:layout_marginTop="8dp"
+                                android:lineSpacingExtra="2dp"
+                                android:text="Konsultasikan kelengkapan dokumen Anda bersama petugas KUA pada hari kerja pukul 08.00–15.00 WIB."
+                                android:textColor="@color/syarat_accent_brown"
+                                android:textSize="12sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_notice_konsultasi"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:minHeight="44dp"
+                                android:text="Tanya Petugas KUA"
+                                android:textAllCaps="false"
                                 android:textColor="@color/syarat_primary"
-                                android:textSize="11sp"
-                                android:textStyle="bold" />
+                                android:textSize="13sp"
+                                app:cornerRadius="12dp"
+                                app:icon="@drawable/ic_chat"
+                                app:iconGravity="start"
+                                app:iconSize="16dp"
+                                app:iconTint="@color/syarat_primary"
+                                app:strokeColor="@color/syarat_primary" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- 6. ANTI PUNGLI NOTE -->
+                    <!-- Catatan anti-pungli -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -365,6 +292,7 @@
                         android:padding="12dp">
 
                         <ImageView
+                            android:id="@+id/ic_policy_shield"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:contentDescription="@null"
@@ -376,18 +304,19 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="@string/syarat_footer_note"
+                            android:lineSpacingExtra="2dp"
+                            android:text="Seluruh proses verifikasi berkas di KUA bebas dari pungutan liar (pungli)."
                             android:textColor="@color/gold_dark"
                             android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- ERROR STATE -->
+                <!-- State error -->
                 <LinearLayout
                     android:id="@+id/layout_error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="48dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="20dp"
@@ -402,11 +331,12 @@
 
                     <TextView
                         android:id="@+id/tv_error_message"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="@string/syarat_error_default"
+                        android:lineSpacingExtra="3dp"
+                        android:text="Gagal memuat data persyaratan."
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -416,23 +346,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="44dp"
                         android:layout_marginTop="12dp"
-                        android:text="@string/syarat_btn_retry"
+                        android:text="Coba Lagi"
                         android:textColor="@color/syarat_primary"
-                        app:cornerRadius="10dp"
+                        app:cornerRadius="12dp"
                         app:strokeColor="@color/syarat_primary" />
                 </LinearLayout>
-            </LinearLayout>
+            </FrameLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- ================= STICKY BOTTOM PANEL ================= -->
+        <!-- Panel aksi sticky -->
         <LinearLayout
             android:id="@+id/layout_bottom_sticky"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/syarat_background"
+            android:background="@color/surface_white"
             android:clickable="true"
-            android:elevation="12dp"
+            android:elevation="8dp"
             android:focusable="true"
             android:orientation="vertical">
 
@@ -441,9 +371,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp">
+                android:paddingHorizontal="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_daftar_nikah"
@@ -453,10 +383,10 @@
                     android:fontFamily="sans-serif-medium"
                     android:minHeight="52dp"
                     android:paddingHorizontal="8dp"
-                    android:text="@string/syarat_btn_daftar"
+                    android:text="Daftar Nikah"
                     android:textAllCaps="false"
                     android:textColor="@color/syarat_on_primary"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     app:backgroundTint="@color/syarat_primary"
                     app:cornerRadius="12dp"
                     app:icon="@drawable/ic_arrow_forward"
@@ -475,7 +405,7 @@
                     android:maxLines="2"
                     android:minHeight="52dp"
                     android:paddingHorizontal="8dp"
-                    android:text="@string/syarat_btn_unduh_blanko"
+                    android:text="Unduh Blanko"
                     android:textAllCaps="false"
                     android:textColor="@color/syarat_primary"
                     android:textSize="12sp"
@@ -494,7 +424,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/surface_white"
                 app:elevation="0dp"
-                app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+                app:itemActiveIndicatorStyle="@style/Widget.Rikua.BottomNav.ActiveIndicator"
                 app:itemIconTint="@color/bottom_nav_color_selector"
                 app:itemRippleColor="@color/primary_forest_container"
                 app:itemTextColor="@color/bottom_nav_color_selector"

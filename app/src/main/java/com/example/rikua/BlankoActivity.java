@@ -47,8 +47,8 @@ public class BlankoActivity extends AppCompatActivity
 
     private static final int CURRENT_TAB_INDEX = 4; // Blanko = 4
 
-    private static final String API_URL = "http://192.168.1.23/rikua_api/get_blanko.php";
-    private static final String BASE_FILE_URL = "http:// 192.168.1.23/rikua_api/uploads/blanko/";
+    private static final String API_URL = "http://192.168.1.8/rikua_api/get_blanko.php";
+    private static final String BASE_FILE_URL = "http:// 192.168.1.8/rikua_api/uploads/blanko/";
 
     private final List<BlankoItem> blankoList = new ArrayList<>();
     private BlankoAdapter adapter;
@@ -63,7 +63,6 @@ public class BlankoActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blanko);
 
-        // ===== TEMPAT MENARUH KODENYA DI SINI =====
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -73,7 +72,6 @@ public class BlankoActivity extends AppCompatActivity
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-        // ===========================================
 
         setupWindowAndStatusBar();
         setupToolbar();
@@ -294,10 +292,9 @@ public class BlankoActivity extends AppCompatActivity
             rvBlanko.setVisibility(View.GONE);
         }
     }
-    // ==================== WINDOW / STATUS BAR ====================
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primary_forest));
         WindowInsetsControllerCompat controller =
                 WindowCompat.getInsetsController(window, window.getDecorView());
         controller.setAppearanceLightStatusBars(false);

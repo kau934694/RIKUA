@@ -13,9 +13,9 @@
         android:id="@+id/rekom_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/md3_background">
+        android:background="@color/surface_cream_light">
 
-        <!-- =================== TOP APP BAR (STICKY) =================== -->
+        <!-- Toolbar hijau identitas, menyatu dengan band hero di bawahnya. -->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -40,14 +40,13 @@
                 app:titleTextColor="@color/md3_on_primary" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- =================== SCROLLABLE BODY =================== -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:fillViewport="true"
-            android:paddingBottom="210dp"
+            android:paddingBottom="180dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -55,479 +54,358 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingStart="18dp"
-                android:paddingTop="16dp"
                 android:paddingEnd="18dp">
 
-                <!-- ============ 1. HERO BADGE RESMI + INFO CARD ============ -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_rekom_badge_official"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    android:paddingTop="7dp"
-                    android:paddingEnd="14dp"
-                    android:paddingBottom="7dp">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_verified"
-                        app:tint="@color/badge_emerald_text" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/rekom_badge_resmi"
-                        android:textColor="@color/badge_emerald_text"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <!-- Kartu informasi utama: ikon transfer + penjelasan -->
-                <LinearLayout
+                <!-- Hero: latar krem menyatu halaman, teks gelap. -->
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/bg_rekom_card"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <FrameLayout
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_rekom_icon_primary_container">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_transfer"
-                            app:tint="@color/md3_on_primary_container" />
-                    </FrameLayout>
+                    android:layout_marginStart="-18dp"
+                    android:layout_marginEnd="-18dp"
+                    android:background="@color/surface_cream_light">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingStart="18dp"
+                        android:paddingTop="20dp"
+                        android:paddingEnd="18dp"
+                        android:paddingBottom="4dp">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
+                            android:fontFamily="serif"
                             android:text="@string/rekom_hero_title"
                             android:textColor="@color/text_primary"
-                            android:textSize="17sp"
+                            android:textSize="22sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:lineSpacingExtra="3dp"
+                            android:layout_marginTop="6dp"
+                            android:lineSpacingExtra="4dp"
                             android:text="@string/rekom_hero_desc"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
-                </LinearLayout>
+                </FrameLayout>
 
-                <!-- ============ 2. SECTION "KAPAN DIPERLUKAN?" (border-l-4 primary) ============ -->
+                <!-- Section "Kapan Diperlukan?": narasi langsung di atas krem. -->
+                <TextView
+                    style="@style/RekomSectionTitle"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/rekom_kapan_title" />
+
+                <View style="@style/RekomSectionRule" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="@string/rekom_kapan_desc"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:background="@drawable/bg_rekom_card_accent_left"
-                    android:orientation="vertical"
-                    android:paddingStart="20dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="16dp">
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_rekom_notice_teal"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="2dp"
+                        android:contentDescription="@null"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="@color/badge_teal_text" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="8dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:gravity="center_vertical"
-                        android:text="@string/rekom_kapan_title"
-                        android:textColor="@color/md3_primary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:drawableStartCompat="@drawable/ic_info"
-                        app:drawableTint="@color/md3_primary" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:lineSpacingExtra="3dp"
-                        android:text="@string/rekom_kapan_desc"
-                        android:textColor="@color/text_secondary"
+                        android:text="@string/rekom_kapan_info"
+                        android:textColor="@color/badge_teal_text"
                         android:textSize="13sp" />
+                </LinearLayout>
 
-                    <!-- Kotak catatan biru lembut: validasi SIMKAH -->
+                <!-- Section "Yang Perlu Disiapkan": 4 berkas, ikon per dokumen. -->
+                <TextView
+                    style="@style/RekomSectionTitle"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/rekom_siap_title" />
+
+                <View style="@style/RekomSectionRule" />
+
+                <TextView
+                    style="@style/RekomSectionSubtitle"
+                    android:text="@string/rekom_siap_subtitle" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    app:cardBackgroundColor="@color/surface_white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/rekom_card_edge"
+                    app:strokeWidth="1dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/bg_rekom_info_blue"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
+                        android:orientation="vertical"
+                        android:paddingStart="16dp"
+                        android:paddingTop="2dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="2dp">
 
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_marginTop="1dp"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_check_circle"
-                            app:tint="@color/md3_info_blue_text" />
+                        <LinearLayout style="@style/RekomDocRow">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/rekom_kapan_info"
-                            android:textColor="@color/md3_info_blue_text"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                            <ImageView
+                                style="@style/RekomDocIcon"
+                                android:contentDescription="@null"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_description" />
 
-                <!-- ============ 3. SECTION "YANG PERLU DISIAPKAN" (checklist) ============ -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/rekom_siap_title"
-                    android:textColor="@color/text_primary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                            <LinearLayout style="@style/RekomDocText">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/rekom_siap_subtitle"
-                    android:textColor="@color/text_tertiary"
-                    android:textSize="12sp" />
+                                <TextView
+                                    style="@style/RekomDocTitle"
+                                    android:text="@string/rekom_berkas_1_title" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_rekom_card"
-                    android:orientation="vertical"
-                    android:paddingStart="16dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="6dp">
+                                <TextView
+                                    style="@style/RekomDocDesc"
+                                    android:text="@string/rekom_berkas_1_desc" />
+                            </LinearLayout>
+                        </LinearLayout>
 
-                    <!-- Berkas 1 — Formulir N1 -->
-                    <LinearLayout style="@style/RekomChecklistRow">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="52dp"
+                            android:background="@color/divider" />
 
-                        <ImageView
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_check_circle" />
+                        <LinearLayout style="@style/RekomDocRow">
 
-                        <LinearLayout style="@style/RekomChecklistText">
+                            <ImageView
+                                style="@style/RekomDocIcon"
+                                android:contentDescription="@null"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_badge" />
 
-                            <TextView
-                                style="@style/RekomChecklistTitle"
-                                android:text="@string/rekom_berkas_1_title" />
+                            <LinearLayout style="@style/RekomDocText">
 
-                            <TextView
-                                style="@style/RekomChecklistDesc"
-                                android:text="@string/rekom_berkas_1_desc" />
+                                <TextView
+                                    style="@style/RekomDocTitle"
+                                    android:text="@string/rekom_berkas_2_title" />
+
+                                <TextView
+                                    style="@style/RekomDocDesc"
+                                    android:text="@string/rekom_berkas_2_desc" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="52dp"
+                            android:background="@color/divider" />
+
+                        <LinearLayout style="@style/RekomDocRow">
+
+                            <ImageView
+                                style="@style/RekomDocIcon"
+                                android:contentDescription="@null"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_camera" />
+
+                            <LinearLayout style="@style/RekomDocText">
+
+                                <TextView
+                                    style="@style/RekomDocTitle"
+                                    android:text="@string/rekom_berkas_3_title" />
+
+                                <TextView
+                                    style="@style/RekomDocDesc"
+                                    android:text="@string/rekom_berkas_3_desc" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="52dp"
+                            android:background="@color/divider" />
+
+                        <LinearLayout style="@style/RekomDocRow">
+
+                            <ImageView
+                                style="@style/RekomDocIcon"
+                                android:contentDescription="@null"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_person" />
+
+                            <LinearLayout style="@style/RekomDocText">
+
+                                <TextView
+                                    style="@style/RekomDocTitle"
+                                    android:text="@string/rekom_berkas_4_title" />
+
+                                <TextView
+                                    style="@style/RekomDocDesc"
+                                    android:text="@string/rekom_berkas_4_desc" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Berkas 2 — KTP & KK -->
-                    <LinearLayout style="@style/RekomChecklistRow">
-
-                        <ImageView
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_check_circle" />
-
-                        <LinearLayout style="@style/RekomChecklistText">
-
-                            <TextView
-                                style="@style/RekomChecklistTitle"
-                                android:text="@string/rekom_berkas_2_title" />
-
-                            <TextView
-                                style="@style/RekomChecklistDesc"
-                                android:text="@string/rekom_berkas_2_desc" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Berkas 3 — Pas foto latar biru -->
-                    <LinearLayout style="@style/RekomChecklistRow">
-
-                        <ImageView
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_check_circle" />
-
-                        <LinearLayout style="@style/RekomChecklistText">
-
-                            <TextView
-                                style="@style/RekomChecklistTitle"
-                                android:text="@string/rekom_berkas_3_title" />
-
-                            <TextView
-                                style="@style/RekomChecklistDesc"
-                                android:text="@string/rekom_berkas_3_desc" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Berkas 4 — KTP orang tua / wali -->
-                    <LinearLayout style="@style/RekomChecklistRow">
-
-                        <ImageView
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_check_circle" />
-
-                        <LinearLayout style="@style/RekomChecklistText">
-
-                            <TextView
-                                style="@style/RekomChecklistTitle"
-                                android:text="@string/rekom_berkas_4_title" />
-
-                            <TextView
-                                style="@style/RekomChecklistDesc"
-                                android:text="@string/rekom_berkas_4_desc" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- ============ 4. SECTION "LANGKAH" (timeline 3 langkah) ============ -->
+                <!-- Section "Alur": rel hijau menyambung, teks tanpa kartu. -->
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/rekom_langkah_title"
-                    android:textColor="@color/text_primary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    style="@style/RekomSectionTitle"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/rekom_langkah_title" />
+
+                <View style="@style/RekomSectionRule" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/rekom_langkah_subtitle"
-                    android:textColor="@color/text_tertiary"
-                    android:textSize="12sp" />
+                    style="@style/RekomSectionSubtitle"
+                    android:text="@string/rekom_langkah_subtitle" />
 
-                <!-- Langkah 1 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp">
+                    android:layout_marginTop="18dp">
 
                     <TextView
                         android:id="@+id/tv_step_1"
-                        style="@style/RekomStepNumber"
+                        style="@style/RekomAlurNumber"
                         android:text="@string/rekom_step_1_number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!-- Garis putus-putus penghubung ke langkah 2 -->
                     <View
                         android:layout_width="2dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/bg_rekom_dashed_line"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/rekom_rail"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tv_step_1"
                         app:layout_constraintStart_toStartOf="@id/tv_step_1"
                         app:layout_constraintTop_toBottomOf="@id/tv_step_1" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_surface_card"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_1"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout style="@style/RekomStepCardBody">
+                        <TextView
+                            style="@style/RekomAlurTitle"
+                            android:text="@string/rekom_langkah_1_title" />
 
-                            <TextView
-                                style="@style/RekomStepTitle"
-                                android:text="@string/rekom_langkah_1_title" />
-
-                            <TextView
-                                style="@style/RekomStepDesc"
-                                android:text="@string/rekom_langkah_1_desc" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            style="@style/RekomAlurDesc"
+                            android:text="@string/rekom_langkah_1_desc" />
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Langkah 2 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_step_2"
-                        style="@style/RekomStepNumber"
+                        style="@style/RekomAlurNumber"
                         android:text="@string/rekom_step_2_number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!-- Garis putus-putus penghubung ke langkah 3 -->
                     <View
                         android:layout_width="2dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="6dp"
-                        android:background="@drawable/bg_rekom_dashed_line"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/rekom_rail"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tv_step_2"
                         app:layout_constraintStart_toStartOf="@id/tv_step_2"
                         app:layout_constraintTop_toBottomOf="@id/tv_step_2" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_surface_card"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_2"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout style="@style/RekomStepCardBody">
+                        <TextView
+                            style="@style/RekomAlurTitle"
+                            android:text="@string/rekom_langkah_2_title" />
 
-                            <TextView
-                                style="@style/RekomStepTitle"
-                                android:text="@string/rekom_langkah_2_title" />
-
-                            <TextView
-                                style="@style/RekomStepDesc"
-                                android:text="@string/rekom_langkah_2_desc" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            style="@style/RekomAlurDesc"
+                            android:text="@string/rekom_langkah_2_desc" />
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- Langkah 3 (langkah akhir — tanpa garis penghubung) -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tv_step_3"
-                        style="@style/RekomStepNumber"
+                        style="@style/RekomAlurNumber"
                         android:text="@string/rekom_step_3_number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_surface_card"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_3"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout style="@style/RekomStepCardBody">
-
-                            <TextView
-                                style="@style/RekomStepTitle"
-                                android:text="@string/rekom_langkah_3_title" />
-
-                            <TextView
-                                style="@style/RekomStepDesc"
-                                android:text="@string/rekom_langkah_3_desc" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- ============ 5. BANNER JAMINAN INSTITUSI (GRATIS Rp 0,-) ============ -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:background="@drawable/bg_rekom_garansi_banner"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_verified"
-                        app:tint="@color/md3_secondary" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        <TextView
+                            style="@style/RekomAlurTitle"
+                            android:text="@string/rekom_langkah_3_title" />
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/rekom_garansi_title"
-                            android:textColor="@color/md3_secondary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/rekom_garansi_desc"
-                            android:textColor="@color/md3_secondary"
-                            android:textSize="12sp" />
+                            style="@style/RekomAlurDesc"
+                            android:text="@string/rekom_langkah_3_desc" />
                     </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/bg_badge_gold"
-                        android:fontFamily="sans-serif-black"
-                        android:paddingStart="10dp"
-                        android:paddingTop="6dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="6dp"
-                        android:text="@string/syarat_biaya_rp0"
-                        android:textColor="@color/md3_secondary"
-                        android:textSize="13sp" />
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- =================== STICKY BOTTOM: AKSI + NAVIGASI =================== -->
+        <!-- Panel sticky: aksi utama lalu navigasi. -->
         <LinearLayout
             android:id="@+id/layout_bottom_sticky"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/md3_background"
+            android:background="@color/surface_white"
             android:elevation="10dp"
             android:orientation="vertical">
 
-            <!-- Panel tombol aksi utama -->
             <LinearLayout
                 android:id="@+id/layout_action_panel"
                 android:layout_width="match_parent"
@@ -536,7 +414,7 @@
                 android:paddingStart="18dp"
                 android:paddingTop="12dp"
                 android:paddingEnd="18dp"
-                android:paddingBottom="8dp">
+                android:paddingBottom="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -546,25 +424,25 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_unduh_blanko"
                         android:layout_width="0dp"
-                        android:layout_height="52dp"
+                        android:layout_height="54dp"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/rekom_btn_unduh_blanko"
                         android:textAllCaps="false"
-                        android:textColor="@color/md3_on_primary_container"
+                        android:textColor="@color/md3_on_primary"
                         android:textSize="14sp"
-                        app:backgroundTint="@color/md3_primary_container"
+                        app:backgroundTint="@color/md3_primary"
                         app:cornerRadius="14dp"
                         app:icon="@drawable/ic_download"
                         app:iconGravity="start"
                         app:iconSize="18dp"
-                        app:iconTint="@color/md3_on_primary_container" />
+                        app:iconTint="@color/md3_on_primary" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_konsultasi"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="52dp"
+                        android:layout_height="54dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-medium"
@@ -582,7 +460,11 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Bottom Navigation Persistent (5 tab, Layanan aktif) -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
@@ -598,7 +480,6 @@
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- =================== NAVIGATION DRAWER =================== -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="wrap_content"

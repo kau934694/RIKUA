@@ -1,62 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- ==================== Facility Detail — Info Row ==================== -->
-    <!-- Baris informasi: ikon + label + nilai -->
-    <style name="DetailRow">
+    <!-- Facility Detail — baris spec sheet: label kiri, nilai kanan -->
+    <style name="SpecRow">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:minHeight">48dp</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
     </style>
 
-    <style name="DetailRowIconFrame">
-        <item name="android:layout_width">40dp</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="android:background">@drawable/bg_icon_rounded_green</item>
-    </style>
-
-    <style name="DetailRowIcon">
-        <item name="android:layout_width">20dp</item>
-        <item name="android:layout_height">20dp</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:contentDescription">@null</item>
-        <item name="android:tint">@color/consult_primary</item>
-    </style>
-
-    <style name="DetailRowText">
-        <item name="android:layout_width">0dp</item>
+    <style name="SpecRowStack">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginStart">14dp</item>
         <item name="android:orientation">vertical</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+    <style name="DupHairline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/dup_border</item>
     </style>
 
-    <style name="DetailRowLabel">
+    <!-- Angka berkas 1-3 (lingkar teal kecil) khusus halaman Wakaf -->
+    <style name="WakafBerkasNumber">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@drawable/bg_rekom_step_circle</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/md3_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- ==================== Wali Nikah — Tertib Wali Nasab ==================== -->
+
+    <style name="SpecRowLabel">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/text_tertiary</item>
+        <item name="android:textColor">@color/text_muted</item>
         <item name="android:textSize">11sp</item>
         <item name="android:letterSpacing">0.02</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="DetailRowValue">
+    <style name="SpecRowValue">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="SpecRowValueStack">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">2dp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="DetailRowDivider">
+    <style name="SpecGroupTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/consult_primary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SpecGroupRule">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@color/gold_accent</item>
+    </style>
+
+    <style name="SpecDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:layout_marginStart">54dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
         <item name="android:background">@color/divider</item>
     </style>
 
@@ -148,17 +185,160 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <!-- ==================== Isbat Nikah — Kartu Poin "Kapan Diperlukan" ==================== -->
-    <style name="IsbatKapanCard">
+    <!-- ==================== Rekomendasi Nikah (redesign) ==================== -->
+    <style name="RekomSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Garis emas pendek penanda awal section, menggantikan border dekoratif -->
+    <style name="RekomSectionRule">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@color/gold_primary</item>
+    </style>
+
+    <style name="RekomSectionSubtitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Baris berkas: ikon dokumen spesifik + judul + keterangan, dipisah hairline -->
+    <style name="RekomDocRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="RekomDocIcon">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">9dp</item>
+        <item name="android:background">@drawable/bg_rekom_icon_teal_soft</item>
+        <item name="android:tint">@color/md3_primary</item>
+    </style>
+
+    <style name="RekomDocText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="RekomDocTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="RekomDocDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Alur pengajuan: angka solid di atas rel hijau, teks tanpa kartu -->
+    <style name="RekomAlurNumber">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@drawable/bg_rekom_step_dot</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/md3_on_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="RekomAlurTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RekomAlurDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- ==================== Isbat Nikah (redesign editorial) ==================== -->
+    <!-- Pembuka: judul tegas sans + deskripsi nyaman, tanpa hero hijau -->
+    <style name="IsbatIntroTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">1dp</item>
+    </style>
+
+    <style name="IsbatIntroDesc">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">10dp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Judul section: suara institusional serif -->
+    <style name="IsbatSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Garis emas pendek penanda awal section -->
+    <style name="IsbatSectionRule">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@color/gold_primary</item>
+    </style>
+
+    <style name="IsbatSectionSubtitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Poin "Kapan Diperlukan": row datar dipisah hairline, ikon lembut -->
+    <style name="IsbatKapanCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@drawable/md3_card_outlined</item>
-        <item name="android:paddingStart">14dp</item>
+        <item name="android:minHeight">60dp</item>
         <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingEnd">14dp</item>
         <item name="android:paddingBottom">12dp</item>
     </style>
 
@@ -184,7 +364,6 @@
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="IsbatKapanDesc">
@@ -192,33 +371,407 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:lineSpacingExtra">2dp</item>
-        <item name="android:textColor">@color/text_tertiary</item>
+        <item name="android:textColor">@color/text_muted</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <!-- Badge status berkas (WAJIB / FOTOKOPI) di kanan row checklist -->
+    <!-- Checklist berkas interaktif: kontrol centang + nama berkas utama -->
+    <style name="IsbatCheckRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="IsbatCheckIcon">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:background">@drawable/bg_isbat_check_field</item>
+    </style>
+
+    <style name="IsbatCheckText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="IsbatCheckTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="IsbatCheckDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Badge status berkas (WAJIB) di kanan row checklist -->
     <style name="IsbatBerkasBadge">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">0.04</item>
-        <item name="android:paddingStart">8dp</item>
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:paddingEnd">8dp</item>
-        <item name="android:paddingBottom">3dp</item>
-        <item name="android:textSize">9sp</item>
+        <item name="android:paddingStart">9dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingEnd">9dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
-    <!-- Angka berkas 1-3 (lingkar teal kecil) khusus halaman Wakaf -->
-    <style name="WakafBerkasNumber">
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:background">@drawable/bg_rekom_step_circle</item>
+    <!-- Alur 4 langkah: angka solid di atas rel hijau, teks tanpa kartu -->
+    <style name="IsbatAlurNumber">
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:background">@drawable/bg_rekom_step_dot</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">sans-serif-black</item>
-        <item name="android:textColor">@color/md3_primary</item>
+        <item name="android:textColor">@color/md3_on_primary</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="IsbatAlurNumberGold">
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:background">@drawable/bg_isbat_step_circle_gold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/md3_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="IsbatAlurTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="IsbatAlurDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Pemisah hairline antar row -->
+    <style name="IsbatHairline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/surface_card_border</item>
+    </style>
+
+    <!-- ==================== Duplikat Buku Nikah — Register Netral ==================== -->
+    <!-- Identitas visual sendiri: kanvas abu, permukaan putih, charcoal, aksen champagne.
+         Sengaja tidak memakai gaya Isbat/Rekomendasi agar tidak meniru format hijau. -->
+    <style name="DupSectionRule">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">3dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:background">@color/dup_gold</item>
+    </style>
+
+    <style name="DupSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/dup_text</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DupSectionSubtitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/dup_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Baris informasi persyaratan: ikon dokumen + judul + deskripsi (statis) -->
+    <style name="DupInfoRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="DupCheckIcon">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">9dp</item>
+        <item name="android:background">@drawable/bg_dup_icon_chip</item>
+        <item name="android:tint">@color/dup_desc</item>
+    </style>
+
+    <style name="DupCheckText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="DupCheckTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/dup_text</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="DupCheckDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/dup_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Badge status berkas di kanan row persyaratan -->
+    <style name="DupBadge">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:paddingStart">9dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingEnd">9dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- Timeline langkah: rel solid, angka dalam lingkaran, tanpa kartu -->
+    <style name="DupStepNumber">
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:background">@drawable/bg_dup_step_circle</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/dup_charcoal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DupStepNumberGold">
+        <item name="android:layout_width">34dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:background">@drawable/bg_dup_step_circle_gold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/dup_champagne_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DupStepTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/dup_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DupStepDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textColor">@color/dup_desc</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- ==================== Wakaf & Kemasjidan — Lembar Layanan Resmi ==================== -->
+    <!-- Editorial sans-serif: kicker caps hijau, judul tegas, pemisah hairline. -->
+    <style name="WakafOverline">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/md3_primary</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="WakafPageTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">1dp</item>
+    </style>
+
+    <style name="WakafPageSub">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="WakafBodyText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="WakafSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="WakafSectionSubtitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Baris meta (landasan regulasi): ikon kecil + caption, tanpa kartu -->
+    <style name="WakafMetaText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">7dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Daftar berkas: gutter nomor tipis + judul menonjol + deskripsi -->
+    <style name="WakafDocRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+    </style>
+
+    <style name="WakafDocNumber">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/md3_primary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="WakafDocText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">14dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="WakafDocTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="WakafDocDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Pemisah: hairline antar row berkas (inset) dan antar section (penuh) -->
+    <style name="WakafHairline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">36dp</item>
+        <item name="android:background">@color/divider</item>
+    </style>
+
+    <style name="WakafDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/surface_card_border</item>
+    </style>
+
+    <!-- Alur: blok editorial perkicker + judul + deskripsi, tanpa rel -->
+    <style name="WakafTahapKicker">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/md3_primary</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="WakafTahapKickerGold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/md3_secondary</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="WakafTahapTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="WakafTahapDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <!-- ==================== Wali Nikah — Tertib Wali Nasab ==================== -->
@@ -306,5 +859,116 @@
         <item name="android:lineSpacingExtra">2dp</item>
         <item name="android:textColor">@color/text_tertiary</item>
         <item name="android:textSize">11sp</item>
+    </style>
+
+    <!-- ==================== Syarat Nikah — Editorial Checklist ==================== -->
+    <!-- Judul besar hero di atas hijau: serif identitas aplikasi (konvensi
+         judul halaman di services/facilities/blanko), putih 6,4:1. -->
+    <style name="SyaratHeroTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">@color/syarat_on_primary</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <!-- Body explanation hero: mint muda, 4,5:1 di atas seluruh gradasi. -->
+    <style name="SyaratHeroBody">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textColor">@color/md3_on_primary_container</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Label meta (estimasi/biaya) di dalam pil transparan hero. -->
+    <style name="SyaratHeroMetaLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/text_white_60</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="SyaratHeroMetaValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/syarat_on_primary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Caption kecil di permukaan terang: text_muted (5,6:1), bukan
+         text_tertiary yang gagal AA. -->
+    <style name="SyaratCaption">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <!-- Eyebrow emas penanda awal bagian (motif editorial, berpasangan
+         dengan judul section). -->
+    <style name="SyaratEyebrow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/syarat_accent_brown</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="SyaratSectionTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <!-- Baris accordion: cek | judul+badge | chevron. -->
+    <style name="SyaratItemTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SyaratItemBody">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- Label caps di dalam body: "DOKUMEN YANG DISIAPKAN". -->
+    <style name="SyaratBodyLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- Rambut pemisah header/body accordion (sudah di dalam padding body). -->
+    <style name="SyaratHairline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginEnd">14dp</item>
+        <item name="android:background">@drawable/bg_syarat_hairline</item>
+    </style>
+
+    <!-- Garis emas 28dp penanda section, dipakai bersama SyaratEyebrow. -->
+    <style name="SyaratGoldRule">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:background">@drawable/bg_syarat_gold_rule</item>
     </style>
 </resources>

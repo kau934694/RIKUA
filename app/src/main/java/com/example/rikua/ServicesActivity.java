@@ -40,7 +40,7 @@ public class ServicesActivity extends AppCompatActivity {
     private static final int CURRENT_TAB_INDEX = 1; // Layanan = 1
 
     private static final String TAG = "Layanan";
-    private static final String URL_LAYANAN = "http://192.168.1.5/rikua_api/get_layanan.php";
+    private static final String URL_LAYANAN = "http://192.168.1.8/rikua_api/get_layanan.php";
     private static final String KODE_SYARAT_NIKAH = "syarat-nikah";
 
     private BottomNavigationView bottomNavigation;

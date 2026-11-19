@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Latar jendela splash: hijau hutan dalam + rosette identitas samar di bawah.
+     Dipakai sebagai windowBackground agar tidak ada kedip putih sebelum konten. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/primary_forest_deep" />
+    <item
+        android:width="300dp"
+        android:height="300dp"
+        android:drawable="@drawable/bg_islamic_pattern"
+        android:gravity="bottom|center_horizontal" />
+</layer-list>

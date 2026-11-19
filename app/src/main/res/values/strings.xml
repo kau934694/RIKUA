@@ -277,10 +277,8 @@
     <string name="facility_detail_lbl_email">Email</string>
     <string name="facility_detail_lbl_qibla">Arah Kiblat</string>
 
-    <string name="facility_detail_placeholder">—</string>
-
-    <string name="facility_detail_btn_maps">Lihat di Peta (Google Maps)</string>
-    <string name="facility_detail_btn_consult">Konsultasi Layanan Kemasjidan &amp; Wakaf</string>
+    <string name="facility_detail_btn_maps">Lihat di Peta</string>
+    <string name="facility_detail_btn_consult">Konsultasi WhatsApp</string>
 
     <string name="facility_detail_maps_unavailable">Google Maps tidak tersedia di perangkat ini</string>
     <string name="facility_detail_whatsapp_unavailable">WhatsApp tidak tersedia di perangkat ini</string>
@@ -327,14 +325,6 @@
     <string name="syarat_toolbar_subtitle">KUA Kec. Randudongkal</string>
     <string name="syarat_back">Kembali</string>
     <string name="syarat_institution_badge">Prosedur resmi Kemenag RI</string>
-    <string name="syarat_hero_desc_default">
-        Kelengkapan dokumen yang harus disiapkan calon pengantin sebelum mendaftar ke KUA.
-        Periksa satu per satu agar berkas tidak ditolak petugas.
-    </string>
-
-    <string name="syarat_biaya_label">Biaya Pencatatan</string>
-    <string name="syarat_biaya_rp0">Rp 0</string>
-    <string name="syarat_badge_gratis">GRATIS</string>
 
     <!-- Meta hero: %1$s = tanggal pembaruan format Indonesia dari kolom updated_at -->
     <string name="syarat_diperbarui_format">Diperbarui %1$s</string>
@@ -346,6 +336,7 @@
     <string name="syarat_tutup_semua">Tutup semua</string>
     <string name="syarat_progress_format">%1$d dari %2$d syarat sudah disiapkan</string>
     <string name="syarat_progress_kosong">Belum ada syarat yang ditandai siap</string>
+    <string name="syarat_progress_eyebrow">Persiapan Dokumen</string>
 
     <string name="syarat_section_umum">Untuk Semua Pendaftar</string>
     <string name="syarat_section_umum_desc">Syarat Umum</string>
@@ -359,7 +350,7 @@
     <string name="syarat_langkah_subtitle">%1$d langkah dari persiapan berkas hingga buku nikah terbit</string>
 
     <string name="syarat_btn_daftar">Daftar Nikah</string>
-    <string name="syarat_btn_unduh_blanko">Unduh Blanko N1 \u2013 N6</string>
+    <string name="syarat_btn_unduh_blanko">Unduh Blanko N1-N6</string>
     <string name="syarat_btn_retry">Coba Lagi</string>
     <string name="syarat_error_default">Gagal memuat data syarat nikah. Periksa koneksi jaringan Anda.</string>
     <string name="syarat_footer_note">
@@ -398,10 +389,9 @@
     <!-- ==================== Rekomendasi Nikah Screen ==================== -->
     <string name="rekom_toolbar_title">Rekomendasi Nikah</string>
     <string name="rekom_back">Kembali</string>
-    <string name="rekom_badge_resmi">Layanan Resmi KUA Randudongkal</string>
 
     <string name="rekom_hero_title">Nikah di Luar Kecamatan</string>
-    <string name="rekom_hero_desc">Bagi warga ber-KTP Randudongkal yang akan melangsungkan akad nikah di KUA kecamatan lain, cukup ambil surat rekomendasi (N2) di sini — tanpa perlu menunggu lama.</string>
+    <string name="rekom_hero_desc">Bagi warga ber-KTP Randudongkal yang akan melangsungkan akad nikah di KUA kecamatan lain, cukup ambil surat rekomendasi (N2) di sini, tanpa perlu menunggu lama.</string>
 
     <string name="rekom_kapan_title">Kapan Diperlukan?</string>
     <string name="rekom_kapan_desc">Rekomendasi nikah diperlukan bila lokasi akad nikah berbeda dari KUA tempat pendaftaran pertama (KUA sesuai domisili KTP). Surat ini mengalihkan pencatatan ke KUA tujuan sambil tetap mencatat asal berkas di SIMKAH.</string>
@@ -430,9 +420,6 @@
     <string name="rekom_langkah_3_title">Daftar di KUA Tujuan</string>
     <string name="rekom_langkah_3_desc">Bawa N2 ke KUA tempat akad untuk pendaftaran akhir. Akad dapat dilangsungkan sesuai jadwal pilihan.</string>
 
-    <string name="rekom_garansi_title">Jaminan Layanan Resmi</string>
-    <string name="rekom_garansi_desc">Penerbitan surat rekomendasi nikah sepenuhnya GRATIS (Rp 0,-). Tidak ada pungutan liar di luar ketentuan PP No. 60/2021.</string>
-
     <string name="rekom_btn_unduh_blanko">Unduh Blanko</string>
     <string name="rekom_btn_konsultasi">Konsultasi</string>
 
@@ -440,9 +427,8 @@
     <string name="rekom_nav_daftar_nikah">Daftar Nikah</string>
     <string name="rekom_nav_lainnya">Lainnya</string>
 
-    <string name="rekom_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin konsultasi mengenai Rekomendasi Nikah luar kecamatan.</string>
     <string name="rekom_wa_unavailable">WhatsApp tidak tersedia di perangkat ini</string>
-    <string name="rekom_feature_soon">Menu segera hadir — pantau update RIKUA ya.</string>
+    <string name="rekom_feature_soon">Menu segera hadir. Pantau update RIKUA ya.</string>
 
     <!-- ==================== Isbat Nikah Screen ==================== -->
     <string name="isbat_toolbar_title">Isbat Nikah</string>
@@ -482,6 +468,7 @@
     <string name="isbat_alur_4_title">Bawa Penetapan ke KUA untuk Dicatat</string>
     <string name="isbat_alur_4_desc">Petugas KUA Randudongkal mencatat nikah dan menerbitkan Buku Nikah.</string>
 
+    <string name="isbat_faq_title">Pertanyaan Umum</string>
     <string name="isbat_faq_question">Berapa lama proses pembuatan Buku Nikah di KUA?</string>
     <string name="isbat_faq_answer">Setelah salinan penetapan Pengadilan Agama diserahkan lengkap ke loket KUA, pencatatan dan penerbitan Buku Nikah umumnya selesai hari yang sama (15–60 menit) pada jam kerja, selama seluruh berkas sudah sesuai.</string>
 
@@ -514,6 +501,11 @@
     <string name="dup_badge_polsek">POLSEK</string>
     <string name="dup_badge_sesuai_kondisi">JIKA RUSAK</string>
 
+    <string name="dup_step_1_number">1</string>
+    <string name="dup_step_2_number">2</string>
+    <string name="dup_step_3_number">3</string>
+    <string name="dup_step_4_number">4</string>
+
     <string name="dup_alur_title">Langkah Pengurusan</string>
     <string name="dup_alur_subtitle">4 tahapan dari surat kehilangan hingga duplikat terbit</string>
     <string name="dup_alur_1_title">Buat Surat Kehilangan</string>
@@ -523,12 +515,12 @@
     <string name="dup_alur_3_title">Verifikasi Data Register</string>
     <string name="dup_alur_3_desc">Petugas mencocokkan data Anda dengan register akta nikah dan sistem SIMKAH.</string>
     <string name="dup_alur_4_title">Penerbitan Duplikat Buku Nikah</string>
-    <string name="dup_alur_4_desc">Duplikat buku nikah diterbitkan dan disahkan — Status: Selesai.</string>
+    <string name="dup_alur_4_desc">Duplikat buku nikah diterbitkan dan disahkan. Status: Selesai.</string>
 
     <string name="dup_jam_title">Jam Layanan KUA</string>
     <string name="dup_btn_hubungi">Hubungi</string>
 
-    <string name="dup_btn_syarat">Lihat Syarat Nikah</string>
+    <string name="dup_btn_pengajuan">Pengajuan Duplikat Buku Nikah</string>
     <string name="dup_btn_konsultasi">Konsultasi</string>
 
     <string name="dup_wa_message">Halo Admin RIKUA KUA Randudongkal, saya ingin bertanya tentang pengajuan Duplikat Buku Nikah.</string>
@@ -540,13 +532,19 @@
 
     <string name="wakaf_hero_title">Layanan Wakaf &amp; Kemasjidan</string>
     <string name="wakaf_hero_subtitle">Ikrar wakaf dan bimbingan bagi nadzir</string>
+<string name="wakaf_overline_kategori">Layanan Wakaf</string>
     <string name="wakaf_hero_desc">KUA Kecamatan berperan sebagai Pejabat Pembuat Akta Ikrar Wakaf (PPAIW): memfasilitasi ikrar wakaf, mencatat akta, dan membimbing nadzir agar harta wakaf dikelola sesuai peruntukan syariat.</string>
 
     <string name="wakaf_aiw_title">Tentang Akta Ikrar Wakaf (AIW)</string>
+    <string name="wakaf_overline_aiw">Dokumen Resmi</string>
     <string name="wakaf_aiw_desc">AIW adalah akta resmi yang dibuat PPAIW sebagai bukti sah ikrar wakaf. Akta ini menjadi dasar pendaftaran tanah wakaf ke BPN dan landasan hukum pengelolaan oleh nadzir.</string>
     <string name="wakaf_aiw_regulasi">Landasan hukum: UU No. 41 Tahun 2004 tentang Wakaf</string>
 
     <string name="wakaf_siap_title">Yang Perlu Disiapkan</string>
+    <string name="wakaf_overline_berkas">Persyaratan</string>
+    <string name="wakaf_doc_1_number">01</string>
+    <string name="wakaf_doc_2_number">02</string>
+    <string name="wakaf_doc_3_number">03</string>
     <string name="wakaf_siap_subtitle">Berkas berikut dibawa saat ikrar wakaf</string>
     <string name="wakaf_berkas_1_title">Identitas Wakif</string>
     <string name="wakaf_berkas_1_desc">KTP, Kartu Keluarga, dan surat persetujuan ahli waris bermaterai</string>
@@ -556,6 +554,11 @@
     <string name="wakaf_berkas_3_desc">Susunan pengurus, KTP nadzir, surat pengesahan KUA/BWI</string>
 
     <string name="wakaf_langkah_title">Langkah Pengurusan</string>
+    <string name="wakaf_overline_alur">Prosedur</string>
+    <string name="wakaf_tahap_1">Tahap 1</string>
+    <string name="wakaf_tahap_2">Tahap 2</string>
+    <string name="wakaf_tahap_3">Tahap 3</string>
+    <string name="wakaf_tahap_4">Tahap Akhir</string>
     <string name="wakaf_langkah_subtitle">4 tahapan dari konsultasi hingga sertifikat tanah wakaf</string>
     <string name="wakaf_langkah_1_title">Konsultasi &amp; Verifikasi Tanah</string>
     <string name="wakaf_langkah_1_desc">Konsultasi rencana wakaf; petugas meneliti status tanah dan dokumen kepemilikan.</string>
@@ -564,7 +567,12 @@
     <string name="wakaf_langkah_3_title">Pelaksanaan Ikrar Wakaf di Hadapan PPAIW</string>
     <string name="wakaf_langkah_3_desc">Wakif mengucapkan ikrar wakaf disaksikan 2 saksi dan dituangkan dalam AIW.</string>
     <string name="wakaf_langkah_4_title">Penerbitan AIW / APAIW &amp; Sertifikat BPN</string>
-    <string name="wakaf_langkah_4_desc">AIW/APAIW terbit, tanah wakaf didaftarkan ke BPN — Status: Selesai.</string>
+    <string name="wakaf_langkah_4_desc">AIW/APAIW terbit, tanah wakaf didaftarkan ke BPN. Status: Selesai.</string>
+
+    <string name="wakaf_step_1_number">1</string>
+    <string name="wakaf_step_2_number">2</string>
+    <string name="wakaf_step_3_number">3</string>
+    <string name="wakaf_step_4_number">4</string>
 
 
     <string name="wakaf_btn_sarana">Sarana Keagamaan</string>
@@ -1128,4 +1136,52 @@
 
     <!-- ==================== Tambahan: string yang hilang (penyebab error linking) ==================== -->
     <string name="dup_jam_desc">Senin - Kamis 07.30 - 16.00 WIB, Jumat 07.30 - 16.30 WIB. Sabtu &amp; Minggu libur.</string>
+    <string name="syarat_biaya_rp0">Rp 0</string>
+
+    <!-- ==================== Autentikasi: splash, login, registrasi, admin ==================== -->
+    <string name="auth_tagline">Rekan Informasi KUA</string>
+    <string name="auth_logo_desc">Logo RIKUA</string>
+
+    <!-- Login pengguna -->
+    <string name="login_greeting">Selamat Datang Kembali</string>
+    <string name="login_desc">Masuk untuk mengakses berbagai layanan KUA dengan lebih mudah.</string>
+    <string name="auth_label_identity">Username atau Email</string>
+    <string name="auth_hint_identity">Masukkan username atau email</string>
+    <string name="auth_label_password">Password</string>
+    <string name="auth_hint_password">Masukkan password</string>
+    <string name="login_cta">Masuk</string>
+    <string name="login_no_account">Belum memiliki akun?</string>
+    <string name="login_register_link">Daftar Sekarang</string>
+    <string name="auth_admin_entry">Masuk sebagai Admin</string>
+    <string name="auth_or_divider">ATAU</string>
+    <string name="auth_google_cta">Masuk dengan Google</string>
+    <string name="auth_google_pending">Masuk dengan Google belum terhubung. Integrasi akan dibuat pada tahap autentikasi berikutnya.</string>
+
+    <!-- Registrasi pengguna -->
+    <string name="register_title">Buat Akun Baru</string>
+    <string name="register_desc">Lengkapi data berikut untuk membuat akun RIKUA.</string>
+    <string name="auth_label_fullname">Nama Lengkap</string>
+    <string name="auth_hint_fullname">Masukkan nama lengkap</string>
+    <string name="auth_label_username">Username</string>
+    <string name="auth_hint_username">Tentukan username</string>
+    <string name="auth_label_email">Email</string>
+    <string name="auth_hint_email">Masukkan alamat email</string>
+    <string name="auth_label_confirm_password">Konfirmasi Password</string>
+    <string name="auth_hint_confirm_password">Ulangi password Anda</string>
+    <string name="register_cta">Daftar Sekarang</string>
+    <string name="register_have_account">Sudah memiliki akun?</string>
+    <string name="register_login_link">Masuk</string>
+
+    <!-- Login admin -->
+    <string name="admin_title">Login Administrator</string>
+    <string name="admin_desc">Masuk ke panel pengelolaan RIKUA</string>
+    <string name="admin_back_link">Kembali ke Login Pengguna</string>
+
+    <!-- Validasi & status antarmuka -->
+    <string name="auth_error_required">Kolom ini wajib diisi</string>
+    <string name="auth_error_confirm">Konfirmasi password belum sama</string>
+    <string name="auth_login_pending">Pemeriksaan akun belum terhubung ke server. Tahap ini baru tampilan.</string>
+    <string name="auth_register_pending">Pembuatan akun belum terhubung ke server. Tahap ini baru tampilan.</string>
+    <string name="auth_back_desc">Kembali</string>
+    <string name="nav_logout">Keluar</string>
 </resources>

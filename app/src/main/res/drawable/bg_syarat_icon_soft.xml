@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tile ikon section syarat: hijau soft RIKUA (varian syarat_primary_soft,
+     bukan teal konsultasi) dengan radius sedang. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/syarat_primary_soft" />
+    <corners android:radius="12dp" />
+</shape>

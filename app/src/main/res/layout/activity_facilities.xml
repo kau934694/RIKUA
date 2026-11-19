@@ -8,13 +8,12 @@
     android:fitsSystemWindows="true"
     tools:context=".FacilitiesActivity">
 
-    <!-- =================== MAIN CONTENT =================== -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/facilities_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/surface_cream_light">
-        <!-- =================== SCROLLABLE BODY =================== -->
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
@@ -28,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- === 1. HEADER BANNER + BADGE + DESCRIPTION === -->
+                <!-- Header hijau identitas RIKUA: logo, nama, KUA Randudongkal, drawer, pola islami. -->
                 <FrameLayout
                     android:id="@+id/banner_container"
                     android:layout_width="match_parent"
@@ -50,69 +49,70 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingStart="20dp"
+                        android:paddingStart="@dimen/page_gutter"
                         android:paddingTop="24dp"
-                        android:paddingEnd="20dp"
+                        android:paddingEnd="@dimen/page_gutter"
                         android:paddingBottom="26dp">
-                                                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp">
 
-        <ImageView
-            android:id="@+id/iv_app_logo"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:contentDescription="Logo KUA"
-            android:src="@drawable/logo" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:orientation="vertical">
+                                <ImageView
+                                    android:id="@+id/iv_app_logo"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:contentDescription="Logo KUA"
+                                    android:src="@drawable/logo" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:letterSpacing="0.05"
-                android:text="RIKUA"
-                android:textColor="@color/text_white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="KUA Kec.\nRandudongkal"
-                android:textColor="@color/gold_accent"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:letterSpacing="0.05"
+                                        android:text="RIKUA"
+                                        android:textColor="@color/text_white"
+                                        android:textSize="22sp"
+                                        android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/btn_menu_drawer"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:contentDescription="Menu Navigasi"
-        android:focusable="true"
-        android:padding="8dp"
-        android:src="@drawable/ic_menu"
-        app:tint="@color/text_white" />
-</RelativeLayout>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="KUA Kec.\nRandudongkal"
+                                        android:textColor="@color/gold_accent"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/btn_menu_drawer"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:contentDescription="Menu Navigasi"
+                                android:focusable="true"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_menu"
+                                app:tint="@color/text_white" />
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,7 +125,6 @@
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -137,18 +136,18 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <!-- === 2. SEARCH INPUT === -->
+                <!-- Pencarian nyata lewat TextWatcher; tombol hapus muncul saat ada teks. -->
                 <LinearLayout
                     android:id="@+id/search_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:background="@drawable/bg_search_field"
-                    android:elevation="2dp"
+                    android:elevation="1dp"
                     android:gravity="center_vertical"
-                    android:minHeight="52dp"
+                    android:minHeight="54dp"
                     android:orientation="horizontal"
                     android:paddingStart="14dp"
                     android:paddingEnd="6dp">
@@ -176,7 +175,7 @@
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
                         android:textColor="@color/text_primary"
-                        android:textColorHint="@color/text_tertiary"
+                        android:textColorHint="@color/text_muted"
                         android:textSize="14sp" />
 
                     <ImageButton
@@ -187,18 +186,19 @@
                         android:contentDescription="@string/facilities_search_clear"
                         android:src="@drawable/ic_close"
                         android:visibility="gone"
-                        app:tint="@color/text_tertiary"
+                        app:tint="@color/text_muted"
                         tools:visibility="visible" />
                 </LinearLayout>
 
-                <!-- === 3. CATEGORY FILTER CHIPS (horizontal carousel) === -->
+                <!-- Filter kategori: satu-satu, chip bergaya identitas RIKUA. -->
                 <HorizontalScrollView
                     android:id="@+id/chip_scroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:clipToPadding="false"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
+                    android:paddingStart="@dimen/page_gutter"
+                    android:paddingEnd="@dimen/page_gutter"
                     android:scrollbars="none">
 
                     <com.google.android.material.chip.ChipGroup
@@ -211,62 +211,62 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_all"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:text="@string/facilities_filter_all" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_masjid"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:text="@string/facilities_filter_masjid" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_musholla"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:text="@string/facilities_filter_musholla" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_pesantren"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:text="@string/facilities_filter_pesantren" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_tpq"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:text="@string/facilities_filter_tpq" />
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_madin"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:text="@string/facilities_filter_madin" />
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
-                <!-- === 4. VILLAGE SPINNER === -->
+                <!-- Filter desa: sumber data R.array.facilities_villages. -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:orientation="vertical">
 
                     <TextView
@@ -275,7 +275,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginBottom="6dp"
                         android:text="@string/facilities_village_label"
-                        android:textColor="@color/text_tertiary"
+                        android:textColor="@color/text_muted"
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -283,52 +283,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_search_field"
-                        android:elevation="1dp">
+                        android:minHeight="@dimen/touch_target">
 
                         <Spinner
                             android:id="@+id/spinner_village"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:minHeight="48dp"
+                            android:minHeight="@dimen/touch_target"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp" />
                     </FrameLayout>
                 </LinearLayout>
 
-                <!-- === 5. RESULT COUNT === -->
                 <TextView
                     android:id="@+id/tv_result_count"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/text_tertiary"
-                    android:textSize="12sp"
+                    android:layout_marginEnd="@dimen/page_gutter"
+                    android:textColor="@color/text_muted"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
                     tools:text="5 sarana ditemukan" />
 
-                <!-- Facility RecyclerView -->
+                <!-- Daftar bersumber dari API, tinggi mengikuti jumlah data. -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_facilities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:paddingBottom="4dp"
                     tools:itemCount="5"
                     tools:listitem="@layout/item_facility" />
 
-                <!-- === 5b. EMPTY STATE (hidden by default) === -->
+                <!-- Empty state: tampil saat hasil filter kosong. -->
                 <LinearLayout
                     android:id="@+id/layout_empty_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="28dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="24dp"
@@ -338,7 +338,7 @@
                     <FrameLayout
                         android:layout_width="72dp"
                         android:layout_height="72dp"
-                        android:background="@drawable/bg_icon_rounded_blue">
+                        android:background="@drawable/bg_icon_rounded_green">
 
                         <ImageView
                             android:layout_width="34dp"
@@ -346,7 +346,7 @@
                             android:layout_gravity="center"
                             android:contentDescription="@null"
                             android:src="@drawable/ic_search"
-                            app:tint="@color/badge_blue_text" />
+                            app:tint="@color/primary_forest" />
                     </FrameLayout>
 
                     <TextView
@@ -368,23 +368,23 @@
                         android:textSize="13sp" />
                 </LinearLayout>
 
-                <!-- === 6. HELP / CTA CARD === -->
+                <!-- Konsultasi pendataan sarana via WhatsApp. -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="18dp"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
-                    app:strokeColor="#B7E4CD"
+                    android:layout_marginEnd="@dimen/page_gutter"
+                    app:cardBackgroundColor="@color/surface_white"
+                    app:cardCornerRadius="@dimen/radius_card"
+                    app:cardElevation="1dp"
+                    app:strokeColor="@color/surface_card_border"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_help_card"
                         android:orientation="vertical"
                         android:padding="18dp">
 
@@ -404,7 +404,7 @@
                                     android:layout_height="22dp"
                                     android:layout_gravity="center"
                                     android:contentDescription="@null"
-                                    android:src="@drawable/ic_chat"
+                                    android:src="@drawable/ic_whatsapp"
                                     app:tint="@color/primary_forest" />
                             </FrameLayout>
 
@@ -431,33 +431,32 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_konsultasi_pendataan"
                             android:layout_width="wrap_content"
-                            android:layout_height="48dp"
+                            android:layout_height="@dimen/touch_target"
                             android:layout_marginTop="14dp"
                             android:fontFamily="sans-serif-medium"
                             android:text="@string/facilities_help_btn"
                             android:textColor="@color/text_white"
                             android:textSize="13sp"
                             app:backgroundTint="@color/primary_forest"
-                            app:cornerRadius="12dp"
-                            app:icon="@drawable/ic_chat"
+                            app:cornerRadius="@dimen/radius_control"
+                            app:icon="@drawable/ic_whatsapp"
                             app:iconGravity="start"
                             app:iconSize="18dp"
                             app:iconTint="@color/text_white" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-      </LinearLayout>
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- === 8. BOTTOM NAVIGATION BAR === -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="64dp"
             android:layout_gravity="bottom"
             android:background="@color/surface_white"
-            app:elevation="10dp"
-            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+            android:minHeight="64dp"
+            app:elevation="4dp"
+            app:itemActiveIndicatorStyle="@style/Widget.Rikua.BottomNav.ActiveIndicator"
             app:itemIconTint="@color/bottom_nav_color_selector"
             app:itemRippleColor="@color/primary_forest_container"
             app:itemTextColor="@color/bottom_nav_color_selector"
@@ -465,7 +464,7 @@
             app:menu="@menu/bottom_nav_menu" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- === NAVIGATION DRAWER (end gravity) === -->
+    <!-- Drawer sekunder; destinasi nyata via handleNavigation(). -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="wrap_content"

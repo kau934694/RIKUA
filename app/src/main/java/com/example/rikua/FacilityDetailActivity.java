@@ -50,11 +50,11 @@ public class FacilityDetailActivity extends AppCompatActivity {
 
     // Basis endpoint detail (Laragon). Mengikuti host API direktori sarana.
     private static final String DETAIL_API_URL =
-            "http://192.168.1.23/rikua_api/get_sarana_detail.php";
+            "http://192.168.1.8/rikua_api/get_sarana_detail.php";
     // Nomor WhatsApp admin KUA Randudongkal (konsultasi kemasjidan & wakaf).
     private static final String ADMIN_WHATSAPP = "6281234567890";
 
-    private static final String PLACEHOLDER = "—";
+    private static final String PLACEHOLDER = "Belum tersedia";
 
     // Data
     private FacilityItem facility;
@@ -96,7 +96,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         loadExtendedDetail();
     }
 
-    // ==================== WINDOW / STATUS BAR ====================
     private void setupWindowAndStatusBar() {
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.consult_primary));
@@ -117,7 +116,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         }
     }
 
-    // ==================== INIT VIEWS ====================
     private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
         ivHeader = findViewById(R.id.iv_header_image);
@@ -138,14 +136,12 @@ public class FacilityDetailActivity extends AppCompatActivity {
         tvValEmail = findViewById(R.id.tv_val_email);
     }
 
-    // ==================== TOOLBAR ====================
     private void setupToolbar() {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         // Tombol kembali menutup activity.
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
-    // ==================== READ INTENT ====================
     private void readIntentData() {
         Object obj = getIntent().getSerializableExtra(EXTRA_FACILITY);
         if (obj instanceof FacilityItem) {
@@ -172,7 +168,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         }
     }
 
-    // ==================== BIND BASIC DATA ====================
     private void bindBasicData() {
         if (facility == null) return;
 
@@ -209,7 +204,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         }
     }
 
-    // ==================== EXTENDED DETAIL (SERVER) ====================
     /**
      * Mengambil field detail tambahan (SIMAS, legalitas, luas, tahun, pengurus, kontak,
      * arah kiblat, koordinat) dari server. Setiap field opsional — yang kosong memakai
@@ -302,7 +296,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         longitude = d.optString("longitude", d.optString("lng", ""));
     }
 
-    // ==================== ACTION BUTTONS ====================
     private void setupActionButtons() {
         findViewById(R.id.btn_open_maps).setOnClickListener(v -> openInGoogleMaps());
         findViewById(R.id.btn_consult_wakaf).setOnClickListener(v -> openWhatsAppConsultation());
@@ -354,7 +347,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         }
     }
 
-    // ==================== BOTTOM NAVIGATION ====================
     private void setupBottomNavigation() {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setSelectedItemId(R.id.menu_facilities);
@@ -379,7 +371,7 @@ public class FacilityDetailActivity extends AppCompatActivity {
         } else if (itemId == R.id.menu_facilities) {
             navigateTo(FacilitiesActivity.class);
         } else if (itemId == R.id.menu_forms) {
-            showToast("Blangko & Formulir — Coming Soon");
+            showToast("Blangko & Formulir segera hadir");
         }
     }
 
@@ -390,7 +382,6 @@ public class FacilityDetailActivity extends AppCompatActivity {
         finish();
     }
 
-    // ==================== UTILITIES ====================
     private static boolean notEmpty(String s) {
         return s != null && !s.trim().isEmpty();
     }

@@ -7,12 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:minHeight="100dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
-    app:rippleColor="@color/primary_forest_container">
+    app:cardBackgroundColor="@color/surface_white"
+    app:cardCornerRadius="@dimen/radius_card"
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +18,7 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <!-- Kode N1/N2 — Kotak Hijau Tua -->
+        <!-- Kode dokumen N1–N6: penanda cepat, kotak hijau solid. -->
         <TextView
             android:id="@+id/tv_blanko_kode"
             android:layout_width="48dp"
@@ -30,11 +27,10 @@
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:textColor="@color/text_white"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             tools:text="N1" />
 
-        <!-- Konten Tengah: Judul, Deskripsi, Info -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,7 +45,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/text_primary"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 tools:text="Surat Keterangan Belum Pernah Nikah" />
 
@@ -64,7 +60,6 @@
                 android:textSize="12sp"
                 tools:text="Formulir pernyataan belum pernah menikah, bermaterai" />
 
-            <!-- Baris Info: Ukuran File + Badge Kategori -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,9 +71,8 @@
                     android:id="@+id/tv_blanko_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/text_tertiary"
-                    android:textSize="11sp"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp"
                     tools:text="PDF • 120 KB" />
 
                 <TextView
@@ -92,24 +86,24 @@
                     android:paddingTop="3dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:textColor="@color/status_green_dark"
-                    android:textSize="10sp"
+                    android:textColor="@color/badge_emerald_text"
+                    android:textSize="11sp"
                     tools:text="Wajib" />
             </LinearLayout>
 
-            <!-- Tombol Unduh PDF -->
+            <!-- Aksi unduh: satu-satunya elemen interaktif pada kartu. -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_unduh_pdf"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="@dimen/touch_target"
+                android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif-medium"
-                android:minWidth="130dp"
+                android:minWidth="140dp"
                 android:text="@string/blanko_btn_unduh"
                 android:textColor="@color/text_white"
-                android:textSize="12sp"
-                app:backgroundTint="@color/consult_primary"
-                app:cornerRadius="10dp"
+                android:textSize="13sp"
+                app:backgroundTint="@color/primary_forest"
+                app:cornerRadius="@dimen/radius_control"
                 app:icon="@drawable/ic_download"
                 app:iconGravity="start"
                 app:iconSize="16dp"

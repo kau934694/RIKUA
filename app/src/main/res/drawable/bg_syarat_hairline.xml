@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rambut pemisah halus di dalam kartu accordion. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/syarat_card_border" />
+    <corners android:radius="1dp" />
+</shape>

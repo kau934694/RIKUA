@@ -80,4 +80,62 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/gold_dark</item>
     </style>
+
+    <!-- Splash: hijau penuh sejak jendela terbuka agar tak ada kedip putih. -->
+    <style name="Theme.Rikua.Splash" parent="Theme.Rikua">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:statusBarColor">@color/primary_forest_deep</item>
+        <item name="android:navigationBarColor">@color/primary_forest_deep</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Kolom isian autentikasi: outline radius kontrol, garis rambut netral. -->
+    <style name="Widget.Rikua.AuthField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_control</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_control</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_control</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_control</item>
+        <item name="boxStrokeColor">@color/auth_field_stroke</item>
+        <item name="hintTextColor">@color/primary_forest</item>
+        <item name="android:textColorHint">@color/text_muted</item>
+        <item name="startIconTint">@color/text_muted</item>
+        <item name="boxBackgroundColor">@color/surface_white</item>
+    </style>
+
+    <!-- Tombol utama: hijau hutan, teks putih, radius kontrol. -->
+    <style name="Widget.Rikua.AuthButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primary_forest</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="cornerRadius">@dimen/radius_control</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="rippleColor">@color/primary_forest_light</item>
+    </style>
+
+    <!-- Tombol masuk admin: outlined agar tak bersaing dengan tombol utama. -->
+    <style name="Widget.Rikua.AuthButton.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/primary_forest</item>
+        <item name="strokeColor">@color/surface_card_border</item>
+        <item name="iconTint">@color/primary_forest</item>
+        <item name="cornerRadius">@dimen/radius_control</item>
+        <item name="android:minHeight">@dimen/touch_target</item>
+        <item name="rippleColor">@color/primary_forest_container</item>
+    </style>
+
+    <!-- Tombol Masuk dengan Google: latar putih, garis rambut abu, logo asli
+         tanpa tint. Selaras radius kontrol dengan tombol lain, warna netral
+         agar logo Google tetap jadi penanda utama. -->
+    <style name="Widget.Rikua.AuthButton.Google" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="backgroundTint">@color/surface_white</item>
+        <item name="strokeColor">@color/google_button_border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="iconTint">@null</item>
+        <item name="iconPadding">12dp</item>
+        <item name="cornerRadius">@dimen/radius_control</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="rippleColor">@color/surface_cream</item>
+    </style>
 </resources>

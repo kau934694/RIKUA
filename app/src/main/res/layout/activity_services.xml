@@ -8,14 +8,12 @@
     android:fitsSystemWindows="true"
     tools:context=".ServicesActivity">
 
-    <!-- =================== MAIN CONTENT =================== -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/services_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/surface_cream_light">
 
-        <!-- =================== SCROLLABLE BODY =================== -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
@@ -29,14 +27,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- === HEADER BANNER (DESAIN DASHBOARD) === -->
+                <!-- Header hijau: identitas utama aplikasi, dipertahankan apa adanya. -->
                 <FrameLayout
                     android:id="@+id/banner_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_hero_curved">
 
-                    <!-- Motif Latar Islami -->
                     <ImageView
                         android:layout_width="220dp"
                         android:layout_height="220dp"
@@ -57,12 +54,10 @@
                         android:paddingEnd="20dp"
                         android:paddingBottom="28dp">
 
-                        <!-- Top Header: Logo + Title App & Menu Burger -->
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <!-- Container Logo & Nama KUA -->
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -71,7 +66,6 @@
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
-                                <!-- Logo KUA (Kiri) -->
                                 <ImageView
                                     android:id="@+id/iv_app_logo"
                                     android:layout_width="48dp"
@@ -79,7 +73,6 @@
                                     android:contentDescription="Logo KUA"
                                     android:src="@drawable/logo" />
 
-                                <!-- Nama Aplikasi & Subtitle -->
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -105,7 +98,6 @@
                                 </LinearLayout>
                             </LinearLayout>
 
-                          <!-- Tombol Menu Burger (Ukuran 24dp & clickable 40dp) -->
                             <ImageView
                                 android:id="@+id/btn_menu_drawer"
                                 android:layout_width="40dp"
@@ -121,7 +113,6 @@
                                 app:tint="@color/text_white" />
                         </RelativeLayout>
 
-                        <!-- Teks Banner Layanan KUA -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -145,18 +136,18 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <!-- === SEARCH INPUT === -->
+                <!-- Kolom cari: elemen yang diberi bayangan, sisanya rata halaman. -->
                 <LinearLayout
                     android:id="@+id/search_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="18dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:background="@drawable/bg_search_field"
                     android:elevation="2dp"
                     android:gravity="center_vertical"
-                    android:minHeight="52dp"
+                    android:minHeight="54dp"
                     android:orientation="horizontal"
                     android:paddingStart="14dp"
                     android:paddingEnd="6dp">
@@ -184,7 +175,7 @@
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
                         android:textColor="@color/text_primary"
-                        android:textColorHint="@color/text_tertiary"
+                        android:textColorHint="@color/text_muted"
                         android:textSize="14sp" />
 
                     <ImageButton
@@ -195,19 +186,18 @@
                         android:contentDescription="@string/services_search_clear"
                         android:src="@drawable/ic_close"
                         android:visibility="gone"
-                        app:tint="@color/text_tertiary"
+                        app:tint="@color/text_muted"
                         tools:visibility="visible" />
                 </LinearLayout>
 
-                <!-- === CATEGORY FILTER CAROUSEL === -->
                 <HorizontalScrollView
                     android:id="@+id/chip_scroll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:clipToPadding="false"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
+                    android:paddingStart="@dimen/page_gutter"
+                    android:paddingEnd="@dimen/page_gutter"
                     android:scrollbars="none">
 
                     <com.google.android.material.chip.ChipGroup
@@ -220,7 +210,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_all"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
@@ -229,7 +219,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_pernikahan"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:minHeight="48dp"
@@ -237,7 +227,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_administrasi"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:minHeight="48dp"
@@ -245,7 +235,7 @@
 
                         <com.google.android.material.chip.Chip
                             android:id="@+id/chip_wakaf"
-                            style="@style/Widget.Material3.Chip.Filter"
+                            style="@style/Widget.Rikua.Chip.Filter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:minHeight="48dp"
@@ -253,13 +243,12 @@
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
 
-                <!-- === SECTION TITLE === -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="@dimen/page_gutter"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:orientation="vertical">
 
                     <TextView
@@ -275,41 +264,40 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="@string/services_section_list_subtitle"
-                        android:textColor="@color/text_tertiary"
+                        android:textColor="@color/text_muted"
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- Service RecyclerView -->
+                <!-- Daftar bersumber dari API, tinggi mengikuti jumlah data. -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_services"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     android:paddingBottom="4dp"
                     tools:itemCount="8"
                     tools:listitem="@layout/item_service" />
 
-                <!-- === HELP CARD === -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
+                    android:layout_marginStart="@dimen/page_gutter"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginEnd="@dimen/page_gutter"
+                    app:cardBackgroundColor="@color/surface_white"
                     app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
-                    app:strokeColor="#B7E4CD"
+                    app:cardElevation="1dp"
+                    app:strokeColor="@color/surface_card_border"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_help_card"
                         android:orientation="vertical"
                         android:padding="18dp">
 
@@ -373,7 +361,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- === BOTTOM NAVIGATION BAR === -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
@@ -381,8 +368,8 @@
             android:layout_gravity="bottom"
             android:minHeight="64dp"
             android:background="@color/surface_white"
-            app:elevation="10dp"
-            app:itemActiveIndicatorStyle="@style/Widget.Material3.BottomNavigationView.ActiveIndicator"
+            app:elevation="4dp"
+            app:itemActiveIndicatorStyle="@style/Widget.Rikua.BottomNav.ActiveIndicator"
             app:itemIconTint="@color/bottom_nav_color_selector"
             app:itemRippleColor="@color/primary_forest_container"
             app:itemTextColor="@color/bottom_nav_color_selector"
@@ -390,7 +377,6 @@
             app:menu="@menu/bottom_nav_menu" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- === NAVIGATION DRAWER === -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="wrap_content"

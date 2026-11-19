@@ -2,21 +2,22 @@
 <!--
     ============================================================================
      RIKUA — activity_duplikat_buku_nikah.xml
-     Halaman "Duplikat Buku Nikah" (penggantian buku nikah hilang/rusak) MD3
-     Palette: primary #005145 / #0f6b5c, container #a2f2de, secondary #795902 /
-              #fdd275, surface #f7f9ff, card #ffffff, border #bec9c5 @ 40%.
+     Halaman "Duplikat Buku Nikah" (penggantian buku nikah hilang/rusak).
+     Karakter: register netral — kanvas abu (#F4F5F3), permukaan putih, judul
+     charcoal (#22262B), teks deskripsi abu medium, aksen champagne terbatas.
+     Sengaja TIDAK memakai format hijau Isbat/Rekomendasi pada area konten.
+     Toolbar, sticky dock, bottom nav, drawer tetap memakai identitas hijau KUA.
     ============================================================================
      Struktur:
        DrawerLayout
-         └─ CoordinatorLayout
+         └─ CoordinatorLayout (bg dup_bg)
               ├─ AppBarLayout + MaterialToolbar   (back | judul tengah | burger)
               ├─ NestedScrollView (paddingBottom 220dp — bebas dock)
-              │    ├─ Hero / civic card : badge resmi, diperbarui, judul,
-              │    │                       deskripsi, strip biaya "Rp 0"
-              │    ├─ Checklist dokumen   : badge "4 Dokumen" + 4 row interaktif
-              │    ├─ Timeline 4 langkah  : garis dashed + langkah-4 emas (Selesai)
-              │    ├─ Banner anti-pungli  : garansi gratis (secondary gold)
-              │    └─ Kartu jam layanan   : Senin–Jumat + tombol Hubungi
+              │    ├─ Kartu intro : judul + garis champagne + deskripsi
+              │    ├─ Persyaratan : judul + badge jumlah + 4 row interaktif
+              │    │                 (ikon jenis dokumen + teks + badge + centang)
+              │    ├─ Timeline    : 4 langkah card-less, rel solid, langkah-4 champagne
+              │    └─ Jam layanan : kartu putih + tombol Hubungi (WhatsApp)
               └─ layout_bottom_sticky     (dock aksi + bottom nav 5 tab)
     ============================================================================
 -->
@@ -33,7 +34,7 @@
         android:id="@+id/dup_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/md3_background">
+        android:background="@color/dup_bg">
 
         <!-- =================== TOP APP BAR (STICKY) =================== -->
         <com.google.android.material.appbar.AppBarLayout
@@ -101,188 +102,166 @@
                 android:paddingTop="16dp"
                 android:paddingEnd="18dp">
 
-                <!-- ============ 1. HERO / CIVIC CARD ============ -->
+                <!-- ============ 1. INTRO ============ -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_rekom_card"
+                    android:background="@drawable/bg_dup_card"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:paddingStart="18dp"
+                    android:paddingTop="18dp"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="20dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/dup_hero_title"
-                        android:textColor="@color/text_primary"
-                        android:textSize="21sp"
+                        android:textColor="@color/dup_text"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <View style="@style/DupSectionRule" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:lineSpacingExtra="3dp"
+                        android:layout_marginTop="12dp"
+                        android:lineSpacingExtra="4dp"
                         android:text="@string/dup_hero_desc"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp" />
+                        android:textColor="@color/dup_desc"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
-                <!-- ============ 2. CHECKLIST PERSYARATAN DOKUMEN (4 ITEM) ============ -->
+                <!-- ============ 2. PERSYARATAN DOKUMEN (DAFTAR STATIS 4 ITEM) ============ -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="26dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/dup_siap_title"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/dup_text"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <!-- Badge jumlah dokumen -->
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:background="@drawable/bg_badge_teal"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingStart="10dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="3dp"
+                        style="@style/DupBadge"
+                        android:layout_marginStart="0dp"
+                        android:background="@drawable/bg_dup_badge_champagne"
                         android:text="@string/dup_siap_badge"
-                        android:textColor="@color/badge_teal_text"
-                        android:textSize="11sp" />
+                        android:textColor="@color/dup_champagne_text" />
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/dup_siap_subtitle"
-                    android:textColor="@color/text_tertiary"
-                    android:textSize="12sp" />
+                    style="@style/DupSectionSubtitle"
+                    android:text="@string/dup_siap_subtitle" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/bg_rekom_card"
+                    android:background="@drawable/bg_dup_card"
                     android:orientation="vertical"
                     android:paddingStart="16dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="6dp">
+                    android:paddingEnd="16dp">
 
-                    <!-- Dokumen 1 — Surat kehilangan (badge POLSEK) -->
-                    <LinearLayout
-                        android:id="@+id/row_dok_1"
-                        style="@style/RekomChecklistRow">
+                    <!-- Dokumen 1 — Surat kehilangan dari Polsek -->
+                    <LinearLayout style="@style/DupInfoRow">
 
                         <ImageView
-                            android:id="@+id/iv_check_1"
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@string/syarat_check_desc"
-                            android:src="@drawable/ic_check_circle" />
+                            style="@style/DupCheckIcon"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_police_badge" />
 
-                        <LinearLayout style="@style/RekomChecklistText">
+                        <LinearLayout style="@style/DupCheckText">
 
                             <TextView
-                                android:id="@+id/tv_dok_1"
-                                style="@style/RekomChecklistTitle"
+                                style="@style/DupCheckTitle"
                                 android:text="@string/dup_dok_1_title" />
 
                             <TextView
-                                style="@style/RekomChecklistDesc"
+                                style="@style/DupCheckDesc"
                                 android:text="@string/dup_dok_1_desc" />
                         </LinearLayout>
-
-                        <TextView
-                            style="@style/IsbatBerkasBadge"
-                            android:background="@drawable/bg_badge_blue"
-                            android:text="@string/dup_badge_polsek"
-                            android:textColor="@color/badge_blue_text" />
                     </LinearLayout>
 
-                    <!-- Dokumen 2 — KTP & KK (badge FOTOKOPI) -->
-                    <LinearLayout
-                        android:id="@+id/row_dok_2"
-                        style="@style/RekomChecklistRow">
+                    <View
+                        style="@style/DupHairline"
+                        android:layout_marginStart="52dp" />
+
+                    <!-- Dokumen 2 — KTP & KK -->
+                    <LinearLayout style="@style/DupInfoRow">
 
                         <ImageView
-                            android:id="@+id/iv_check_2"
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@string/syarat_check_desc"
-                            android:src="@drawable/ic_check_circle" />
+                            style="@style/DupCheckIcon"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_person" />
 
-                        <LinearLayout style="@style/RekomChecklistText">
+                        <LinearLayout style="@style/DupCheckText">
 
                             <TextView
-                                android:id="@+id/tv_dok_2"
-                                style="@style/RekomChecklistTitle"
+                                style="@style/DupCheckTitle"
                                 android:text="@string/dup_dok_2_title" />
 
                             <TextView
-                                style="@style/RekomChecklistDesc"
+                                style="@style/DupCheckDesc"
                                 android:text="@string/dup_dok_2_desc" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Dokumen 3 — Buku rusak (badge JIKA RUSAK) -->
-                    <LinearLayout
-                        android:id="@+id/row_dok_3"
-                        style="@style/RekomChecklistRow">
+                    <View
+                        style="@style/DupHairline"
+                        android:layout_marginStart="52dp" />
+
+                    <!-- Dokumen 3 — Buku nikah rusak -->
+                    <LinearLayout style="@style/DupInfoRow">
 
                         <ImageView
-                            android:id="@+id/iv_check_3"
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@string/syarat_check_desc"
-                            android:src="@drawable/ic_check_circle" />
+                            style="@style/DupCheckIcon"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_description" />
 
-                        <LinearLayout style="@style/RekomChecklistText">
+                        <LinearLayout style="@style/DupCheckText">
 
                             <TextView
-                                android:id="@+id/tv_dok_3"
-                                style="@style/RekomChecklistTitle"
+                                style="@style/DupCheckTitle"
                                 android:text="@string/dup_dok_3_title" />
 
                             <TextView
-                                style="@style/RekomChecklistDesc"
+                                style="@style/DupCheckDesc"
                                 android:text="@string/dup_dok_3_desc" />
                         </LinearLayout>
-
-                        <TextView
-                            style="@style/IsbatBerkasBadge"
-                            android:background="@drawable/bg_badge_amber"
-                            android:text="@string/dup_badge_sesuai_kondisi"
-                            android:textColor="@color/badge_amber_text" />
                     </LinearLayout>
 
+                    <View
+                        style="@style/DupHairline"
+                        android:layout_marginStart="52dp" />
+
                     <!-- Dokumen 4 — Pas foto 2x3 suami istri latar biru -->
-                    <LinearLayout
-                        android:id="@+id/row_dok_4"
-                        style="@style/RekomChecklistRow">
+                    <LinearLayout style="@style/DupInfoRow">
 
                         <ImageView
-                            android:id="@+id/iv_check_4"
-                            style="@style/RekomChecklistIcon"
-                            android:contentDescription="@string/syarat_check_desc"
-                            android:src="@drawable/ic_check_circle" />
+                            style="@style/DupCheckIcon"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_camera" />
 
-                        <LinearLayout style="@style/RekomChecklistText">
+                        <LinearLayout style="@style/DupCheckText">
 
                             <TextView
-                                android:id="@+id/tv_dok_4"
-                                style="@style/RekomChecklistTitle"
+                                style="@style/DupCheckTitle"
                                 android:text="@string/dup_dok_4_title" />
 
                             <TextView
-                                style="@style/RekomChecklistDesc"
+                                style="@style/DupCheckDesc"
                                 android:text="@string/dup_dok_4_desc" />
                         </LinearLayout>
                     </LinearLayout>
@@ -292,31 +271,27 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
+                    android:layout_marginTop="28dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/dup_alur_title"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/dup_text"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/dup_alur_subtitle"
-                    android:textColor="@color/text_tertiary"
-                    android:textSize="12sp" />
+                    style="@style/DupSectionSubtitle"
+                    android:text="@string/dup_alur_subtitle" />
 
                 <!-- Langkah 1 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp">
+                    android:layout_marginTop="16dp">
 
                     <TextView
                         android:id="@+id/tv_step_1"
-                        style="@style/RekomStepNumber"
-                        android:text="@string/rekom_step_1_number"
+                        style="@style/DupStepNumber"
+                        android:text="@string/dup_step_1_number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -324,44 +299,42 @@
                         android:layout_width="2dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="6dp"
-                        android:background="@drawable/bg_rekom_dashed_line"
+                        android:background="@color/dup_rail"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tv_step_1"
                         app:layout_constraintStart_toStartOf="@id/tv_step_1"
                         app:layout_constraintTop_toBottomOf="@id/tv_step_1" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_surface_card"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_1"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout style="@style/RekomStepCardBody">
+                        <TextView
+                            style="@style/DupStepTitle"
+                            android:text="@string/dup_alur_1_title" />
 
-                            <TextView
-                                style="@style/RekomStepTitle"
-                                android:text="@string/dup_alur_1_title" />
-
-                            <TextView
-                                style="@style/RekomStepDesc"
-                                android:text="@string/dup_alur_1_desc" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            style="@style/DupStepDesc"
+                            android:text="@string/dup_alur_1_desc" />
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Langkah 2 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="6dp">
 
                     <TextView
                         android:id="@+id/tv_step_2"
-                        style="@style/RekomStepNumber"
-                        android:text="@string/rekom_step_2_number"
+                        style="@style/DupStepNumber"
+                        android:text="@string/dup_step_2_number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -369,44 +342,42 @@
                         android:layout_width="2dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="6dp"
-                        android:background="@drawable/bg_rekom_dashed_line"
+                        android:background="@color/dup_rail"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tv_step_2"
                         app:layout_constraintStart_toStartOf="@id/tv_step_2"
                         app:layout_constraintTop_toBottomOf="@id/tv_step_2" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_surface_card"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_2"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout style="@style/RekomStepCardBody">
+                        <TextView
+                            style="@style/DupStepTitle"
+                            android:text="@string/dup_alur_2_title" />
 
-                            <TextView
-                                style="@style/RekomStepTitle"
-                                android:text="@string/dup_alur_2_title" />
-
-                            <TextView
-                                style="@style/RekomStepDesc"
-                                android:text="@string/dup_alur_2_desc" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            style="@style/DupStepDesc"
+                            android:text="@string/dup_alur_2_desc" />
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Langkah 3 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="6dp">
 
                     <TextView
                         android:id="@+id/tv_step_3"
-                        style="@style/RekomStepNumber"
-                        android:text="@string/rekom_step_3_number"
+                        style="@style/DupStepNumber"
+                        android:text="@string/dup_step_3_number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -414,90 +385,82 @@
                         android:layout_width="2dp"
                         android:layout_height="0dp"
                         android:layout_marginTop="6dp"
-                        android:background="@drawable/bg_rekom_dashed_line"
+                        android:background="@color/dup_rail"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/tv_step_3"
                         app:layout_constraintStart_toStartOf="@id/tv_step_3"
                         app:layout_constraintTop_toBottomOf="@id/tv_step_3" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        style="@style/RekomStepCard"
-                        app:cardBackgroundColor="@color/md3_surface_card"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical"
+                        android:paddingBottom="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_step_3"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout style="@style/RekomStepCardBody">
+                        <TextView
+                            style="@style/DupStepTitle"
+                            android:text="@string/dup_alur_3_title" />
 
-                            <TextView
-                                style="@style/RekomStepTitle"
-                                android:text="@string/dup_alur_3_title" />
-
-                            <TextView
-                                style="@style/RekomStepDesc"
-                                android:text="@string/dup_alur_3_desc" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                        <TextView
+                            style="@style/DupStepDesc"
+                            android:text="@string/dup_alur_3_desc" />
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
- <!-- Langkah 4 -->
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+                <!-- Langkah 4 — penanda penyelesaian (aksen champagne) -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp">
 
-    <TextView
-        android:id="@+id/tv_step_4"
-        style="@style/RekomStepNumber"
-        android:text="4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_step_4"
+                        style="@style/DupStepNumberGold"
+                        android:text="@string/dup_step_4_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/RekomStepCard"
-        app:cardBackgroundColor="@color/md3_surface_card"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_step_4"
-        app:layout_constraintTop_toTopOf="parent">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_step_4"
+                        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout style="@style/RekomStepCardBody">
+                        <TextView
+                            style="@style/DupStepTitle"
+                            android:text="@string/dup_alur_4_title" />
 
-            <TextView
-                style="@style/RekomStepTitle"
-                android:text="@string/dup_alur_4_title" />
+                        <TextView
+                            style="@style/DupStepDesc"
+                            android:text="@string/dup_alur_4_desc" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                style="@style/RekomStepDesc"
-                android:text="@string/dup_alur_4_desc" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
-                <!-- ============ 5. KARTU JAM LAYANAN + HUBUNGI ============ -->
+                <!-- ============ 4. JAM LAYANAN + HUBUNGI ============ -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_rekom_card"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/bg_dup_card"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="16dp"
-                    android:paddingTop="12dp"
+                    android:paddingTop="14dp"
                     android:paddingEnd="14dp"
-                    android:paddingBottom="12dp">
+                    android:paddingBottom="14dp">
 
                     <ImageView
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        android:background="@drawable/bg_rekom_icon_teal_soft"
-                        android:contentDescription="@null"
-                        android:padding="9dp"
-                        android:src="@drawable/ic_schedule"
-                        app:tint="@color/md3_primary" />
+                        style="@style/DupCheckIcon"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_schedule" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -510,51 +473,55 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="@string/hours_weekday"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"
+                            android:text="@string/dup_jam_title"
+                            android:textColor="@color/dup_text"
+                            android:textSize="15sp"
                             android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/hours_weekday"
+                            android:textColor="@color/dup_desc"
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/hours_friday"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/dup_desc"
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="@string/dup_jam_desc"
-                            android:textColor="@color/text_tertiary"
+                            android:text="@string/hours_weekend"
+                            android:textColor="@color/dup_muted"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
                     <!-- Aksi cepat: Hubungi petugas (WhatsApp admin) -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_hubungi"
-                        style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="10dp"
                         android:fontFamily="sans-serif-medium"
                         android:minWidth="96dp"
                         android:text="@string/dup_btn_hubungi"
                         android:textAllCaps="false"
-                        android:textColor="@color/md3_on_primary_container"
+                        android:textColor="@color/surface_white"
                         android:textSize="13sp"
-                        app:backgroundTint="@color/md3_primary_container"
-                        app:cornerRadius="14dp"
+                        app:backgroundTint="@color/dup_charcoal"
+                        app:cornerRadius="12dp"
                         app:icon="@drawable/ic_phone"
                         app:iconGravity="start"
                         app:iconSize="16dp"
-                        app:iconTint="@color/md3_on_primary_container" />
+                        app:iconTint="@color/surface_white" />
                 </LinearLayout>
-            </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -580,30 +547,9 @@
                 android:paddingBottom="8dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_lihat_syarat"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="52dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/dup_btn_syarat"
-                    android:textAllCaps="false"
-                    android:textColor="@color/md3_primary"
-                    android:textSize="14sp"
-                    app:cornerRadius="14dp"
-                    app:icon="@drawable/ic_description"
-                    app:iconGravity="start"
-                    app:iconSize="18dp"
-                    app:iconTint="@color/md3_primary"
-                    app:strokeColor="@color/md3_primary"
-                    app:strokeWidth="1.5dp" />
-
-                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_konsultasi"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/dup_btn_konsultasi"
                     android:textAllCaps="false"

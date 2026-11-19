@@ -1,12 +1,9 @@
 package com.example.rikua;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -34,12 +31,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * findViewById, sesuai standar project.
  *
  * Struktur tampilan (lihat activity_duplikat_buku_nikah.xml):
- *   1. Section banner : badge resmi, tanggal pembaruan, judul, deskripsi,
- *                      strip biaya "Rp 0" + ringkasan alur
- *   2. Checklist dokumen : badge "4 Dokumen" + 4 row interaktif (klik = siap)
- *   3. Timeline 4 langkah : garis dashed, langkah-4 highlight emas (Selesai)
- *   4. Banner anti-pungli : garansi gratis + kartu jam layanan + tombol Hubungi
- *   5. Sticky dock    : Lihat Syarat Nikah (outline) + Konsultasi (filled)
+ *   1. Intro          : judul + garis champagne + deskripsi singkat
+ *   2. Persyaratan    : daftar statis 4 berkas (ikon + judul + deskripsi)
+ *   3. Timeline       : 4 langkah card-less, langkah-4 aksen champagne
+ *   4. Jam layanan    : kartu putih + tombol Hubungi (WhatsApp)
+ *   5. Sticky dock    : satu tombol Konsultasi (filled)
  *   6. Bottom navigation persisten (5 tab, "Layanan" aktif)
  */
 public class DuplikatBukuNikahActivity extends AppCompatActivity {
@@ -59,9 +55,6 @@ public class DuplikatBukuNikahActivity extends AppCompatActivity {
 
     private ActivityDuplikatBukuNikahBinding binding;
 
-    /** State centang checklist dokumen (indeks 0..3 == dokumen 1..4). */
-    private final boolean[] dokumenSiap = new boolean[4];
-
     // =======================================================================
     // Lifecycle
     // =======================================================================
@@ -75,7 +68,6 @@ public class DuplikatBukuNikahActivity extends AppCompatActivity {
         setupWindowAndStatusBar();
         setupToolbar();
         setupDrawer();
-        setupChecklist();
         setupActionButtons();
         setupBottomNavigation();
 
@@ -142,77 +134,15 @@ public class DuplikatBukuNikahActivity extends AppCompatActivity {
     }
 
     // =======================================================================
-    // Checklist dokumen — klik row menandai "siap"
-    // =======================================================================
-
-    /**
-     * Interaksi checklist: mengetuk salah satu dari 4 row dokumen akan
-     * menandai/membatalkan status "siap" — ikon centang berubah warna dan
-     * judul menebal; saat semua dokumen siap tampil toast apresiasi.
-     */
-    private void setupChecklist() {
-        binding.rowDok1.setOnClickListener(v -> toggleDokumen(0));
-        binding.rowDok2.setOnClickListener(v -> toggleDokumen(1));
-        binding.rowDok3.setOnClickListener(v -> toggleDokumen(2));
-        binding.rowDok4.setOnClickListener(v -> toggleDokumen(3));
-        terapkanVisualSemuaDokumen();
-    }
-
-    private void toggleDokumen(int index) {
-        dokumenSiap[index] = !dokumenSiap[index];
-        terapkanVisualDokumen(index);
-
-        if (dokumenSemuaSiap()) {
-            Toast.makeText(this, R.string.dup_checklist_selesai, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /** Terapkan visual satu row: tint ikon centang + gaya teks judul. */
-    private void terapkanVisualDokumen(int index) {
-        ImageView icon;
-        TextView judul;
-        switch (index) {
-            case 1:  icon = binding.ivCheck2; judul = binding.tvDok2; break;
-            case 2:  icon = binding.ivCheck3; judul = binding.tvDok3; break;
-            case 3:  icon = binding.ivCheck4; judul = binding.tvDok4; break;
-            default: icon = binding.ivCheck1; judul = binding.tvDok1; break;
-        }
-
-        boolean siap = dokumenSiap[index];
-        icon.setImageResource(R.drawable.ic_check_circle);
-        icon.setColorFilter(ContextCompat.getColor(this,
-                siap ? R.color.md3_primary : R.color.md3_outline_variant_40));
-        judul.setTypeface(Typeface.create("sans-serif-medium",
-                siap ? Typeface.BOLD : Typeface.NORMAL));
-    }
-
-    private void terapkanVisualSemuaDokumen() {
-        for (int i = 0; i < dokumenSiap.length; i++) {
-            terapkanVisualDokumen(i);
-        }
-    }
-
-    private boolean dokumenSemuaSiap() {
-        for (boolean siap : dokumenSiap) {
-            if (!siap) return false;
-        }
-        return true;
-    }
-
-    // =======================================================================
     // Sticky action buttons
     // =======================================================================
 
     /**
      * Aksi tombol:
-     *   - Lihat Syarat Nikah -> SyaratNikahActivity (checklist berkas nikah)
-     *   - Konsultasi         -> ConsultationActivity (daftar petugas)
+     *   - Konsultasi           -> ConsultationActivity (daftar petugas)
      *   - Hubungi (jam layanan) -> WhatsApp resmi admin KUA pesan siap kirim
      */
     private void setupActionButtons() {
-        binding.btnLihatSyarat.setOnClickListener(v ->
-                startActivity(new Intent(this, SyaratNikahActivity.class)));
-
         binding.btnKonsultasi.setOnClickListener(v ->
                 startActivity(new Intent(this, ConsultationActivity.class)));
 

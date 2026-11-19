@@ -4,6 +4,8 @@
     - Header selalu tampil: checkbox checklist, judul, badge wajib, chevron.
     - Body (layout_accordion_body) awalannya GONE, di-expand lewat animasi
       ValueAnimator pada SyaratNikahActivity#toggleAccordion().
+    - Lebar efektif kartu = layar - 36dp (16dp padding scroll + 0 margin kartu);
+      asumsi getContentWidth() di Activity, jangan diubah tanpa sinkron.
 -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +15,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     app:cardBackgroundColor="@color/surface_white"
-    app:cardCornerRadius="18dp"
+    app:cardCornerRadius="14dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/syarat_card_border"
     app:strokeWidth="1dp">
@@ -23,7 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- ================= HEADER ACCORDION (klik = buka/tutup) ================= -->
+        <!-- Header: ketuk = buka/tutup body (klik panjang = tanya via WA) -->
         <LinearLayout
             android:id="@+id/layout_accordion_header"
             android:layout_width="match_parent"
@@ -35,51 +37,50 @@
             android:gravity="center_vertical"
             android:minHeight="64dp"
             android:orientation="horizontal"
-            android:paddingStart="14dp"
-            android:paddingTop="12dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
             android:paddingEnd="14dp"
-            android:paddingBottom="12dp">
+            android:paddingBottom="10dp">
 
-            <!-- Checklist persiapan — sentuhan terpisah dari expand/collapse -->
+            <!-- Checklist persiapan: visual 24dp, target sentuh 44dp (R-03).
+                 Terpisah dari expand/collapse. -->
             <ImageView
                 android:id="@+id/iv_check"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/syarat_check_desc"
-                android:padding="1dp"
+                android:padding="10dp"
                 android:src="@drawable/ic_check_circle"
                 app:tint="@color/text_tertiary" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_judul_syarat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@color/text_primary"
-                    android:textSize="14sp"
-                    tools:text="Surat Model N1 — Pengantar Nikah dari Desa" />
+                    style="@style/SyaratItemTitle"
+                    tools:text="Surat Model N1, Pengantar Nikah dari Desa" />
 
+                <!-- Badge status: wajib (emerald) / sesuai kondisi (amber),
+                     warna final di-set renderAccordion() di Activity -->
                 <TextView
                     android:id="@+id/tv_badge_wajib"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/bg_badge_gray"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_badge_emerald"
                     android:fontFamily="sans-serif-medium"
                     android:letterSpacing="0.04"
                     android:paddingStart="8dp"
                     android:paddingTop="2dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="2dp"
-                    android:textColor="@color/text_tertiary"
+                    android:textColor="@color/badge_emerald_text"
                     android:textSize="10sp"
                     tools:text="WAJIB" />
             </LinearLayout>
@@ -91,44 +92,38 @@
                 android:layout_marginStart="8dp"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_expand_more"
-                app:tint="@color/text_tertiary" />
+                app:tint="@color/text_muted" />
         </LinearLayout>
 
-        <!-- ================= BODY ACCORDION (collapsed by default) ================= -->
+        <!-- Body accordion (collapsed by default) -->
         <LinearLayout
             android:id="@+id/layout_accordion_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="52dp"
+            android:paddingStart="60dp"
             android:paddingEnd="14dp"
             android:paddingBottom="14dp"
             android:visibility="gone"
             tools:visibility="visible">
 
+            <!-- Pemisah halus header/body, rata dengan teks judul -->
+            <View
+                style="@style/SyaratHairline"
+                android:layout_marginBottom="10dp" />
+
             <!-- Penjelasan rinci syarat -->
             <TextView
                 android:id="@+id/tv_sub_teks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:lineSpacingExtra="3dp"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"
+                style="@style/SyaratItemBody"
                 tools:text="Diterbitkan kantor desa/kelurahan domisili. Masa berlaku 30 hari kalender." />
 
             <!-- Label daftar dokumen -->
             <TextView
                 android:id="@+id/tv_dokumen_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/SyaratBodyLabel"
                 android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="0.06"
-                android:text="@string/syarat_dokumen_label"
-                android:textAllCaps="true"
-                android:textColor="@color/text_tertiary"
-                android:textSize="10sp" />
+                android:text="@string/syarat_dokumen_label" />
 
             <!-- Chip dokumen_diminta, diisi dinamis dari array "dokumen" JSON -->
             <com.google.android.material.chip.ChipGroup
@@ -139,7 +134,7 @@
                 app:chipSpacingHorizontal="6dp"
                 app:singleLine="false" />
 
-            <!-- Catatan tambahan (peringatan kuning) -->
+            <!-- Catatan tambahan (peringatan amber, 5,9:1) -->
             <TextView
                 android:id="@+id/tv_catatan"
                 android:layout_width="match_parent"

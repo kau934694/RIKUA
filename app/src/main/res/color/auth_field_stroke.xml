@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Garis tepi kolom isian: hijau hutan saat fokus, garis rambut saat diam. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/primary_forest" android:state_focused="true" />
+    <item android:alpha="0.87" android:color="@color/primary_forest" android:state_hovered="true" />
+    <item android:color="@color/primary_forest_light" android:state_enabled="false" />
+    <item android:color="@color/surface_card_border" />
+</selector>

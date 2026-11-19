@@ -7,9 +7,10 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     android:checkable="false"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@color/surface_white"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
+    app:cardCornerRadius="@dimen/radius_card"
+    app:cardElevation="1dp"
     app:strokeColor="@color/surface_card_border"
     app:strokeWidth="1dp">
 
@@ -17,41 +18,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
 
-        <!-- Border aksen kiri -->
-        <View
-            android:id="@+id/view_accent_strip"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
-            android:background="@color/consult_primary" />
-
-        <!-- Image / Thumbnail dari Database / Fallback Icon -->
+        <!-- Foto sarana dari database; fallback ikon saat URL kosong. -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_thumb_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
             tools:src="@drawable/ic_mosque" />
 
-        <!-- Content -->
+        <!-- Judul, kategori, lokasi, dan keterangan. -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="14dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- Nama & Badge Kategori -->
             <TextView
                 android:id="@+id/tv_facility_name"
                 android:layout_width="match_parent"
@@ -63,41 +50,41 @@
                 android:textStyle="bold"
                 tools:text="Masjid Besar Baitul Muttaqin" />
 
-            <TextView
-                android:id="@+id/tv_facility_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/bg_badge_emerald"
-                android:fontFamily="sans-serif-medium"
-                android:paddingStart="10dp"
-                android:paddingTop="3dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="3dp"
-                android:textColor="@color/status_green_dark"
-                android:textSize="11sp"
-                tools:text="Masjid Jami'" />
-
-            <!-- Lokasi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_facility_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_emerald"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingStart="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="3dp"
+                    android:textColor="@color/badge_emerald_text"
+                    android:textSize="11sp"
+                    tools:text="Masjid" />
 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_location"
-                    app:tint="@color/text_tertiary" />
+                    app:tint="@color/text_muted" />
 
                 <TextView
                     android:id="@+id/tv_facility_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@color/text_secondary"
@@ -105,35 +92,39 @@
                     tools:text="Randudongkal" />
             </LinearLayout>
 
-            <!-- Detail 1 (Jumlah Jamaah) -->
             <TextView
                 android:id="@+id/tv_facility_detail1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:drawablePadding="6dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 app:drawableStartCompat="@drawable/ic_verified"
-                app:drawableTint="@color/primary_forest_light"
-                tools:text="Jamaah ±1.200 orang" />
+                app:drawableTint="@color/primary_forest"
+                tools:text="Jumlah Jamaah: 1200 orang" />
 
-            <!-- Detail 2 (Keterangan/Alamat) -->
             <TextView
                 android:id="@+id/tv_facility_detail2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/bg_badge_gold"
-                android:fontFamily="sans-serif-medium"
-                android:paddingStart="10dp"
-                android:paddingTop="3dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="3dp"
-                android:textColor="@color/gold_dark"
-                android:textSize="11sp"
-                tools:text="Jl. Raya Randudongkal No. 04" />
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp"
+                tools:text="Keterangan: tanah wakaf masjid" />
         </LinearLayout>
+
+        <!-- Chevron: area sentuh 36dp, glyph tetap 24dp lewat padding. -->
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@null"
+            android:padding="6dp"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/text_tertiary" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

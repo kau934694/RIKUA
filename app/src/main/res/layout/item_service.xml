@@ -13,6 +13,8 @@
     android:minHeight="76dp"
     app:cardCornerRadius="18dp"
     app:cardElevation="1dp"
+    app:strokeColor="@color/surface_card_border"
+    app:strokeWidth="1dp"
     app:rippleColor="@color/primary_forest_container">
 
     <LinearLayout
@@ -27,7 +29,7 @@
         android:paddingEnd="10dp"
         android:paddingBottom="14dp">
 
-        <!-- Round Icon Container -->
+        <!-- Wadah ikon layanan di dalam kontainer hijau muda. -->
         <FrameLayout
             android:id="@+id/icon_frame"
             android:layout_width="46dp"
@@ -43,7 +45,7 @@
                 tools:src="@drawable/wali_nikah" />
         </FrameLayout>
 
-        <!-- Title + Description + Badge -->
+        <!-- Judul, deskripsi, dan badge layanan. -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -90,13 +92,14 @@
                 tools:text="Lengkap" />
         </LinearLayout>
 
-        <!-- Chevron Right -->
+        <!-- Chevron: area sentuh 36dp, glyph tetap 24dp lewat padding. -->
         <ImageView
             android:id="@+id/iv_chevron"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginStart="4dp"
             android:contentDescription="@string/services_chevron_desc"
+            android:padding="6dp"
             android:src="@drawable/ic_chevron_right"
             app:tint="@color/text_tertiary" />
     </LinearLayout>
