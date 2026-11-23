@@ -4,6 +4,7 @@ Aplikasi Android untuk layanan informasi dan pra-pendaftaran administrasi pernik
 
 ## Fitur
 
+- Login dan registrasi pengguna (email/password dan Google Sign-In), login khusus administrator, serta logout dari menu drawer dengan konfirmasi
 - Informasi layanan KUA: syarat nikah, rekomendasi nikah luar kecamatan, isbat nikah, duplikat buku nikah, wali nikah, taukil wali, wakaf
 - Unduh blanko N1 sampai N6
 - Direktori sarana keagamaan (masjid, musholla, pesantren, TPQ, madrasah)
@@ -17,6 +18,7 @@ Aplikasi Android untuk layanan informasi dan pra-pendaftaran administrasi pernik
 | Bagian | Teknologi |
 |---|---|
 | Aplikasi | Android native (Java, XML, ViewBinding), minSdk 24 |
+| Autentikasi | Google Sign-In (Credential Manager) + token sesi via backend `RIKUA_auth_backend` |
 | Backend | PHP (REST sederhana, respons JSON) |
 | Database | MySQL |
 | Lingkungan lokal | XAMPP (Apache + MySQL) |
@@ -30,6 +32,8 @@ RIKUA/
 ├── database/    Skema dan data master MySQL
 └── asset/       Aset desain
 ```
+
+Backend autentikasi (`RIKUA_auth_backend/`, dipakai `ApiConfig.java`) merupakan proyek PHP terpisah yang tidak ikut di repo ini; skema tabel user/adminnya tidak didistribusikan di sini.
 
 ## Cara menjalankan
 
@@ -49,12 +53,13 @@ Atau lewat phpMyAdmin: buat database `rikua`, lalu impor `01_struktur.sql` dan `
 
 1. Salin folder `rikua_api` ke `C:\xampp\htdocs\rikua_api`.
 2. Buat folder `uploads/dokumen` di dalamnya untuk menampung berkas pendaftar.
-3. Jalankan Apache dan MySQL dari XAMPP.
-4. Uji di peramban: `http://localhost/rikua_api/get_layanan.php` harus menampilkan JSON.
+3. Letakkan juga `RIKUA_auth_backend` di `htdocs` agar login berjalan (lihat `ApiConfig.java`).
+4. Jalankan Apache dan MySQL dari XAMPP.
+5. Uji di peramban: `http://localhost/rikua_api/get_layanan.php` harus menampilkan JSON.
 
 ### 3. Hubungkan aplikasi
 
-Alamat server di kode Android masih ditulis langsung. Ganti `192.168.1.8` dengan IP komputer Anda (cek dengan `ipconfig`) di semua file Java, dan tambahkan IP yang sama ke `app/src/main/res/xml/network_security_config.xml`. Gunakan fitur Find and Replace di Android Studio (Ctrl+Shift+R). Ponsel dan komputer harus berada di jaringan Wi-Fi yang sama.
+Alamat server di kode Android masih ditulis langsung. Ganti `192.168.1.6` dengan IP komputer Anda (cek dengan `ipconfig`) di semua file Java, dan tambahkan IP yang sama ke `app/src/main/res/xml/network_security_config.xml`. Gunakan fitur Find and Replace di Android Studio (Ctrl+Shift+R). Ponsel dan komputer harus berada di jaringan Wi-Fi yang sama.
 
 Setelah itu, buka proyek di Android Studio, tunggu sinkronisasi Gradle, lalu jalankan di emulator atau perangkat.
 
@@ -66,11 +71,11 @@ Setelah itu, buka proyek di Android Studio, tunggu sinkronisasi Gradle, lalu jal
 | Master | `mst_desa`, `mst_jenis_dokumen`, `mst_sarana_keagamaan` |
 | Konten | `layanan_kua`, `kategori_syarat`, `detail_syarat`, `langkah_pendaftaran`, `rekomendasi_nikah`, `blanko`, `petugas` |
 
-Data transaksi dan data petugas tidak disertakan di repositori. Skema `trx_*` ada di `01_struktur.sql`, sedangkan `02_data_master.sql` hanya berisi data konten.
+Data transaksi dan data petugas tidak disertakan di repositori. Skema `trx_*` ada di `01_struktur.sql`, sedangkan `02_data_master.sql` hanya berisi data konten. Relasi antar tabel (ERD) dan pemetaan tabel ke endpoint API didokumentasikan di `progres.md` bagian Database.
 
 ## Keterbatasan
 
 - Aplikasi masih berjalan di jaringan lokal lewat HTTP tanpa enkripsi. Versi produksi wajib memakai HTTPS.
 - Backend memakai akun MySQL `root` tanpa kata sandi (hanya untuk pengembangan lokal). Versi produksi perlu akun database khusus dengan kata sandi.
-- Belum ada login petugas dan panel pengelolaan. Data konten dikelola langsung lewat database.
+- Login pengguna dan login admin sudah tersedia, tetapi panel pengelolaan konten untuk admin belum dibangun. Data konten masih dikelola langsung lewat database.
 - Pendaftaran di aplikasi berfungsi sebagai pra-pendaftaran. Input resmi tetap dilakukan petugas di SIMKAH Kemenag.

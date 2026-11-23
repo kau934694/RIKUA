@@ -1,7 +1,9 @@
 
 package com.example.rikua;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AdminLoginActivity extends AppCompatActivity {
+
+    private static final String TAG = "AdminLogin";
 
     private ActivityAdminLoginBinding binding;
     private SessionManager sessionManager;
@@ -109,6 +113,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                 }
 
                 int responseCode = connection.getResponseCode();
+                Log.i(TAG, "Login response HTTP " + responseCode);
 
                 InputStream input = responseCode >= 200
                         && responseCode < 400
@@ -135,27 +140,37 @@ public class AdminLoginActivity extends AppCompatActivity {
                 JSONObject json = new JSONObject(response.toString());
 
                 boolean success = json.optBoolean("success", false);
+                Log.i(TAG, "Login response success=" + success);
 
                 if (responseCode == 200 && success) {
                     JSONObject user = json.getJSONObject("user");
 
-                    String role = user.optString("role", "");
+                    String role = user.optString("role", "").trim();
 
                     if (!"admin".equalsIgnoreCase(role)) {
+                        Log.w(TAG, "Login rejected: role is not admin");
                         tampilkanHasil(false,
                                 "Akun ini bukan akun administrator.");
                         return;
                     }
 
-                    String token = json.optString("token", "");
-                    String userId = user.optString("id", "");
+                    String token = json.optString("token", "").trim();
+                    String userId = user.optString("id", "").trim();
                     String nama = user.optString("nama_lengkap", "");
                     String email = user.optString("email", "");
                     String expiresAt = json.optString("expires_at", "");
+                    boolean tokenPresent = !token.isEmpty();
+                    boolean userIdPresent = !userId.isEmpty();
+                    boolean expiryValid = SessionExpiry.isFuture(
+                            expiresAt, System.currentTimeMillis());
+                    Log.i(TAG, "Login fields: tokenPresent=" + tokenPresent
+                            + ", userIdPresent=" + userIdPresent
+                            + ", roleAdmin=true, expiryValid=" + expiryValid);
 
-                    if (token.isEmpty() || userId.isEmpty()) {
+                    if (!tokenPresent || !userIdPresent || !expiryValid) {
+                        Log.w(TAG, "Login rejected: incomplete or invalid session");
                         tampilkanHasil(false,
-                                "Respons server tidak lengkap.");
+                                getString(R.string.auth_session_expiry_invalid));
                         return;
                     }
 
@@ -167,6 +182,11 @@ public class AdminLoginActivity extends AppCompatActivity {
                             role,
                             expiresAt
                     );
+                    Log.i(TAG, "Session saved: loggedIn="
+                            + sessionManager.isLoggedIn()
+                            + ", sessionValid=" + sessionManager.isSessionValid()
+                            + ", roleAdmin="
+                            + "admin".equalsIgnoreCase(sessionManager.getRole()));
 
                     tampilkanHasil(true,
                             "Login administrator berhasil!");
@@ -177,10 +197,14 @@ public class AdminLoginActivity extends AppCompatActivity {
                             "Login gagal. Periksa kembali akun Anda."
                     );
 
+                    Log.w(TAG, "Login rejected by server: HTTP " + responseCode
+                            + ", success=" + success);
                     tampilkanHasil(false, message);
                 }
 
             } catch (Exception e) {
+                Log.e(TAG, "Login request failed: "
+                        + e.getClass().getSimpleName());
                 tampilkanHasil(false,
                         "Tidak dapat terhubung ke server. "
                                 + "Periksa Laragon dan koneksi Wi-Fi.");
@@ -208,6 +232,19 @@ public class AdminLoginActivity extends AppCompatActivity {
 
             if (berhasil) {
                 binding.etPassword.setText("");
+
+                // Bersihkan tumpukan task: Back tidak kembali ke login admin.
+                Intent intent = new Intent(
+                        AdminLoginActivity.this,
+                        AdminDashboardActivity.class
+                );
+                intent.setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                );
+                Log.i(TAG, "Launching AdminDashboardActivity");
+                startActivity(intent);
+                finish();
             }
         });
     }

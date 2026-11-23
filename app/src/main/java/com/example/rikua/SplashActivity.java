@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -16,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.rikua.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private static final String TAG = "SplashRoute";
 
     private static final long DURASI_TAMPIK = 2400L;
     private static final long DURASI_FADE = 600L;
@@ -104,14 +107,26 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         Intent intent;
+        String role = sessionManager.getRole();
+        boolean admin = "admin".equalsIgnoreCase(role);
+        boolean sessionValid = sessionManager.isSessionValid();
+        String destination;
 
-        if (sessionManager.isLoggedIn()) {
-            // Pengguna sudah memiliki token sesi.
-            intent = new Intent(this, MainActivity.class);
+        if (sessionValid) {
+            destination = admin ? "AdminDashboardActivity" : "MainActivity";
+            intent = new Intent(this, admin
+                    ? AdminDashboardActivity.class
+                    : MainActivity.class);
         } else {
-            // Belum memiliki token sesi.
-            intent = new Intent(this, LoginActivity.class);
+            sessionManager.clearSession();
+            destination = admin ? "AdminLoginActivity" : "LoginActivity";
+            intent = new Intent(this, admin
+                    ? AdminLoginActivity.class
+                    : LoginActivity.class);
         }
+        Log.i(TAG, "Startup route: roleAdmin=" + admin
+                + ", sessionValid=" + sessionValid
+                + ", destination=" + destination);
 
         intent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK

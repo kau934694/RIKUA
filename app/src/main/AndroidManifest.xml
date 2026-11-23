@@ -46,6 +46,11 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Dashboard petugas KUA, hanya terbuka untuk sesi admin valid -->
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="false"

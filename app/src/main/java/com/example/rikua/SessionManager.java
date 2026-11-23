@@ -74,4 +74,9 @@ public class SessionManager {
     public void clearSession() {
         preferences.edit().clear().apply();
     }
+
+    public boolean isSessionValid() {
+        return isLoggedIn()
+                && SessionExpiry.isFuture(getExpiresAt(), System.currentTimeMillis());
+    }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Avatar inisial header dashboard admin: lingkaran hairline tipis di atas
+     hijau dalam, mengikuti gaya lencana login admin. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/white_hairline" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/white_hairline" />
+</shape>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_admin_dasbor"
+        android:icon="@drawable/ic_nav_home"
+        android:title="@string/admin_nav_dasbor" />
+
+    <item
+        android:id="@+id/menu_admin_pendaftaran"
+        android:icon="@drawable/ic_how_to_reg"
+        android:title="@string/admin_nav_pendaftaran" />
+
+    <item
+        android:id="@+id/menu_admin_sarana"
+        android:icon="@drawable/ic_nav_facilities"
+        android:title="@string/admin_nav_sarana" />
+
+    <item
+        android:id="@+id/menu_admin_blanko"
+        android:icon="@drawable/ic_nav_forms"
+        android:title="@string/admin_nav_blanko" />
+
+    <item
+        android:id="@+id/menu_admin_akun"
+        android:icon="@drawable/ic_person_circle"
+        android:title="@string/admin_nav_akun" />
+
+</menu>

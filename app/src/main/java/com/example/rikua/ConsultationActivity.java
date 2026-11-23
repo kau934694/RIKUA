@@ -54,7 +54,7 @@ public class ConsultationActivity extends AppCompatActivity
     private boolean gagalMemuat = false;
 
     private static final String WA_BASE = "https://wa.me/";
-    private static final String API_URL = "http://192.168.1.8/rikua_api/get_petugas.php";
+    private static final String API_URL = "http://192.168.1.6/rikua_api/get_petugas.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

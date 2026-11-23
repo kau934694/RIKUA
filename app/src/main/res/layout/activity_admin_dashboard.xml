@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_cream_light"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".AdminDashboardActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Header petugas: hijau dalam khas area admin (varian login admin) -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_auth_header_admin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/page_gutter"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="@dimen/page_gutter"
+                        android:paddingBottom="22dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:baselineAligned="false"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@drawable/bg_admin_avatar">
+
+                                <TextView
+                                    android:id="@+id/tv_inisial"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textColor="@color/gold_accent"
+                                    android:textSize="19sp"
+                                    android:textStyle="bold"
+                                    tools:text="AR" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/admin_sapaan"
+                                    android:textColor="@color/text_white_80"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_nama_petugas"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    tools:text="Ahmad Rifai" />
+
+                                <TextView
+                                    android:id="@+id/tv_peran"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:letterSpacing="0.06"
+                                    android:text="@string/admin_peran_petugas"
+                                    android:textColor="@color/gold_accent"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <ImageButton
+                                android:id="@+id/btn_notifikasi"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="@string/admin_cd_notifikasi"
+                                android:padding="12dp"
+                                android:src="@drawable/ic_admin_bell"
+                                app:tint="@color/text_white" />
+
+                            <ImageButton
+                                android:id="@+id/btn_keluar"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="4dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="@string/admin_cd_keluar"
+                                android:padding="12dp"
+                                android:src="@drawable/ic_nav_logout"
+                                app:tint="@color/text_white" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_tanggal_hari_ini"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:textColor="@color/text_white_80"
+                            android:textSize="12sp"
+                            tools:text="Kamis, 19 November 2026" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!-- Isi dashboard: hilang selama muat pertama, diganti spinner -->
+                <LinearLayout
+                    android:id="@+id/layout_konten"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <!-- Ringkasan kerja 2x2: angka hanya dari API, satu tile ikon per kartu -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/grid_margin"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="@dimen/grid_margin"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_ringkas_daftar"
+                            style="@style/Widget.Rikua.FlatCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:minHeight="104dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:background="@drawable/bg_admin_icon_tile"
+                                    android:contentDescription="@null"
+                                    android:padding="7dp"
+                                    android:src="@drawable/ic_how_to_reg"
+                                    app:tint="@color/admin_teal" />
+
+                                <TextView
+                                    android:id="@+id/tv_ringkas_daftar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:text="@string/admin_ringkas_pendaftaran_baru"
+                                    android:textColor="@color/text_muted"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_ringkas_dokumen"
+                            style="@style/Widget.Rikua.FlatCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:minHeight="104dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:background="@drawable/bg_admin_icon_tile"
+                                    android:contentDescription="@null"
+                                    android:padding="7dp"
+                                    android:src="@drawable/ic_description"
+                                    app:tint="@color/gold_dark" />
+
+                                <TextView
+                                    android:id="@+id/tv_ringkas_dokumen"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:text="@string/admin_ringkas_dokumen"
+                                    android:textColor="@color/text_muted"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/grid_margin"
+                        android:layout_marginEnd="@dimen/grid_margin"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_ringkas_akad"
+                            style="@style/Widget.Rikua.FlatCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:minHeight="104dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:background="@drawable/bg_admin_icon_tile"
+                                    android:contentDescription="@null"
+                                    android:padding="7dp"
+                                    android:src="@drawable/ic_calendar"
+                                    app:tint="@color/primary_forest" />
+
+                                <TextView
+                                    android:id="@+id/tv_ringkas_akad"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:text="@string/admin_ringkas_akad"
+                                    android:textColor="@color/text_muted"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_ringkas_konsul"
+                            style="@style/Widget.Rikua.FlatCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:minHeight="104dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="32dp"
+                                    android:layout_height="32dp"
+                                    android:background="@drawable/bg_admin_icon_tile"
+                                    android:contentDescription="@null"
+                                    android:padding="7dp"
+                                    android:src="@drawable/ic_chat"
+                                    app:tint="@color/badge_blue_text" />
+
+                                <TextView
+                                    android:id="@+id/tv_ringkas_konsul"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="22sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:text="@string/admin_ringkas_konsultasi"
+                                    android:textColor="@color/text_muted"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <!-- Antrean berkas perlu diperiksa -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page_gutter"
+                        android:layout_marginTop="@dimen/section_gap"
+                        android:layout_marginEnd="@dimen/page_gutter"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:accessibilityHeading="true"
+                            android:text="@string/admin_seksi_antrean"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:targetApi="28" />
+
+                        <TextView
+                            android:id="@+id/btn_lihat_semua"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="4dp"
+                            android:text="@string/admin_lihat_semua"
+                            android:textColor="@color/admin_teal"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Widget.Rikua.FlatCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page_gutter"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="@dimen/page_gutter">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_antrean"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:overScrollMode="never" />
+
+                            <TextView
+                                android:id="@+id/tv_kosong_antrean"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="8dp"
+                                android:gravity="center"
+                                android:padding="20dp"
+                                android:text="@string/admin_kosong_antrean"
+                                android:textColor="@color/text_muted"
+                                android:textSize="13sp"
+                                android:visibility="gone"
+                                app:drawableTopCompat="@drawable/ic_check_circle"
+                                tools:visibility="visible" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Kuota akad 7 hari ke depan -->
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/Widget.Rikua.FlatCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page_gutter"
+                        android:layout_marginTop="@dimen/section_gap"
+                        android:layout_marginEnd="@dimen/page_gutter">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:accessibilityHeading="true"
+                                android:text="@string/admin_akad_terdekat"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                tools:targetApi="28" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_kuota"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:clipToPadding="false"
+                                android:nestedScrollingEnabled="false"
+                                android:orientation="horizontal"
+                                android:overScrollMode="never"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_admin_kuota_hari" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Aksi cepat -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page_gutter"
+                        android:layout_marginTop="@dimen/section_gap"
+                        android:layout_marginEnd="@dimen/page_gutter"
+                        android:accessibilityHeading="true"
+                        android:text="@string/admin_seksi_aksi"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:targetApi="28" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/grid_margin"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="@dimen/grid_margin"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/aksi_sarana"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_admin_icon_clickable"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:minHeight="92dp"
+                            android:orientation="vertical"
+                            android:paddingTop="14dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_mosque"
+                                app:tint="@color/admin_teal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="@string/admin_aksi_sarana"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/aksi_blanko"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_admin_icon_clickable"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:minHeight="92dp"
+                            android:orientation="vertical"
+                            android:paddingTop="14dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_nav_forms"
+                                app:tint="@color/admin_teal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="@string/admin_aksi_blanko"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/aksi_pengumuman"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_admin_icon_clickable"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:minHeight="92dp"
+                            android:orientation="vertical"
+                            android:paddingTop="14dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_campaign"
+                                app:tint="@color/admin_teal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="@string/admin_aksi_pengumuman"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/aksi_konsultasi"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_admin_icon_clickable"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:minHeight="92dp"
+                            android:orientation="vertical"
+                            android:paddingTop="14dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_chat"
+                                app:tint="@color/admin_teal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="@string/admin_aksi_konsultasi"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_simkah"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="@dimen/page_gutter"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="@dimen/page_gutter"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="@string/admin_buka_simkah"
+                        android:textColor="@color/admin_teal"
+                        android:textSize="14sp"
+                        app:cornerRadius="@dimen/radius_control"
+                        app:icon="@drawable/ic_compass"
+                        app:iconGravity="textStart"
+                        app:iconTint="@color/admin_teal"
+                        app:strokeColor="@color/admin_teal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page_gutter"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="@dimen/page_gutter"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/admin_catatan_simkah"
+                        android:textColor="@color/text_muted"
+                        android:textSize="12sp"
+                        app:drawableStartCompat="@drawable/ic_info"
+                        app:drawableTint="@color/text_muted" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress_dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/admin_memuat"
+            android:indeterminateTint="@color/admin_teal" />
+
+        <LinearLayout
+            android:id="@+id/layout_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/surface_cream_light"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_warning"
+                app:tint="@color/badge_amber_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/admin_gagal_memuat"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_coba_lagi"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:text="@string/admin_coba_lagi"
+                android:textColor="@color/text_white"
+                android:textSize="14sp"
+                app:backgroundTint="@color/admin_teal"
+                app:cornerRadius="@dimen/radius_control" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_white"
+        app:elevation="4dp"
+        app:itemActiveIndicatorStyle="@style/Widget.Rikua.BottomNav.ActiveIndicator"
+        app:itemIconTint="@color/bottom_nav_color_selector"
+        app:itemRippleColor="@color/primary_forest_container"
+        app:itemTextColor="@color/bottom_nav_color_selector"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/admin_bottom_nav_menu" />
+</LinearLayout>

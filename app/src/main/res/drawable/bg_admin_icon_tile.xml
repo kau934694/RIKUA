@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tile ikon kartu admin: teal lembut, penanda area pengelolaan. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/admin_teal_soft" />
+    <corners android:radius="@dimen/radius_control" />
+</shape>

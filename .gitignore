@@ -20,3 +20,4 @@ rikua_api/uploads/dokumen/
 rikua_api/cek_eror.php
 rikua_api/test_koneksi.php
 build_*.txt 
+.vscode/

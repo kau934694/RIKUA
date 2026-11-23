@@ -42,6 +42,10 @@
     <!-- Wakaf & Kemasjidan — lembar layanan resmi (kanvas off-white) -->
     <color name="wakaf_bg">#F5F7F1</color>
 
+    <!-- Dashboard admin: area pengelolaan, aksen teal pembeda dari layar warga -->
+    <color name="admin_teal">#0F6B5C</color>
+    <color name="admin_teal_soft">#E6F2EF</color>
+
     <!-- Announcement Card Gradient -->
     <color name="announcement_bg_start">#FDF9F0</color>
     <color name="announcement_bg_end">#F7EFE1</color>

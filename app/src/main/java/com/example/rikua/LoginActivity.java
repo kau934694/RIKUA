@@ -14,9 +14,11 @@ import androidx.credentials.CustomCredential;
 import androidx.credentials.GetCredentialRequest;
 import androidx.credentials.GetCredentialResponse;
 import androidx.credentials.exceptions.GetCredentialException;
+import androidx.credentials.exceptions.NoCredentialException;
 
 import com.example.rikua.databinding.ActivityLoginBinding;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
 
 import org.json.JSONObject;
@@ -83,6 +85,25 @@ public class LoginActivity extends AppCompatActivity {
                         .addCredentialOption(googleIdOption)
                         .build();
 
+        mintaCredential(request, true);
+    }
+
+    private void mintaAlurTombolGoogle() {
+        GetSignInWithGoogleOption googleButtonOption =
+                new GetSignInWithGoogleOption.Builder(
+                        ApiConfig.GOOGLE_WEB_CLIENT_ID
+                ).build();
+        GetCredentialRequest request =
+                new GetCredentialRequest.Builder()
+                        .addCredentialOption(googleButtonOption)
+                        .build();
+        mintaCredential(request, false);
+    }
+
+    private void mintaCredential(
+            GetCredentialRequest request,
+            boolean fallbackJikaTanpaCredential
+    ) {
         credentialManager.getCredentialAsync(
                 this,
                 request,
@@ -109,35 +130,34 @@ public class LoginActivity extends AppCompatActivity {
                                 kirimTokenKeServer(idToken);
 
                             } catch (Exception e) {
-    binding.btnGoogle.setEnabled(true);
-    Toast.makeText(
-            LoginActivity.this,
-            "Gagal membaca akun Google: " + e.getMessage(),
-            Toast.LENGTH_LONG
-    ).show();
-}
+                                tampilkanErrorGoogle(
+                                        "Gagal membaca akun Google: " + e.getMessage()
+                                );
+                            }
 
                         } else {
-                            binding.btnGoogle.setEnabled(true);
-                            Toast.makeText(
-                                    LoginActivity.this,
-                                    "Jenis akun Google tidak dikenali.",
-                                    Toast.LENGTH_LONG
-                            ).show();
+                            tampilkanErrorGoogle("Jenis akun Google tidak dikenali.");
                         }
                     }
 
                     @Override
                     public void onError(GetCredentialException e) {
-                        binding.btnGoogle.setEnabled(true);
-                        Toast.makeText(
-                                LoginActivity.this,
-                                "Login Google dibatalkan atau gagal: " + e.getMessage(),
-                                Toast.LENGTH_LONG
-                        ).show();
+                        if (fallbackJikaTanpaCredential
+                                && e instanceof NoCredentialException) {
+                            mintaAlurTombolGoogle();
+                            return;
+                        }
+                        tampilkanErrorGoogle(
+                                "Login Google dibatalkan atau gagal: " + e.getMessage()
+                        );
                     }
                 }
         );
+    }
+
+    private void tampilkanErrorGoogle(String pesan) {
+        binding.btnGoogle.setEnabled(true);
+        Toast.makeText(this, pesan, Toast.LENGTH_LONG).show();
     }
 
     private void kirimTokenKeServer(String idToken) {

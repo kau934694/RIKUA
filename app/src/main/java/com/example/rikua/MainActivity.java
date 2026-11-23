@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String WHATSAPP_MESSAGE = "Assalamu'alaikum, saya ingin bertanya terkait layanan KUA Randudongkal.";
     private static final String URL_SIMKAH = "https://simkah.kemenag.go.id";
 
-    private static final String API_KUOTA = "http://192.168.1.8/rikua_api/get_kuota.php";
+    private static final String API_KUOTA = "http://192.168.1.6/rikua_api/get_kuota.php";
 
     private static final boolean HITUNG_DRAF_UNTUK_UJI = true;
 
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
     private View cardSearchResults;
     private LinearLayout layoutSearchResults;
 
-    private static final String URL_SARANA = "http://192.168.1.8/rikua_api/get_sarana.php";
-    private static final String URL_GAMBAR_SARANA = "http://192.168.1.8/rikua_api/uploads/";
+    private static final String URL_SARANA = "http://192.168.1.6/rikua_api/get_sarana.php";
+    private static final String URL_GAMBAR_SARANA = "http://192.168.1.6/rikua_api/uploads/";
 
     private final List<FacilityItem> daftarFasilitasGlobal = new ArrayList<>();
 
@@ -130,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_logout) {
-                drawerLayout.closeDrawer(GravityCompat.END);
-                logout();
+                tampilkanLogoutSetelahDrawerTertutup();
                 return true;
             }
             Toast.makeText(MainActivity.this, "Menu dipilih: " + item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -652,7 +651,7 @@ public class MainActivity extends AppCompatActivity {
         return (int) (value * getResources().getDisplayMetrics().density);
     }
 
-    private static final String URL_LAYANAN = "http://192.168.1.8/rikua_api/get_layanan.php";
+    private static final String URL_LAYANAN = "http://192.168.1.6/rikua_api/get_layanan.php";
 
     private final List<ServiceItem> daftarLayananFilter = new ArrayList<>();
 
@@ -992,6 +991,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startStatusPulse() {}
+
+    // Dialog logout dibuat setelah drawer benar-benar tertutup,
+    // agar tidak muncul di atas animasi penutupan drawer.
+    private void tampilkanLogoutSetelahDrawerTertutup() {
+        drawerLayout.closeDrawer(GravityCompat.END);
+        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                drawerLayout.removeDrawerListener(this);
+                if (!isFinishing() && !isDestroyed()) {
+                    logout();
+                }
+            }
+        });
+    }
 
     @Override
     protected void onDestroy() {

@@ -44,7 +44,7 @@ public class DaftarNikahStep6Activity extends AppCompatActivity {
             "https://simkah.kemenag.go.id";
 
     private static final String API_URL =
-            "http://192.168.1.8/rikua_api/langkah_6_tinjau.php";
+            "http://192.168.1.6/rikua_api/langkah_6_tinjau.php";
 
     private ActivityDaftarNikahStep6Binding binding;
 
