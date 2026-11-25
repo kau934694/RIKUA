@@ -22,6 +22,18 @@ public final class ApiConfig {
     public static final String ADMIN_DASHBOARD =
             BASE_URL + "admin_dashboard.php";
 
+    public static final String ADMIN_PENDAFTARAN =
+            BASE_URL + "admin_pendaftaran.php";
+
+    public static final String ADMIN_GET_SARANA =
+            BASE_URL + "admin_get_sarana.php";
+    public static final String ADMIN_CREATE_SARANA =
+            BASE_URL + "admin_create_sarana.php";
+    public static final String ADMIN_UPDATE_SARANA =
+            BASE_URL + "admin_update_sarana.php";
+    public static final String ADMIN_DELETE_SARANA =
+            BASE_URL + "admin_delete_sarana.php";
+
     // Portal SIMKAH tempat petugas melakukan input resmi.
     public static final String URL_SIMKAH_PETUGAS =
             "https://simkah4.kemenag.go.id/";

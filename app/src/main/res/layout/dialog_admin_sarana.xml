@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="16dp">
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_admin_icon_tile">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_mosque"
+                app:tint="@color/admin_teal" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_form_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans"
+                android:text="@string/admin_sarana_tambah_judul"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/admin_sarana_form_subtitle"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_tutup_form"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/admin_sarana_tutup_form"
+            android:padding="12dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/text_primary" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="18dp">
+
+            <TextView
+                android:id="@+id/tv_label_nama_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/et_nama_sarana"
+                android:text="@string/admin_sarana_nama"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_nama_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_input"
+                android:hint="@string/admin_sarana_nama_hint"
+                android:inputType="textCapWords"
+                android:maxLength="150"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/tv_label_jenis_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:labelFor="@id/spinner_jenis_sarana"
+                android:text="@string/admin_sarana_jenis"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_jenis_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_spinner"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/tv_label_desa_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:labelFor="@id/spinner_desa_sarana"
+                android:text="@string/admin_sarana_desa"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinner_desa_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_spinner"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:id="@+id/tv_label_alamat_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:labelFor="@id/et_alamat_sarana"
+                android:text="@string/admin_sarana_alamat"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_alamat_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_input"
+                android:hint="@string/admin_sarana_alamat_hint"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:maxLength="1000"
+                android:padding="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted" />
+
+            <TextView
+                android:id="@+id/tv_label_pengurus_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:labelFor="@id/et_pengurus_sarana"
+                android:text="@string/admin_sarana_pengurus"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_pengurus_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_input"
+                android:hint="@string/admin_sarana_pengurus_hint"
+                android:inputType="textPersonName"
+                android:maxLength="100"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/tv_label_kontak_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:labelFor="@id/et_kontak_sarana"
+                android:text="@string/admin_sarana_kontak"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_kontak_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_input"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="10dp"
+                android:hint="@string/admin_sarana_kontak_hint"
+                android:inputType="phone"
+                android:maxLength="20"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_primary"
+                app:drawableTint="@color/text_secondary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/admin_sarana_jumlah"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp">
+
+                <EditText
+                    android:id="@+id/et_jumlah_sarana"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_admin_sarana_input"
+                    android:hint="@string/admin_sarana_jumlah_hint"
+                    android:inputType="number"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="66dp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_muted" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:gravity="center"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="14dp"
+                    android:text="@string/admin_sarana_orang"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/admin_sarana_gps"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_koordinat_sarana"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_input"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="10dp"
+                android:hint="@string/admin_sarana_gps_hint"
+                android:inputType="text"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
+                app:drawableTint="@color/primary_forest" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/admin_sarana_foto"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_admin_sarana_upload"
+                android:gravity="center"
+                android:minHeight="196dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_preview_foto"
+                    android:layout_width="104dp"
+                    android:layout_height="104dp"
+                    android:background="@drawable/bg_admin_icon_tile"
+                    android:contentDescription="@string/admin_sarana_foto_preview"
+                    android:scaleType="centerCrop"
+                    android:padding="30dp"
+                    android:src="@drawable/ic_upload"
+                    app:tint="@color/admin_teal" />
+
+                <TextView
+                    android:id="@+id/tv_status_foto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/admin_sarana_foto_belum"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="@string/admin_sarana_foto_keterangan"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_pilih_foto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:text="@string/admin_sarana_pilih_foto"
+                        android:textColor="@color/on_primary_forest_container"
+                        app:backgroundTint="@color/primary_forest_container"
+                        app:cornerRadius="@dimen/radius_control"
+                        app:icon="@drawable/ic_camera"
+                        app:iconTint="@color/on_primary_forest_container" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_hapus_foto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/admin_sarana_hapus_foto"
+                        android:textColor="@color/badge_rose_text"
+                        android:visibility="gone"
+                        app:backgroundTint="@android:color/transparent"
+                        app:cornerRadius="@dimen/radius_control"
+                        tools:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_admin_sarana_info"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_verified"
+                    app:tint="@color/admin_teal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:lineSpacingExtra="2dp"
+                    android:text="@string/admin_sarana_form_notice"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_white"
+        android:elevation="6dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_batal_form"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:text="@string/admin_sarana_batal"
+            android:textColor="@color/text_primary"
+            app:backgroundTint="@color/surface_white"
+            app:cornerRadius="@dimen/radius_control"
+            app:strokeColor="@color/surface_card_border"
+            app:strokeWidth="1dp" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1.55">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_simpan_form"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/admin_sarana_simpan_data"
+                android:textColor="@color/text_white"
+                android:textStyle="bold"
+                app:backgroundTint="@color/admin_teal"
+                app:cornerRadius="@dimen/radius_control"
+                app:icon="@drawable/ic_save"
+                app:iconGravity="textStart"
+                app:iconTint="@color/text_white" />
+
+            <ProgressBar
+                android:id="@+id/progress_simpan_form"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="18dp"
+                android:indeterminateTint="@color/text_white"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

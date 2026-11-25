@@ -2,7 +2,7 @@
 
 Dokumen ini merangkum progres pengerjaan aplikasi Android **RIKUA** (layanan KUA Kec. Randudongkal) selama sesi kerja bersama.
 
-Terakhir diperbarui: 23 November 2026
+Terakhir diperbarui: 25 November 2026, 10:43 WIB
 
 ---
 
@@ -19,7 +19,14 @@ Terakhir diperbarui: 23 November 2026
 ### Dashboard Admin (perubahan lokal, belum ter-commit)
 - **Login admin**: `AdminLoginActivity` kini membuka `AdminDashboardActivity` setelah autentikasi berhasil dan membersihkan task agar tombol Back tidak kembali ke login.
 - **Dashboard petugas**: halaman baru `activity_admin_dashboard.xml` dan `AdminDashboardActivity` menampilkan data ringkasan, antrean berkas, kuota 7 hari, aksi cepat, tautan SIMKAH, notifikasi, bottom navigation, dan konfirmasi logout.
+- **Manajemen Sarana**: `AdminSaranaActivity`, `AdminSaranaAdapter`, dan `AdminSaranaItem` menambahkan daftar sarana, pencarian nama, filter jenis dan desa, form tambah/edit, loading, empty, error, retry, serta konfirmasi hapus. Aksi "Kelola Sarana" pada dashboard dan item Sarana pada bottom navigation membuka layar ini.
+- **Redesign form Manajemen Sarana**: form tambah/edit diubah menjadi bottom sheet bergaya referensi, dengan header berikon, field berlabel, kolom koordinat GPS, area unggah foto, kartu informasi, serta footer Batal dan Simpan yang tetap dapat dijangkau.
+- **Endpoint sarana admin**: `admin_get_sarana.php`, `admin_create_sarana.php`, `admin_update_sarana.php`, dan `admin_delete_sarana.php` ditambahkan pada backend autentikasi `RIKUA_auth_backend`. Semua endpoint memakai `authenticated_admin($pdo)`, prepared statement, validasi server, dan tabel `mst_sarana_keagamaan` yang sama dengan halaman Sarana pengguna.
+- **Integrasi data**: tambah, ubah, dan hapus di layar admin langsung memengaruhi tabel sarana yang dibaca oleh `rikua_api/get_sarana.php`. Tidak ada tabel baru, duplikasi data, atau perubahan skema.
 - **API dashboard**: `ApiConfig.ADMIN_DASHBOARD` mengarah ke `admin_dashboard.php` pada backend autentikasi; permintaan membawa bearer token dan menangani respons, loading, empty, serta error. Uji perangkat terbaru menerima HTTP 200 dari API dengan sesi admin valid.
+- **Daftar Pendaftaran Admin**: tab Pendaftaran membuka `AdminPendaftaranActivity`, menampilkan pencarian tiket/nama, filter status yang dibentuk dari respons API, rentang tanggal pengajuan, jumlah hasil, kartu data, dan `AdminPendaftaranDetailActivity`. Layar menangani loading, empty, error, serta coba lagi. Respons 401 mengakhiri sesi, sedangkan 403, error server, dan gangguan jaringan tidak menghapusnya.
+- **Sumber data pendaftaran**: endpoint `admin_pendaftaran.php` berada di `D:\laragon\www\RIKUA_auth_backend`, di luar repository. Endpoint memakai `authenticated_admin($pdo)` dan query prepared statement atas `trx_pendaftaran_nikah`, dengan JOIN terpisah ke `trx_calon_pengantin` untuk peran `suami` dan `istri`. Aturan tiket dan tanggal akad mengikuti `get_pengumuman.php`; tidak ada tabel baru atau perubahan skema. Respons memuat `success`, `total`, `statuses`, dan `data` berisi tiket, status, tanggal, lokasi, serta nama pasangan.
+- **Arahan visual halaman Pendaftaran**: Design Read untuk daftar operasional petugas KUA, mengikuti identitas RIKUA Forest Green, Gold, dan cream. Dial ENERGY 1 / RHYTHM 2 / MOTION 1. Warna mempertahankan identitas layanan, kartu memisahkan tiap pendaftaran agar mudah dipindai, badge menunjukkan status aktual, dan kontrol tanggal/status menyaring data yang sama.
 - **Perbaikan masa berlaku sesi**: parser lama tidak menerima ISO timestamp dengan zona waktu, sehingga format seperti `...Z` atau `...+07:00` dapat salah ditolak. `SessionExpiry` kini menerima epoch detik/milidetik, ISO-8601 UTC/offset, serta datetime tanpa zona yang ditafsirkan sebagai `Asia/Jakarta`; tanggal tidak valid, token kosong, dan masa berlaku kosong/kedaluwarsa ditolak. Login admin hanya menyimpan sesi dengan role `admin`, token/ID, dan `expires_at` valid yang masih akan datang.
 - **Routing sesi**: `SplashActivity` mengarahkan role admin ke dashboard admin dan role lain ke beranda pengguna; sesi kedaluwarsa dibersihkan dan kembali ke halaman login sesuai role.
 - **Komponen pendukung**: adapter dan model antrean/kuota admin ditambahkan bersama drawable ikon, avatar, menu bottom navigation, manifest activity, dan resource strings/dashboard.
@@ -173,15 +180,23 @@ Rasio kontras dihitung dengan skrip antislop-human; enam pasangan gagal diperbai
 - Baseline lint pre-existing yang **bukan regresi**: 13 error (12 GestureBackNavigation, 1 NewApi `windowLightNavigationBar` di `themes.xml:23`).
 - Perubahan resource kecil butuh `--rerun-tasks --no-configuration-cache` agar terbukti benar-benar diproses ulang (plain assembleDebug bisa UP-TO-DATE palsu).
 - Artefak log build di root repo sudah dihapus dan di-gitignore (commit `5dfbc93`).
-- Verifikasi terbaru 23 November 2026: `cmd /c build_with_jdk.bat :app:testDebugUnitTest :app:assembleDebug --rerun-tasks --no-configuration-cache` → **BUILD SUCCESSFUL** (41 task); PHP lint untuk `auth/common.php` dan `admin_dashboard.php` lulus.
+- Verifikasi terbaru 23 November 2026: `cmd /c build_with_jdk.bat :app:testDebugUnitTest :app:assembleDebug --rerun-tasks --no-configuration-cache` → **BUILD SUCCESSFUL** (41 task); PHP lint untuk `auth/common.php`, `auth/google_login.php`, dan `admin_dashboard.php` lulus.
+- Verifikasi Manajemen Sarana 24 November 2026: `:app:assembleDebug :app:testDebugUnitTest --rerun-tasks --no-configuration-cache` → **BUILD SUCCESSFUL** (41 task). Keempat endpoint baru lolos `php -l`.
+- Verifikasi HTTP awal: `admin_get_sarana.php` tanpa bearer token merespons HTTP 401. `rikua_api/get_sarana.php` tetap merespons HTTP 200 dan mengembalikan data dari `mst_sarana_keagamaan`.
+- Pengujian CRUD dan 403 role user memerlukan sesi admin atau akun user aktif yang belum tersedia sebagai token pada sesi terminal ini.
+- Verifikasi halaman Pendaftaran 23 November 2026: build ulang dengan `:app:testDebugUnitTest :app:assembleDebug --rerun-tasks --no-configuration-cache` → **BUILD SUCCESSFUL** (41 task); 7 unit test lulus. `php -l` untuk endpoint baru lulus, dan GET tanpa bearer token ditolak dengan HTTP 401. Query pada database lokal diperiksa untuk status aktual `draf` dan `dikirim`; jumlah hasil JOIN cocok dengan jumlah pendaftaran unik. APK terbaru berhasil dipasang pada perangkat, tetapi layar tetap terkunci saat percobaan validasi; belum ada respons HTTP 200 dari endpoint baru maupun uji klik/render.
 - Uji perangkat 23 November 2026: login admin HTTP 200, token/role/expiry valid, sesi tersimpan dan valid, `AdminDashboardActivity` terbuka, lalu dashboard API merespons HTTP 200. Log PHP aman mengonfirmasi sesi admin aktif dan berlaku; token dan hash tidak dicatat.
 - Request dashboard tanpa Authorization tetap merespons HTTP 401. Tampilan data/empty state tidak direkam secara visual.
-- Audit dan uji Google Sign-In 23 November 2026: sebelum perbaikan, PHP access/error log menunjukkan HTTP 500 dari `issue_session()` yang hilang dan penolakan `iat` akibat selisih jam. Setelah helper, toleransi 30 detik, dan fallback Credential Manager diterapkan, uji satu-tekan dengan akun yang sama mencapai beranda; access log menunjukkan HTTP 200 dan tabel sesi memiliki sesi pengguna baru.
+- Audit dan uji Google Sign-In 23 November 2026: sebelum perbaikan, PHP access/error log menunjukkan HTTP 500 dari `issue_session()` yang hilang dan penolakan `iat` akibat selisih jam. Setelah helper, toleransi 30 detik, dan fallback Credential Manager diterapkan, uji satu-tekan dengan akun yang sama mencapai beranda; access log menunjukkan HTTP 200 dan tabel sesi memiliki sesi pengguna baru. Uji sebelum fallback sempat menghasilkan `No credentials available` tanpa request backend.
 - `:app:signingReport` berhasil dijalankan untuk memeriksa sertifikat debug. Fingerprint belum dapat dicocokkan dengan OAuth Android Client di Google Cloud Console karena konfigurasi cloud tidak tersedia.
 
 ## 8. Status Saat Ini
 
 Cabang `main` berisi commit autentikasi, redesign, dan logout terdahulu. Saat ini working tree **memiliki perubahan yang belum dikomit**, termasuk dashboard admin, pembaruan sesi autentikasi, routing login admin, dan beberapa penyesuaian API/IP serta sumber UI.
+
+Fitur Daftar Pendaftaran Admin juga sudah ditambahkan pada working tree. Endpoint PHP-nya berada di folder backend Laragon di luar repository, sehingga tidak muncul dalam `git diff` repository ini.
+
+Fitur Manajemen Sarana juga sudah ditambahkan pada working tree. Endpoint CRUD PHP-nya berada di `D:\laragon\www\RIKUA_auth_backend`, sedangkan halaman pengguna tetap membaca `mst_sarana_keagamaan` melalui `rikua_api/get_sarana.php`.
 
 Komponen yang sudah ter-push:
 - Autentikasi pengguna, Google Sign-In, registrasi, dan logout drawer.
@@ -190,8 +205,13 @@ Komponen yang sudah ter-push:
 
 ### Belum selesai / perlu perhatian
 - [ ] Uji logout admin dan pastikan sesi/token dicabut sesuai perilaku backend.
+- [ ] Jalankan CRUD Manajemen Sarana memakai bearer token admin valid: tambah, edit, hapus, ID tidak ditemukan, data tidak valid, dan filter pencarian.
+- [ ] Uji role user pada endpoint admin sarana; respons harus HTTP 403 tanpa menghapus sesi.
+- [ ] Uji integrasi perangkat: tambah lalu lihat pada halaman user, edit lalu lihat pembaruan, hapus lalu pastikan tidak tampil.
+- [ ] Verifikasi loading, empty, error, retry, pencarian, filter jenis, filter desa, dan form pada `AdminSaranaActivity` melalui emulator atau perangkat.
 - [ ] Uji token admin yang benar-benar kedaluwarsa atau dicabut; request tanpa token sudah dipastikan ditolak HTTP 401.
 - [ ] Verifikasi visual dashboard pada device/emulator untuk data, empty state, loading, error, kuota, antrean, logout, dan bottom navigation.
+- [ ] Uji endpoint `admin_pendaftaran.php` dengan sesi admin valid untuk memastikan HTTP 200 dan payload aktual, lalu uji pencarian, filter tanggal/status, detail, loading/error/empty, serta navigasi di perangkat.
 - [ ] Uji Google Sign-In dengan akun yang belum pernah diotorisasi dan pembatalan chooser; akun sebelumnya sudah berhasil sampai beranda dengan satu kali tekan setelah fallback ditambahkan.
 - [ ] Implementasi serta uji login email/password dan registrasi pengguna; keduanya masih placeholder tanpa request backend.
 - [ ] Cocokkan fingerprint SHA-1 debug dan konfigurasi OAuth Android Client di Google Cloud Console; konfigurasi tersebut tidak tersedia lokal.
@@ -203,3 +223,17 @@ Komponen yang sudah ter-push:
 - [ ] `FacilityDetailActivity` memanggil `get_sarana_detail.php` yang **tidak ada** di folder `rikua_api/` (endpoint yatim).
 - [ ] Bug typo di `BlankoActivity.java` baris 51: `BASE_FILE_URL = "http:// 192.168.1.6/..."` ada spasi setelah `http://` → unduh/buka file blanko akan gagal.
 - [ ] Backend `RIKUA_auth_backend` (termasuk tabel user/admin, `google_login.php`, `admin_login.php`, dan perubahan autentikasi dashboard) berada di luar repo ini dan belum ikut ter-version.
+
+## 9. Redesign Form Manajemen Sarana Admin (25 November 2026)
+
+- Design Read: formulir operasional petugas KUA dengan ENERGY 1 / RHYTHM 1 / MOTION 1; susunan satu kolom mengikuti urutan input lapangan, putih menjaga keterbacaan, dan Forest Green menandai aksi simpan utama sesuai identitas RIKUA.
+- Form tambah dan edit memakai satu layout `dialog_admin_sarana.xml`: header ringkas, input satu kolom, label wajib berbintang merah, spinner dari endpoint, upload foto, informasi penyimpanan RIKUA, dan action bar bawah.
+- Tambahan styling lokal: `bg_admin_sarana_input.xml`, `bg_admin_sarana_spinner.xml`, `bg_admin_sarana_upload.xml`, `bg_admin_sarana_info.xml`, serta layout item spinner terpilih dan dropdown.
+- `AdminSaranaActivity` tetap memakai endpoint CRUD dan bearer token yang sama. Validasi klien mencakup field wajib, nomor telepon, jumlah positif bila diisi, koordinat dalam rentang, tipe gambar JPG/PNG, dan ukuran foto maksimum 5 MB. Tombol simpan menampilkan status proses dan dinonaktifkan selama request.
+- Mode edit memuat semua nilai, nama desa dipetakan kembali ke `id_desa`, dan foto lama ditampilkan dari direktori upload yang dipakai halaman Sarana publik. Batal/close meminta konfirmasi jika ada perubahan.
+- Audit `database/01_struktur.sql`: seluruh field form tersedia di `mst_sarana_keagamaan`; `jenis` adalah enum masjid/musholla/tpq/madrasah/pesantren, `id_desa` mengacu `mst_desa`, `alamat` text, `nama_pengurus` varchar(100), `kontak` varchar(20), `jumlah_anggota` int default 0, `foto` varchar(255), serta latitude/longitude decimal(10,7). Tidak ada perubahan skema.
+- Audit endpoint di `D:\laragon\www\RIKUA_auth_backend`: GET mengirim pilihan enum dan daftar desa (`id_desa`, `nama_desa`); create/update memetakan field tersebut ke tabel yang sama. Payload foto JSON Base64 sesuai dengan `request_data()` backend. Konfigurasi PHP lokal yang diperiksa: `post_max_size=2G`, `memory_limit=512M`.
+- Perbaikan backend lokal pada `admin_create_sarana.php` dan `admin_update_sarana.php`: file baru dibersihkan bila operasi database gagal, foto lama baru dihapus setelah update database sukses. File backend tersebut berada di luar repository Git dan perlu dikelola/di-version-kan terpisah.
+- Copy informasi pada form hanya menyebut penyimpanan dan tampilan data pada sistem RIKUA. Tidak ditemukan integrasi SIMBI/SIWAK pada endpoint CRUD yang diaudit.
+- Verifikasi: `:app:assembleDebug` sukses, `:app:testDebugUnitTest` sukses, dan `php -l` keempat endpoint sarana sukses. `:app:lintDebug` tetap gagal karena 13 error existing pada layar/tema lain (12 `GestureBackNavigation`, 1 `NewApi` di `themes.xml`); tidak ada lint error pada file form yang diubah. Lint melaporkan 546 warning total.
+- Belum diverifikasi melalui klik di emulator/perangkat: alur tambah/edit nyata, pemilihan dropdown dari server, upload/preview foto jaringan, request simpan ke database, konfirmasi batal, serta hasil tampil pada halaman Sarana publik. Pengujian ini memerlukan sesi admin uji dan akses database/API yang valid.

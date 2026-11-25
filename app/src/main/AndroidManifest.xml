@@ -52,6 +52,23 @@
             android:exported="false" />
 
         <activity
+            android:name=".AdminPendaftaranActivity"
+            android:exported="false"
+            android:parentActivityName=".AdminDashboardActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".AdminPendaftaranDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".AdminPendaftaranActivity" />
+
+        <activity
+            android:name=".AdminSaranaActivity"
+            android:exported="false"
+            android:parentActivityName=".AdminDashboardActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

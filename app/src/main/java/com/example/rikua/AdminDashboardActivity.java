@@ -175,7 +175,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding.cardRingkasAkad.setOnClickListener(segeraHadir);
         binding.cardRingkasKonsul.setOnClickListener(segeraHadir);
         binding.btnLihatSemua.setOnClickListener(segeraHadir);
-        binding.aksiSarana.setOnClickListener(segeraHadir);
+        binding.aksiSarana.setOnClickListener(v ->
+                startActivity(new Intent(this, AdminSaranaActivity.class)));
         binding.aksiBlanko.setOnClickListener(segeraHadir);
         binding.aksiPengumuman.setOnClickListener(segeraHadir);
         binding.aksiKonsultasi.setOnClickListener(segeraHadir);
@@ -192,6 +193,16 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         binding.bottomNavAdmin.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.menu_admin_dasbor) {
+                return true;
+            }
+            if (item.getItemId() == R.id.menu_admin_pendaftaran) {
+                startActivity(new Intent(this, AdminPendaftaranActivity.class));
+                binding.bottomNavAdmin.setSelectedItemId(R.id.menu_admin_dasbor);
+                return true;
+            }
+            if (item.getItemId() == R.id.menu_admin_sarana) {
+                startActivity(new Intent(this, AdminSaranaActivity.class));
+                binding.bottomNavAdmin.setSelectedItemId(R.id.menu_admin_dasbor);
                 return true;
             }
             Toast.makeText(this, R.string.admin_segera_hadir,
